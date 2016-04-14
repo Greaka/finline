@@ -13,3 +13,8 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Undead.obj
+/importer:XImporter
+/processor:
+/build:Undead.obj
+
