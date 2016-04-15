@@ -37,7 +37,7 @@ namespace Test3D
             camTarget = new Vector3(0f, 0f, 0f);
             camPosition = new Vector3(0f, 0f, -5);
             projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
-                               MathHelper.ToRadians(45f), graphics.
+                               MathHelper.ToRadians(80f), graphics.
                                GraphicsDevice.Viewport.AspectRatio,
                 1f, 1000f);
             viewMatrix = Matrix.CreateLookAt(camPosition, camTarget,
