@@ -25,7 +25,7 @@ namespace Test3D
 
         //Geometric info
         Model model;
-        float angle;
+        
         Vector3 cameraPosition = new Vector3(15, 10, 10);
         
 
@@ -147,8 +147,7 @@ namespace Test3D
             }
             viewMatrix = Matrix.CreateLookAt(camPosition, camTarget,
                          Vector3.Up);
-            angle += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            base.Update(gameTime);
+            
         }
         void DrawGround()
         {

@@ -1,5 +1,5 @@
 ﻿using System;
-using Test3D;
+using MonoGame3D;
 
 namespace prototyp
 {
@@ -15,7 +15,7 @@ namespace prototyp
         [STAThread]
         static void Main()
         {
-            using (var game = new Test3DDemo2())
+            using (var game = new Game1())
                 game.Run();
         }
     }
