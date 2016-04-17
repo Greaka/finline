@@ -1,8 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using prototyp.Code.Game;
 
-namespace MonoGame3D
+namespace prototyp
 {
     public class Game1 : Game
     {
@@ -16,7 +17,7 @@ namespace MonoGame3D
 
         Vector3 cameraPosition = new Vector3(15, 10, 10);
        
-        Robot robot;
+        Player _player;
   
         public Game1()
         {
@@ -50,8 +51,8 @@ namespace MonoGame3D
 
             effect = new BasicEffect(graphics.GraphicsDevice);
 
-            robot = new Robot();
-            robot.Initialize(Content);
+            _player = new Player();
+            _player.Initialize(Content);
 
             base.Initialize();
         }
@@ -73,7 +74,7 @@ namespace MonoGame3D
 
           
 
-            robot.Update(gameTime);
+            _player.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -85,7 +86,7 @@ namespace MonoGame3D
 
             float aspectRatio =
                 graphics.PreferredBackBufferWidth / (float)graphics.PreferredBackBufferHeight;
-            robot.Draw(cameraPosition, aspectRatio);
+            _player.Draw(cameraPosition, aspectRatio);
 
             base.Draw(gameTime);
         }

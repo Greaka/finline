@@ -1,5 +1,4 @@
 ﻿using System;
-using MonoGame3D;
 
 namespace prototyp
 {
