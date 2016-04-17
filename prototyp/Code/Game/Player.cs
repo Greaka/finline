@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace prototyp.Code.Game
 {
@@ -8,16 +9,31 @@ namespace prototyp.Code.Game
     {
         Model model;
         float angle;
+        private Vector3 position;
 
         public void Initialize(ContentManager contentManager)
         {
             model = contentManager.Load<Model>("Undead");
-
+            position = Vector3.Zero;
         }
         public void Update(GameTime gameTime)
         {
-            // TotalSeconds is a double so we need to cast to float
-            angle += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                position.X += 0.1f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                position.X -= 0.1f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                position.Y -= 0.1f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                position.Y += 0.1f;
+            }
         }
 
         // For now we'll take these values in, eventually we'll
@@ -52,12 +68,9 @@ namespace prototyp.Code.Game
         }
         Matrix GetWorldMatrix()
         {
-            const float circleRadius = 8;
-            const float heightOffGround = 3;
 
             // this matrix moves the model "out" from the origin
-            Matrix translationMatrix = Matrix.CreateTranslation(
-                circleRadius, 0, heightOffGround);
+            Matrix translationMatrix = Matrix.CreateTranslation(position);
 
             // this matrix rotates everything around the origin
             Matrix rotationMatrix = Matrix.CreateRotationZ(angle);
