@@ -1,4 +1,5 @@
 ﻿using System;
+using prototyp.Code.Game;
 
 namespace prototyp
 {
