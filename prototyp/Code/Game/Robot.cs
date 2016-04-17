@@ -64,7 +64,7 @@ namespace MonoGame3D
             Matrix rotationMatrix = Matrix.CreateRotationZ(angle);
 
             // We combine the two to have the model move in a circle:
-            Matrix combined = translationMatrix * rotationMatrix;
+            Matrix combined = rotationMatrix * translationMatrix;
 
             return combined;
         }

@@ -17,7 +17,7 @@ namespace MonoGame3D
         Vector3 cameraPosition = new Vector3(15, 10, 10);
        
         Robot robot;
-
+  
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -67,9 +67,11 @@ namespace MonoGame3D
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back ==
-                ButtonState.Pressed || Keyboard.GetState().IsKeyDown(
-                Keys.Escape))
+                 ButtonState.Pressed || Keyboard.GetState().IsKeyDown(
+                 Keys.Escape))
                 Exit();
+
+          
 
             robot.Update(gameTime);
             base.Update(gameTime);
