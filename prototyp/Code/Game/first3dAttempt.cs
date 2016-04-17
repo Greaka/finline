@@ -2,11 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-
-namespace Test3D
+namespace prototyp.Code.Game
 {
 
-    public class Test3DDemo2 : Game
+    public class Test3DDemo2 : Microsoft.Xna.Framework.Game
     {
         VertexPositionTexture[] floorVerts;
         BasicEffect effect;
