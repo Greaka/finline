@@ -14,6 +14,12 @@ namespace prototyp.Code.Utility
             return (1f - interval) * from + interval * target;
         }
 
+        public static Vector3 lerp2d(this Vector3 from, Vector3 target, float interval)
+        {
+            target.Z = from.Z;
+            return (1f - interval) * from + interval * target;
+        }
+
         public static Vector3 rotate2d(this Vector3 me, float radian)
         {
             float cosA = (float)System.Math.Cos(radian);

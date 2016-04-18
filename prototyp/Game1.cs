@@ -19,6 +19,8 @@ namespace prototyp
         private Vector3 _cameraPosition = new Vector3(0, 30, 10);
 
         private Player _player;
+
+        private SpriteBatch batch;
   
         public Game1()
         {
@@ -40,7 +42,7 @@ namespace prototyp
             _floorVerts[4].Position = new Vector3(20, 20, 0);
             _floorVerts[5].Position = _floorVerts[2].Position;
 
-            int repetitions = 20;
+            int repetitions = 10;
 
             _floorVerts[0].TextureCoordinate = new Vector2(0, 0);
             _floorVerts[1].TextureCoordinate = new Vector2(0, repetitions);
@@ -60,7 +62,7 @@ namespace prototyp
 
         protected override void LoadContent()
         {
-            using (var stream = TitleContainer.OpenStream("Content/checkerboard.png"))
+            using (var stream = TitleContainer.OpenStream("Content/ground.jpg"))
             {
                 _checkerboardTexture = Texture2D.FromStream(this.GraphicsDevice, stream);
             }
