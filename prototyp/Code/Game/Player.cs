@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using prototyp.Code.Utility;
 
 namespace prototyp.Code.Game
 {
@@ -9,30 +10,60 @@ namespace prototyp.Code.Game
     {
         Model model;
         float angle;
-        private Vector3 position;
+        private Vector3 _position;
+        private float updraft = 1;
+
+        public Vector3 position
+        {
+            get { return _position; }
+        }
 
         public void Initialize(ContentManager contentManager)
         {
             model = contentManager.Load<Model>("Undead");
-            position = Vector3.Zero;
+            _position = Vector3.UnitZ;
         }
         public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                position.X += 0.1f;
+                _position.X += 0.1f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                position.X -= 0.1f;
+                _position.X -= 0.1f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                position.Y -= 0.1f;
+                _position.Y -= 0.1f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                position.Y += 0.1f;
+                _position.Y += 0.1f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                if (_position.Z <= 1)
+                {
+                    updraft = 2.5f;
+                }
+            }
+            if (_position.Z >= 2.45f)
+            {
+                updraft = 1f;
+            }
+
+            if (updraft <= 1)
+            {
+                _position.Z = 1.05f * position.Z - 0.2f * updraft;
+                if (_position.Z < 1)
+                {
+                    _position.Z = 1;
+                }
+            }
+            else
+            {
+                _position = _position.lerp(new Vector3(_position.X, _position.Y, updraft), 0.2f);
             }
         }
 
@@ -49,7 +80,7 @@ namespace prototyp.Code.Game
                     // We’ll be doing our calculations here...
                     effect.World = GetWorldMatrix();
 
-                    var cameraLookAtVector = Vector3.Zero;
+                    var cameraLookAtVector = _position;
                     var cameraUpVector = Vector3.UnitZ;
 
                     effect.View = Matrix.CreateLookAt(
