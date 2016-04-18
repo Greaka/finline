@@ -2,54 +2,55 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using prototyp.Code.Game;
+using prototyp.Code.Utility;
 
 namespace prototyp
 {
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
+        private GraphicsDeviceManager _graphics;
 
-        VertexPositionNormalTexture[] floorVerts;
+        private VertexPositionNormalTexture[] _floorVerts;
 
-        BasicEffect effect;
+        private BasicEffect _effect;
 
-        Texture2D checkerboardTexture;
+        Texture2D _checkerboardTexture;
 
-        Vector3 cameraPosition = new Vector3(15, 10, 10);
-       
-        Player _player;
+        private Vector3 _cameraPosition = new Vector3(0, 30, 10);
+
+        private Player _player;
   
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = false;
+            _graphics = new GraphicsDeviceManager(this);
+            _graphics.IsFullScreen = false;
 
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
-            floorVerts = new VertexPositionNormalTexture[6];
+            _floorVerts = new VertexPositionNormalTexture[6];
 
-            floorVerts[0].Position = new Vector3(-20, -20, 0);
-            floorVerts[1].Position = new Vector3(-20, 20, 0);
-            floorVerts[2].Position = new Vector3(20, -20, 0);
+            _floorVerts[0].Position = new Vector3(-20, -20, 0);
+            _floorVerts[1].Position = new Vector3(-20, 20, 0);
+            _floorVerts[2].Position = new Vector3(20, -20, 0);
 
-            floorVerts[3].Position = floorVerts[1].Position;
-            floorVerts[4].Position = new Vector3(20, 20, 0);
-            floorVerts[5].Position = floorVerts[2].Position;
+            _floorVerts[3].Position = _floorVerts[1].Position;
+            _floorVerts[4].Position = new Vector3(20, 20, 0);
+            _floorVerts[5].Position = _floorVerts[2].Position;
 
             int repetitions = 20;
 
-            floorVerts[0].TextureCoordinate = new Vector2(0, 0);
-            floorVerts[1].TextureCoordinate = new Vector2(0, repetitions);
-            floorVerts[2].TextureCoordinate = new Vector2(repetitions, 0);
+            _floorVerts[0].TextureCoordinate = new Vector2(0, 0);
+            _floorVerts[1].TextureCoordinate = new Vector2(0, repetitions);
+            _floorVerts[2].TextureCoordinate = new Vector2(repetitions, 0);
 
-            floorVerts[3].TextureCoordinate = floorVerts[1].TextureCoordinate;
-            floorVerts[4].TextureCoordinate = new Vector2(repetitions, repetitions);
-            floorVerts[5].TextureCoordinate = floorVerts[2].TextureCoordinate;
+            _floorVerts[3].TextureCoordinate = _floorVerts[1].TextureCoordinate;
+            _floorVerts[4].TextureCoordinate = new Vector2(repetitions, repetitions);
+            _floorVerts[5].TextureCoordinate = _floorVerts[2].TextureCoordinate;
 
-            effect = new BasicEffect(graphics.GraphicsDevice);
+            _effect = new BasicEffect(_graphics.GraphicsDevice);
 
             _player = new Player();
             _player.Initialize(Content);
@@ -61,7 +62,7 @@ namespace prototyp
         {
             using (var stream = TitleContainer.OpenStream("Content/checkerboard.png"))
             {
-                checkerboardTexture = Texture2D.FromStream(this.GraphicsDevice, stream);
+                _checkerboardTexture = Texture2D.FromStream(this.GraphicsDevice, stream);
             }
         }
 
@@ -85,8 +86,8 @@ namespace prototyp
             DrawGround();
 
             float aspectRatio =
-                graphics.PreferredBackBufferWidth / (float)graphics.PreferredBackBufferHeight;
-            _player.Draw(cameraPosition, aspectRatio);
+                _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
+            _player.Draw(_cameraPosition, aspectRatio);
 
             base.Draw(gameTime);
         }
@@ -96,31 +97,32 @@ namespace prototyp
        
         void DrawGround()
         {
-            var cameraLookAtVector = Vector3.Zero;
+            _cameraPosition = _player.Position + new Vector3(0, -10, 10).rotate2d(_player.ViewDirection);
+            var cameraLookAtVector = _player.Position;
             var cameraUpVector = Vector3.UnitZ;
 
-            effect.View = Matrix.CreateLookAt(
-                cameraPosition, cameraLookAtVector, cameraUpVector);
+            _effect.View = Matrix.CreateLookAt(
+                _cameraPosition, cameraLookAtVector, cameraUpVector);
 
             float aspectRatio =
-                graphics.PreferredBackBufferWidth / (float)graphics.PreferredBackBufferHeight;
+                _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
             float fieldOfView = Microsoft.Xna.Framework.MathHelper.PiOver4;
             float nearClipPlane = 1;
             float farClipPlane = 200;
 
-            effect.Projection = Matrix.CreatePerspectiveFieldOfView(
+            _effect.Projection = Matrix.CreatePerspectiveFieldOfView(
                 fieldOfView, aspectRatio, nearClipPlane, farClipPlane);
 
-            effect.TextureEnabled = true;
-            effect.Texture = checkerboardTexture;
+            _effect.TextureEnabled = true;
+            _effect.Texture = _checkerboardTexture;
 
-            foreach (var pass in effect.CurrentTechnique.Passes)
+            foreach (var pass in _effect.CurrentTechnique.Passes)
             {
                 pass.Apply();
 
-                graphics.GraphicsDevice.DrawUserPrimitives(
+                _graphics.GraphicsDevice.DrawUserPrimitives(
                             PrimitiveType.TriangleList,
-                    floorVerts,
+                    _floorVerts,
                     0,
                     2);
             }

@@ -2,37 +2,70 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using prototyp.Code.Utility;
 
 namespace prototyp.Code.Game
 {
     public class Player
     {
         Model model;
-        float angle;
-        private Vector3 position;
+        private Vector3 _position;
+        private float updraft = 1;
+
+        public Vector3 Position => _position;
+
+        public float ViewDirection { get; private set; }
 
         public void Initialize(ContentManager contentManager)
         {
             model = contentManager.Load<Model>("Undead");
-            position = Vector3.Zero;
+            _position = Vector3.UnitZ;
         }
         public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                position.X += 0.1f;
+                ViewDirection += 0.05f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                position.X -= 0.1f;
+                ViewDirection -= 0.05f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                position.Y -= 0.1f;
+                var richtung = new Vector3(0, 1, 0).rotate2d(ViewDirection);
+                richtung.Normalize();
+                _position += richtung * 0.1f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                position.Y += 0.1f;
+                var richtung = new Vector3(0, 1, 0).rotate2d(ViewDirection);
+                richtung.Normalize();
+                _position -= richtung * 0.1f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                if (_position.Z <= 1)
+                {
+                    updraft = 2.5f;
+                }
+            }
+            if (_position.Z >= 2.45f)
+            {
+                updraft = 1f;
+            }
+
+            if (updraft <= 1)
+            {
+                _position.Z = 1.05f * Position.Z - 0.2f * updraft;
+                if (_position.Z < 1)
+                {
+                    _position.Z = 1;
+                }
+            }
+            else
+            {
+                _position = _position.lerp(new Vector3(_position.X, _position.Y, updraft), 0.2f);
             }
         }
 
@@ -49,7 +82,7 @@ namespace prototyp.Code.Game
 
                     effect.World = GetWorldMatrix();
 
-                    var cameraLookAtVector = Vector3.Zero;
+                    var cameraLookAtVector = _position;
                     var cameraUpVector = Vector3.UnitZ;
 
                     effect.View = Matrix.CreateLookAt(
@@ -69,11 +102,11 @@ namespace prototyp.Code.Game
         Matrix GetWorldMatrix()
         {
 
-            
-            Matrix translationMatrix = Matrix.CreateTranslation(position);
+            // this matrix moves the model "out" from the origin
+            Matrix translationMatrix = Matrix.CreateTranslation(Position);
 
             // this matrix rotates everything around the origin
-            Matrix rotationMatrix = Matrix.CreateRotationZ(angle);
+            Matrix rotationMatrix = Matrix.CreateRotationZ(ViewDirection);
 
             // We combine the two to have the model move in a circle:
             Matrix combined = rotationMatrix * translationMatrix;
