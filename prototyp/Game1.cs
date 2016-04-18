@@ -77,6 +77,9 @@ namespace prototyp
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 1), "cube"));
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 1), "cube"));
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 3, 3), "cube"));
+            
+
+
 
         }
 
