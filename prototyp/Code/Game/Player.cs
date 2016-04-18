@@ -8,7 +8,7 @@ namespace prototyp.Code.Game
 {
     public class Player
     {
-        Model model;
+        Model _model;
         private Vector3 _position;
         private float updraft = 1;
 
@@ -18,7 +18,7 @@ namespace prototyp.Code.Game
 
         public void Initialize(ContentManager contentManager)
         {
-            model = contentManager.Load<Model>("Undead");
+            _model = contentManager.Load<Model>("Undead");
             _position = Vector3.UnitZ;
         }
         public void Update(GameTime gameTime)
@@ -69,17 +69,17 @@ namespace prototyp.Code.Game
             }
         }
 
-        // For now we'll take these values in, eventually we'll
-        // take a Camera object
+        
         public void Draw(Vector3 cameraPosition, float aspectRatio)
         {
-            foreach (var mesh in model.Meshes)
+            foreach (var mesh in _model.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
                     effect.PreferPerPixelLighting = true;
-                    // We’ll be doing our calculations here...
+                    
+
                     effect.World = GetWorldMatrix();
 
                     var cameraLookAtVector = _position;
