@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using prototyp.Code.Game;
+using prototyp.Code.Utility;
 
 namespace prototyp
 {
@@ -96,7 +97,8 @@ namespace prototyp
        
         void DrawGround()
         {
-            var cameraLookAtVector = _player.position;
+            _cameraPosition = _player.Position + new Vector3(0, -10, 10).rotate2d(_player.ViewDirection);
+            var cameraLookAtVector = _player.Position;
             var cameraUpVector = Vector3.UnitZ;
 
             _effect.View = Matrix.CreateLookAt(

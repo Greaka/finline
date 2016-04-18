@@ -9,14 +9,12 @@ namespace prototyp.Code.Game
     public class Player
     {
         Model model;
-        float angle;
         private Vector3 _position;
         private float updraft = 1;
 
-        public Vector3 position
-        {
-            get { return _position; }
-        }
+        public Vector3 Position => _position;
+
+        public float ViewDirection { get; private set; }
 
         public void Initialize(ContentManager contentManager)
         {
@@ -27,19 +25,23 @@ namespace prototyp.Code.Game
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                _position.X += 0.1f;
+                ViewDirection += 0.05f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                _position.X -= 0.1f;
+                ViewDirection -= 0.05f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                _position.Y -= 0.1f;
+                var richtung = new Vector3(0, 1, 0).rotate2d(ViewDirection);
+                richtung.Normalize();
+                _position += richtung * 0.1f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                _position.Y += 0.1f;
+                var richtung = new Vector3(0, 1, 0).rotate2d(ViewDirection);
+                richtung.Normalize();
+                _position -= richtung * 0.1f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
@@ -55,7 +57,7 @@ namespace prototyp.Code.Game
 
             if (updraft <= 1)
             {
-                _position.Z = 1.05f * position.Z - 0.2f * updraft;
+                _position.Z = 1.05f * Position.Z - 0.2f * updraft;
                 if (_position.Z < 1)
                 {
                     _position.Z = 1;
@@ -101,10 +103,10 @@ namespace prototyp.Code.Game
         {
 
             // this matrix moves the model "out" from the origin
-            Matrix translationMatrix = Matrix.CreateTranslation(position);
+            Matrix translationMatrix = Matrix.CreateTranslation(Position);
 
             // this matrix rotates everything around the origin
-            Matrix rotationMatrix = Matrix.CreateRotationZ(angle);
+            Matrix rotationMatrix = Matrix.CreateRotationZ(ViewDirection);
 
             // We combine the two to have the model move in a circle:
             Matrix combined = rotationMatrix * translationMatrix;

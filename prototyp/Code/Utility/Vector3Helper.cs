@@ -13,5 +13,21 @@ namespace prototyp.Code.Utility
         {
             return (1f - interval) * from + interval * target;
         }
+
+        public static Vector3 rotate2d(this Vector3 me, float radian)
+        {
+            float cosA = (float)System.Math.Cos(radian);
+            float sinA = (float)System.Math.Sin(radian);
+
+            float tmpX = me.X * cosA - me.Y * sinA;
+            float tmpY = me.Y * cosA + me.X * sinA;
+
+            me.X = tmpX;
+            me.Y = tmpY;
+
+            return me;
+        }
+
+        public static Vector2 get2d(this Vector3 me) { return new Vector2(me.X, me.Y);}
     }
 }
