@@ -36,8 +36,7 @@ namespace prototyp.Code.Game
             }
         }
 
-        // For now we'll take these values in, eventually we'll
-        // take a Camera object
+        
         public void Draw(Vector3 cameraPosition, float aspectRatio)
         {
             foreach (var mesh in model.Meshes)
@@ -46,7 +45,8 @@ namespace prototyp.Code.Game
                 {
                     effect.EnableDefaultLighting();
                     effect.PreferPerPixelLighting = true;
-                    // We’ll be doing our calculations here...
+                    
+
                     effect.World = GetWorldMatrix();
 
                     var cameraLookAtVector = Vector3.Zero;
@@ -69,7 +69,7 @@ namespace prototyp.Code.Game
         Matrix GetWorldMatrix()
         {
 
-            // this matrix moves the model "out" from the origin
+            
             Matrix translationMatrix = Matrix.CreateTranslation(position);
 
             // this matrix rotates everything around the origin
