@@ -23,7 +23,7 @@ namespace prototyp
 
         private Player _player;
 
-        private List<EnvironmentObject> _environmentObjectsobjects;
+        private List<EnvironmentObject> _environmentObjects;
 
   
         public Game1()
@@ -33,7 +33,7 @@ namespace prototyp
 
             Content.RootDirectory = "Content";
 
-            _environmentObjectsobjects = new List<EnvironmentObject>();
+            _environmentObjects = new List<EnvironmentObject>();
         }
 
         protected override void Initialize()
@@ -74,8 +74,10 @@ namespace prototyp
                 _checkerboardTexture = Texture2D.FromStream(this.GraphicsDevice, stream);
             }
 
-      
-            
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 1), "cube"));
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 1), "cube"));
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 3, 3), "cube"));
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -101,7 +103,7 @@ namespace prototyp
                 _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
             _player.Draw(_cameraPosition, aspectRatio);
 
-            foreach (var obj in _environmentObjectsobjects)
+            foreach (var obj in _environmentObjects)
             {
                 obj.Draw(_cameraPosition, aspectRatio, _player.Position);
             }

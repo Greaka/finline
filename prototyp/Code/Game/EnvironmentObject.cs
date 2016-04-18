@@ -17,10 +17,10 @@ namespace prototyp.Code.Game
 
 
 
-        public EnvironmentObject(ContentManager contentManager)
+        public EnvironmentObject(ContentManager contentManager, Vector3 position, string model)
         {
-            _model = contentManager.Load<Model>("cube");
-            _position = new Vector3(10, 1, 1);
+            _model = contentManager.Load<Model>(model);
+            _position = position;
             _angle = 0;
         }
 

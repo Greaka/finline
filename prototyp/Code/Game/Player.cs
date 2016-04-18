@@ -11,6 +11,8 @@ namespace prototyp.Code.Game
         Model _model;
         private Vector3 _position;
         private float updraft = 1;
+        private float groundzero = 1;
+        const float jumpheight = 4f;
 
         public Vector3 Position => _position;
 
@@ -45,22 +47,22 @@ namespace prototyp.Code.Game
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                if (_position.Z <= 1)
+                if (_position.Z <= groundzero)
                 {
-                    updraft = 2.5f;
+                    updraft = jumpheight;
                 }
             }
-            if (_position.Z >= 2.45f)
+            if (_position.Z >= jumpheight - 0.05f)
             {
-                updraft = 1f;
+                updraft = groundzero;
             }
 
-            if (updraft <= 1)
+            if (updraft <= groundzero)
             {
-                _position.Z = 1.05f * Position.Z - 0.2f * updraft;
-                if (_position.Z < 1)
+                _position.Z = jumpheight / 4f * Position.Z - 0.2f * updraft;
+                if (_position.Z < groundzero)
                 {
-                    _position.Z = 1;
+                    _position.Z = groundzero;
                 }
             }
             else
