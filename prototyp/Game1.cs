@@ -77,9 +77,7 @@ namespace prototyp
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 1), "cube"));
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 1), "cube"));
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 3, 3), "cube"));
-            
-
-
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 3), "bottle_cap2"));
 
         }
 
@@ -98,6 +96,10 @@ namespace prototyp
 
         protected override void Draw(GameTime gameTime)
         {
+            RasterizerState rasterizerState = new RasterizerState();
+            rasterizerState.CullMode = CullMode.None;
+            GraphicsDevice.RasterizerState = rasterizerState;
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             DrawGround();
