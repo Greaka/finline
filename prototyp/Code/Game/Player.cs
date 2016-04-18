@@ -8,7 +8,7 @@ namespace prototyp.Code.Game
 {
     public class Player
     {
-        Model model;
+        Model _model;
         private Vector3 _position;
         private float updraft = 1;
 
@@ -18,7 +18,7 @@ namespace prototyp.Code.Game
 
         public void Initialize(ContentManager contentManager)
         {
-            model = contentManager.Load<Model>("Undead");
+            _model = contentManager.Load<Model>("Undead");
             _position = Vector3.UnitZ;
         }
         public void Update(GameTime gameTime)
@@ -72,7 +72,7 @@ namespace prototyp.Code.Game
         
         public void Draw(Vector3 cameraPosition, float aspectRatio)
         {
-            foreach (var mesh in model.Meshes)
+            foreach (var mesh in _model.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {

@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using prototyp.Code.Game;
@@ -9,6 +11,7 @@ namespace prototyp
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
 
         private VertexPositionNormalTexture[] _floorVerts;
 
@@ -19,6 +22,9 @@ namespace prototyp
         private Vector3 _cameraPosition = new Vector3(0, 30, 10);
 
         private Player _player;
+
+        private List<EnvironmentObject> _environmentObjectsobjects;
+
   
         public Game1()
         {
@@ -26,6 +32,8 @@ namespace prototyp
             _graphics.IsFullScreen = false;
 
             Content.RootDirectory = "Content";
+
+            _environmentObjectsobjects = new List<EnvironmentObject>();
         }
 
         protected override void Initialize()
@@ -55,15 +63,22 @@ namespace prototyp
             _player = new Player();
             _player.Initialize(Content);
 
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _environmentObjectsobjects.Add(new EnvironmentObject(Content));
+            
             using (var stream = TitleContainer.OpenStream("Content/checkerboard.png"))
             {
                 _checkerboardTexture = Texture2D.FromStream(this.GraphicsDevice, stream);
             }
+
+      
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -88,6 +103,11 @@ namespace prototyp
             float aspectRatio =
                 _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
             _player.Draw(_cameraPosition, aspectRatio);
+
+            foreach (var obj in _environmentObjectsobjects)
+            {
+                obj.Draw(_cameraPosition, aspectRatio, _player.Position);
+            }
 
             base.Draw(gameTime);
         }
