@@ -38,6 +38,16 @@ namespace prototyp
 
         protected override void Initialize()
         {
+            var samplerState = new SamplerState
+            {
+                Filter = TextureFilter.LinearMipPoint
+            };
+            GraphicsDevice.SamplerStates[0] = samplerState;
+
+            RasterizerState rasterizerState = new RasterizerState();
+            rasterizerState.CullMode = CullMode.None;
+            GraphicsDevice.RasterizerState = rasterizerState;
+
             _floorVerts = new VertexPositionNormalTexture[6];
 
             _floorVerts[0].Position = new Vector3(-20, -20, 0);
@@ -95,12 +105,7 @@ namespace prototyp
         }
 
         protected override void Draw(GameTime gameTime)
-        {
-            RasterizerState rasterizerState = new RasterizerState();
-            rasterizerState.CullMode = CullMode.None;
-            GraphicsDevice.RasterizerState = rasterizerState;
-
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+        {GraphicsDevice.Clear(Color.CornflowerBlue);
 
             DrawGround();
 
