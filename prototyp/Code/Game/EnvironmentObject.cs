@@ -17,6 +17,7 @@ namespace prototyp.Code.Game
 
 
 
+
         public EnvironmentObject(ContentManager contentManager, Vector3 position, string model)
         {
             _model = contentManager.Load<Model>(model);
@@ -67,8 +68,6 @@ namespace prototyp.Code.Game
 
             return combined;
         }
-
-
     }
 
 
