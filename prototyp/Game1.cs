@@ -36,7 +36,7 @@ namespace prototyp
         {
             var samplerState = new SamplerState
             {
-                Filter = TextureFilter.LinearMipPoint
+                Filter = TextureFilter.Anisotropic
             };
             GraphicsDevice.SamplerStates[0] = samplerState;
 
@@ -69,7 +69,11 @@ namespace prototyp
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            
+
+            foreach (EnvironmentObject obj in _environmentObjects)
+            {
+                obj.Update(gameTime);
+            }
             _player.Update(gameTime);
             base.Update(gameTime);
         }

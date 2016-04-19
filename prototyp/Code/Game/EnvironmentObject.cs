@@ -15,15 +15,30 @@ namespace prototyp.Code.Game
         private Model _model;
         private Vector3 _position;
         private float _angle;
-
-
-
-
+        private bool orbit;
+        
         public EnvironmentObject(ContentManager contentManager, Vector3 position, GameConstants.EnvObjects model)
         {
+            switch (model)
+            {
+                case GameConstants.EnvObjects.bottle_cap2:
+                    orbit = true;
+                    break;
+                default:
+                    orbit = false;
+                    break;
+            }
             _model = contentManager.Load<Model>(model.ToString());
             _position = position;
             _angle = 0;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            if (orbit)
+            {
+                _angle += 0.1f;
+            }
         }
 
         public void Draw(Vector3 cameraPosition, float aspectRatio, Vector3 playerPosition)
@@ -55,7 +70,8 @@ namespace prototyp.Code.Game
                 mesh.Draw();
             }
         }
-        Matrix GetWorldMatrix()
+
+        private Matrix GetWorldMatrix()
         {
 
             // this matrix moves the model "out" from the origin
