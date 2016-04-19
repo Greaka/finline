@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Code\Game\EnvironmentObject.cs" />
+    <Compile Include="Code\Game\Ground.cs" />
     <Compile Include="Code\Game\Player.cs" />
     <Compile Include="Code\Utility\Vector3Helper.cs" />
     <Compile Include="Game1.cs" />

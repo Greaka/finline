@@ -13,15 +13,10 @@ namespace prototyp
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private VertexPositionNormalTexture[] _floorVerts;
-
-        private BasicEffect _effect;
-
-        Texture2D _checkerboardTexture;
-
         private Vector3 _cameraPosition = new Vector3(0, 30, 10);
 
         private Player _player;
+        private Ground _ground;
 
         private List<EnvironmentObject> _environmentObjects;
 
@@ -48,27 +43,8 @@ namespace prototyp
             rasterizerState.CullMode = CullMode.None;
             GraphicsDevice.RasterizerState = rasterizerState;
 
-            _floorVerts = new VertexPositionNormalTexture[6];
-
-            _floorVerts[0].Position = new Vector3(-20, -20, 0);
-            _floorVerts[1].Position = new Vector3(-20, 20, 0);
-            _floorVerts[2].Position = new Vector3(20, -20, 0);
-
-            _floorVerts[3].Position = _floorVerts[1].Position;
-            _floorVerts[4].Position = new Vector3(20, 20, 0);
-            _floorVerts[5].Position = _floorVerts[2].Position;
-
-            int repetitions = 5;
-
-            _floorVerts[0].TextureCoordinate = new Vector2(0, 0);
-            _floorVerts[1].TextureCoordinate = new Vector2(0, repetitions);
-            _floorVerts[2].TextureCoordinate = new Vector2(repetitions, 0);
-
-            _floorVerts[3].TextureCoordinate = _floorVerts[1].TextureCoordinate;
-            _floorVerts[4].TextureCoordinate = new Vector2(repetitions, repetitions);
-            _floorVerts[5].TextureCoordinate = _floorVerts[2].TextureCoordinate;
-
-            _effect = new BasicEffect(_graphics.GraphicsDevice);
+            _ground = new Ground();
+            _ground.Initialize();
 
             _player = new Player();
             _player.Initialize(Content);
@@ -79,10 +55,7 @@ namespace prototyp
 
         protected override void LoadContent()
         {
-            using (var stream = TitleContainer.OpenStream("Content/ground.jpg"))
-            {
-                _checkerboardTexture = Texture2D.FromStream(this.GraphicsDevice, stream);
-            }
+            _ground.LoadContent(GraphicsDevice);
 
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 1), "cube"));
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 1), "cube"));
@@ -105,12 +78,15 @@ namespace prototyp
         }
 
         protected override void Draw(GameTime gameTime)
-        {GraphicsDevice.Clear(Color.CornflowerBlue);
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            DrawGround();
+            _cameraPosition = _player.Position + new Vector3(0, -10, 10).rotate2d(_player.ViewDirection);
 
             float aspectRatio =
                 _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
+
+            _ground.Draw(_cameraPosition, aspectRatio, _player.Position, GraphicsDevice);
             _player.Draw(_cameraPosition, aspectRatio);
 
             foreach (var obj in _environmentObjects)
@@ -119,42 +95,6 @@ namespace prototyp
             }
 
             base.Draw(gameTime);
-        }
-
-      
-
-       
-        void DrawGround()
-        {
-            _cameraPosition = _player.Position + new Vector3(0, -10, 10).rotate2d(_player.ViewDirection);
-            var cameraLookAtVector = _player.Position;
-            var cameraUpVector = Vector3.UnitZ;
-
-            _effect.View = Matrix.CreateLookAt(
-                _cameraPosition, cameraLookAtVector, cameraUpVector);
-
-            float aspectRatio =
-                _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
-            float fieldOfView = Microsoft.Xna.Framework.MathHelper.PiOver4;
-            float nearClipPlane = 1;
-            float farClipPlane = 200;
-
-            _effect.Projection = Matrix.CreatePerspectiveFieldOfView(
-                fieldOfView, aspectRatio, nearClipPlane, farClipPlane);
-
-            _effect.TextureEnabled = true;
-            _effect.Texture = _checkerboardTexture;
-
-            foreach (var pass in _effect.CurrentTechnique.Passes)
-            {
-                pass.Apply();
-
-                _graphics.GraphicsDevice.DrawUserPrimitives(
-                            PrimitiveType.TriangleList,
-                    _floorVerts,
-                    0,
-                    2);
-            }
         }
     }
 }
