@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using prototyp.Code.Constants;
 using prototyp.Code.Game;
 using prototyp.Code.Utility;
 
@@ -57,22 +58,18 @@ namespace prototyp
         {
             _ground.LoadContent(GraphicsDevice);
 
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 1), "cube"));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 1), "cube"));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 3, 3), "cube"));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 3), "bottle_cap2"));
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 1), GameConstants.EnvObjects.cube));
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 1), GameConstants.EnvObjects.cube));
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 3, 3), GameConstants.EnvObjects.cube));
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 3), GameConstants.EnvObjects.bottle_cap2));
 
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back ==
-                 ButtonState.Pressed || Keyboard.GetState().IsKeyDown(
-                 Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-          
-
+            
             _player.Update(gameTime);
             base.Update(gameTime);
         }
@@ -83,8 +80,7 @@ namespace prototyp
 
             _cameraPosition = _player.Position + new Vector3(0, -10, 10).rotate2d(_player.ViewDirection);
 
-            float aspectRatio =
-                _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
+            float aspectRatio = _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
 
             _ground.Draw(_cameraPosition, aspectRatio, _player.Position, GraphicsDevice);
             _player.Draw(_cameraPosition, aspectRatio);

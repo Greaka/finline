@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using prototyp.Code.Constants;
 
 namespace prototyp.Code.Game
 {
@@ -18,9 +19,9 @@ namespace prototyp.Code.Game
 
 
 
-        public EnvironmentObject(ContentManager contentManager, Vector3 position, string model)
+        public EnvironmentObject(ContentManager contentManager, Vector3 position, GameConstants.EnvObjects model)
         {
-            _model = contentManager.Load<Model>(model);
+            _model = contentManager.Load<Model>(model.ToString());
             _position = position;
             _angle = 0;
         }
