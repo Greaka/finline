@@ -11,13 +11,13 @@ namespace prototyp.Code.Utility
 {
     public static class GraphicsHelper
     {
-        public static bool isColliding(Player player, List<EnvironmentObject> environmentObjects)
+        public static bool isColliding(this Entity entity, List<EnvironmentObject> environmentObjects)
         {
             bool colliding = false;
             EnvironmentObject remove = null;
             foreach (EnvironmentObject obj in environmentObjects)
             {
-                if (player.GetBound.Intersects(obj.GetBound))
+                if (entity.GetBound.Intersects(obj.GetBound))
                 {
                     switch (obj.Type)
                     {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@ namespace prototyp.Code.Game
     {
         private float updraft = 1;
         private float groundzero = 1;
-        const float jumpheight = 4f;
+        const float jumpheight = 3f;
         private List<EnvironmentObject> _environmentObjects;
 
         public Vector3 Position
@@ -21,7 +22,7 @@ namespace prototyp.Code.Game
             {
                 var pos = _position;
                 _position = value;
-                if (GraphicsHelper.isColliding(this, _environmentObjects))
+                if (this.isColliding(_environmentObjects))
                 {
                     _position = pos;
                 }
@@ -62,21 +63,29 @@ namespace prototyp.Code.Game
                 richtung.Normalize();
                 Position -= richtung * 0.1f;
             }
+            var pos = new Vector3(_position.X, _position.Y, updraft).lerp(_position, 0.85f);
+            if ((pos - _position).Length() < 0.05f && _position.Z > groundzero)
+            {
+                pos = new Vector3(Position.X, Position.Y, Position.Z - 0.05f);
+            }
+            //var pos = new Vector3(_position.X, _position.Y, jumpheight/4f*Position.Z - 0.2f*updraft);
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                if (_position.Z <= groundzero)
+                var oldPosition = Position;
+                Position = pos;
+                if (_position.Z <= groundzero || Position == oldPosition)
                 {
-                    updraft = jumpheight;
+                    updraft = Position.Z + jumpheight;
                 }
             }
-            if (_position.Z >= jumpheight - 0.05f)
+            if (Math.Abs(updraft - groundzero) > 0.05f && _position.Z >= updraft - 0.05f)
             {
                 updraft = groundzero;
             }
 
             if (updraft <= groundzero)
             {
-                Position = new Vector3(_position.X, _position.Y, jumpheight / 4f * Position.Z - 0.2f * updraft);
+                Position = pos;
                 if (_position.Z < groundzero)
                 {
                     _position.Z = groundzero;

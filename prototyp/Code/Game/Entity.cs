@@ -22,6 +22,7 @@ namespace prototyp.Code.Game
             {
                 var sphere = _model.Meshes[0].BoundingSphere;
                 sphere.Center += _position;
+                sphere.Radius *= 0.8f;
                 return sphere;
             }
         }
