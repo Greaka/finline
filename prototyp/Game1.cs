@@ -40,7 +40,7 @@ namespace prototyp
         {
             var samplerState = new SamplerState
             {
-                Filter = TextureFilter.LinearMipPoint
+                Filter = TextureFilter.MinPointMagLinearMipPoint
             };
             GraphicsDevice.SamplerStates[0] = samplerState;
 
@@ -88,7 +88,7 @@ namespace prototyp
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 1), "cube"));
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 3, 3), "cube"));
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 3), "bottle_cap2"));
-
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 3), "bottle_cap2"));
         }
 
         protected override void Update(GameTime gameTime)
@@ -99,6 +99,10 @@ namespace prototyp
                 Exit();
 
           
+
+
+
+
 
             _player.Update(gameTime);
             base.Update(gameTime);
