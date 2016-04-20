@@ -70,11 +70,14 @@ namespace prototyp
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            _player.Update(gameTime, _environmentObjects);
+
+            EnvironmentObject remove = null;
             foreach (EnvironmentObject obj in _environmentObjects)
             {
                 obj.Update(gameTime);
             }
-            _player.Update(gameTime);
+
             base.Update(gameTime);
         }
 

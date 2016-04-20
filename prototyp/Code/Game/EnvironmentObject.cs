@@ -12,13 +12,29 @@ namespace prototyp.Code.Game
 {
     public class EnvironmentObject
     {
+        private GameConstants.EnvObjects _type;
         private Model _model;
         private Vector3 _position;
         private float _angle;
         private bool orbit;
-        
+
+        public Model GetModel => _model;
+
+        public GameConstants.EnvObjects Type => _type;
+
+        public BoundingSphere GetBound
+        {
+            get
+            {
+                var sphere = _model.Meshes[0].BoundingSphere;
+                sphere.Center = _position;
+                return sphere;
+            }
+        }
+
         public EnvironmentObject(ContentManager contentManager, Vector3 position, GameConstants.EnvObjects model)
         {
+            _type = model;
             switch (model)
             {
                 case GameConstants.EnvObjects.bottle_cap2:

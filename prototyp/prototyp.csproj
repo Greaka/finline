@@ -42,6 +42,7 @@
     <Compile Include="Code\Game\EnvironmentObject.cs" />
     <Compile Include="Code\Game\Ground.cs" />
     <Compile Include="Code\Game\Player.cs" />
+    <Compile Include="Code\Utility\GraphicsHelper.cs" />
     <Compile Include="Code\Utility\Vector3Helper.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
