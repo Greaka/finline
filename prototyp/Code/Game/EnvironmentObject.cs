@@ -10,27 +10,12 @@ using prototyp.Code.Constants;
 
 namespace prototyp.Code.Game
 {
-    public class EnvironmentObject
+    public class EnvironmentObject : Entity
     {
         private GameConstants.EnvObjects _type;
-        private Model _model;
-        private Vector3 _position;
-        private float _angle;
         private bool orbit;
 
-        public Model GetModel => _model;
-
         public GameConstants.EnvObjects Type => _type;
-
-        public BoundingSphere GetBound
-        {
-            get
-            {
-                var sphere = _model.Meshes[0].BoundingSphere;
-                sphere.Center = _position;
-                return sphere;
-            }
-        }
 
         public EnvironmentObject(ContentManager contentManager, Vector3 position, GameConstants.EnvObjects model)
         {
@@ -59,47 +44,7 @@ namespace prototyp.Code.Game
 
         public void Draw(Vector3 cameraPosition, float aspectRatio, Vector3 playerPosition)
         {
-            foreach (var mesh in _model.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.EnableDefaultLighting();
-                    effect.PreferPerPixelLighting = true;
-
-
-                    effect.World = GetWorldMatrix();
-
-                    var cameraLookAtVector = playerPosition;
-                    var cameraUpVector = Vector3.UnitZ;
-
-                    effect.View = Matrix.CreateLookAt(
-                        cameraPosition, cameraLookAtVector, cameraUpVector);
-
-                    float fieldOfView = Microsoft.Xna.Framework.MathHelper.PiOver4;
-                    float nearClipPlane = 1;
-                    float farClipPlane = 200;
-
-                    effect.Projection = Matrix.CreatePerspectiveFieldOfView(
-                        fieldOfView, aspectRatio, nearClipPlane, farClipPlane);
-                }
-
-                mesh.Draw();
-            }
-        }
-
-        private Matrix GetWorldMatrix()
-        {
-
-            // this matrix moves the model "out" from the origin
-            Matrix translationMatrix = Matrix.CreateTranslation(_position);
-
-            // this matrix rotates everything around the origin
-            Matrix rotationMatrix = Matrix.CreateRotationZ(_angle);
-
-            // We combine the two to have the model move in a circle:
-            Matrix combined = rotationMatrix * translationMatrix;
-
-            return combined;
+            base.Draw(cameraPosition, aspectRatio, playerPosition);
         }
     }
 

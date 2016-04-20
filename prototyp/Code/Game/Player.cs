@@ -7,26 +7,12 @@ using prototyp.Code.Utility;
 
 namespace prototyp.Code.Game
 {
-    public class Player
+    public class Player : Entity
     {
-        Model _model;
-        private Vector3 _position;
         private float updraft = 1;
         private float groundzero = 1;
         const float jumpheight = 4f;
         private List<EnvironmentObject> _environmentObjects;
-
-        public Model GetModel => _model;
-
-        public BoundingSphere GetBound
-        {
-            get
-            {
-                var sphere = _model.Meshes[0].BoundingSphere;
-                sphere.Center = _position;
-                return sphere;
-            }
-        }
 
         public Vector3 Position
         {
@@ -42,7 +28,11 @@ namespace prototyp.Code.Game
             }
         }
 
-        public float ViewDirection { get; private set; }
+        public float ViewDirection
+        {
+            get { return _angle; }
+            private set { _angle = value; }
+        }
 
         public void Initialize(ContentManager contentManager)
         {
@@ -101,46 +91,7 @@ namespace prototyp.Code.Game
         
         public void Draw(Vector3 cameraPosition, float aspectRatio)
         {
-            foreach (var mesh in _model.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.EnableDefaultLighting();
-                    effect.PreferPerPixelLighting = true;
-                    
-
-                    effect.World = GetWorldMatrix();
-
-                    var cameraLookAtVector = _position;
-                    var cameraUpVector = Vector3.UnitZ;
-
-                    effect.View = Matrix.CreateLookAt(
-                        cameraPosition, cameraLookAtVector, cameraUpVector);
-
-                    float fieldOfView = Microsoft.Xna.Framework.MathHelper.PiOver4;
-                    float nearClipPlane = 1;
-                    float farClipPlane = 200;
-
-                    effect.Projection = Matrix.CreatePerspectiveFieldOfView(
-                        fieldOfView, aspectRatio, nearClipPlane, farClipPlane);
-                }
-
-                mesh.Draw();
-            }
-        }
-        Matrix GetWorldMatrix()
-        {
-
-            // this matrix moves the model "out" from the origin
-            Matrix translationMatrix = Matrix.CreateTranslation(Position);
-
-            // this matrix rotates everything around the origin
-            Matrix rotationMatrix = Matrix.CreateRotationZ(ViewDirection);
-
-            // We combine the two to have the model move in a circle:
-            Matrix combined = rotationMatrix * translationMatrix;
-
-            return combined;
+            base.Draw(cameraPosition, aspectRatio, _position);
         }
     }
 }
