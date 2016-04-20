@@ -61,7 +61,11 @@ namespace prototyp
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 1), GameConstants.EnvObjects.cube));
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 1), GameConstants.EnvObjects.cube));
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 3, 3), GameConstants.EnvObjects.cube));
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(-15, 1, 1), GameConstants.EnvObjects.cube));
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(15, -15, 1), GameConstants.EnvObjects.cube));
             _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 3), GameConstants.EnvObjects.bottle_cap2));
+            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 3), GameConstants.EnvObjects.bottle_cap2));
+
 
         }
 
