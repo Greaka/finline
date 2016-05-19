@@ -18,11 +18,6 @@ namespace prototyp
         [STAThread]
         static void Main()
         {
-            Task.Factory.StartNew(() =>
-            {
-                Controller myController = new Controller();
-                myController.ControlsLoop();
-            });
             using (var game = new Game1())
                 game.Run();
             ControlsHelper.Active = false;

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using prototyp.Code.Constants;
 using prototyp.Code.Game;
+using prototyp.Code.Game.Controls;
 
 namespace prototyp
 {
@@ -18,6 +19,7 @@ namespace prototyp
         private Ground _ground;
 
         private List<EnvironmentObject> _environmentObjects;
+        private Controller controls = new Controller();
 
   
         public Game1()
@@ -71,6 +73,7 @@ namespace prototyp
 
         protected override void Update(GameTime gameTime)
         {
+            controls.Update();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 

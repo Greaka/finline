@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using prototyp.Code.Game.Helper;
 
 namespace prototyp.Code.Game
 {
@@ -37,8 +38,9 @@ namespace prototyp.Code.Game
                     var cameraLookAtVector = playerPosition;
                     var cameraUpVector = Vector3.UnitZ;
 
-                    effect.View = Matrix.CreateLookAt(
+                    ControlsHelper.ViewMatrix = Matrix.CreateLookAt(
                         cameraPosition, cameraLookAtVector, cameraUpVector);
+                    effect.View = ControlsHelper.ViewMatrix;
 
                     float fieldOfView = Microsoft.Xna.Framework.MathHelper.PiOver4;
                     float nearClipPlane = 1;

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using prototyp.Code.Game.Helper;
 using prototyp.Code.Utility;
 
 namespace prototyp.Code.Game
@@ -38,11 +39,12 @@ namespace prototyp.Code.Game
             _model = contentManager.Load<Model>("Undead");
             _position = Vector3.UnitZ;
         }
+
         public void Update(GameTime gameTime, List<EnvironmentObject> environmentObjects)
         {
-
+            _position += new Vector3(ControlsHelper.MoveDirection, 0);
+            ControlsHelper.PlayerPosition = _position;
         }
-
         
         public void Draw(Vector3 cameraPosition, float aspectRatio)
         {

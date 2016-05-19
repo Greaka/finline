@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Timers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using prototyp.Code.Game.Helper;
+using Timer = System.Timers.Timer;
 
 namespace prototyp.Code.Game.Controls
 {
@@ -12,36 +12,50 @@ namespace prototyp.Code.Game.Controls
 
         public event Shot Shoot;
 
+        private Timer aTimer;
         private bool shootable = true;
         private bool alreadyshot = false;
         const double trigger = 0.2;
 
-        public void ControlsLoop()
+        public Controller()
         {
-            var aTimer = new Timer
+            aTimer = new Timer
             {
                 Interval = 1000/ControlsHelper.ActualShotsPerSecond,
                 Enabled = true
             };
             aTimer.Elapsed += (sender, args) => { shootable = true; };
-            
-            while (ControlsHelper.Active)
+        }
+
+        public void Update() {
+            if (Math.Abs(aTimer.Interval - ControlsHelper.ActualShotsPerSecond) < 0.00001)
+                aTimer.Interval = ControlsHelper.ActualShotsPerSecond;
+            var inputstate = GamePad.GetState(PlayerIndex.One);
+            if (inputstate.IsConnected)
             {
-                if (Math.Abs(aTimer.Interval - ControlsHelper.ActualShotsPerSecond) < 0.00001)
-                    aTimer.Interval = ControlsHelper.ActualShotsPerSecond;
-                var inputstate = GamePad.GetState(0);
-                if (inputstate.IsConnected)
-                {
-                    ControlsHelper.MoveDirection = inputstate.ThumbSticks.Left;
-                    ControlsHelper.ShootDirection = inputstate.ThumbSticks.Right;
-                    Shootroutine(inputstate.Triggers.Right > trigger);
-                }
-                else
-                {
-                    //TODO: ControlsHelper.MoveDirection = inputstate.ThumbSticks.Left;
-                    //TODO: ControlsHelper.ShootDirection = inputstate.ThumbSticks.Right;
-                    Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed);
-                }
+                ControlsHelper.MoveDirection = inputstate.ThumbSticks.Left;
+                ControlsHelper.ShootDirection = inputstate.ThumbSticks.Right;
+                Shootroutine(inputstate.Triggers.Right > trigger);
+            }
+            else
+            {
+                var moveDirection = new Vector2(0);
+                if (Keyboard.GetState().IsKeyDown(Keys.W))
+                    moveDirection += Vector2.UnitY;
+                if (Keyboard.GetState().IsKeyDown(Keys.S))
+                    moveDirection -= Vector2.UnitY;
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                    moveDirection -= Vector2.UnitX;
+                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                    moveDirection += Vector2.UnitX;
+                if (moveDirection.Length() > 0) moveDirection.Normalize();
+
+                ControlsHelper.MoveDirection = moveDirection;
+
+                ControlsHelper.ShootDirection = Vector2.Transform(Mouse.GetState().Position.ToVector2(), Matrix.Invert(ControlsHelper.ViewMatrix)) -
+                    new Vector2(ControlsHelper.PlayerPosition.X, ControlsHelper.PlayerPosition.Y);
+                ControlsHelper.ShootDirection.Normalize();
+                Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed);
             }
         }
 
@@ -49,9 +63,10 @@ namespace prototyp.Code.Game.Controls
         {
             Action beforeShoot = () =>
             {
+                if (!shootPressed) return;
                 alreadyshot = true;
                 shootable = false;
-                Shoot();
+                Shoot?.Invoke();
             };
 
             if (!shootable) return;
@@ -63,12 +78,10 @@ namespace prototyp.Code.Game.Controls
                         alreadyshot = false;
                 }
                 else
-                    if (shootPressed)
-                        beforeShoot();
+                    beforeShoot();
             }
             else
-                if (shootPressed)
-                    beforeShoot();
+                beforeShoot();
         }
     }
 }

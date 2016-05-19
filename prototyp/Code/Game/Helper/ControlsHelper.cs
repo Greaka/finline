@@ -17,6 +17,16 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
+        private static ThreadSafeObject<Matrix> viewMatrix = new ThreadSafeObject<Matrix>(new Matrix());
+        public static Matrix ViewMatrix
+        {
+            get { return viewMatrix.value; }
+            set
+            {
+                lock (viewMatrix)
+                    viewMatrix.value = value;
+            }
+        }
 
         private static ThreadSafeObject<double> sps = new ThreadSafeObject<double>(2.5);
         public static double ActualShotsPerSecond
@@ -30,7 +40,7 @@ namespace prototyp.Code.Game.Helper
                 }
             }
         }
-
+        /*
         private static ThreadSafeObject<bool> forward = new ThreadSafeObject<bool>(false);
         public static bool Forward
         {
@@ -81,9 +91,22 @@ namespace prototyp.Code.Game.Helper
                     left.value = value;
                 }
             }
+        }*/
+
+        private static ThreadSafeObject<Vector3> playerPosition = new ThreadSafeObject<Vector3>(new Vector3(0));
+        public static Vector3 PlayerPosition
+        {
+            get { return playerPosition.value; }
+            set
+            {
+                lock (moveDirection)
+                {
+                    playerPosition.value = value;
+                }
+            }
         }
 
-        private static ThreadSafeObject<Vector2> moveDirection = new ThreadSafeObject<Vector2>(new Vector2());
+        private static ThreadSafeObject<Vector2> moveDirection = new ThreadSafeObject<Vector2>(new Vector2(0));
         public static Vector2 MoveDirection
         {
             get { return moveDirection.value; }
@@ -96,7 +119,7 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
-        private static ThreadSafeObject<Vector2> shootDirection = new ThreadSafeObject<Vector2>(new Vector2());
+        private static ThreadSafeObject<Vector2> shootDirection = new ThreadSafeObject<Vector2>(new Vector2(0, 1));
         public static Vector2 ShootDirection
         {
             get { return shootDirection.value; }
