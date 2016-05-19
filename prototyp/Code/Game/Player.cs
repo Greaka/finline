@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using prototyp.Code.Utility;
 
 namespace prototyp.Code.Game
@@ -42,59 +40,7 @@ namespace prototyp.Code.Game
         }
         public void Update(GameTime gameTime, List<EnvironmentObject> environmentObjects)
         {
-            _environmentObjects = environmentObjects;
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                ViewDirection += 0.05f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                ViewDirection -= 0.05f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                var richtung = new Vector3(0, 1, 0).rotate2d(ViewDirection);
-                richtung.Normalize();
-                Position += richtung * 0.1f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                var richtung = new Vector3(0, 1, 0).rotate2d(ViewDirection);
-                richtung.Normalize();
-                Position -= richtung * 0.1f;
-            }
-            var pos = new Vector3(_position.X, _position.Y, updraft).lerp(_position, 0.85f);
-            if ((pos - _position).Length() < 0.05f && _position.Z > groundzero)
-            {
-                pos = new Vector3(Position.X, Position.Y, Position.Z - 0.05f);
-            }
-            //var pos = new Vector3(_position.X, _position.Y, jumpheight/4f*Position.Z - 0.2f*updraft);
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                var oldPosition = Position;
-                Position = pos;
-                if (_position.Z <= groundzero || Position == oldPosition)
-                {
-                    updraft = Position.Z + jumpheight;
-                }
-            }
-            if (Math.Abs(updraft - groundzero) > 0.05f && _position.Z >= updraft - 0.05f)
-            {
-                updraft = groundzero;
-            }
 
-            if (updraft <= groundzero)
-            {
-                Position = pos;
-                if (_position.Z < groundzero)
-                {
-                    _position.Z = groundzero;
-                }
-            }
-            else
-            {
-                Position = _position.lerp(new Vector3(_position.X, _position.Y, updraft), 0.2f);
-            }
         }
 
         

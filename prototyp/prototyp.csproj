@@ -39,9 +39,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Code\Constants\GameConstants.cs" />
+    <Compile Include="Code\Game\Controls\Controller.cs" />
+    <Compile Include="Code\Game\Controls\Shoot.cs" />
     <Compile Include="Code\Game\Entity.cs" />
     <Compile Include="Code\Game\EnvironmentObject.cs" />
     <Compile Include="Code\Game\Ground.cs" />
+    <Compile Include="Code\Game\Helper\ControlsHelper.cs" />
+    <Compile Include="Code\Game\Helper\Enums.cs" />
+    <Compile Include="Code\Game\Helper\ThreadSafeObject.cs" />
     <Compile Include="Code\Game\Player.cs" />
     <Compile Include="Code\Utility\GraphicsHelper.cs" />
     <Compile Include="Code\Utility\Vector3Helper.cs" />

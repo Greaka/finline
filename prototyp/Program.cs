@@ -1,5 +1,8 @@
 ﻿using System;
-using prototyp.Code.Game;
+using System.Threading;
+using System.Threading.Tasks;
+using prototyp.Code.Game.Controls;
+using prototyp.Code.Game.Helper;
 
 namespace prototyp
 {
@@ -15,8 +18,14 @@ namespace prototyp
         [STAThread]
         static void Main()
         {
+            Task.Factory.StartNew(() =>
+            {
+                Controller myController = new Controller();
+                myController.ControlsLoop();
+            });
             using (var game = new Game1())
                 game.Run();
+            ControlsHelper.Active = false;
         }
     }
 #endif

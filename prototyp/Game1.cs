@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using prototyp.Code.Constants;
 using prototyp.Code.Game;
-using prototyp.Code.Utility;
 
 namespace prototyp
 {
@@ -26,7 +24,6 @@ namespace prototyp
         {
             _graphics = new GraphicsDeviceManager(this);
             _graphics.IsFullScreen = false;
-
             Content.RootDirectory = "Content";
 
             _environmentObjects = new List<EnvironmentObject>();
@@ -92,7 +89,7 @@ namespace prototyp
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _cameraPosition = _player.Position + new Vector3(0, -10, 10).rotate2d(_player.ViewDirection);
+            _cameraPosition = _player.Position + new Vector3(0, -10, 10);
 
             float aspectRatio = _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
 
