@@ -11,7 +11,6 @@ namespace prototyp.Code.Game.Entities
     {
         private float updraft = 1;
         private float groundzero = 1;
-        const float jumpheight = 3f;
         private List<EnvironmentObject> _environmentObjects;
 
         public Vector3 Position

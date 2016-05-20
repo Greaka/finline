@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using prototyp.Code.Constants;
+using prototyp.Code.Game.Entities;
 using prototyp.Code.Utility;
 
 namespace prototyp.Code.Game.Helper
 {
     public static class ControlsHelper
     {
+        public static ConcurrentBag<Projectile> Projectiles = new ConcurrentBag<Projectile>();
+
         private static readonly ThreadSafeObject<bool> active = new ThreadSafeObject<bool>(true);
         public static bool Active
         {
@@ -43,58 +48,6 @@ namespace prototyp.Code.Game.Helper
                 }
             }
         }
-        /*
-        private static ThreadSafeObject<bool> forward = new ThreadSafeObject<bool>(false);
-        public static bool Forward
-        {
-            get { return forward.value; }
-            set
-            {
-                lock (forward)
-                {
-                    forward.value = value;
-                }
-            }
-        }
-
-        private static ThreadSafeObject<bool> backward = new ThreadSafeObject<bool>(false);
-        public static bool Backward
-        {
-            get { return backward.value; }
-            set
-            {
-                lock (backward)
-                {
-                    backward.value = value;
-                }
-            }
-        }
-
-        private static ThreadSafeObject<bool> right = new ThreadSafeObject<bool>(false);
-        public static bool Right
-        {
-            get { return right.value; }
-            set
-            {
-                lock (right)
-                {
-                    right.value = value;
-                }
-            }
-        }
-
-        private static ThreadSafeObject<bool> left = new ThreadSafeObject<bool>(false);
-        public static bool Left
-        {
-            get { return left.value; }
-            set
-            {
-                lock (left)
-                {
-                    left.value = value;
-                }
-            }
-        }*/
 
         private static readonly ThreadSafeObject<Vector3> playerPosition = new ThreadSafeObject<Vector3>(new Vector3(0));
         public static Vector3 PlayerPosition
@@ -109,18 +62,20 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
+        private static Vector2 addPerspective(this Vector2 me)
+        {
+            if (!(me.Length() > 0)) return me;
+            var perspective = GraphicConstants.CameraOffset.get2d();
+            perspective.Normalize();
+            perspective = me.rotate((float)Math.PI + perspective.getAngle());
+            perspective.Normalize();
+            return perspective;
+        }
+
         private static readonly ThreadSafeObject<Vector2> moveDirection = new ThreadSafeObject<Vector2>(new Vector2(0));
         public static Vector2 MoveDirection
         {
-            get
-            {
-                if (!(moveDirection.value.Length() > 0)) return moveDirection.value;
-                var perspective = GraphicConstants.CameraOffset.get2d();
-                perspective.Normalize();
-                perspective = moveDirection.value.rotate((float)Math.PI + perspective.getAngle());
-                perspective.Normalize();
-                return perspective;
-            }
+            get { return moveDirection.value.addPerspective(); }
             set
             {
                 lock (moveDirection)
@@ -133,15 +88,7 @@ namespace prototyp.Code.Game.Helper
         private static readonly ThreadSafeObject<Vector2> shootDirection = new ThreadSafeObject<Vector2>(new Vector2(0, 1));
         public static Vector2 ShootDirection
         {
-            get
-            {
-                if (!(shootDirection.value.Length() > 0)) return shootDirection.value;
-                var perspective = GraphicConstants.CameraOffset.get2d();
-                perspective.Normalize();
-                perspective = shootDirection.value.rotate((float)Math.PI + perspective.getAngle());
-                perspective.Normalize();
-                return perspective;
-            }
+            get { return shootDirection.value; }
             set
             {
                 lock (shootDirection)
@@ -151,7 +98,7 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
-        private static readonly ThreadSafeObject<GameConstants.EWeaponShootMode> actualShootMode = new ThreadSafeObject<GameConstants.EWeaponShootMode>(GameConstants.EWeaponShootMode.SingleFire);
+        private static readonly ThreadSafeObject<GameConstants.EWeaponShootMode> actualShootMode = new ThreadSafeObject<GameConstants.EWeaponShootMode>(GameConstants.EWeaponShootMode.Automatic);
         public static GameConstants.EWeaponShootMode ActualShootMode
         {
             get { return actualShootMode.value; }

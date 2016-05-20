@@ -53,9 +53,10 @@ namespace prototyp.Code.Game.Controls
 
                 ControlsHelper.MoveDirection = moveDirection;
 
-                ControlsHelper.ShootDirection = Vector2.Transform(Mouse.GetState().Position.ToVector2(), Matrix.Invert(ControlsHelper.ViewMatrix)) -
+                var shootDirection = Vector2.Transform(Mouse.GetState().Position.ToVector2(), Matrix.Invert(ControlsHelper.ViewMatrix)) -
                     new Vector2(ControlsHelper.PlayerPosition.X, ControlsHelper.PlayerPosition.Y);
-                ControlsHelper.ShootDirection.Normalize();
+                shootDirection.Normalize();
+                ControlsHelper.ShootDirection = shootDirection;
                 Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed);
             }
         }

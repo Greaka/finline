@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -6,6 +9,7 @@ using prototyp.Code.Constants;
 using prototyp.Code.Game;
 using prototyp.Code.Game.Controls;
 using prototyp.Code.Game.Entities;
+using prototyp.Code.Game.Helper;
 
 namespace prototyp
 {
@@ -19,12 +23,10 @@ namespace prototyp
 
         private readonly List<EnvironmentObject> _environmentObjects;
         private readonly Controller controls = new Controller();
-
   
         public Ingame()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            _graphics.IsFullScreen = false;
+            _graphics = new GraphicsDeviceManager(this) {IsFullScreen = false};
             Content.RootDirectory = "Content";
 
             _environmentObjects = new List<EnvironmentObject>();
@@ -32,6 +34,7 @@ namespace prototyp
 
         protected override void Initialize()
         {
+            this.IsMouseVisible = true;
             var samplerState = new SamplerState
             {
                 Filter = TextureFilter.Anisotropic
@@ -48,6 +51,12 @@ namespace prototyp
             _player = new Player();
             _player.Initialize(Content);
 
+            Task.Factory.StartNew(() =>
+            {
+                var projectileHandler = new Shooting(Content);
+                controls.Shoot += projectileHandler.Shoot;
+                projectileHandler.Update();
+            });
 
             base.Initialize();
         }
@@ -98,6 +107,11 @@ namespace prototyp
             foreach (var obj in _environmentObjects)
             {
                 obj.Draw(aspectRatio);
+            }
+
+            foreach (var outch in ControlsHelper.Projectiles)
+            {
+                outch.Draw(aspectRatio);
             }
 
             base.Draw(gameTime);

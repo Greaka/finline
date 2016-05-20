@@ -44,6 +44,7 @@
     <Compile Include="Code\Game\Controls\Shoot.cs" />
     <Compile Include="Code\Game\Entities\Entity.cs" />
     <Compile Include="Code\Game\Entities\EnvironmentObject.cs" />
+    <Compile Include="Code\Game\Entities\Projectile.cs" />
     <Compile Include="Code\Game\Ground.cs" />
     <Compile Include="Code\Game\Helper\ControlsHelper.cs" />
     <Compile Include="Code\Game\Helper\ThreadSafeObject.cs" />

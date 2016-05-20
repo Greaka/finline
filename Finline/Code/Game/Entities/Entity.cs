@@ -37,6 +37,11 @@ namespace prototyp.Code.Game.Entities
                 _angle = direction.getAngle();
         }
 
+        public Vector2 GetViewDirection()
+        {
+            return Vector2.UnitY.rotate(_angle);
+        }
+
         public void Draw(float aspectRatio)
         {
             var worldMatrix = GetWorldMatrix();
