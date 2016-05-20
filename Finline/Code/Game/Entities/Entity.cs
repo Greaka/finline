@@ -42,16 +42,9 @@ namespace prototyp.Code.Game.Entities
             return Vector2.UnitY.rotate(_angle);
         }
 
-        public void Draw(float aspectRatio)
+        public void Draw()
         {
             var worldMatrix = GetWorldMatrix();
-            var cameraLookAtVector = ControlsHelper.PlayerPosition;
-            var cameraUpVector = Vector3.UnitZ;
-
-            ControlsHelper.ViewMatrix = Matrix.CreateLookAt(
-                GraphicConstants.CameraPosition, cameraLookAtVector, cameraUpVector);
-            var projection = Matrix.CreatePerspectiveFieldOfView(
-                        GraphicConstants.FieldOfView, aspectRatio, GraphicConstants.NearClipPlane, GraphicConstants.FarClipPlane);
 
             foreach (var mesh in _model.Meshes)
             {
@@ -61,7 +54,7 @@ namespace prototyp.Code.Game.Entities
                     effect.PreferPerPixelLighting = true;
                     effect.World = worldMatrix;
                     effect.View = ControlsHelper.ViewMatrix;
-                    effect.Projection = projection;
+                    effect.Projection = ControlsHelper.ProjectionMatrix;
                 }
 
                 mesh.Draw();

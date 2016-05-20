@@ -10,7 +10,8 @@ namespace prototyp.Code.Game.Helper
 {
     public static class ControlsHelper
     {
-        public static ConcurrentBag<Projectile> Projectiles = new ConcurrentBag<Projectile>();
+        public static readonly ConcurrentDictionary<int, EnvironmentObject> EnvironmentObjects = new ConcurrentDictionary<int, EnvironmentObject>();
+        public static readonly ConcurrentDictionary<int, Projectile> Projectiles = new ConcurrentDictionary<int, Projectile>();
 
         private static readonly ThreadSafeObject<bool> active = new ThreadSafeObject<bool>(true);
         public static bool Active
@@ -36,15 +37,26 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
-        private static readonly ThreadSafeObject<double> sps = new ThreadSafeObject<double>(2.5);
-        public static double ActualShotsPerSecond
+        private static readonly ThreadSafeObject<Matrix> projectionMatrix = new ThreadSafeObject<Matrix>(new Matrix());
+        public static Matrix ProjectionMatrix
         {
-            get { return sps.value; }
+            get { return projectionMatrix.value; }
             set
             {
-                lock (sps)
+                lock (projectionMatrix)
+                    projectionMatrix.value = value;
+            }
+        }
+
+        private static readonly ThreadSafeObject<double> shotsPerSecond = new ThreadSafeObject<double>(20);
+        public static double ActualShotsPerSecond
+        {
+            get { return shotsPerSecond.value; }
+            set
+            {
+                lock (shotsPerSecond)
                 {
-                    sps.value = value;
+                    shotsPerSecond.value = value;
                 }
             }
         }

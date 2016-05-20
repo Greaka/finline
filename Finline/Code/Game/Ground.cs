@@ -25,7 +25,7 @@ namespace prototyp.Code.Game
             _floorVerts[4].Position = new Vector3(20, 20, 0);
             _floorVerts[5].Position = _floorVerts[2].Position;
 
-            var repetitions = 5;
+            const int repetitions = 5;
 
             _floorVerts[0].TextureCoordinate = new Vector2(0, 0);
             _floorVerts[1].TextureCoordinate = new Vector2(0, repetitions);
@@ -45,15 +45,11 @@ namespace prototyp.Code.Game
             }
         }
 
-        public void Draw(float aspectRatio, GraphicsDevice gdevice)
+        public void Draw(GraphicsDevice gdevice)
         {
-            var cameraUpVector = Vector3.UnitZ;
+            _effect.View = ControlsHelper.ViewMatrix;
 
-            _effect.View = Matrix.CreateLookAt(
-                GraphicConstants.CameraPosition, ControlsHelper.PlayerPosition, cameraUpVector);
-
-            _effect.Projection = Matrix.CreatePerspectiveFieldOfView(
-                GraphicConstants.FieldOfView, aspectRatio, GraphicConstants.NearClipPlane, GraphicConstants.FarClipPlane);
+            _effect.Projection = ControlsHelper.ProjectionMatrix;
 
             _effect.TextureEnabled = true;
             _effect.Texture = _checkerboardTexture;

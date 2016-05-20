@@ -20,16 +20,13 @@ namespace prototyp
 
         private Player _player;
         private Ground _ground;
-
-        private readonly List<EnvironmentObject> _environmentObjects;
+        
         private readonly Controller controls = new Controller();
   
         public Ingame()
         {
             _graphics = new GraphicsDeviceManager(this) {IsFullScreen = false};
             Content.RootDirectory = "Content";
-
-            _environmentObjects = new List<EnvironmentObject>();
         }
 
         protected override void Initialize()
@@ -65,29 +62,29 @@ namespace prototyp
         {
             _ground.LoadContent(GraphicsDevice);
 
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 1), GameConstants.EnvObjects.cube));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 1), GameConstants.EnvObjects.cube));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 3, 3), GameConstants.EnvObjects.cube));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(-15, 1, 1), GameConstants.EnvObjects.cube));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(15, -15, 1), GameConstants.EnvObjects.cube));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(5, -10, 3), GameConstants.EnvObjects.bottle_cap2));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(10, 1, 3), GameConstants.EnvObjects.bottle_cap2));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(10, 1, 1), GameConstants.EnvObjects.cube));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(5, -10, 1), GameConstants.EnvObjects.cube));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(10, 3, 3), GameConstants.EnvObjects.cube));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(-15, 1, 1), GameConstants.EnvObjects.cube));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(15, -15, 1), GameConstants.EnvObjects.cube));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(5, -10, 3), GameConstants.EnvObjects.bottle_cap2));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(10, 1, 3), GameConstants.EnvObjects.bottle_cap2));
 
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(20, -3, 5), GameConstants.EnvObjects.bottle_cap2));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(-2, 6, 6), GameConstants.EnvObjects.bottle_cap2));
-            _environmentObjects.Add(new EnvironmentObject(Content, new Vector3(8, 7, 6), GameConstants.EnvObjects.bottle_cap2));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(20, -3, 5), GameConstants.EnvObjects.bottle_cap2));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(-2, 6, 6), GameConstants.EnvObjects.bottle_cap2));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(8, 7, 6), GameConstants.EnvObjects.bottle_cap2));
 
         }
 
         protected override void Update(GameTime gameTime)
         {
-            controls.Update();
+            controls.Update(GraphicsDevice);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _player.Update(gameTime, _environmentObjects);
+            _player.Update(gameTime);
 
-            foreach (var obj in _environmentObjects)
+            foreach (var obj in ControlsHelper.EnvironmentObjects.Values)
             {
                 obj.Update(gameTime);
             }
@@ -100,18 +97,22 @@ namespace prototyp
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             var aspectRatio = _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
+            ControlsHelper.ViewMatrix = Matrix.CreateLookAt(
+                GraphicConstants.CameraPosition, ControlsHelper.PlayerPosition, Vector3.UnitZ);
+            ControlsHelper.ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView(
+                        GraphicConstants.FieldOfView, aspectRatio, GraphicConstants.NearClipPlane, GraphicConstants.FarClipPlane);
 
-            _ground.Draw(aspectRatio, GraphicsDevice);
-            _player.Draw(aspectRatio);
+            _ground.Draw(GraphicsDevice);
+            _player.Draw();
 
-            foreach (var obj in _environmentObjects)
+            foreach (var obj in ControlsHelper.EnvironmentObjects.Values)
             {
-                obj.Draw(aspectRatio);
+                obj.Draw();
             }
 
-            foreach (var outch in ControlsHelper.Projectiles)
+            foreach (var outch in ControlsHelper.Projectiles.Values)
             {
-                outch.Draw(aspectRatio);
+                outch.Draw();
             }
 
             base.Draw(gameTime);

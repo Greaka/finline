@@ -11,7 +11,6 @@ namespace prototyp.Code.Game.Entities
     {
         private float updraft = 1;
         private float groundzero = 1;
-        private List<EnvironmentObject> _environmentObjects;
 
         public Vector3 Position
         {
@@ -20,7 +19,7 @@ namespace prototyp.Code.Game.Entities
             {
                 var pos = _position;
                 _position = value;
-                if (this.isColliding(_environmentObjects))
+                if (this.isColliding(ControlsHelper.EnvironmentObjects))
                 {
                     _position = pos;
                 }
@@ -33,10 +32,9 @@ namespace prototyp.Code.Game.Entities
             _position = Vector3.UnitZ;
         }
 
-        public void Update(GameTime gameTime, List<EnvironmentObject> environmentObjects)
+        public void Update(GameTime gameTime)
         {
             SetViewDirection(ControlsHelper.MoveDirection);
-            _environmentObjects = environmentObjects;
             Position += new Vector3(ControlsHelper.MoveDirection, 0)/10;
             ControlsHelper.PlayerPosition = _position;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using prototyp.Code.Constants;
 using prototyp.Code.Game.Helper;
@@ -11,7 +12,6 @@ namespace prototyp.Code.Game.Controls
     class Controller
     {
         public delegate void Shot();
-
         public event Shot Shoot;
 
         private readonly Timer aTimer;
@@ -29,7 +29,7 @@ namespace prototyp.Code.Game.Controls
             aTimer.Elapsed += (sender, args) => { shootable = true; };
         }
 
-        public void Update() {
+        public void Update(GraphicsDevice device) {
             if (Math.Abs(aTimer.Interval - ControlsHelper.ActualShotsPerSecond) < 0.00001)
                 aTimer.Interval = ControlsHelper.ActualShotsPerSecond;
             var inputstate = GamePad.GetState(PlayerIndex.One);
@@ -53,12 +53,29 @@ namespace prototyp.Code.Game.Controls
 
                 ControlsHelper.MoveDirection = moveDirection;
 
-                var shootDirection = Vector2.Transform(Mouse.GetState().Position.ToVector2(), Matrix.Invert(ControlsHelper.ViewMatrix)) -
-                    new Vector2(ControlsHelper.PlayerPosition.X, ControlsHelper.PlayerPosition.Y);
+                var shootDirection3d = MousePosition(device);
+                var shootDirection = new Vector2(shootDirection3d.X, shootDirection3d.Z);
+                    //- ControlsHelper.PlayerPosition.get2d();
                 shootDirection.Normalize();
                 ControlsHelper.ShootDirection = shootDirection;
                 Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed);
             }
+        }
+
+        private static Vector3 MousePosition(GraphicsDevice device)
+        {
+            var ms = Mouse.GetState();
+            var nearScreenPoint = new Vector3(ms.X, ms.Y, 0);
+            var farScreenPoint = new Vector3(ms.X, ms.Y, 1);
+            var nearWorldPoint = device.Viewport.Unproject(nearScreenPoint, ControlsHelper.ProjectionMatrix, ControlsHelper.ViewMatrix, Matrix.Identity);
+            var farWorldPoint = device.Viewport.Unproject(farScreenPoint, ControlsHelper.ProjectionMatrix, ControlsHelper.ViewMatrix, Matrix.Identity);
+
+            var direction = farWorldPoint - nearWorldPoint;
+
+            var zFactor = -nearWorldPoint.Y / direction.Y;
+            var zeroWorldPoint = nearWorldPoint + direction * zFactor;
+
+            return zeroWorldPoint;
         }
 
         private void Shootroutine(bool shootPressed)
