@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using prototyp.Code.Constants;
 using prototyp.Code.Game.Helper;
+using prototyp.Code.Utility;
 using Timer = System.Timers.Timer;
 
 namespace prototyp.Code.Game.Controls
@@ -12,7 +14,7 @@ namespace prototyp.Code.Game.Controls
 
         public event Shot Shoot;
 
-        private Timer aTimer;
+        private readonly Timer aTimer;
         private bool shootable = true;
         private bool alreadyshot = false;
         const double trigger = 0.2;
@@ -48,7 +50,6 @@ namespace prototyp.Code.Game.Controls
                     moveDirection -= Vector2.UnitX;
                 if (Keyboard.GetState().IsKeyDown(Keys.D))
                     moveDirection += Vector2.UnitX;
-                if (moveDirection.Length() > 0) moveDirection.Normalize();
 
                 ControlsHelper.MoveDirection = moveDirection;
 
@@ -70,7 +71,7 @@ namespace prototyp.Code.Game.Controls
             };
 
             if (!shootable) return;
-            if (ControlsHelper.ActualShootMode == Enums.EWeaponShootMode.SingleFire)
+            if (ControlsHelper.ActualShootMode == GameConstants.EWeaponShootMode.SingleFire)
             {
                 if (alreadyshot)
                 {

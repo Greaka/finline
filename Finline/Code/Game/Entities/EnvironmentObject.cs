@@ -3,12 +3,12 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using prototyp.Code.Constants;
 
-namespace prototyp.Code.Game
+namespace prototyp.Code.Game.Entities
 {
     public class EnvironmentObject : Entity
     {
-        private GameConstants.EnvObjects _type;
-        private bool orbit;
+        private readonly GameConstants.EnvObjects _type;
+        private readonly bool orbit;
 
         public GameConstants.EnvObjects Type => _type;
 
@@ -35,11 +35,6 @@ namespace prototyp.Code.Game
             {
                 _angle += 0.1f;
             }
-        }
-
-        public void Draw(Vector3 cameraPosition, float aspectRatio, Vector3 playerPosition)
-        {
-            base.Draw(cameraPosition, aspectRatio, playerPosition);
         }
     }
 

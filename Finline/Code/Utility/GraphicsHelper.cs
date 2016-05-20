@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using prototyp.Code.Constants;
-using prototyp.Code.Game;
+using prototyp.Code.Game.Entities;
 
 namespace prototyp.Code.Utility
 {
@@ -8,9 +8,9 @@ namespace prototyp.Code.Utility
     {
         public static bool isColliding(this Entity entity, List<EnvironmentObject> environmentObjects)
         {
-            bool colliding = false;
+            var colliding = false;
             EnvironmentObject remove = null;
-            foreach (EnvironmentObject obj in environmentObjects)
+            foreach (var obj in environmentObjects)
             {
                 if (entity.GetBound.Intersects(obj.GetBound))
                 {

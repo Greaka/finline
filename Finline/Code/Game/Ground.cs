@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using prototyp.Code.Constants;
+using prototyp.Code.Game.Helper;
 
 namespace prototyp.Code.Game
 {
@@ -23,7 +25,7 @@ namespace prototyp.Code.Game
             _floorVerts[4].Position = new Vector3(20, 20, 0);
             _floorVerts[5].Position = _floorVerts[2].Position;
 
-            int repetitions = 5;
+            var repetitions = 5;
 
             _floorVerts[0].TextureCoordinate = new Vector2(0, 0);
             _floorVerts[1].TextureCoordinate = new Vector2(0, repetitions);
@@ -43,19 +45,15 @@ namespace prototyp.Code.Game
             }
         }
 
-        public void Draw(Vector3 cameraPosition, float aspectRatio, Vector3 cameraLookAt, GraphicsDevice gdevice)
+        public void Draw(float aspectRatio, GraphicsDevice gdevice)
         {
             var cameraUpVector = Vector3.UnitZ;
 
             _effect.View = Matrix.CreateLookAt(
-                cameraPosition, cameraLookAt, cameraUpVector);
-
-            float fieldOfView = Microsoft.Xna.Framework.MathHelper.PiOver4;
-            float nearClipPlane = 1;
-            float farClipPlane = 200;
+                GraphicConstants.CameraPosition, ControlsHelper.PlayerPosition, cameraUpVector);
 
             _effect.Projection = Matrix.CreatePerspectiveFieldOfView(
-                fieldOfView, aspectRatio, nearClipPlane, farClipPlane);
+                GraphicConstants.FieldOfView, aspectRatio, GraphicConstants.NearClipPlane, GraphicConstants.FarClipPlane);
 
             _effect.TextureEnabled = true;
             _effect.Texture = _checkerboardTexture;

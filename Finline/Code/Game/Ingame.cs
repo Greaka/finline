@@ -5,24 +5,23 @@ using Microsoft.Xna.Framework.Input;
 using prototyp.Code.Constants;
 using prototyp.Code.Game;
 using prototyp.Code.Game.Controls;
+using prototyp.Code.Game.Entities;
 
 namespace prototyp
 {
-    public class Game1 : Game
+    public class Ingame : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
-        private Vector3 _cameraPosition = new Vector3(0, 30, 10);
 
         private Player _player;
         private Ground _ground;
 
-        private List<EnvironmentObject> _environmentObjects;
-        private Controller controls = new Controller();
+        private readonly List<EnvironmentObject> _environmentObjects;
+        private readonly Controller controls = new Controller();
 
   
-        public Game1()
+        public Ingame()
         {
             _graphics = new GraphicsDeviceManager(this);
             _graphics.IsFullScreen = false;
@@ -39,7 +38,7 @@ namespace prototyp
             };
             GraphicsDevice.SamplerStates[0] = samplerState;
 
-            RasterizerState rasterizerState = new RasterizerState();
+            var rasterizerState = new RasterizerState();
             rasterizerState.CullMode = CullMode.None;
             GraphicsDevice.RasterizerState = rasterizerState;
 
@@ -79,8 +78,7 @@ namespace prototyp
 
             _player.Update(gameTime, _environmentObjects);
 
-            EnvironmentObject remove = null;
-            foreach (EnvironmentObject obj in _environmentObjects)
+            foreach (var obj in _environmentObjects)
             {
                 obj.Update(gameTime);
             }
@@ -92,16 +90,14 @@ namespace prototyp
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _cameraPosition = _player.Position + new Vector3(0, -10, 10);
+            var aspectRatio = _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
 
-            float aspectRatio = _graphics.PreferredBackBufferWidth / (float)_graphics.PreferredBackBufferHeight;
-
-            _ground.Draw(_cameraPosition, aspectRatio, _player.Position, GraphicsDevice);
-            _player.Draw(_cameraPosition, aspectRatio);
+            _ground.Draw(aspectRatio, GraphicsDevice);
+            _player.Draw(aspectRatio);
 
             foreach (var obj in _environmentObjects)
             {
-                obj.Draw(_cameraPosition, aspectRatio, _player.Position);
+                obj.Draw(aspectRatio);
             }
 
             base.Draw(gameTime);

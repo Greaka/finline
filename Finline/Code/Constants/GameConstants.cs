@@ -1,7 +1,13 @@
-﻿namespace prototyp.Code.Game.Helper
+﻿namespace prototyp.Code.Constants
 {
-    public static class Enums
+    public static class GameConstants
     {
+        public enum EnvObjects
+        {
+            cube,
+            bottle_cap2
+        }
+
         public enum EWeaponShootMode
         {
             SingleFire,

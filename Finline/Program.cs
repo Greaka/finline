@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using prototyp.Code.Game.Controls;
 using prototyp.Code.Game.Helper;
 
 namespace prototyp
@@ -18,7 +15,7 @@ namespace prototyp
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new Ingame())
                 game.Run();
             ControlsHelper.Active = false;
         }

@@ -1,10 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
+using prototyp.Code.Constants;
+using prototyp.Code.Utility;
 
 namespace prototyp.Code.Game.Helper
 {
     public static class ControlsHelper
     {
-        private static ThreadSafeObject<bool> active = new ThreadSafeObject<bool>(true);
+        private static readonly ThreadSafeObject<bool> active = new ThreadSafeObject<bool>(true);
         public static bool Active
         {
             get { return active.value; }
@@ -17,7 +20,7 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
-        private static ThreadSafeObject<Matrix> viewMatrix = new ThreadSafeObject<Matrix>(new Matrix());
+        private static readonly ThreadSafeObject<Matrix> viewMatrix = new ThreadSafeObject<Matrix>(new Matrix());
         public static Matrix ViewMatrix
         {
             get { return viewMatrix.value; }
@@ -28,7 +31,7 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
-        private static ThreadSafeObject<double> sps = new ThreadSafeObject<double>(2.5);
+        private static readonly ThreadSafeObject<double> sps = new ThreadSafeObject<double>(2.5);
         public static double ActualShotsPerSecond
         {
             get { return sps.value; }
@@ -93,7 +96,7 @@ namespace prototyp.Code.Game.Helper
             }
         }*/
 
-        private static ThreadSafeObject<Vector3> playerPosition = new ThreadSafeObject<Vector3>(new Vector3(0));
+        private static readonly ThreadSafeObject<Vector3> playerPosition = new ThreadSafeObject<Vector3>(new Vector3(0));
         public static Vector3 PlayerPosition
         {
             get { return playerPosition.value; }
@@ -106,10 +109,18 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
-        private static ThreadSafeObject<Vector2> moveDirection = new ThreadSafeObject<Vector2>(new Vector2(0));
+        private static readonly ThreadSafeObject<Vector2> moveDirection = new ThreadSafeObject<Vector2>(new Vector2(0));
         public static Vector2 MoveDirection
         {
-            get { return moveDirection.value; }
+            get
+            {
+                if (!(moveDirection.value.Length() > 0)) return moveDirection.value;
+                var perspective = GraphicConstants.CameraOffset.get2d();
+                perspective.Normalize();
+                perspective = moveDirection.value.rotate((float)Math.PI + perspective.getAngle());
+                perspective.Normalize();
+                return perspective;
+            }
             set
             {
                 lock (moveDirection)
@@ -119,10 +130,18 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
-        private static ThreadSafeObject<Vector2> shootDirection = new ThreadSafeObject<Vector2>(new Vector2(0, 1));
+        private static readonly ThreadSafeObject<Vector2> shootDirection = new ThreadSafeObject<Vector2>(new Vector2(0, 1));
         public static Vector2 ShootDirection
         {
-            get { return shootDirection.value; }
+            get
+            {
+                if (!(shootDirection.value.Length() > 0)) return shootDirection.value;
+                var perspective = GraphicConstants.CameraOffset.get2d();
+                perspective.Normalize();
+                perspective = shootDirection.value.rotate((float)Math.PI + perspective.getAngle());
+                perspective.Normalize();
+                return perspective;
+            }
             set
             {
                 lock (shootDirection)
@@ -132,8 +151,8 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
-        private static ThreadSafeObject<Enums.EWeaponShootMode> actualShootMode = new ThreadSafeObject<Enums.EWeaponShootMode>(Enums.EWeaponShootMode.SingleFire);
-        public static Enums.EWeaponShootMode ActualShootMode
+        private static readonly ThreadSafeObject<GameConstants.EWeaponShootMode> actualShootMode = new ThreadSafeObject<GameConstants.EWeaponShootMode>(GameConstants.EWeaponShootMode.SingleFire);
+        public static GameConstants.EWeaponShootMode ActualShootMode
         {
             get { return actualShootMode.value; }
             set
@@ -145,8 +164,8 @@ namespace prototyp.Code.Game.Helper
             }
         }
 
-        private static ThreadSafeObject<Enums.EWeaponType> actualWeaponMode = new ThreadSafeObject<Enums.EWeaponType>(Enums.EWeaponType.Pistol);
-        public static Enums.EWeaponType ActualWeaponMode
+        private static readonly ThreadSafeObject<GameConstants.EWeaponType> actualWeaponMode = new ThreadSafeObject<GameConstants.EWeaponType>(GameConstants.EWeaponType.Pistol);
+        public static GameConstants.EWeaponType ActualWeaponMode
         {
             get { return actualWeaponMode.value; }
             set
