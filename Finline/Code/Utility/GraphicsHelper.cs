@@ -12,13 +12,13 @@ namespace Finline.Code.Utility
         public static bool isColliding(this Entity entity, ConcurrentDictionary<int, EnvironmentObject> environmentObjects, out float distance)
         {
             var colliding = false;
-            distance = -1;
+            distance = 1;
             for (var i=0; i<environmentObjects.Values.Count; i++)
             {
                 var obj = environmentObjects[i];
                 float intersection;
                 if (!entity.GetBound.Intersection(obj.GetBound, out intersection)) continue;
-                if (intersection > distance) distance = intersection;
+                if (intersection < distance) distance = intersection;
                 switch (obj.Type)
                 {
                     case GameConstants.EnvObjects.bottle_cap2:
@@ -39,7 +39,7 @@ namespace Finline.Code.Utility
             var result = (sphere1.Radius + sphere2.Radius)*
                          (sphere1.Radius + sphere2.Radius);
             distance = result1 - result;
-            return result1 > result;
+            return result1 < result;
         }
     }
 }

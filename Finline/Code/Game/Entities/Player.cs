@@ -18,10 +18,10 @@ namespace Finline.Code.Game.Entities
             {
                 var pos = _position;
                 _position = value;
-                float section;
-                if (this.isColliding(ControlsHelper.EnvironmentObjects, out section))
+                float intersection;
+                if (this.isColliding(ControlsHelper.EnvironmentObjects, out intersection))
                 {
-                    _position = pos + new Vector3(ControlsHelper.MoveDirection * section, 0);
+                    _position += new Vector3(ControlsHelper.MoveDirection * intersection, 0);
                 }
             }
         }
