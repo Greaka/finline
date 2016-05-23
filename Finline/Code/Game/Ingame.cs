@@ -74,6 +74,18 @@ namespace prototyp
             ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(-2, 6, 6), GameConstants.EnvObjects.bottle_cap2));
             ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(Content, new Vector3(8, 7, 6), GameConstants.EnvObjects.bottle_cap2));
 
+            for (int i = -20; i < 21; i += 2)
+            {
+                int bla = i==0?20:Math.Abs(i)/i;
+                ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count,
+                    new EnvironmentObject(Content, new Vector3(i, bla*20, 1), GameConstants.EnvObjects.cube));
+                ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count,
+                     new EnvironmentObject(Content, new Vector3(bla*20, i, 1), GameConstants.EnvObjects.cube));
+                ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count,
+                    new EnvironmentObject(Content, new Vector3(-i, bla * 20, 1), GameConstants.EnvObjects.cube));
+                ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count,
+                     new EnvironmentObject(Content, new Vector3(bla * 20, -i, 1), GameConstants.EnvObjects.cube));
+            }
         }
 
         protected override void Update(GameTime gameTime)

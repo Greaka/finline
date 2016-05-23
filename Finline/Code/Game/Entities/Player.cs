@@ -35,7 +35,7 @@ namespace prototyp.Code.Game.Entities
         public void Update(GameTime gameTime)
         {
             SetViewDirection(ControlsHelper.MoveDirection);
-            Position += new Vector3(ControlsHelper.MoveDirection, 0)/10;
+            Position += new Vector3(ControlsHelper.MoveDirection, 0)/5;
             ControlsHelper.PlayerPosition = _position;
         }
     }

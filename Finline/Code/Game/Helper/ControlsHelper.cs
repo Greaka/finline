@@ -100,7 +100,7 @@ namespace prototyp.Code.Game.Helper
         private static readonly ThreadSafeObject<Vector2> shootDirection = new ThreadSafeObject<Vector2>(new Vector2(0, 1));
         public static Vector2 ShootDirection
         {
-            get { return shootDirection.value; }
+            get { return shootDirection.value.addPerspective(); }
             set
             {
                 lock (shootDirection)

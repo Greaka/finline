@@ -65,13 +65,12 @@ namespace prototyp.Code.Game.Controls
         private static Vector3 MousePosition(GraphicsDevice device)
         {
             var ms = Mouse.GetState();
-            var nearScreenPoint = new Vector3(ms.X, ms.Y, 0);
-            var farScreenPoint = new Vector3(ms.X, ms.Y, 1);
+            var nearScreenPoint = new Vector3(ms.Position.ToVector2(), 0);
+            var farScreenPoint = new Vector3(ms.Position.ToVector2(), 1);
             var nearWorldPoint = device.Viewport.Unproject(nearScreenPoint, ControlsHelper.ProjectionMatrix, ControlsHelper.ViewMatrix, Matrix.Identity);
             var farWorldPoint = device.Viewport.Unproject(farScreenPoint, ControlsHelper.ProjectionMatrix, ControlsHelper.ViewMatrix, Matrix.Identity);
 
             var direction = farWorldPoint - nearWorldPoint;
-
             var zFactor = -nearWorldPoint.Y / direction.Y;
             var zeroWorldPoint = nearWorldPoint + direction * zFactor;
 
