@@ -21,7 +21,7 @@ namespace Finline.Code.Game.Entities
                 float intersection;
                 if (this.isColliding(ControlsHelper.EnvironmentObjects, out intersection))
                 {
-                    _position += new Vector3(ControlsHelper.MoveDirection * intersection, 0);
+                    _position = pos; //+= new Vector3(ControlsHelper.MoveDirection * intersection, 0);
                 }
             }
         }
