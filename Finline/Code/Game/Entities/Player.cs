@@ -9,8 +9,7 @@ namespace prototyp.Code.Game.Entities
 {
     public class Player : Entity
     {
-        private float updraft = 1;
-        private float groundzero = 1;
+        private float unitsPerSecond = 15;
 
         public Vector3 Position
         {
@@ -35,7 +34,10 @@ namespace prototyp.Code.Game.Entities
         public void Update(GameTime gameTime)
         {
             SetViewDirection(ControlsHelper.MoveDirection);
-            Position += new Vector3(ControlsHelper.MoveDirection, 0)/5;
+            Position += new Vector3(ControlsHelper.MoveDirection * 
+               (float)gameTime.ElapsedGameTime.TotalSeconds *
+               unitsPerSecond,
+               0);
             ControlsHelper.PlayerPosition = _position;
         }
     }

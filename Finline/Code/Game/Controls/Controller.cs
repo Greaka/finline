@@ -54,8 +54,8 @@ namespace prototyp.Code.Game.Controls
                 ControlsHelper.MoveDirection = moveDirection;
 
                 var shootDirection3d = MousePosition(device);
-                var shootDirection = new Vector2(shootDirection3d.X, shootDirection3d.Z);
-                    //- ControlsHelper.PlayerPosition.get2d();
+                var shootDirection = new Vector2(shootDirection3d.X, shootDirection3d.Z)
+                    - ControlsHelper.PlayerPosition.get2d();
                 shootDirection.Normalize();
                 ControlsHelper.ShootDirection = shootDirection;
                 Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed);
