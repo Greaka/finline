@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace prototyp.Code.Game
+namespace Finline.Code.Game
 {
     class Class1
     {

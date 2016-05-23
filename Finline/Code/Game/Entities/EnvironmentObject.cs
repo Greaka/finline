@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Finline.Code.Constants;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using prototyp.Code.Constants;
 
-namespace prototyp.Code.Game.Entities
+namespace Finline.Code.Game.Entities
 {
     public class EnvironmentObject : Entity
     {

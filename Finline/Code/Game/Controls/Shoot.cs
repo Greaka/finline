@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Threading;
+using Finline.Code.Game.Entities;
+using Finline.Code.Game.Helper;
 using Microsoft.Xna.Framework.Content;
-using prototyp.Code.Game.Entities;
-using prototyp.Code.Game.Helper;
 
-namespace prototyp.Code.Game.Controls
+namespace Finline.Code.Game.Controls
 {
     public class Shooting
     {

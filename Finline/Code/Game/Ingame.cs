@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
+using Finline.Code.Constants;
+using Finline.Code.Game.Controls;
+using Finline.Code.Game.Entities;
+using Finline.Code.Game.Helper;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using prototyp.Code.Constants;
-using prototyp.Code.Game;
-using prototyp.Code.Game.Controls;
-using prototyp.Code.Game.Entities;
-using prototyp.Code.Game.Helper;
 
-namespace prototyp
+namespace Finline.Code.Game
 {
-    public class Ingame : Game
+    public class Ingame : Microsoft.Xna.Framework.Game
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;

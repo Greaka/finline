@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Finline.Code.Game.Helper;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using prototyp.Code.Constants;
-using prototyp.Code.Game.Helper;
+using Finline.Code.Constants;
 
-namespace prototyp.Code.Game
+namespace Finline.Code.Game
 {
     class Ground
     {

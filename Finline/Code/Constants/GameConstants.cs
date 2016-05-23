@@ -1,4 +1,4 @@
-﻿namespace prototyp.Code.Constants
+﻿namespace Finline.Code.Constants
 {
     public static class GameConstants
     {

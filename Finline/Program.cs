@@ -1,7 +1,8 @@
 ﻿using System;
-using prototyp.Code.Game.Helper;
+using Finline.Code.Game;
+using Finline.Code.Game.Helper;
 
-namespace prototyp
+namespace Finline
 {
 #if WINDOWS || LINUX
     /// <summary>

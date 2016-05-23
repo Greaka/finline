@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using Finline.Code.Game.Helper;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using prototyp.Code.Game.Helper;
-using prototyp.Code.Utility;
+using Finline.Code.Utility;
 
-namespace prototyp.Code.Game.Entities
+namespace Finline.Code.Game.Entities
 {
     public class Player : Entity
     {
@@ -18,9 +18,10 @@ namespace prototyp.Code.Game.Entities
             {
                 var pos = _position;
                 _position = value;
-                if (this.isColliding(ControlsHelper.EnvironmentObjects))
+                float section;
+                if (this.isColliding(ControlsHelper.EnvironmentObjects, out section))
                 {
-                    _position = pos;
+                    _position = pos + new Vector3(ControlsHelper.MoveDirection * section, 0);
                 }
             }
         }

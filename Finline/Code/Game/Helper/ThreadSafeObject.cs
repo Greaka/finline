@@ -1,4 +1,4 @@
-﻿namespace prototyp.Code.Game.Helper
+﻿namespace Finline.Code.Game.Helper
 {
     public class ThreadSafeObject<T>
     {

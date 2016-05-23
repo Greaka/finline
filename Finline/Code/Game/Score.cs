@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace prototyp.Code.Game
+namespace Finline.Code.Game
 {
     public class Score
     {

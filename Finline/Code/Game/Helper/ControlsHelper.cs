@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Finline.Code.Constants;
+using Finline.Code.Game.Entities;
 using Microsoft.Xna.Framework;
-using prototyp.Code.Constants;
-using prototyp.Code.Game.Entities;
-using prototyp.Code.Utility;
+using Finline.Code.Utility;
 
-namespace prototyp.Code.Game.Helper
+namespace Finline.Code.Game.Helper
 {
     public static class ControlsHelper
     {

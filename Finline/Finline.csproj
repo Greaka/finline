@@ -9,8 +9,8 @@
     <ProjectGuid>{D5B84092-9DCC-40EB-9E8D-4A5402D0EEDA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>prototyp</RootNamespace>
-    <AssemblyName>prototyp</AssemblyName>
+    <RootNamespace>Finline</RootNamespace>
+    <AssemblyName>Finline</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>

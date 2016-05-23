@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Finline.Code.Game.Helper;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using prototyp.Code.Game.Controls;
-using prototyp.Code.Game.Helper;
-using prototyp.Code.Utility;
+using Finline.Code.Game.Controls;
+using Finline.Code.Utility;
 
-namespace prototyp.Code.Game.Entities
+namespace Finline.Code.Game.Entities
 {
     public class Projectile : Entity
     {
@@ -27,7 +27,8 @@ namespace prototyp.Code.Game.Entities
             set
             {
                 _position = value;
-                if (!this.isColliding(ControlsHelper.EnvironmentObjects)) return;
+                float unused;
+                if (!this.isColliding(ControlsHelper.EnvironmentObjects, out unused)) return;
                 Destruct?.Invoke(_index);
             }
         }

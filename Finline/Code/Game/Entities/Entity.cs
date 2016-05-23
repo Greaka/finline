@@ -1,11 +1,11 @@
 ﻿using System;
+using Finline.Code.Game.Helper;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using prototyp.Code.Constants;
-using prototyp.Code.Game.Helper;
-using prototyp.Code.Utility;
+using Finline.Code.Constants;
+using Finline.Code.Utility;
 
-namespace prototyp.Code.Game.Entities
+namespace Finline.Code.Game.Entities
 {
     public abstract class Entity
     {

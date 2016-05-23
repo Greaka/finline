@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace prototyp.Code.Utility
+namespace Finline.Code.Utility
 {
     static class VectorHelper
     {

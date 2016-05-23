@@ -1,13 +1,13 @@
 ﻿using System;
+using Finline.Code.Constants;
+using Finline.Code.Game.Helper;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using prototyp.Code.Constants;
-using prototyp.Code.Game.Helper;
-using prototyp.Code.Utility;
+using Finline.Code.Utility;
 using Timer = System.Timers.Timer;
 
-namespace prototyp.Code.Game.Controls
+namespace Finline.Code.Game.Controls
 {
     class Controller
     {
@@ -64,9 +64,9 @@ namespace prototyp.Code.Game.Controls
 
         private static Vector3 MousePosition(GraphicsDevice device)
         {
-            var ms = Mouse.GetState();
-            var nearScreenPoint = new Vector3(ms.Position.ToVector2(), 0);
-            var farScreenPoint = new Vector3(ms.Position.ToVector2(), 1);
+            var ms = Mouse.GetState().Position.ToVector2();
+            var nearScreenPoint = new Vector3(ms, 0);
+            var farScreenPoint = new Vector3(ms, 1);
             var nearWorldPoint = device.Viewport.Unproject(nearScreenPoint, ControlsHelper.ProjectionMatrix, ControlsHelper.ViewMatrix, Matrix.Identity);
             var farWorldPoint = device.Viewport.Unproject(farScreenPoint, ControlsHelper.ProjectionMatrix, ControlsHelper.ViewMatrix, Matrix.Identity);
 
