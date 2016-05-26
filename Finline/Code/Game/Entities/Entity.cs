@@ -20,6 +20,8 @@ namespace Finline.Code.Game.Entities
             get
             {
                 var sphere = _model.Meshes[0].BoundingSphere;
+                for (var i = 1; i < _model.Meshes.Count; i++)
+                    sphere = BoundingSphere.CreateMerged(sphere, _model.Meshes[i].BoundingSphere);
                 sphere.Center += _position;
                 sphere.Radius *= 0.8f;
                 return sphere;

@@ -29,7 +29,7 @@ namespace Finline.Code.Game.Entities
         public void Initialize(ContentManager contentManager)
         {
             _model = contentManager.Load<Model>("Undead");
-            _position = Vector3.UnitZ;
+            _position = Vector3.Zero;
         }
 
         public void Update(GameTime gameTime)

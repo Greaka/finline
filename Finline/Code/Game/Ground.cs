@@ -15,14 +15,18 @@ namespace Finline.Code.Game
 
         public void Initialize()
         {
+            const float x = 20;
+            const float y = 20;
+            const float z = -1;
+
             _floorVerts = new VertexPositionNormalTexture[6];
 
-            _floorVerts[0].Position = new Vector3(-20, -20, 0);
-            _floorVerts[1].Position = new Vector3(-20, 20, 0);
-            _floorVerts[2].Position = new Vector3(20, -20, 0);
+            _floorVerts[0].Position = new Vector3(-x, -y, z);
+            _floorVerts[1].Position = new Vector3(-x, y, z);
+            _floorVerts[2].Position = new Vector3(x, -y, z);
 
             _floorVerts[3].Position = _floorVerts[1].Position;
-            _floorVerts[4].Position = new Vector3(20, 20, 0);
+            _floorVerts[4].Position = new Vector3(x, y, z);
             _floorVerts[5].Position = _floorVerts[2].Position;
 
             const int repetitions = 5;

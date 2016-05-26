@@ -75,13 +75,13 @@ namespace Finline.Code.Game
             {
                 int bla = i==0?20:Math.Abs(i)/i;
                 ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count,
-                    new EnvironmentObject(Content, new Vector3(i, bla*20, 1), GameConstants.EnvObjects.cube));
+                    new EnvironmentObject(Content, new Vector3(i, bla*20, 0), GameConstants.EnvObjects.cube));
                 ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count,
-                     new EnvironmentObject(Content, new Vector3(bla*20, i, 1), GameConstants.EnvObjects.cube));
+                     new EnvironmentObject(Content, new Vector3(bla*20, i, 0), GameConstants.EnvObjects.cube));
                 ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count,
-                    new EnvironmentObject(Content, new Vector3(-i, bla * 20, 1), GameConstants.EnvObjects.cube));
+                    new EnvironmentObject(Content, new Vector3(-i, bla * 20, 0), GameConstants.EnvObjects.cube));
                 ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count,
-                     new EnvironmentObject(Content, new Vector3(bla * 20, -i, 1), GameConstants.EnvObjects.cube));
+                     new EnvironmentObject(Content, new Vector3(bla * 20, -i, 0), GameConstants.EnvObjects.cube));
             }
         }
 
