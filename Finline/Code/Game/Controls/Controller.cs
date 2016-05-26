@@ -36,7 +36,7 @@ namespace Finline.Code.Game.Controls
             if (inputstate.IsConnected)
             {
                 ControlsHelper.MoveDirection = inputstate.ThumbSticks.Left;
-                ControlsHelper.ShootDirection = inputstate.ThumbSticks.Right;
+                ControlsHelper.ShootDirection = inputstate.ThumbSticks.Right.addPerspective();
                 Shootroutine(inputstate.Triggers.Right > trigger);
             }
             else
@@ -52,9 +52,8 @@ namespace Finline.Code.Game.Controls
                     moveDirection += Vector2.UnitX;
 
                 ControlsHelper.MoveDirection = moveDirection;
-
-                var shootDirection3d = MousePosition(device);
-                var shootDirection = shootDirection3d.get2d()
+                
+                var shootDirection = MousePosition(device).get2d()
                     - ControlsHelper.PlayerPosition.get2d();
                 shootDirection.Normalize();
                 ControlsHelper.ShootDirection = shootDirection;
@@ -71,9 +70,7 @@ namespace Finline.Code.Game.Controls
             var nearWorldPoint = device.Viewport.Unproject(nearScreenPoint, ControlsHelper.ProjectionMatrix, ControlsHelper.ViewMatrix, Matrix.Identity);
             var farWorldPoint = device.Viewport.Unproject(farScreenPoint, ControlsHelper.ProjectionMatrix, ControlsHelper.ViewMatrix, Matrix.Identity);
 
-            var direction = farWorldPoint - nearWorldPoint;/*
-            var zFactor = -nearWorldPoint.Y / direction.Y;
-            var zeroWorldPoint = nearWorldPoint + direction * zFactor;*/
+            var direction = farWorldPoint - nearWorldPoint;
             var angle = Vector3.Dot(plane.Normal, direction);
             // Part 1: Find if the ray is parallel to the plane by checking 
             //  if the angle between them is zero. 

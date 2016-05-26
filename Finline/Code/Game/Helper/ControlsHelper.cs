@@ -74,7 +74,7 @@ namespace Finline.Code.Game.Helper
             }
         }
 
-        private static Vector2 addPerspective(this Vector2 me)
+        public static Vector2 addPerspective(this Vector2 me)
         {
             if (!(me.Length() > 0)) return me;
             var perspective = GraphicConstants.CameraOffset.get2d();
@@ -87,12 +87,12 @@ namespace Finline.Code.Game.Helper
         private static readonly ThreadSafeObject<Vector2> moveDirection = new ThreadSafeObject<Vector2>(new Vector2(0));
         public static Vector2 MoveDirection
         {
-            get { return moveDirection.value.addPerspective(); }
+            get { return moveDirection.value; }
             set
             {
                 lock (moveDirection)
                 {
-                    moveDirection.value = value;
+                    moveDirection.value = value.addPerspective();
                 }
             }
         }
