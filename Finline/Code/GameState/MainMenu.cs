@@ -34,7 +34,9 @@ namespace Finline
         private GUIElement.ElementClicked Onclick;
 
 
-        //Using Texture from the List
+        /// <summary>
+        /// Constructor to use the GUIElementlist to select the element
+        /// </summary>
         public MainMenu()
         {
             title.Add(new GUIElement("Logo"));
@@ -64,7 +66,7 @@ namespace Finline
                 element.clickEvent += OnClick;
             }
 
-            main.Find(x => x.AssetName == "NewGame").MoveElement(0, -100); //move the newgamee button 100 up in y-direction
+            main.Find(x => x.AssetName == "NewGame").MoveElement(0, -100); //move the "newgame" button 100 up in y-direction
 
             foreach (GUIElement element in option)
             {
@@ -73,7 +75,7 @@ namespace Finline
                 element.clickEvent += OnClick;
 
             }
-            main.Find(x => x.AssetName == "Option").MoveElement(0, 100); //move the option button down in y-direction
+            main.Find(x => x.AssetName == "Option").MoveElement(0, 100); //move the "option" button down in y-direction
 
 
             foreach (GUIElement element in option)
@@ -150,7 +152,10 @@ namespace Finline
         }
 
 
-        //When Click on Buttons, Change to the GameState
+        /// <summary>
+        /// when click on the element change to next state
+        /// </summary>
+        /// <param name="element"></param>
         public void OnClick(string element)
         {
           
@@ -178,7 +183,7 @@ namespace Finline
 
         public EGameState Update(GameTime gameTime)
         {
-            if(Keyboard.GetState().IsKeyDown(Keys.P))
+            if(Keyboard.GetState().IsKeyDown(Keys.B))
                 return EGameState.InGame;
             return EGameState.MainMenu;
         }

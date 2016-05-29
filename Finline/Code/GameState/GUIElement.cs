@@ -18,6 +18,8 @@ namespace Finline
 
         private string assetName; 
 
+
+
         public string AssetName
         {
             get { return assetName;}
@@ -33,10 +35,16 @@ namespace Finline
 
 
         public event ElementClicked clickEvent;
+
+        /// <summary>
+        /// Constructor for GUIElements
+        /// </summary>
+        /// <param name="assetName"></param>
         public GUIElement(string assetName)
         {
             this.AssetName = assetName;
         }
+
 
         public void LoadContent(ContentManager content)
         {
@@ -60,7 +68,11 @@ namespace Finline
         }
 
 
-        //Zum Zentrieren der Elemente
+        /// <summary>
+        /// Function to center the elements
+        /// </summary>
+        /// <param name="height"></param>
+        /// <param name="width"></param>
         public void CenterElement(int height, int width)
         {
             GUIRect = new Rectangle((width/2) - (this.GUITexture.Width/2) , (height/2) - (this.GUITexture.Height/2),this.GUITexture.Width,this.GUITexture.Height);
@@ -69,7 +81,11 @@ namespace Finline
 
 
 
-        //zum Bewegen der Elmente
+        /// <summary>
+        /// Function to move the Element
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void MoveElement(int x, int y)
         {
             GUIRect = new Rectangle(GUIRect.X += x, GUIRect.Y += y, GUIRect.Width, GUIRect.Height);
