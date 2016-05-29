@@ -1,52 +1,98 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Threading;
-using Finline.Code.Game.Entities;
-using Finline.Code.Game.Helper;
-using Microsoft.Xna.Framework.Content;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Shoot.cs" company="Finline OVGU">
+//   
+// </copyright>
+// <summary>
+//   The shooting class. Handles  creating and destroying.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Finline.Code.Game.Controls
 {
+    using System.Collections.Concurrent;
+    using System.Diagnostics;
+
+    using Finline.Code.Game.Entities;
+    using Finline.Code.Game.Helper;
+
+    using Microsoft.Xna.Framework.Content;
+
+    /// <summary>
+    /// The shooting class. Handles <see cref="Projectile"/> creating and destroying.
+    /// </summary>
     public class Shooting
     {
-        private readonly Stopwatch aStopwatch = new Stopwatch();
+        /// <summary>
+        /// The stopwatch.
+        /// </summary>
+        private readonly Stopwatch stopwatch = new Stopwatch();
+
+        /// <summary>
+        /// The <see cref="ContentManager"/>.
+        /// </summary>
         private readonly ContentManager content;
-        private ConcurrentBag<int> indices = new ConcurrentBag<int>();
+
+        /// <summary>
+        /// The pool of indices available for Projectiles.
+        /// </summary>
+        private readonly ConcurrentBag<int> indices = new ConcurrentBag<int>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Shooting"/> class. 
+        /// Instantiates indices pool.
+        /// </summary>
+        /// <param name="shiny">
+        /// <see cref="ContentManager"/> for loading models of Projectiles.
+        /// </param>
         public Shooting(ContentManager shiny)
         {
             for (var i = 0; i < 1000; i++)
-                indices.Add(i);
+            {
+                this.indices.Add(i);
+            }
 
-            content = shiny;
-            aStopwatch.Restart();
+            this.content = shiny;
+            this.stopwatch.Restart();
         }
 
-        private void AddIndex(int index)
-        {
-            Projectile projectile;
-            if (ControlsHelper.Projectiles.TryRemove(index, out projectile))
-                indices.Add(index);
-        }
-
+        /// <summary>
+        /// Creates new <see cref="Projectile"/>, adds it to the Projectile list and binds his destructor.
+        /// </summary>
         public void Shoot()
         {
             int index;
-            indices.TryTake(out index);
-            var projectile = new Projectile(aStopwatch.Elapsed, content, index);
-            projectile.Destruct += AddIndex;
+            this.indices.TryTake(out index);
+            var projectile = new Projectile(this.stopwatch.Elapsed, this.content, index);
+            projectile.Destruct += this.AddIndex;
             ControlsHelper.Projectiles.TryAdd(index, projectile);
         }
 
+        /// <summary>
+        /// Update for Projectiles.
+        /// </summary>
         public void Update()
         {
             while (ControlsHelper.Active)
             {
                 foreach (var outch in ControlsHelper.Projectiles.Values)
                 {
-                    outch.Update(aStopwatch.Elapsed);
+                    outch.Update(this.stopwatch.Elapsed);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Add index from destroyed <see cref="Projectile"/>.
+        /// </summary>
+        /// <param name="index">
+        /// Index of destroyed Projectile.
+        /// </param>
+        private void AddIndex(int index)
+        {
+            Projectile projectile;
+            if (ControlsHelper.Projectiles.TryRemove(index, out projectile))
+            {
+                this.indices.Add(index);
             }
         }
     }

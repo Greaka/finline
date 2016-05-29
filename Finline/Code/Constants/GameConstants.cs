@@ -4,13 +4,13 @@
     {
         public enum EnvObjects
         {
-            cube,
+            cube, 
             bottle_cap2
         }
 
         public enum EWeaponShootMode
         {
-            SingleFire,
+            SingleFire, 
             Automatic
         }
 

@@ -23,8 +23,8 @@ namespace Finline.Code.Utility
 
         public static Vector2 rotate(this Vector2 me, float radian)
         {
-            var cosA = (float)System.Math.Cos(radian);
-            var sinA = (float)System.Math.Sin(radian);
+            var cosA = (float)Math.Cos(radian);
+            var sinA = (float)Math.Sin(radian);
 
             var tmpX = me.X * cosA - me.Y * sinA;
             var tmpY = me.Y * cosA + me.X * sinA;

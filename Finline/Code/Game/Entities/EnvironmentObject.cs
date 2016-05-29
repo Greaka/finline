@@ -11,38 +11,39 @@ namespace Finline.Code.Game.Entities
         private readonly bool orbit;
         public bool Visible { get; set; }
 
-        public GameConstants.EnvObjects Type => _type;
+        public GameConstants.EnvObjects Type => this._type;
 
         public EnvironmentObject(ContentManager contentManager, Vector3 position, GameConstants.EnvObjects model)
         {
-            Visible = true;
-            _type = model;
+            this.Visible = true;
+            this._type = model;
             switch (model)
             {
                 case GameConstants.EnvObjects.bottle_cap2:
-                    orbit = true;
+                    this.orbit = true;
                     break;
                 default:
-                    orbit = false;
+                    this.orbit = false;
                     break;
             }
-            _model = contentManager.Load<Model>(model.ToString());
-            _position = position;
-            _angle = 0;
+
+            this._model = contentManager.Load<Model>(model.ToString());
+            this._position = position;
+            this._angle = 0;
         }
 
         public void Update(GameTime gameTime)
         {
-            if (orbit)
+            if (this.orbit)
             {
-                _angle += 0.1f;
+                this._angle += 0.1f;
             }
         }
 
         public void Draw()
         {
-            if (Visible)
-                base.Draw();
+            if (this.Visible)
+                this.Draw();
         }
     }
 

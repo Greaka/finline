@@ -3,51 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Finline.Code.Game.Controls;
 using Finline.Code.Game.Helper;
+using Finline.Code.Utility;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Finline.Code.Game.Controls;
-using Finline.Code.Utility;
 
 namespace Finline.Code.Game.Entities
 {
     public class Projectile : Entity
     {
         private TimeSpan timeStamp;
-        private float unitsPerSecond;
-        private int _index;
+        private readonly float unitsPerSecond;
+        private readonly int index;
 
         public delegate void Destroy(int index);
         public event Destroy Destruct;
 
-        public Vector3 Position
+        private Vector3 Position
         {
-            get { return _position; }
+            get { return this._position; }
             set
             {
-                _position = value;
+                this._position = value;
                 float unused;
-                if (!this.isColliding(ControlsHelper.EnvironmentObjects, out unused)) return;
-                Destruct?.Invoke(_index);
+                if (!this.IsColliding(ControlsHelper.EnvironmentObjects, out unused)) return;
+                this.Destruct?.Invoke(this.index);
             }
         }
 
         public Projectile(TimeSpan actualTime, ContentManager content, int index)
         {
-            _index = index;
-            _model = content.Load<Model>("Arrow");
-            _position = ControlsHelper.PlayerPosition;
-            _angle = ControlsHelper.ShootDirection.getAngle();
-            timeStamp = actualTime;
-            unitsPerSecond = 10;
+            this.index = index;
+            this._model = content.Load<Model>("Arrow");
+            this._position = ControlsHelper.PlayerPosition;
+            this._angle = ControlsHelper.ShootDirection.getAngle();
+            this.timeStamp = actualTime;
+            this.unitsPerSecond = 10;
         }
 
         public void Update(TimeSpan actualTime)
         {
-            var elapsedTime = (actualTime - timeStamp).TotalSeconds;
-            Position += new Vector3(this.GetViewDirection(), 0) * unitsPerSecond * (float) elapsedTime;
-            timeStamp = actualTime;
+            var elapsedTime = (actualTime - this.timeStamp).TotalSeconds;
+            this.Position += new Vector3(this.GetViewDirection(), 0) * this.unitsPerSecond * (float) elapsedTime;
+            this.timeStamp = actualTime;
         }
     }
 }

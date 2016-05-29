@@ -5,6 +5,7 @@ using Finline.Code.Game.Helper;
 namespace Finline
 {
 #if WINDOWS || LINUX
+
     /// <summary>
     /// The main class.
     /// </summary>

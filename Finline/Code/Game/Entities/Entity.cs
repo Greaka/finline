@@ -1,9 +1,11 @@
 ﻿using System;
+
+using Finline.Code.Constants;
 using Finline.Code.Game.Helper;
+using Finline.Code.Utility;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Finline.Code.Constants;
-using Finline.Code.Utility;
 
 namespace Finline.Code.Game.Entities
 {
@@ -13,16 +15,16 @@ namespace Finline.Code.Game.Entities
         protected Vector3 _position;
         protected float _angle;
 
-        public Model GetModel => _model;
+        public Model GetModel => this._model;
 
         public BoundingSphere GetBound
         {
             get
             {
-                var sphere = _model.Meshes[0].BoundingSphere;
-                for (var i = 1; i < _model.Meshes.Count; i++)
-                    sphere = BoundingSphere.CreateMerged(sphere, _model.Meshes[i].BoundingSphere);
-                sphere.Center += _position;
+                var sphere = this._model.Meshes[0].BoundingSphere;
+                for (var i = 1; i < this._model.Meshes.Count; i++)
+                    sphere = BoundingSphere.CreateMerged(sphere, this._model.Meshes[i].BoundingSphere);
+                sphere.Center += this._position;
                 sphere.Radius *= 0.8f;
                 return sphere;
             }
@@ -30,25 +32,24 @@ namespace Finline.Code.Game.Entities
 
         public void SetViewDirection(float angle)
         {
-            _angle = angle;
+            this._angle = angle;
         }
 
         public void SetViewDirection(Vector2 direction)
         {
-            if (direction.Length() > 0)
-                _angle = direction.getAngle();
+            if (direction.Length() > 0) this._angle = direction.getAngle();
         }
 
         public Vector2 GetViewDirection()
         {
-            return Vector2.UnitY.rotate(_angle);
+            return Vector2.UnitY.rotate(this._angle);
         }
 
         public void Draw()
         {
-            var worldMatrix = GetWorldMatrix();
+            var worldMatrix = this.GetWorldMatrix();
 
-            foreach (var mesh in _model.Meshes)
+            foreach (var mesh in this._model.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
@@ -67,10 +68,10 @@ namespace Finline.Code.Game.Entities
         {
 
             // this matrix moves the model "out" from the origin
-            var translationMatrix = Matrix.CreateTranslation(_position);
+            var translationMatrix = Matrix.CreateTranslation(this._position);
 
             // this matrix rotates everything around the origin
-            var rotationMatrix = Matrix.CreateRotationZ(_angle);
+            var rotationMatrix = Matrix.CreateRotationZ(this._angle);
 
             // We combine the two to have the model move in a circle:
             var combined = rotationMatrix * translationMatrix;

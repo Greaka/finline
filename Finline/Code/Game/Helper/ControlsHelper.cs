@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+
 using Finline.Code.Constants;
 using Finline.Code.Game.Entities;
-using Microsoft.Xna.Framework;
 using Finline.Code.Utility;
+
+using Microsoft.Xna.Framework;
 
 namespace Finline.Code.Game.Helper
 {

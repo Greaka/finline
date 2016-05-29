@@ -6,7 +6,7 @@
 
         public ThreadSafeObject(T data)
         {
-            value = data;
+            this.value = data;
         }
     }
 }

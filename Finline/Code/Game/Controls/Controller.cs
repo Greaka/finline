@@ -1,10 +1,13 @@
 ﻿using System;
+
 using Finline.Code.Constants;
 using Finline.Code.Game.Helper;
+using Finline.Code.Utility;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Finline.Code.Utility;
+
 using Timer = System.Timers.Timer;
 
 namespace Finline.Code.Game.Controls
@@ -21,23 +24,22 @@ namespace Finline.Code.Game.Controls
 
         public Controller()
         {
-            aTimer = new Timer
+            this.aTimer = new Timer
             {
-                Interval = 1000/ControlsHelper.ActualShotsPerSecond,
+                Interval = 1000/ControlsHelper.ActualShotsPerSecond, 
                 Enabled = true
             };
-            aTimer.Elapsed += (sender, args) => { shootable = true; };
+            this.aTimer.Elapsed += (sender, args) => { this.shootable = true; };
         }
 
         public void Update(GraphicsDevice device) {
-            if (Math.Abs(aTimer.Interval - ControlsHelper.ActualShotsPerSecond) < 0.00001)
-                aTimer.Interval = ControlsHelper.ActualShotsPerSecond;
+            if (Math.Abs(this.aTimer.Interval - ControlsHelper.ActualShotsPerSecond) < 0.00001) this.aTimer.Interval = ControlsHelper.ActualShotsPerSecond;
             var inputstate = GamePad.GetState(PlayerIndex.One);
             if (inputstate.IsConnected)
             {
                 ControlsHelper.MoveDirection = inputstate.ThumbSticks.Left;
                 ControlsHelper.ShootDirection = inputstate.ThumbSticks.Right.addPerspective();
-                Shootroutine(inputstate.Triggers.Right > trigger);
+                this.Shootroutine(inputstate.Triggers.Right > trigger);
             }
             else
             {
@@ -57,7 +59,7 @@ namespace Finline.Code.Game.Controls
                     - ControlsHelper.PlayerPosition.get2d();
                 shootDirection.Normalize();
                 ControlsHelper.ShootDirection = shootDirection;
-                Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed);
+                this.Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed);
             }
         }
 
@@ -67,17 +69,27 @@ namespace Finline.Code.Game.Controls
             var ms = Mouse.GetState().Position.ToVector2();
             var nearScreenPoint = new Vector3(ms, 0);
             var farScreenPoint = new Vector3(ms, 1);
-            var nearWorldPoint = device.Viewport.Unproject(nearScreenPoint, ControlsHelper.ProjectionMatrix, ControlsHelper.ViewMatrix, Matrix.Identity);
-            var farWorldPoint = device.Viewport.Unproject(farScreenPoint, ControlsHelper.ProjectionMatrix, ControlsHelper.ViewMatrix, Matrix.Identity);
+            var nearWorldPoint = device.Viewport.Unproject(
+                nearScreenPoint, 
+                ControlsHelper.ProjectionMatrix, 
+                ControlsHelper.ViewMatrix, 
+                Matrix.Identity);
+            var farWorldPoint = device.Viewport.Unproject(
+                farScreenPoint, 
+                ControlsHelper.ProjectionMatrix, 
+                ControlsHelper.ViewMatrix, 
+                Matrix.Identity);
 
             var direction = farWorldPoint - nearWorldPoint;
             var angle = Vector3.Dot(plane.Normal, direction);
+
             // Part 1: Find if the ray is parallel to the plane by checking 
-            //  if the angle between them is zero. 
+            // if the angle between them is zero. 
             if (!(Math.Abs(angle) > float.Epsilon)) return Vector3.Zero;
             var v1D = Vector3.Dot(plane.Normal, nearWorldPoint);
+
             // Part 2: Extend the starting point to the distance it would 
-            //  require to intersect the plane.
+            // require to intersect the plane.
             return nearWorldPoint + direction * ((plane.D - v1D) / angle);
         }
 
@@ -86,18 +98,17 @@ namespace Finline.Code.Game.Controls
             Action beforeShoot = () =>
             {
                 if (!shootPressed) return;
-                alreadyshot = true;
-                shootable = false;
-                Shoot?.Invoke();
+                this.alreadyshot = true;
+                this.shootable = false;
+                this.Shoot?.Invoke();
             };
 
-            if (!shootable) return;
+            if (!this.shootable) return;
             if (ControlsHelper.ActualShootMode == GameConstants.EWeaponShootMode.SingleFire)
             {
-                if (alreadyshot)
+                if (this.alreadyshot)
                 {
-                    if (!shootPressed)
-                        alreadyshot = false;
+                    if (!shootPressed) this.alreadyshot = false;
                 }
                 else
                     beforeShoot();
