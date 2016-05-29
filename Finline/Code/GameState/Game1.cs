@@ -29,7 +29,7 @@ namespace Finline.Code.GameState
         {
             graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 1024;
-            nextGameState = EGameState.HauptMenu;
+            nextGameState = EGameState.MainMenu;
             base.Initialize();
         }
 
@@ -77,7 +77,7 @@ namespace Finline.Code.GameState
         {
             switch (nextGameState)
             {
-                case EGameState.HauptMenu:
+                case EGameState.MainMenu:
                     GameState = new MainMenu();
                     GameState.initialize(Content);
                     break;

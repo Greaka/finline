@@ -180,7 +180,7 @@ namespace Finline
         {
             if(Keyboard.GetState().IsKeyDown(Keys.P))
                 return EGameState.InGame;
-            return EGameState.HauptMenu;
+            return EGameState.MainMenu;
         }
     }
 }

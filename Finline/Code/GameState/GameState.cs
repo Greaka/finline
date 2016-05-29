@@ -12,7 +12,7 @@ namespace Finline.Code.GameState
    enum EGameState 
     {
         None,
-        HauptMenu,
+       MainMenu,
         InGame,
 
 
