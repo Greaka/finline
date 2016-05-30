@@ -9,7 +9,7 @@
 
     public class StateManager : Microsoft.Xna.Framework.Game
     {
-        private GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
 
         private SpriteBatch spriteBatch;
         MainMenu main;
