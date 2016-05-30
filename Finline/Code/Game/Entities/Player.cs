@@ -1,12 +1,21 @@
-﻿using Finline.Code.Game.Helper;
-using Finline.Code.Utility;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Player.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Defines the Player type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Finline.Code.Game.Entities
 {
+    using Finline.Code.Game.Helper;
+    using Finline.Code.Utility;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
+
     public class Player : Entity
     {
         private readonly float unitsPerSecond = 15;

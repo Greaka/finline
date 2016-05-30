@@ -122,6 +122,7 @@
 
         public override void Draw(GameTime gameTime)
         {
+            this.spriteBatch.Begin();
             switch (this.menuState)
             {
                 case EMenuState.TitleScreen:
@@ -150,6 +151,7 @@
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            this.spriteBatch.End();
         }
 
         /// <summary>

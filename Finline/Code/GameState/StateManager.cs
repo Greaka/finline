@@ -9,7 +9,7 @@
 
     public class StateManager : Microsoft.Xna.Framework.Game
     {
-        public GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager Graphics { get; private set; }
 
         private SpriteBatch spriteBatch;
         MainMenu main;
@@ -19,7 +19,7 @@
 
         public StateManager()
         {
-            this.graphics = new GraphicsDeviceManager(this);
+            this.Graphics = new GraphicsDeviceManager(this);
             this.IsMouseVisible = true;
         }
   
@@ -61,10 +61,10 @@
         protected override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.White);
-
-            this.spriteBatch.Begin();
+            
             this.GameState.Draw(gameTime);
-            this.spriteBatch.End();
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            GraphicsDevice.BlendState = BlendState.Opaque;
             base.Draw(gameTime);
         }
 
