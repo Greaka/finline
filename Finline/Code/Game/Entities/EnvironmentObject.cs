@@ -40,10 +40,10 @@ namespace Finline.Code.Game.Entities
             }
         }
 
-        public void Draw()
+        public override void Draw()
         {
             if (this.Visible)
-                this.Draw();
+                base.Draw();
         }
     }
 

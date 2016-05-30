@@ -1,32 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace Finline.Code.GameState
+﻿namespace Finline.Code.GameState
 {
-   enum EGameState 
+    using Microsoft.Xna.Framework;
+
+    using Game = Microsoft.Xna.Framework.Game;
+
+    enum EGameState 
     {
         None,
         MainMenu,
-        InGame,
-
-
+        InGame
     }
-   
 
-    interface IGameState
+/*
+    public abstract class GameState : DrawableGameComponent
     {
-        void initialize(ContentManager content);
-        EGameState Update(GameTime gameTime);
-        void Draw(SpriteBatch spriteBatch);
+        public virtual void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
+        }
 
+        public virtual void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+        }
 
+        public virtual void Initialize()
+        {
+            // base.Initialize();
+        }
+
+        public GameState(Game game)
+            : base(game)
+        {
+        }
     }
-
-
+    */
 }

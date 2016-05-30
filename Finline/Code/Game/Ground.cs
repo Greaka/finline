@@ -64,7 +64,8 @@ namespace Finline.Code.Game
                 pass.Apply();
 
                 gdevice.DrawUserPrimitives(
-                            PrimitiveType.TriangleList, this._floorVerts, 
+                    PrimitiveType.TriangleList,
+                    this._floorVerts,
                     0, 
                     2);
             }

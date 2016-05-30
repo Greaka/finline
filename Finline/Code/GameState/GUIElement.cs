@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Input;
-
-namespace Finline
+﻿namespace Finline.Code.GameState
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
     class GUIElement
     {
         private Texture2D GUITexture;
@@ -22,8 +17,8 @@ namespace Finline
 
         public string AssetName
         {
-            get { return assetName;}
-            set { assetName = value; }
+            get { return this.assetName;}
+            set { this.assetName = value; }
         }
 
 
@@ -48,23 +43,21 @@ namespace Finline
 
         public void LoadContent(ContentManager content)
         {
-            GUITexture = content.Load<Texture2D>(AssetName);
-            GUIRect = new Rectangle(0,0,GUITexture.Width,GUITexture.Height);
+            this.GUITexture = content.Load<Texture2D>(this.AssetName);
+            this.GUIRect = new Rectangle(0,0,this.GUITexture.Width, this.GUITexture.Height);
         }
-
-
+        
         public void Update()
         {
-            if (GUIRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (this.GUIRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                clickEvent(assetName);
+                this.clickEvent(this.assetName);
             }
-
             
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(GUITexture,GUIRect, Color.White);
+            spriteBatch.Draw(this.GUITexture,this.GUIRect, Color.White);
         }
 
 
@@ -75,7 +68,7 @@ namespace Finline
         /// <param name="width"></param>
         public void CenterElement(int height, int width)
         {
-            GUIRect = new Rectangle((width/2) - (this.GUITexture.Width/2) , (height/2) - (this.GUITexture.Height/2),this.GUITexture.Width,this.GUITexture.Height);
+            this.GUIRect = new Rectangle((width/2) - (this.GUITexture.Width/2) , (height/2) - (this.GUITexture.Height/2),this.GUITexture.Width,this.GUITexture.Height);
             
         }
 
@@ -88,9 +81,7 @@ namespace Finline
         /// <param name="y"></param>
         public void MoveElement(int x, int y)
         {
-            GUIRect = new Rectangle(GUIRect.X += x, GUIRect.Y += y, GUIRect.Width, GUIRect.Height);
+            this.GUIRect = new Rectangle(this.GUIRect.X += x, this.GUIRect.Y += y, this.GUIRect.Width, this.GUIRect.Height);
         }
-
-        
     }
 }

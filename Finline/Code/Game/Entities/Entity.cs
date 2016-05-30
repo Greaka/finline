@@ -45,7 +45,7 @@ namespace Finline.Code.Game.Entities
             return Vector2.UnitY.rotate(this._angle);
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
             var worldMatrix = this.GetWorldMatrix();
 

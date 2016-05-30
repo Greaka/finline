@@ -4,6 +4,8 @@ using Finline.Code.Game.Helper;
 
 namespace Finline
 {
+    using Finline.Code.GameState;
+
 #if WINDOWS || LINUX
 
     /// <summary>
@@ -17,9 +19,8 @@ namespace Finline
         [STAThread]
         static void Main()
         {
-            using (var game = new Ingame())
+            using (var game = new StateManager())
                 game.Run();
-            ControlsHelper.Active = false;
         }
     }
 #endif

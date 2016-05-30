@@ -40,7 +40,7 @@
   <ItemGroup>
     <Compile Include="Code\Constants\GameConstants.cs" />
     <Compile Include="Code\Constants\GraphicConstants.cs" />
-    <Compile Include="Code\GameState\Game1.cs" />
+    <Compile Include="Code\GameState\StateManager.cs" />
     <Compile Include="Code\GameState\GameState.cs" />
     <Compile Include="Code\GameState\GUIElement.cs" />
     <Compile Include="Code\GameState\MainMenu.cs" />

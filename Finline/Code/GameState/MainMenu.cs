@@ -1,30 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Finline.Code.GameState;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-
-namespace Finline
+﻿namespace Finline.Code.GameState
 {
-    class MainMenu: IGameState {
+    using System.Collections.Generic;
 
+    using Finline.Code.Game;
 
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
+    class MainMenu: DrawableGameComponent
+    {
         //Gamestate to manage all the states
-        enum GameState
-            {
-             TitleScreen,
-             MainMenu,
-             Option,
-             InGame
-             }
+        private enum EMenuState
+        {
+            None,
 
-         GameState gameState;
+            TitleScreen,
+
+            MainMenu,
+
+            Option
+        }
+
+        private EMenuState menuState;
 
 
         //The Lists with all the elements
@@ -33,118 +32,111 @@ namespace Finline
         List<GUIElement> option = new List<GUIElement>();
         private GUIElement.ElementClicked Onclick;
 
+        private SpriteBatch spriteBatch;
 
         /// <summary>
         /// Constructor to use the GUIElementlist to select the element
         /// </summary>
-        public MainMenu()
+        public MainMenu(Game game, SpriteBatch sprite)
+            : base(game)
         {
-            title.Add(new GUIElement("Logo"));
+            this.spriteBatch = sprite;
+            this.menuState = EMenuState.TitleScreen;
+            this.title.Add(new GUIElement("Logo"));
 
-            main.Add(new GUIElement("MenuFrame"));
-            main.Add(new GUIElement("NewGame"));
-            main.Add(new GUIElement("Option"));
+            this.main.Add(new GUIElement("MenuFrame"));
+            this.main.Add(new GUIElement("NewGame"));
+            this.main.Add(new GUIElement("Option"));
 
-            option.Add(new GUIElement(("End")));
+            this.option.Add(new GUIElement(("End")));
            
         }
 
-        public void LoadContent(ContentManager content)
+        protected override void LoadContent()
         {
-
-            foreach (GUIElement element in title)
+            foreach (GUIElement element in this.title)
             {
-                element.LoadContent(content);
+                element.LoadContent(this.Game.Content);
                 element.CenterElement(600,800);
-                element.clickEvent += OnClick;
+                element.clickEvent += this.OnClick;
             }
 
-            foreach (GUIElement element in main)
+            foreach (GUIElement element in this.main)
             {
-                element.LoadContent(content);
+                element.LoadContent(this.Game.Content);
                 element.CenterElement(600,800);
-                element.clickEvent += OnClick;
+                element.clickEvent += this.OnClick;
             }
 
-            main.Find(x => x.AssetName == "NewGame").MoveElement(0, -100); //move the "newgame" button 100 up in y-direction
+            this.main.Find(x => x.AssetName == "NewGame").MoveElement(0, -100); //move the "newgame" button 100 up in y-direction
 
-            foreach (GUIElement element in option)
+            foreach (GUIElement element in this.option)
             {
-                element.LoadContent(content);
+                element.LoadContent(this.Game.Content);
                 element.CenterElement(600, 800);
-                element.clickEvent += OnClick;
+                element.clickEvent += this.OnClick;
 
             }
-            main.Find(x => x.AssetName == "Option").MoveElement(0, 100); //move the "option" button down in y-direction
+            this.main.Find(x => x.AssetName == "Option").MoveElement(0, 100); //move the "option" button down in y-direction
 
 
-            foreach (GUIElement element in option)
+            foreach (GUIElement element in this.option)
             {
-                element.LoadContent(content);
+                element.LoadContent(this.Game.Content);
                 element.CenterElement(600, 800);
-                element.clickEvent += OnClick;
+                element.clickEvent += this.OnClick;
 
             }
-            option.Find(x => x.AssetName == "End").MoveElement(0, 50); 
-
+            this.option.Find(x => x.AssetName == "End").MoveElement(0, 50);
         }
-        public void Update()
+
+        public override void Update(GameTime gameTime)
         {
-            switch (gameState) {
-                case GameState.TitleScreen:
+            switch (this.menuState) {
+                case EMenuState.TitleScreen:
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                        gameState = GameState.MainMenu;
+                        this.menuState = EMenuState.MainMenu;
                     break;
                     
 
-                case GameState.MainMenu:
-                    foreach (GUIElement element in main)
+                case EMenuState.MainMenu:
+                    foreach (GUIElement element in this.main)
                     {
                         element.Update();
                     }
                     break;
                    
-                case GameState.Option:
-                    foreach (GUIElement element in option)
+                case EMenuState.Option:
+                    foreach (GUIElement element in this.option)
                     {
                         element.Update();
                     }
                     break;
-                  
-
-                case GameState.InGame:
-                    break;
             }
-
-
-           
-
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime)
         {
-            switch (gameState)
+            switch (this.menuState)
             {
-                case GameState.TitleScreen:
-                    foreach (GUIElement element in title)
+                case EMenuState.TitleScreen:
+                    foreach (GUIElement element in this.title)
                     {
-                        element.Draw(spriteBatch);
+                        element.Draw(this.spriteBatch);
                     }
                     break;
-               case GameState.MainMenu:
-                    foreach (GUIElement element in main)
+               case EMenuState.MainMenu:
+                    foreach (GUIElement element in this.main)
                     {
-                        element.Draw(spriteBatch);
+                        element.Draw(this.spriteBatch);
                     }
                     break;
-                case GameState.Option:
-                    foreach (GUIElement element in option)
+                case EMenuState.Option:
+                    foreach (GUIElement element in this.option)
                     {
-                        element.Draw(spriteBatch);
+                        element.Draw(this.spriteBatch);
                     }
                     break;
-
-                case GameState.InGame: break;
             }
             
 
@@ -158,34 +150,30 @@ namespace Finline
         /// <param name="element"></param>
         public void OnClick(string element)
         {
-          
-
-             if (element == "NewGame")
+            if (this.menuState == EMenuState.TitleScreen)
             {
-                gameState = GameState.InGame;
+                this.menuState = EMenuState.MainMenu;
+            }
+
+            if (element == "NewGame")
+            {
+                this.menuState = EMenuState.None;
+                this.GoIngame?.Invoke();
             }
 
             if (element == "Option")
             {
-                gameState = GameState.Option;
+                this.menuState = EMenuState.Option;
             }
 
             if (element == "End")
             {
-                gameState = GameState.MainMenu;
+                this.menuState = EMenuState.MainMenu;
             }
         }
 
-        public void initialize(ContentManager content)
-        {
-           LoadContent(content);
-        }
+        public delegate void GetIngame();
 
-        public EGameState Update(GameTime gameTime)
-        {
-            if(Keyboard.GetState().IsKeyDown(Keys.B))
-                return EGameState.InGame;
-            return EGameState.MainMenu;
-        }
+        public event GetIngame GoIngame;
     }
 }
