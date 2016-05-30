@@ -1,4 +1,6 @@
-﻿namespace Finline.Code.GameState
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace Finline.Code.GameState
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
@@ -12,7 +14,9 @@
         private Rectangle GUIRect;
 
         private string assetName;
+        
 
+        
 
 
 
@@ -65,6 +69,7 @@
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            
             spriteBatch.Draw(this.GUITexture, this.GUIRect, Color.White);
         }
 
@@ -91,5 +96,13 @@
         {
             this.GUIRect = new Rectangle(this.GUIRect.X += x, this.GUIRect.Y += y, this.GUIRect.Width, this.GUIRect.Height);
         }
+
+     
+
+
+
     }
+
+
+
 }

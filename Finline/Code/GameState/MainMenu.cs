@@ -9,7 +9,9 @@
 
     internal class MainMenu: DrawableGameComponent
     {
-        // Gamestate to manage all the states
+        /// <summary>
+        /// MenuState to manage all States
+        /// </summary>
         private enum EMenuState
         {
             None, 
@@ -31,6 +33,7 @@
         private readonly List<GUIElement> option = new List<GUIElement>();
 
         private readonly SpriteBatch spriteBatch;
+       
 
         /// <summary>
         /// Constructor to use the GUIElementlist to select the element
@@ -40,14 +43,19 @@
         {
             this.spriteBatch = sprite;
             this.menuState = EMenuState.TitleScreen;
-            this.title.Add(new GUIElement("Logo"));
 
+            this.title.Add(new GUIElement("Logo 2")); //Logo in the state Titlescreen
+            
+
+            //here are the elements in the state MainMenu
+           
             this.main.Add(new GUIElement("MenuFrame"));
             this.main.Add(new GUIElement("NewGame"));
             this.main.Add(new GUIElement("Option"));
-            
+            this.main.Add(new GUIElement("End"));
 
-            this.option.Add(new GUIElement("End"));
+            //here are the elements in the state Option
+            this.option.Add(new GUIElement("Back_to_MainMenu"));
            
         }
 
@@ -59,6 +67,9 @@
                 element.CenterElement(600, 800);
                 element.ClickEvent += this.OnClick;
             }
+            this.title.Find(x => x.AssetName == "Logo 2").MoveElement(0,-50);
+            
+
 
             foreach (var element in this.main)
             {
@@ -66,18 +77,10 @@
                 element.CenterElement(600, 800);
                 element.ClickEvent += this.OnClick;
             }
-
-            this.main.Find(x => x.AssetName == "NewGame").MoveElement(0, -100); // move the "newgame" button 100 up in y-direction
-
-            foreach (var element in this.option)
-            {
-                element.LoadContent(this.Game.Content);
-                element.CenterElement(600, 800);
-                element.ClickEvent += this.OnClick;
-
-            }
-
-            this.main.Find(x => x.AssetName == "Option").MoveElement(0, 100); // move the "option" button down in y-direction
+            this.main.Find(x =>x.AssetName =="MenuFrame").MoveElement(0, -50);  // frame Movement
+            this.main.Find(x => x.AssetName == "NewGame").MoveElement(0, -200); // move the "newgame" button 100 up in y-direction
+            this.main.Find(x => x.AssetName == "Option").MoveElement(0, -50);   // move the "option" button down in y-direction
+            this.main.Find(x => x.AssetName == "End").MoveElement(0, 100);
 
 
             foreach (var element in this.option)
@@ -88,7 +91,7 @@
 
             }
 
-            this.option.Find(x => x.AssetName == "End").MoveElement(0, 50);
+            this.option.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50);
         }
 
         public override void Update(GameTime gameTime)
@@ -122,9 +125,13 @@
             }
         }
 
+
+
         public override void Draw(GameTime gameTime)
         {
             this.spriteBatch.Begin();
+            
+            
             switch (this.menuState)
             {
                 case EMenuState.TitleScreen:
@@ -132,6 +139,7 @@
                     {
                         element.Draw(this.spriteBatch);
                     }
+                   
 
                     break;
                 case EMenuState.MainMenu:
@@ -185,6 +193,12 @@
             }
 
             if (element == "End")
+            {
+                this.menuState = EMenuState.TitleScreen;
+            }
+            
+
+            if (element == "Back_to_MainMenu")
             {
                 this.menuState = EMenuState.MainMenu;
             }
