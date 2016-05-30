@@ -11,7 +11,9 @@
 
         private Rectangle GUIRect;
 
-        private string assetName; 
+        private string assetName;
+
+
 
 
 
@@ -52,6 +54,11 @@
             if (this.GUIRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 this.ClickEvent(this.assetName);
+            }
+
+            if (Mouse.GetState().LeftButton != ButtonState.Pressed)
+            {
+                MainMenu.isPressed = false;
             }
             
         }

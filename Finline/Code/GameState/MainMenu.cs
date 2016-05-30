@@ -21,6 +21,7 @@
             Option
         }
 
+        public static bool isPressed = false;
         private EMenuState menuState;
 
 
@@ -44,6 +45,7 @@
             this.main.Add(new GUIElement("MenuFrame"));
             this.main.Add(new GUIElement("NewGame"));
             this.main.Add(new GUIElement("Option"));
+            
 
             this.option.Add(new GUIElement("End"));
            
@@ -160,6 +162,12 @@
         /// <param name="element"></param>
         private void OnClick(string element)
         {
+            if (isPressed) return;
+
+            isPressed = true;
+            if (element == "MenuFrame")
+                isPressed = false;
+
             if (this.menuState == EMenuState.TitleScreen)
             {
                 this.menuState = EMenuState.MainMenu;
