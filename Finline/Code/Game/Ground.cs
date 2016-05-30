@@ -1,5 +1,4 @@
-﻿using Finline.Code.Constants;
-using Finline.Code.Game.Helper;
+﻿using Finline.Code.Game.Helper;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,64 +7,64 @@ namespace Finline.Code.Game
 {
     class Ground
     {
-        private Texture2D _checkerboardTexture;
+        private Texture2D checkerboardTexture;
 
-        private VertexPositionNormalTexture[] _floorVerts;
+        private VertexPositionNormalTexture[] floorVerts;
 
-        private BasicEffect _effect;
+        private BasicEffect effect;
 
         public void Initialize()
         {
-            const float x = 20;
-            const float y = 20;
-            const float z = -1;
+            const float X = 20;
+            const float Y = 20;
+            const float Z = -1;
 
-            this._floorVerts = new VertexPositionNormalTexture[6];
+            this.floorVerts = new VertexPositionNormalTexture[6];
 
-            this._floorVerts[0].Position = new Vector3(-x, -y, z);
-            this._floorVerts[1].Position = new Vector3(-x, y, z);
-            this._floorVerts[2].Position = new Vector3(x, -y, z);
+            this.floorVerts[0].Position = new Vector3(-X, -Y, Z);
+            this.floorVerts[1].Position = new Vector3(-X, Y, Z);
+            this.floorVerts[2].Position = new Vector3(X, -Y, Z);
 
-            this._floorVerts[3].Position = this._floorVerts[1].Position;
-            this._floorVerts[4].Position = new Vector3(x, y, z);
-            this._floorVerts[5].Position = this._floorVerts[2].Position;
+            this.floorVerts[3].Position = this.floorVerts[1].Position;
+            this.floorVerts[4].Position = new Vector3(X, Y, Z);
+            this.floorVerts[5].Position = this.floorVerts[2].Position;
 
             const int repetitions = 5;
 
-            this._floorVerts[0].TextureCoordinate = new Vector2(0, 0);
-            this._floorVerts[1].TextureCoordinate = new Vector2(0, repetitions);
-            this._floorVerts[2].TextureCoordinate = new Vector2(repetitions, 0);
+            this.floorVerts[0].TextureCoordinate = new Vector2(0, 0);
+            this.floorVerts[1].TextureCoordinate = new Vector2(0, repetitions);
+            this.floorVerts[2].TextureCoordinate = new Vector2(repetitions, 0);
 
-            this._floorVerts[3].TextureCoordinate = this._floorVerts[1].TextureCoordinate;
-            this._floorVerts[4].TextureCoordinate = new Vector2(repetitions, repetitions);
-            this._floorVerts[5].TextureCoordinate = this._floorVerts[2].TextureCoordinate;
+            this.floorVerts[3].TextureCoordinate = this.floorVerts[1].TextureCoordinate;
+            this.floorVerts[4].TextureCoordinate = new Vector2(repetitions, repetitions);
+            this.floorVerts[5].TextureCoordinate = this.floorVerts[2].TextureCoordinate;
         }
 
         public void LoadContent(GraphicsDevice gdevice)
         {
-            this._effect = new BasicEffect(gdevice);
+            this.effect = new BasicEffect(gdevice);
             using (var stream = TitleContainer.OpenStream("Content/ground.jpg"))
             {
-                this._checkerboardTexture = Texture2D.FromStream(gdevice, stream);
+                this.checkerboardTexture = Texture2D.FromStream(gdevice, stream);
             }
         }
 
         public void Draw(GraphicsDevice gdevice)
         {
-            this._effect.View = ControlsHelper.ViewMatrix;
+            this.effect.View = ControlsHelper.ViewMatrix;
 
-            this._effect.Projection = ControlsHelper.ProjectionMatrix;
+            this.effect.Projection = ControlsHelper.ProjectionMatrix;
 
-            this._effect.TextureEnabled = true;
-            this._effect.Texture = this._checkerboardTexture;
+            this.effect.TextureEnabled = true;
+            this.effect.Texture = this.checkerboardTexture;
 
-            foreach (var pass in this._effect.CurrentTechnique.Passes)
+            foreach (var pass in this.effect.CurrentTechnique.Passes)
             {
                 pass.Apply();
 
                 gdevice.DrawUserPrimitives(
-                    PrimitiveType.TriangleList,
-                    this._floorVerts,
+                    PrimitiveType.TriangleList, 
+                    this.floorVerts, 
                     0, 
                     2);
             }

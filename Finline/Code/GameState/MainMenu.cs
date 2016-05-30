@@ -1,24 +1,22 @@
 ﻿namespace Finline.Code.GameState
 {
+    using System;
     using System.Collections.Generic;
 
-    using Finline.Code.Game;
-
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
 
-    class MainMenu: DrawableGameComponent
+    internal class MainMenu: DrawableGameComponent
     {
-        //Gamestate to manage all the states
+        // Gamestate to manage all the states
         private enum EMenuState
         {
-            None,
+            None, 
 
-            TitleScreen,
+            TitleScreen, 
 
-            MainMenu,
+            MainMenu, 
 
             Option
         }
@@ -26,13 +24,12 @@
         private EMenuState menuState;
 
 
-        //The Lists with all the elements
-        List<GUIElement> title = new List<GUIElement>();
-        List<GUIElement> main = new List<GUIElement>(); 
-        List<GUIElement> option = new List<GUIElement>();
-        private GUIElement.ElementClicked Onclick;
+        // The Lists with all the elements
+        private readonly List<GUIElement> title = new List<GUIElement>();
+        private readonly List<GUIElement> main = new List<GUIElement>();
+        private readonly List<GUIElement> option = new List<GUIElement>();
 
-        private SpriteBatch spriteBatch;
+        private readonly SpriteBatch spriteBatch;
 
         /// <summary>
         /// Constructor to use the GUIElementlist to select the element
@@ -48,45 +45,47 @@
             this.main.Add(new GUIElement("NewGame"));
             this.main.Add(new GUIElement("Option"));
 
-            this.option.Add(new GUIElement(("End")));
+            this.option.Add(new GUIElement("End"));
            
         }
 
         protected override void LoadContent()
         {
-            foreach (GUIElement element in this.title)
-            {
-                element.LoadContent(this.Game.Content);
-                element.CenterElement(600,800);
-                element.clickEvent += this.OnClick;
-            }
-
-            foreach (GUIElement element in this.main)
-            {
-                element.LoadContent(this.Game.Content);
-                element.CenterElement(600,800);
-                element.clickEvent += this.OnClick;
-            }
-
-            this.main.Find(x => x.AssetName == "NewGame").MoveElement(0, -100); //move the "newgame" button 100 up in y-direction
-
-            foreach (GUIElement element in this.option)
+            foreach (var element in this.title)
             {
                 element.LoadContent(this.Game.Content);
                 element.CenterElement(600, 800);
-                element.clickEvent += this.OnClick;
-
+                element.ClickEvent += this.OnClick;
             }
-            this.main.Find(x => x.AssetName == "Option").MoveElement(0, 100); //move the "option" button down in y-direction
 
-
-            foreach (GUIElement element in this.option)
+            foreach (var element in this.main)
             {
                 element.LoadContent(this.Game.Content);
                 element.CenterElement(600, 800);
-                element.clickEvent += this.OnClick;
+                element.ClickEvent += this.OnClick;
+            }
+
+            this.main.Find(x => x.AssetName == "NewGame").MoveElement(0, -100); // move the "newgame" button 100 up in y-direction
+
+            foreach (var element in this.option)
+            {
+                element.LoadContent(this.Game.Content);
+                element.CenterElement(600, 800);
+                element.ClickEvent += this.OnClick;
 
             }
+
+            this.main.Find(x => x.AssetName == "Option").MoveElement(0, 100); // move the "option" button down in y-direction
+
+
+            foreach (var element in this.option)
+            {
+                element.LoadContent(this.Game.Content);
+                element.CenterElement(600, 800);
+                element.ClickEvent += this.OnClick;
+
+            }
+
             this.option.Find(x => x.AssetName == "End").MoveElement(0, 50);
         }
 
@@ -100,18 +99,24 @@
                     
 
                 case EMenuState.MainMenu:
-                    foreach (GUIElement element in this.main)
+                    foreach (var element in this.main)
                     {
                         element.Update();
                     }
+
                     break;
                    
                 case EMenuState.Option:
-                    foreach (GUIElement element in this.option)
+                    foreach (var element in this.option)
                     {
                         element.Update();
                     }
+
                     break;
+                case EMenuState.None:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -120,35 +125,38 @@
             switch (this.menuState)
             {
                 case EMenuState.TitleScreen:
-                    foreach (GUIElement element in this.title)
+                    foreach (var element in this.title)
                     {
                         element.Draw(this.spriteBatch);
                     }
+
                     break;
-               case EMenuState.MainMenu:
-                    foreach (GUIElement element in this.main)
+                case EMenuState.MainMenu:
+                    foreach (var element in this.main)
                     {
                         element.Draw(this.spriteBatch);
                     }
+
                     break;
                 case EMenuState.Option:
-                    foreach (GUIElement element in this.option)
+                    foreach (var element in this.option)
                     {
                         element.Draw(this.spriteBatch);
                     }
+
                     break;
+                case EMenuState.None:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-            
-
-
         }
-
 
         /// <summary>
         /// when click on the element change to next state
         /// </summary>
         /// <param name="element"></param>
-        public void OnClick(string element)
+        private void OnClick(string element)
         {
             if (this.menuState == EMenuState.TitleScreen)
             {

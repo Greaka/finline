@@ -1,7 +1,4 @@
-﻿using System;
-
-using Finline.Code.Constants;
-using Finline.Code.Game.Helper;
+﻿using Finline.Code.Game.Helper;
 using Finline.Code.Utility;
 
 using Microsoft.Xna.Framework;

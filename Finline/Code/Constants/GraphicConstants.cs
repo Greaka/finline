@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Finline.Code.Game.Helper;
+﻿using Finline.Code.Game.Helper;
 using Microsoft.Xna.Framework;
 
 namespace Finline.Code.Constants

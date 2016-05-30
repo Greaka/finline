@@ -1,32 +1,29 @@
-﻿using System;
-using System.Threading.Tasks;
-using Finline.Code.Constants;
-using Finline.Code.Game.Controls;
-using Finline.Code.Game.Entities;
-using Finline.Code.Game.Helper;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace Finline.Code.Game
+﻿namespace Finline.Code.Game
 {
-    using Finline.Code.GameState;
+    using System;
+    using System.Threading.Tasks;
 
-    using Game = Microsoft.Xna.Framework.Game;
+    using Constants;
+    using Controls;
+    using Entities;
+    using GameState;
+    using Helper;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
 
     public class Ingame : DrawableGameComponent
     {
-        private readonly GraphicsDeviceManager _graphics;
-
-        private Player _player;
-        private Ground _ground;
-        
         private readonly Controller controls = new Controller();
-  
+        private readonly GraphicsDeviceManager graphics;
+        private Player player;
+        private Ground ground;
+        
         public Ingame(StateManager game)
             : base(game)
         {
-            this._graphics = game.graphics;
+            this.graphics = game.graphics;
             this.Game.Content.RootDirectory = "Content";
         }
 
@@ -42,11 +39,11 @@ namespace Finline.Code.Game
             var rasterizerState = new RasterizerState { CullMode = CullMode.None };
             this.Game.GraphicsDevice.RasterizerState = rasterizerState;
 
-            this._ground = new Ground();
-            this._ground.Initialize();
+            this.ground = new Ground();
+            this.ground.Initialize();
 
-            this._player = new Player();
-            this._player.Initialize(this.Game.Content);
+            this.player = new Player();
+            this.player.Initialize(this.Game.Content);
 
             Task.Factory.StartNew(() =>
             {
@@ -60,7 +57,7 @@ namespace Finline.Code.Game
 
         protected override void LoadContent()
         {
-            this._ground.LoadContent(this.Game.GraphicsDevice);
+            this.ground.LoadContent(this.Game.GraphicsDevice);
 
             ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(10, 1, 1), GameConstants.EnvObjects.cube));
             ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(5, -10, 1), GameConstants.EnvObjects.cube));
@@ -78,28 +75,28 @@ namespace Finline.Code.Game
             {
                 var bla = i == 0 ? 20 : Math.Abs(i) / i;
                 ControlsHelper.EnvironmentObjects.TryAdd(
-                    ControlsHelper.EnvironmentObjects.Count,
+                    ControlsHelper.EnvironmentObjects.Count, 
                     new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(i, bla * 20, 0),
+                        this.Game.Content, 
+                        new Vector3(i, bla * 20, 0), 
                         GameConstants.EnvObjects.cube));
                 ControlsHelper.EnvironmentObjects.TryAdd(
-                    ControlsHelper.EnvironmentObjects.Count,
+                    ControlsHelper.EnvironmentObjects.Count, 
                     new EnvironmentObject(
                         this.Game.Content, 
                         new Vector3(bla * 20, i, 0), 
                         GameConstants.EnvObjects.cube));
                 ControlsHelper.EnvironmentObjects.TryAdd(
-                    ControlsHelper.EnvironmentObjects.Count,
+                    ControlsHelper.EnvironmentObjects.Count, 
                     new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(-i, bla * 20, 0),
+                        this.Game.Content, 
+                        new Vector3(-i, bla * 20, 0), 
                         GameConstants.EnvObjects.cube));
                 ControlsHelper.EnvironmentObjects.TryAdd(
-                    ControlsHelper.EnvironmentObjects.Count,
+                    ControlsHelper.EnvironmentObjects.Count, 
                     new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(bla * 20, -i, 0),
+                        this.Game.Content, 
+                        new Vector3(bla * 20, -i, 0), 
                         GameConstants.EnvObjects.cube));
             }
         }
@@ -113,7 +110,7 @@ namespace Finline.Code.Game
                 this.Game.Exit();
             }
 
-            this._player.Update(gameTime);
+            this.player.Update(gameTime);
 
             foreach (var obj in ControlsHelper.EnvironmentObjects.Values)
             {
@@ -127,14 +124,14 @@ namespace Finline.Code.Game
         {
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            var aspectRatio = this._graphics.PreferredBackBufferWidth / (float)this._graphics.PreferredBackBufferHeight;
+            var aspectRatio = this.graphics.PreferredBackBufferWidth / (float)this.graphics.PreferredBackBufferHeight;
             ControlsHelper.ViewMatrix = Matrix.CreateLookAt(
                 GraphicConstants.CameraPosition, ControlsHelper.PlayerPosition, Vector3.UnitZ);
             ControlsHelper.ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView(
                         GraphicConstants.FieldOfView, aspectRatio, GraphicConstants.NearClipPlane, GraphicConstants.FarClipPlane);
 
-            this._ground.Draw(this.Game.GraphicsDevice);
-            this._player.Draw();
+            this.ground.Draw(this.Game.GraphicsDevice);
+            this.player.Draw();
 
             foreach (var obj in ControlsHelper.EnvironmentObjects.Values)
             {

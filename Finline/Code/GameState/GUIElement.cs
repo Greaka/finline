@@ -17,19 +17,19 @@
 
         public string AssetName
         {
-            get { return this.assetName;}
-            set { this.assetName = value; }
+            get
+            {
+                return this.assetName;
+            }
+
+            private set
+            {
+                this.assetName = value;
+            }
         }
 
-
-
-
         public delegate void ElementClicked(string element);
-
-
-
-
-        public event ElementClicked clickEvent;
+        public event ElementClicked ClickEvent;
 
         /// <summary>
         /// Constructor for GUIElements
@@ -44,20 +44,21 @@
         public void LoadContent(ContentManager content)
         {
             this.GUITexture = content.Load<Texture2D>(this.AssetName);
-            this.GUIRect = new Rectangle(0,0,this.GUITexture.Width, this.GUITexture.Height);
+            this.GUIRect = new Rectangle(0, 0, this.GUITexture.Width, this.GUITexture.Height);
         }
         
         public void Update()
         {
             if (this.GUIRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                this.clickEvent(this.assetName);
+                this.ClickEvent(this.assetName);
             }
             
         }
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(this.GUITexture,this.GUIRect, Color.White);
+            spriteBatch.Draw(this.GUITexture, this.GUIRect, Color.White);
         }
 
 
@@ -68,7 +69,7 @@
         /// <param name="width"></param>
         public void CenterElement(int height, int width)
         {
-            this.GUIRect = new Rectangle((width/2) - (this.GUITexture.Width/2) , (height/2) - (this.GUITexture.Height/2),this.GUITexture.Width,this.GUITexture.Height);
+            this.GUIRect = new Rectangle((width/2) - (this.GUITexture.Width/2) , (height/2) - (this.GUITexture.Height/2), this.GUITexture.Width, this.GUITexture.Height);
             
         }
 

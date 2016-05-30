@@ -1,17 +1,15 @@
 ﻿namespace Finline.Code.GameState
 {
-    using Microsoft.Xna.Framework;
-
-    using Game = Microsoft.Xna.Framework.Game;
-
-    enum EGameState 
+    enum EGameState
     {
-        None,
-        MainMenu,
+        None, 
+
+        MainMenu, 
+
         InGame
     }
 
-/*
+    /*
     public abstract class GameState : DrawableGameComponent
     {
         public virtual void Draw(GameTime gameTime)

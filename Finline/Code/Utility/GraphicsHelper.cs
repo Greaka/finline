@@ -1,12 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="GraphicsHelper.cs" company="">
-//   
 // </copyright>
 // <summary>
 //   Defines the GraphicsHelper type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 
 
 namespace Finline.Code.Utility
@@ -50,6 +48,7 @@ namespace Finline.Code.Utility
                 {
                     continue;
                 }
+
                 if (intersection < distance)
                 {
                     distance = intersection;

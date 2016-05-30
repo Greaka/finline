@@ -1,12 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Shoot.cs" company="Finline OVGU">
-//   
 // </copyright>
 // <summary>
 //   The shooting class. Handles  creating and destroying.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Finline.Code.Game.Controls
 {
     using System.Collections.Concurrent;

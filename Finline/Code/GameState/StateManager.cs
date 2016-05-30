@@ -9,8 +9,9 @@
 
     public class StateManager : Microsoft.Xna.Framework.Game
     {
-        public GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+
+        private SpriteBatch spriteBatch;
         MainMenu main;
         private EGameState currentGameState;
         private EGameState nextGameState;
@@ -20,7 +21,7 @@
         {
             this.graphics = new GraphicsDeviceManager(this);
             this.IsMouseVisible = true;
-    }
+        }
   
         protected override void Initialize()
         {
@@ -79,6 +80,7 @@
                     this.GameState = new Ingame(this);
                     break;
             }
+
             this.GameState.Initialize();
 
             this.currentGameState = this.nextGameState;

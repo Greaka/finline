@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Finline.Code.Game.Helper;
+﻿using Finline.Code.Game.Helper;
 using Finline.Code.Utility;
 
 using Microsoft.Xna.Framework;
