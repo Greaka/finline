@@ -37,7 +37,7 @@ namespace Finline.Code.Game.Entities
             this._position = ControlsHelper.PlayerPosition;
             this._angle = ControlsHelper.ShootDirection.getAngle();
             this.timeStamp = actualTime;
-            this.unitsPerSecond = 10;
+            this.unitsPerSecond = 60;
         }
 
         public void Update(TimeSpan actualTime)

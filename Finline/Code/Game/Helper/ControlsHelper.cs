@@ -49,7 +49,7 @@ namespace Finline.Code.Game.Helper
             }
         }
 
-        private static readonly ThreadSafeObject<double> shotsPerSecond = new ThreadSafeObject<double>(20);
+        private static readonly ThreadSafeObject<double> shotsPerSecond = new ThreadSafeObject<double>(4);
         public static double ActualShotsPerSecond
         {
             get { return shotsPerSecond.value; }

@@ -29,7 +29,7 @@ namespace Finline.Code.Game
             this.floorVerts[4].Position = new Vector3(X, Y, Z);
             this.floorVerts[5].Position = this.floorVerts[2].Position;
 
-            const int repetitions = 5;
+            const int repetitions = 1;
 
             this.floorVerts[0].TextureCoordinate = new Vector2(0, 0);
             this.floorVerts[1].TextureCoordinate = new Vector2(0, repetitions);
