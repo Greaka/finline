@@ -2,7 +2,7 @@
 {
     using System;
 
-    using Finline.Code.GameState;
+    using Code.GameState;
 
 #if WINDOWS || LINUX
 

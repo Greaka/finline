@@ -61,10 +61,10 @@
         protected override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.White);
-
-            this.spriteBatch.Begin();
+            
             this.GameState.Draw(gameTime);
-            this.spriteBatch.End();
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            GraphicsDevice.BlendState = BlendState.Opaque;
             base.Draw(gameTime);
         }
 
