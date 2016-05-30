@@ -72,7 +72,7 @@ namespace Finline.Code.GameState
         {
             
             if(assetName == "Logo 2")
-                spriteBatch.Draw(GUITexture,new Rectangle(30,10,700,440), null,Color.White);
+                spriteBatch.Draw(GUITexture,new Rectangle(30, 10, 700, 440), null,Color.White);
             else
                 spriteBatch.Draw(this.GUITexture, this.GUIRect, Color.White);
         }
