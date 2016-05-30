@@ -9,7 +9,7 @@
 
     public class StateManager : Microsoft.Xna.Framework.Game
     {
-        private GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager Graphics { get; private set; }
 
         private SpriteBatch spriteBatch;
         MainMenu main;
@@ -19,7 +19,7 @@
 
         public StateManager()
         {
-            this.graphics = new GraphicsDeviceManager(this);
+            this.Graphics = new GraphicsDeviceManager(this);
             this.IsMouseVisible = true;
         }
   
