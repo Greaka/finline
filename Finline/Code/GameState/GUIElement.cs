@@ -50,6 +50,7 @@ namespace Finline.Code.GameState
         public void LoadContent(ContentManager content)
         {
             this.GUITexture = content.Load<Texture2D>(this.AssetName);
+            
             this.GUIRect = new Rectangle(0, 0, this.GUITexture.Width, this.GUITexture.Height);
         }
         
@@ -70,7 +71,10 @@ namespace Finline.Code.GameState
         public void Draw(SpriteBatch spriteBatch)
         {
             
-            spriteBatch.Draw(this.GUITexture, this.GUIRect, Color.White);
+            if(assetName == "Logo 2")
+                spriteBatch.Draw(GUITexture,new Rectangle(30,10,700,440), null,Color.White);
+            else
+                spriteBatch.Draw(this.GUITexture, this.GUIRect, Color.White);
         }
 
 

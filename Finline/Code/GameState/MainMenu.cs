@@ -67,7 +67,7 @@
                 element.CenterElement(600, 800);
                 element.ClickEvent += this.OnClick;
             }
-            this.title.Find(x => x.AssetName == "Logo 2").MoveElement(0,-50);
+            this.title.Find(x => x.AssetName == "Logo 2").MoveElement(0,-50); //move the logo up in y-direction
             
 
 
@@ -78,9 +78,9 @@
                 element.ClickEvent += this.OnClick;
             }
             this.main.Find(x =>x.AssetName =="MenuFrame").MoveElement(0, -50);  // frame Movement
-            this.main.Find(x => x.AssetName == "NewGame").MoveElement(0, -200); // move the "newgame" button 100 up in y-direction
+            this.main.Find(x => x.AssetName == "NewGame").MoveElement(0, -200); // move the "newgame" button up in y-direction
             this.main.Find(x => x.AssetName == "Option").MoveElement(0, -50);   // move the "option" button down in y-direction
-            this.main.Find(x => x.AssetName == "End").MoveElement(0, 100);
+            this.main.Find(x => x.AssetName == "End").MoveElement(0, 100);      //move the "end" button down in y-direction
 
 
             foreach (var element in this.option)
@@ -91,7 +91,7 @@
 
             }
 
-            this.option.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50);
+            this.option.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
         }
 
         public override void Update(GameTime gameTime)
@@ -130,8 +130,7 @@
         public override void Draw(GameTime gameTime)
         {
             this.spriteBatch.Begin();
-            
-            
+                        
             switch (this.menuState)
             {
                 case EMenuState.TitleScreen:
