@@ -1,112 +1,82 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Finline.Code.GameState
 {
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Content;
-    using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
-
-    class GUIElement
+    internal class GuiElement
     {
-        private Texture2D GUITexture;
-
-        private Rectangle GUIRect;
-
-        private string assetName;
-        
-
-        
-
-
-
-
-        public string AssetName
-        {
-            get
-            {
-                return this.assetName;
-            }
-
-            private set
-            {
-                this.assetName = value;
-            }
-        }
-
         public delegate void ElementClicked(string element);
-        public event ElementClicked ClickEvent;
+
+        private Rectangle _guiRect;
+        private Texture2D _guiTexture;
 
         /// <summary>
-        /// Constructor for GUIElements
+        ///     Constructor for GUIElements
         /// </summary>
         /// <param name="assetName"></param>
-        public GUIElement(string assetName)
+        public GuiElement(string assetName)
         {
-            this.AssetName = assetName;
+            AssetName = assetName;
         }
+
+
+        public string AssetName { get; }
+
+        public event ElementClicked ClickEvent;
 
 
         public void LoadContent(ContentManager content)
         {
-            this.GUITexture = content.Load<Texture2D>(this.AssetName);
-            
-            this.GUIRect = new Rectangle(0, 0, this.GUITexture.Width, this.GUITexture.Height);
+            _guiTexture = content.Load<Texture2D>(AssetName);
+
+            _guiRect = new Rectangle(0, 0, _guiTexture.Width, _guiTexture.Height);
         }
-        
+
         public void Update()
         {
-            if (this.GUIRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (_guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
+                Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                this.ClickEvent(this.assetName);
+                ClickEvent?.Invoke(AssetName);
             }
 
             if (Mouse.GetState().LeftButton != ButtonState.Pressed)
             {
-                MainMenu.isPressed = false;
+                MainMenu.IsPressed = false;
             }
-            
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            
-            if(assetName == "Logo 2")
-                spriteBatch.Draw(GUITexture,new Rectangle(30, 10, 700, 440), null,Color.White);
+            if (AssetName == "Logo 2")
+                spriteBatch.Draw(_guiTexture, new Rectangle(30, 10, 700, 440), null, Color.White);
             else
-                spriteBatch.Draw(this.GUITexture, this.GUIRect, Color.White);
+                spriteBatch.Draw(_guiTexture, _guiRect, Color.White);
         }
 
 
         /// <summary>
-        /// Function to center the elements
+        ///     Function to center the elements
         /// </summary>
         /// <param name="height"></param>
         /// <param name="width"></param>
         public void CenterElement(int height, int width)
         {
-            this.GUIRect = new Rectangle((width/2) - (this.GUITexture.Width/2) , (height/2) - (this.GUITexture.Height/2), this.GUITexture.Width, this.GUITexture.Height);
-            
+            _guiRect = new Rectangle(width/2 - _guiTexture.Width/2, height/2 - _guiTexture.Height/2, _guiTexture.Width,
+                _guiTexture.Height);
         }
 
 
-
         /// <summary>
-        /// Function to move the Element
+        ///     Function to move the Element
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         public void MoveElement(int x, int y)
         {
-            this.GUIRect = new Rectangle(this.GUIRect.X += x, this.GUIRect.Y += y, this.GUIRect.Width, this.GUIRect.Height);
+            _guiRect = new Rectangle(_guiRect.X += x, _guiRect.Y += y, _guiRect.Width, _guiRect.Height);
         }
-
-     
-
-
-
     }
-
-
-
 }

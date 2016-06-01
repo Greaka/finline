@@ -1,118 +1,105 @@
-﻿namespace Finline.Code.GameState
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+namespace Finline.Code.GameState
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
-
-    internal class MainMenu: DrawableGameComponent
+    internal class MainMenu : DrawableGameComponent
     {
-        /// <summary>
-        /// MenuState to manage all States
-        /// </summary>
-        private enum EMenuState
-        {
-            None, 
+        public delegate void GetIngame();
 
-            TitleScreen, 
+        public static bool IsPressed;
+        private readonly List<GuiElement> _main = new List<GuiElement>();
+        private readonly List<GuiElement> _option = new List<GuiElement>();
 
-            MainMenu, 
-
-            Option
-        }
-
-        public static bool isPressed = false;
-        private EMenuState menuState;
+        private readonly SpriteBatch _spriteBatch;
 
 
         // The Lists with all the elements
-        private readonly List<GUIElement> title = new List<GUIElement>();
-        private readonly List<GUIElement> main = new List<GUIElement>();
-        private readonly List<GUIElement> option = new List<GUIElement>();
+        private readonly List<GuiElement> _title = new List<GuiElement>();
+        private EMenuState _menuState;
 
-        private readonly SpriteBatch spriteBatch;
-       
 
         /// <summary>
-        /// Constructor to use the GUIElementlist to select the element
+        ///     Constructor to use the GUIElementlist to select the element
         /// </summary>
-        public MainMenu(Game game, SpriteBatch sprite)
+        public MainMenu(Microsoft.Xna.Framework.Game game, SpriteBatch sprite)
             : base(game)
         {
-            this.spriteBatch = sprite;
-            this.menuState = EMenuState.TitleScreen;
+            _spriteBatch = sprite;
+            _menuState = EMenuState.TitleScreen;
 
-            this.title.Add(new GUIElement("Logo 2")); //Logo in the state Titlescreen
-            
+            _title.Add(new GuiElement("Logo 2")); //Logo in the state Titlescreen
+
 
             //here are the elements in the state MainMenu
-           
-            this.main.Add(new GUIElement("MenuFrame"));
-            this.main.Add(new GUIElement("NewGame"));
-            this.main.Add(new GUIElement("Option"));
-            this.main.Add(new GUIElement("End"));
+
+            _main.Add(new GuiElement("MenuFrame"));
+            _main.Add(new GuiElement("NewGame"));
+            _main.Add(new GuiElement("Option"));
+            _main.Add(new GuiElement("End"));
 
             //here are the elements in the state Option
-            this.option.Add(new GUIElement("Back_to_MainMenu"));
-           
+            _option.Add(new GuiElement("Back_to_MainMenu"));
         }
 
         protected override void LoadContent()
         {
-            foreach (var element in this.title)
+            foreach (var element in _title)
             {
-                element.LoadContent(this.Game.Content);
+                element.LoadContent(Game.Content);
                 element.CenterElement(600, 800);
-                element.ClickEvent += this.OnClick;
+                element.ClickEvent += OnClick;
             }
-            this.title.Find(x => x.AssetName == "Logo 2").MoveElement(0,-50); //move the logo up in y-direction
-            
+            _title.Find(x => x.AssetName == "Logo 2").MoveElement(0, -50); //move the logo up in y-direction
 
 
-            foreach (var element in this.main)
+            foreach (var element in _main)
             {
-                element.LoadContent(this.Game.Content);
+                element.LoadContent(Game.Content);
                 element.CenterElement(600, 800);
-                element.ClickEvent += this.OnClick;
+                element.ClickEvent += OnClick;
             }
-            this.main.Find(x =>x.AssetName =="MenuFrame").MoveElement(0, -50);  // frame Movement
-            this.main.Find(x => x.AssetName == "NewGame").MoveElement(0, -200); // move the "newgame" button up in y-direction
-            this.main.Find(x => x.AssetName == "Option").MoveElement(0, -50);   // move the "option" button down in y-direction
-            this.main.Find(x => x.AssetName == "End").MoveElement(0, 100);      //move the "end" button down in y-direction
+            _main.Find(x => x.AssetName == "MenuFrame").MoveElement(0, -50); // frame Movement
+            _main.Find(x => x.AssetName == "NewGame").MoveElement(0, -200);
+                // move the "newgame" button up in y-direction
+            _main.Find(x => x.AssetName == "Option").MoveElement(0, -50); // move the "option" button down in y-direction
+            _main.Find(x => x.AssetName == "End").MoveElement(0, 100); //move the "end" button down in y-direction
 
 
-            foreach (var element in this.option)
+            foreach (var element in _option)
             {
-                element.LoadContent(this.Game.Content);
+                element.LoadContent(Game.Content);
                 element.CenterElement(600, 800);
-                element.ClickEvent += this.OnClick;
-
+                element.ClickEvent += OnClick;
             }
 
-            this.option.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
+            _option.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50);
+                // move the "Back_to_MainMenu" button down in y-direction
         }
 
         public override void Update(GameTime gameTime)
         {
-            switch (this.menuState) {
+            switch (_menuState)
+            {
                 case EMenuState.TitleScreen:
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                        this.menuState = EMenuState.MainMenu;
+                        _menuState = EMenuState.MainMenu;
                     break;
-                    
+
 
                 case EMenuState.MainMenu:
-                    foreach (var element in this.main)
+                    foreach (var element in _main)
                     {
                         element.Update();
                     }
 
                     break;
-                   
+
                 case EMenuState.Option:
-                    foreach (var element in this.option)
+                    foreach (var element in _option)
                     {
                         element.Update();
                     }
@@ -124,34 +111,33 @@
                     throw new ArgumentOutOfRangeException();
             }
         }
-
 
 
         public override void Draw(GameTime gameTime)
         {
-            this.spriteBatch.Begin();
-                        
-            switch (this.menuState)
+            _spriteBatch.Begin();
+
+            switch (_menuState)
             {
                 case EMenuState.TitleScreen:
-                    foreach (var element in this.title)
+                    foreach (var element in _title)
                     {
-                        element.Draw(this.spriteBatch);
+                        element.Draw(_spriteBatch);
                     }
-                   
+
 
                     break;
                 case EMenuState.MainMenu:
-                    foreach (var element in this.main)
+                    foreach (var element in _main)
                     {
-                        element.Draw(this.spriteBatch);
+                        element.Draw(_spriteBatch);
                     }
 
                     break;
                 case EMenuState.Option:
-                    foreach (var element in this.option)
+                    foreach (var element in _option)
                     {
-                        element.Draw(this.spriteBatch);
+                        element.Draw(_spriteBatch);
                     }
 
                     break;
@@ -160,51 +146,63 @@
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            this.spriteBatch.End();
+            _spriteBatch.End();
         }
 
         /// <summary>
-        /// when click on the element change to next state
+        ///     when click on the element change to next state
         /// </summary>
         /// <param name="element"></param>
         private void OnClick(string element)
         {
-            if (isPressed) return;
+            if (IsPressed) return;
 
-            isPressed = true;
+            IsPressed = true;
             if (element == "MenuFrame")
-                isPressed = false;
+                IsPressed = false;
 
-            if (this.menuState == EMenuState.TitleScreen)
+            if (_menuState == EMenuState.TitleScreen)
             {
-                this.menuState = EMenuState.MainMenu;
+                _menuState = EMenuState.MainMenu;
             }
 
             if (element == "NewGame")
             {
-                this.menuState = EMenuState.None;
-                this.GoIngame?.Invoke();
+                _menuState = EMenuState.None;
+                GoIngame?.Invoke();
             }
 
             if (element == "Option")
             {
-                this.menuState = EMenuState.Option;
+                _menuState = EMenuState.Option;
             }
 
             if (element == "End")
             {
-                this.menuState = EMenuState.TitleScreen;
+                _menuState = EMenuState.TitleScreen;
             }
-            
+
 
             if (element == "Back_to_MainMenu")
             {
-                this.menuState = EMenuState.MainMenu;
+                _menuState = EMenuState.MainMenu;
             }
         }
 
-        public delegate void GetIngame();
-
         public event GetIngame GoIngame;
+
+        /// <summary>
+        ///     MenuState to manage all States
+        /// </summary>
+        private enum EMenuState
+        {
+            None,
+
+            TitleScreen,
+
+            MainMenu,
+
+            Option
+        }
     }
 }
