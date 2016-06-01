@@ -22,7 +22,7 @@ namespace Finline.Code.GameState
         // The Lists with all the elements
         private readonly List<GuiElement> _title = new List<GuiElement>();
         private EMenuState _menuState;
-        private SpriteFont font;
+        private SpriteFont _font;
 
         /// <summary>
         ///     Constructor to use the GUIElementlist to select the element
@@ -53,7 +53,7 @@ namespace Finline.Code.GameState
 
         protected override void LoadContent()
         {
-            font = Game.Content.Load<SpriteFont>("font");
+            _font = Game.Content.Load<SpriteFont>("font");
 
             foreach (var element in _title)
             {
@@ -123,7 +123,6 @@ namespace Finline.Code.GameState
                     {
                         element.Update();
                     }
-
                     break;
 
                 case EMenuState.Credits:
@@ -175,7 +174,7 @@ namespace Finline.Code.GameState
                     {
                         element.Draw(_spriteBatch);
                     }
-                    _spriteBatch.DrawString(font,
+                    _spriteBatch.DrawString(_font,
                         "Minh Vuong Pham\n" + "Michl Steglich\n" + "Tim Stadelmann\n" + "Tino Nagelmueller\n",
                         new Vector2(300, 100), Color.Black);
                     
