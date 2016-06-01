@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -13,6 +14,7 @@ namespace Finline.Code.GameState
         public static bool IsPressed;
         private readonly List<GuiElement> _main = new List<GuiElement>();
         private readonly List<GuiElement> _option = new List<GuiElement>();
+        private readonly List<GuiElement> _credits = new List<GuiElement>();
 
         private readonly SpriteBatch _spriteBatch;
 
@@ -20,7 +22,7 @@ namespace Finline.Code.GameState
         // The Lists with all the elements
         private readonly List<GuiElement> _title = new List<GuiElement>();
         private EMenuState _menuState;
-
+        private SpriteFont font;
 
         /// <summary>
         ///     Constructor to use the GUIElementlist to select the element
@@ -39,14 +41,20 @@ namespace Finline.Code.GameState
             _main.Add(new GuiElement("MenuFrame"));
             _main.Add(new GuiElement("NewGame"));
             _main.Add(new GuiElement("Option"));
+            _main.Add(new GuiElement("Credits"));
             _main.Add(new GuiElement("End"));
 
             //here are the elements in the state Option
             _option.Add(new GuiElement("Back_to_MainMenu"));
+
+
+            _credits.Add(new GuiElement("Back_to_MainMenu"));
         }
 
         protected override void LoadContent()
         {
+            font = Game.Content.Load<SpriteFont>("font");
+
             foreach (var element in _title)
             {
                 element.LoadContent(Game.Content);
@@ -63,9 +71,9 @@ namespace Finline.Code.GameState
                 element.ClickEvent += OnClick;
             }
             _main.Find(x => x.AssetName == "MenuFrame").MoveElement(0, -50); // frame Movement
-            _main.Find(x => x.AssetName == "NewGame").MoveElement(0, -200);
-                // move the "newgame" button up in y-direction
+            _main.Find(x => x.AssetName == "NewGame").MoveElement(0, -200); // move the "newgame" button up in y-direction
             _main.Find(x => x.AssetName == "Option").MoveElement(0, -50); // move the "option" button down in y-direction
+            _main.Find(x => x.AssetName == "Credits").MoveElement(200 , 50); //move the "credits" button 200 in x-direction and 50 down in y-direction
             _main.Find(x => x.AssetName == "End").MoveElement(0, 100); //move the "end" button down in y-direction
 
 
@@ -78,6 +86,18 @@ namespace Finline.Code.GameState
 
             _option.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50);
                 // move the "Back_to_MainMenu" button down in y-direction
+
+
+            foreach (var element in _credits)
+            {
+                element.LoadContent(Game.Content);
+                element.CenterElement(600,800);
+                element.ClickEvent += OnClick;
+            }
+
+            _credits.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50);
+            
+
         }
 
         public override void Update(GameTime gameTime)
@@ -105,6 +125,15 @@ namespace Finline.Code.GameState
                     }
 
                     break;
+
+                case EMenuState.Credits:
+                    foreach (var element in _credits)
+                    {
+                        element.Update();
+                    }
+
+                    break;
+                    
                 case EMenuState.None:
                     break;
                 default:
@@ -140,6 +169,16 @@ namespace Finline.Code.GameState
                         element.Draw(_spriteBatch);
                     }
 
+                    break;
+                case EMenuState.Credits:
+                    foreach (var element in _credits)
+                    {
+                        element.Draw(_spriteBatch);
+                    }
+                    _spriteBatch.DrawString(font,
+                        "Minh Vuong Pham\n" + "Michl Steglich\n" + "Tim Stadelmann\n" + "Tino Nagelmueller\n",
+                        new Vector2(300, 100), Color.Black);
+                    
                     break;
                 case EMenuState.None:
                     break;
@@ -177,6 +216,11 @@ namespace Finline.Code.GameState
                 _menuState = EMenuState.Option;
             }
 
+            if (element == "Credits")
+            {
+                _menuState = EMenuState.Credits;
+            }
+
             if (element == "End")
             {
                 _menuState = EMenuState.TitleScreen;
@@ -202,7 +246,11 @@ namespace Finline.Code.GameState
 
             MainMenu,
 
-            Option
+            Option,
+
+            Credits
+
+
         }
     }
 }
