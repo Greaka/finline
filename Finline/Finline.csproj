@@ -78,6 +78,7 @@
     <Content Include="Content\MenuFrame.png" />
     <Content Include="Content\NewGame.png" />
     <Content Include="Content\Option.png" />
+    <Content Include="Content\StartGame.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

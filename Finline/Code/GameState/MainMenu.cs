@@ -13,6 +13,7 @@ namespace Finline.Code.GameState
 
         public static bool IsPressed;
         private readonly List<GuiElement> _main = new List<GuiElement>();
+        public readonly  List<GuiElement> _character = new List<GuiElement>();
         private readonly List<GuiElement> _option = new List<GuiElement>();
         private readonly List<GuiElement> _credits = new List<GuiElement>();
 
@@ -43,6 +44,11 @@ namespace Finline.Code.GameState
             _main.Add(new GuiElement("Option"));
             _main.Add(new GuiElement("Credits"));
             _main.Add(new GuiElement("End"));
+
+
+            //elements in the state characterScreen
+            _character.Add(new GuiElement("StartGame"));
+            _character.Add(new GuiElement("Back_to_MainMenu"));
 
             //here are the elements in the state Option
             _option.Add(new GuiElement("Back_to_MainMenu"));
@@ -77,6 +83,15 @@ namespace Finline.Code.GameState
             _main.Find(x => x.AssetName == "End").MoveElement(0, 100); //move the "end" button down in y-direction
 
 
+            foreach (var element in _character)
+            {
+                element.LoadContent(Game.Content);
+                element.CenterElement(600, 800);
+                element.ClickEvent += OnClick;
+            }
+
+            _character.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 100); //move the "Back_to_MainMenu" button down in y-direction
+
             foreach (var element in _option)
             {
                 element.LoadContent(Game.Content);
@@ -84,8 +99,8 @@ namespace Finline.Code.GameState
                 element.ClickEvent += OnClick;
             }
 
-            _option.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50);
-                // move the "Back_to_MainMenu" button down in y-direction
+            _option.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
+
 
 
             foreach (var element in _credits)
@@ -116,6 +131,13 @@ namespace Finline.Code.GameState
                         element.Update();
                     }
 
+                    break;
+
+                    case EMenuState.CharacterScreen:
+                    foreach (var element in _character)
+                    {
+                        element.Update();
+                    }
                     break;
 
                 case EMenuState.Option:
@@ -162,6 +184,15 @@ namespace Finline.Code.GameState
                     }
 
                     break;
+
+                case EMenuState.CharacterScreen:
+                    foreach (var element in _character)
+                    {
+                        element.Draw(_spriteBatch);
+                    }
+
+                    break;
+
                 case EMenuState.Option:
                     foreach (var element in _option)
                     {
@@ -206,8 +237,14 @@ namespace Finline.Code.GameState
 
             if (element == "NewGame")
             {
+                _menuState = EMenuState.CharacterScreen;
+            }
+
+            if (element == "StartGame")
+            {
                 _menuState = EMenuState.None;
                 GoIngame?.Invoke();
+
             }
 
             if (element == "Option")
@@ -244,6 +281,8 @@ namespace Finline.Code.GameState
             TitleScreen,
 
             MainMenu,
+
+            CharacterScreen,
 
             Option,
 
