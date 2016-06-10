@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -13,7 +12,7 @@ namespace Finline.Code.GameState
 
         public static bool IsPressed;
         private readonly List<GuiElement> _main = new List<GuiElement>();
-        public readonly  List<GuiElement> _character = new List<GuiElement>();
+        private readonly  List<GuiElement> _character = new List<GuiElement>();
         private readonly List<GuiElement> _option = new List<GuiElement>();
         private readonly List<GuiElement> _credits = new List<GuiElement>();
 
