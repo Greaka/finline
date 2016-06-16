@@ -6,10 +6,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Finline.Code.GameState
 {
+    using Finline.Code.Game.Controls;
+
     internal class MainMenu : DrawableGameComponent
     {
         public delegate void GetIngame();
-
+        private readonly Controller controls;
         public static bool IsPressed;
         Dictionary<EMenuState, List<GuiElement>> _guiElements = new Dictionary<EMenuState, List<GuiElement>>();
        
@@ -25,11 +27,13 @@ namespace Finline.Code.GameState
         /// <summary>
         ///     Constructor to use the GUIElementlist to select the element
         /// </summary>
-        public MainMenu(Microsoft.Xna.Framework.Game game, SpriteBatch sprite)
+        public MainMenu(StateManager game, SpriteBatch sprite)
             : base(game)
         {
-            // The Lists with all the elements
-            _guiElements.Add(EMenuState.TitleScreen, new List<GuiElement>());
+            this.controls = game.controls;
+
+        // The Lists with all the elements
+        _guiElements.Add(EMenuState.TitleScreen, new List<GuiElement>());
             _guiElements.Add(EMenuState.MainMenu, new List<GuiElement>());
             _guiElements.Add(EMenuState.CharacterScreen, new List<GuiElement>());
             _guiElements.Add(EMenuState.Option, new List<GuiElement>());
@@ -64,56 +68,28 @@ namespace Finline.Code.GameState
         protected override void LoadContent()
         {
             _font = Game.Content.Load<SpriteFont>("font");
-
-            foreach (var element in _guiElements[EMenuState.TitleScreen])
+            foreach (var elementList in this._guiElements.Values)
             {
-                element.LoadContent(Game.Content);
-                element.CenterElement(600, 800);
-                element.ClickEvent += OnClick;
+                foreach (var element in elementList)
+                {
+                    element.LoadContent(this.Game.Content);
+                    element.CenterElement(600, 800);
+                    element.ClickEvent += this.OnClick;
+                }
             }
+            
             _guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "Logo 2").MoveElement(0, -50); //move the logo up in y-direction
-
-
-            foreach (var element in _guiElements[EMenuState.MainMenu])
-            {
-                element.LoadContent(Game.Content);
-                element.CenterElement(600, 800);
-                element.ClickEvent += OnClick;
-            }
+            
             _guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "MenuFrame").MoveElement(0, -50); // frame Movement
             _guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(0, -200); // move the "newgame" button up in y-direction
             _guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Option").MoveElement(0, -50); // move the "option" button down in y-direction
             _guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Credits").MoveElement(200 , 50); //move the "credits" button 200 in x-direction and 50 down in y-direction
             _guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "End").MoveElement(0, 100); //move the "end" button down in y-direction
-
-
-            foreach (var element in _guiElements[EMenuState.CharacterScreen])
-            {
-                element.LoadContent(Game.Content);
-                element.CenterElement(600, 800);
-                element.ClickEvent += OnClick;
-            }
-
+            
             _guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 100); //move the "Back_to_MainMenu" button down in y-direction
-
-            foreach (var element in _guiElements[EMenuState.Option])
-            {
-                element.LoadContent(Game.Content);
-                element.CenterElement(600, 800);
-                element.ClickEvent += OnClick;
-            }
-
+            
             _guiElements[EMenuState.Option].Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
-
-
-
-            foreach (var element in _guiElements[EMenuState.Credits])
-            {
-                element.LoadContent(Game.Content);
-                element.CenterElement(600,800);
-                element.ClickEvent += OnClick;
-            }
-
+            
             _guiElements[EMenuState.Credits].Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50);
             
 
