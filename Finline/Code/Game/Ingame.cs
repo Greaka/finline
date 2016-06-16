@@ -23,7 +23,7 @@
         public Ingame(StateManager game)
             : base(game)
         {
-            this.controls = game.controls;
+            this.controls = game.Controls;
             this.graphics = game.Graphics;
             this.Game.Content.RootDirectory = "Content";
         }

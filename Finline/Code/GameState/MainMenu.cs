@@ -30,7 +30,7 @@ namespace Finline.Code.GameState
         public MainMenu(StateManager game, SpriteBatch sprite)
             : base(game)
         {
-            this.controls = game.controls;
+            this.controls = game.Controls;
 
         // The Lists with all the elements
         _guiElements.Add(EMenuState.TitleScreen, new List<GuiElement>());
