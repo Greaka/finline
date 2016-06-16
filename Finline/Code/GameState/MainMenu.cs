@@ -11,16 +11,14 @@ namespace Finline.Code.GameState
         public delegate void GetIngame();
 
         public static bool IsPressed;
-        private readonly List<GuiElement> _main = new List<GuiElement>();
-        private readonly  List<GuiElement> _character = new List<GuiElement>();
-        private readonly List<GuiElement> _option = new List<GuiElement>();
-        private readonly List<GuiElement> _credits = new List<GuiElement>();
+        Dictionary<EMenuState, List<GuiElement>> _guiElements = new Dictionary<EMenuState, List<GuiElement>>();
+       
 
         private readonly SpriteBatch _spriteBatch;
 
 
-        // The Lists with all the elements
-        private readonly List<GuiElement> _title = new List<GuiElement>();
+       
+        
         private EMenuState _menuState;
         private SpriteFont _font;
 
@@ -30,86 +28,93 @@ namespace Finline.Code.GameState
         public MainMenu(Microsoft.Xna.Framework.Game game, SpriteBatch sprite)
             : base(game)
         {
+            // The Lists with all the elements
+            _guiElements.Add(EMenuState.TitleScreen, new List<GuiElement>());
+            _guiElements.Add(EMenuState.MainMenu, new List<GuiElement>());
+            _guiElements.Add(EMenuState.CharacterScreen, new List<GuiElement>());
+            _guiElements.Add(EMenuState.Option, new List<GuiElement>());
+            _guiElements.Add(EMenuState.Credits, new List<GuiElement>());
+
             _spriteBatch = sprite;
             _menuState = EMenuState.TitleScreen;
 
-            _title.Add(new GuiElement("Logo 2")); //Logo in the state Titlescreen
+            _guiElements[EMenuState.TitleScreen].Add(new GuiElement("Logo 2")); //Logo in the state Titlescreen
 
 
             //here are the elements in the state MainMenu
 
-            _main.Add(new GuiElement("MenuFrame"));
-            _main.Add(new GuiElement("NewGame"));
-            _main.Add(new GuiElement("Option"));
-            _main.Add(new GuiElement("Credits"));
-            _main.Add(new GuiElement("End"));
+            _guiElements[EMenuState.MainMenu].Add(new GuiElement("MenuFrame"));
+            _guiElements[EMenuState.MainMenu].Add(new GuiElement("NewGame"));
+            _guiElements[EMenuState.MainMenu].Add(new GuiElement("Option"));
+            _guiElements[EMenuState.MainMenu].Add(new GuiElement("Credits"));
+            _guiElements[EMenuState.MainMenu].Add(new GuiElement("End"));
 
 
             //elements in the state characterScreen
-            _character.Add(new GuiElement("StartGame"));
-            _character.Add(new GuiElement("Back_to_MainMenu"));
+            _guiElements[EMenuState.CharacterScreen].Add(new GuiElement("StartGame"));
+            _guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Back_to_MainMenu"));
 
             //here are the elements in the state Option
-            _option.Add(new GuiElement("Back_to_MainMenu"));
+            _guiElements[EMenuState.Option].Add(new GuiElement("Back_to_MainMenu"));
 
 
-            _credits.Add(new GuiElement("Back_to_MainMenu"));
+            _guiElements[EMenuState.Credits].Add(new GuiElement("Back_to_MainMenu"));
         }
 
         protected override void LoadContent()
         {
             _font = Game.Content.Load<SpriteFont>("font");
 
-            foreach (var element in _title)
+            foreach (var element in _guiElements[EMenuState.TitleScreen])
             {
                 element.LoadContent(Game.Content);
                 element.CenterElement(600, 800);
                 element.ClickEvent += OnClick;
             }
-            _title.Find(x => x.AssetName == "Logo 2").MoveElement(0, -50); //move the logo up in y-direction
+            _guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "Logo 2").MoveElement(0, -50); //move the logo up in y-direction
 
 
-            foreach (var element in _main)
+            foreach (var element in _guiElements[EMenuState.MainMenu])
             {
                 element.LoadContent(Game.Content);
                 element.CenterElement(600, 800);
                 element.ClickEvent += OnClick;
             }
-            _main.Find(x => x.AssetName == "MenuFrame").MoveElement(0, -50); // frame Movement
-            _main.Find(x => x.AssetName == "NewGame").MoveElement(0, -200); // move the "newgame" button up in y-direction
-            _main.Find(x => x.AssetName == "Option").MoveElement(0, -50); // move the "option" button down in y-direction
-            _main.Find(x => x.AssetName == "Credits").MoveElement(200 , 50); //move the "credits" button 200 in x-direction and 50 down in y-direction
-            _main.Find(x => x.AssetName == "End").MoveElement(0, 100); //move the "end" button down in y-direction
+            _guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "MenuFrame").MoveElement(0, -50); // frame Movement
+            _guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(0, -200); // move the "newgame" button up in y-direction
+            _guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Option").MoveElement(0, -50); // move the "option" button down in y-direction
+            _guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Credits").MoveElement(200 , 50); //move the "credits" button 200 in x-direction and 50 down in y-direction
+            _guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "End").MoveElement(0, 100); //move the "end" button down in y-direction
 
 
-            foreach (var element in _character)
-            {
-                element.LoadContent(Game.Content);
-                element.CenterElement(600, 800);
-                element.ClickEvent += OnClick;
-            }
-
-            _character.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 100); //move the "Back_to_MainMenu" button down in y-direction
-
-            foreach (var element in _option)
+            foreach (var element in _guiElements[EMenuState.CharacterScreen])
             {
                 element.LoadContent(Game.Content);
                 element.CenterElement(600, 800);
                 element.ClickEvent += OnClick;
             }
 
-            _option.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
+            _guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 100); //move the "Back_to_MainMenu" button down in y-direction
+
+            foreach (var element in _guiElements[EMenuState.Option])
+            {
+                element.LoadContent(Game.Content);
+                element.CenterElement(600, 800);
+                element.ClickEvent += OnClick;
+            }
+
+            _guiElements[EMenuState.Option].Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
 
 
 
-            foreach (var element in _credits)
+            foreach (var element in _guiElements[EMenuState.Credits])
             {
                 element.LoadContent(Game.Content);
                 element.CenterElement(600,800);
                 element.ClickEvent += OnClick;
             }
 
-            _credits.Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50);
+            _guiElements[EMenuState.Credits].Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50);
             
 
         }
@@ -125,7 +130,7 @@ namespace Finline.Code.GameState
 
 
                 case EMenuState.MainMenu:
-                    foreach (var element in _main)
+                    foreach (var element in _guiElements[EMenuState.MainMenu])
                     {
                         element.Update();
                     }
@@ -133,21 +138,21 @@ namespace Finline.Code.GameState
                     break;
 
                     case EMenuState.CharacterScreen:
-                    foreach (var element in _character)
+                    foreach (var element in _guiElements[EMenuState.CharacterScreen])
                     {
                         element.Update();
                     }
                     break;
 
                 case EMenuState.Option:
-                    foreach (var element in _option)
+                    foreach (var element in _guiElements[EMenuState.Option])
                     {
                         element.Update();
                     }
                     break;
 
                 case EMenuState.Credits:
-                    foreach (var element in _credits)
+                    foreach (var element in _guiElements[EMenuState.Credits])
                     {
                         element.Update();
                     }
@@ -169,7 +174,7 @@ namespace Finline.Code.GameState
             switch (_menuState)
             {
                 case EMenuState.TitleScreen:
-                    foreach (var element in _title)
+                    foreach (var element in _guiElements[EMenuState.TitleScreen])
                     {
                         element.Draw(_spriteBatch);
                     }
@@ -177,7 +182,7 @@ namespace Finline.Code.GameState
 
                     break;
                 case EMenuState.MainMenu:
-                    foreach (var element in _main)
+                    foreach (var element in _guiElements[EMenuState.MainMenu])
                     {
                         element.Draw(_spriteBatch);
                     }
@@ -185,7 +190,7 @@ namespace Finline.Code.GameState
                     break;
 
                 case EMenuState.CharacterScreen:
-                    foreach (var element in _character)
+                    foreach (var element in _guiElements[EMenuState.CharacterScreen])
                     {
                         element.Draw(_spriteBatch);
                     }
@@ -193,14 +198,14 @@ namespace Finline.Code.GameState
                     break;
 
                 case EMenuState.Option:
-                    foreach (var element in _option)
+                    foreach (var element in _guiElements[EMenuState.Option])
                     {
                         element.Draw(_spriteBatch);
                     }
 
                     break;
                 case EMenuState.Credits:
-                    foreach (var element in _credits)
+                    foreach (var element in _guiElements[EMenuState.Credits])
                     {
                         element.Draw(_spriteBatch);
                     }
