@@ -32,8 +32,9 @@ namespace Finline.Code.GameState
         {
             this.controls = game.controls;
 
-        // The Lists with all the elements
-        _guiElements.Add(EMenuState.TitleScreen, new List<GuiElement>());
+            // The Lists with all the elements
+
+            _guiElements.Add(EMenuState.TitleScreen, new List<GuiElement>());
             _guiElements.Add(EMenuState.MainMenu, new List<GuiElement>());
             _guiElements.Add(EMenuState.CharacterScreen, new List<GuiElement>());
             _guiElements.Add(EMenuState.Option, new List<GuiElement>());
@@ -61,7 +62,7 @@ namespace Finline.Code.GameState
             //here are the elements in the state Option
             _guiElements[EMenuState.Option].Add(new GuiElement("Back_to_MainMenu"));
 
-
+            //here are the elements in the state Credits
             _guiElements[EMenuState.Credits].Add(new GuiElement("Back_to_MainMenu"));
         }
 
@@ -90,55 +91,22 @@ namespace Finline.Code.GameState
             
             _guiElements[EMenuState.Option].Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
             
-            _guiElements[EMenuState.Credits].Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50);
-            
+            _guiElements[EMenuState.Credits].Find(x => x.AssetName == "Back_to_MainMenu").MoveElement(0, 50); //  move the "Back_to_MainMenu" button down in y-direction
+
 
         }
 
         public override void Update(GameTime gameTime)
         {
-            switch (_menuState)
+            if (_menuState == EMenuState.TitleScreen)
             {
-                case EMenuState.TitleScreen:
-                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                        _menuState = EMenuState.MainMenu;
-                    break;
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    _menuState = EMenuState.MainMenu;
+            }
 
-
-                case EMenuState.MainMenu:
-                    foreach (var element in _guiElements[EMenuState.MainMenu])
-                    {
-                        element.Update();
-                    }
-
-                    break;
-
-                    case EMenuState.CharacterScreen:
-                    foreach (var element in _guiElements[EMenuState.CharacterScreen])
-                    {
-                        element.Update();
-                    }
-                    break;
-
-                case EMenuState.Option:
-                    foreach (var element in _guiElements[EMenuState.Option])
-                    {
-                        element.Update();
-                    }
-                    break;
-
-                case EMenuState.Credits:
-                    foreach (var element in _guiElements[EMenuState.Credits])
-                    {
-                        element.Update();
-                    }
-
-                    break;
-                    
-                case EMenuState.None:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+            foreach (var element in _guiElements[_menuState])
+            {
+                element.Update();
             }
         }
 
@@ -146,55 +114,19 @@ namespace Finline.Code.GameState
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin();
-
-            switch (_menuState)
+         
+            if (_menuState == EMenuState.Credits)
             {
-                case EMenuState.TitleScreen:
-                    foreach (var element in _guiElements[EMenuState.TitleScreen])
-                    {
-                        element.Draw(_spriteBatch);
-                    }
-
-
-                    break;
-                case EMenuState.MainMenu:
-                    foreach (var element in _guiElements[EMenuState.MainMenu])
-                    {
-                        element.Draw(_spriteBatch);
-                    }
-
-                    break;
-
-                case EMenuState.CharacterScreen:
-                    foreach (var element in _guiElements[EMenuState.CharacterScreen])
-                    {
-                        element.Draw(_spriteBatch);
-                    }
-
-                    break;
-
-                case EMenuState.Option:
-                    foreach (var element in _guiElements[EMenuState.Option])
-                    {
-                        element.Draw(_spriteBatch);
-                    }
-
-                    break;
-                case EMenuState.Credits:
-                    foreach (var element in _guiElements[EMenuState.Credits])
-                    {
-                        element.Draw(_spriteBatch);
-                    }
-                    _spriteBatch.DrawString(_font,
-                        "Minh Vuong Pham\n" + "Michl Steglich\n" + "Tim Stadelmann\n" + "Tino Nagelmueller\n",
-                        new Vector2(300, 100), Color.Black);
-                    
-                    break;
-                case EMenuState.None:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                _spriteBatch.DrawString(_font,
+                    "Minh Vuong Pham\n" + "Michl Steglich\n" + "Tim Stadelmann\n" + "Tino Nagelmueller\n",
+                    new Vector2(300, 100), Color.Black);
             }
+
+            foreach (var element in _guiElements[_menuState])
+            {
+                element.Draw(_spriteBatch);
+            }
+
             _spriteBatch.End();
         }
 
