@@ -1,12 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Player.cs" company="">
-//   
 // </copyright>
 // <summary>
 //   Defines the Player type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Finline.Code.Game.Entities
 {
     using Finline.Code.Game.Helper;

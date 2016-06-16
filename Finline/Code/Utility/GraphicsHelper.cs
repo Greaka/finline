@@ -6,13 +6,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
 namespace Finline.Code.Utility
 {
     using System.Collections.Concurrent;
 
     using Finline.Code.Constants;
-    using Finline.Code.Game.Entities;
+    using Game.Entities;
 
     using Microsoft.Xna.Framework;
 

@@ -10,8 +10,8 @@ namespace Finline.Code.GameState
 {
     using System;
 
-    using Finline.Code.Game;
-    using Finline.Code.Game.Controls;
+    using Game;
+    using Game.Controls;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;

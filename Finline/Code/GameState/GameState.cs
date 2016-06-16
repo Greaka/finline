@@ -1,12 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace Finline.Code.GameState
+﻿namespace Finline.Code.GameState
 {
     enum EGameState
     {
-        None,
+        None, 
 
-        MainMenu,
+        MainMenu, 
 
         InGame
     }

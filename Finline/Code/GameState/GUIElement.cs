@@ -18,7 +18,7 @@ namespace Finline.Code.GameState
         /// <param name="assetName"></param>
         public GuiElement(string assetName)
         {
-            AssetName = assetName;
+            this.AssetName = assetName;
         }
 
 
@@ -29,32 +29,31 @@ namespace Finline.Code.GameState
 
         public void LoadContent(ContentManager content)
         {
-            
-            _guiTexture = content.Load<Texture2D>(AssetName);
+            this._guiTexture = content.Load<Texture2D>(this.AssetName);
 
-            _guiRect = new Rectangle(0, 0, _guiTexture.Width, _guiTexture.Height);
+            this._guiRect = new Rectangle(0, 0, this._guiTexture.Width, this._guiTexture.Height);
         }
 
-        public void Update()
+        public void Update(ref bool isPressed)
         {
-            if (_guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
+            if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
                 Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                ClickEvent?.Invoke(AssetName);
+                this.ClickEvent?.Invoke(this.AssetName);
             }
 
             if (Mouse.GetState().LeftButton != ButtonState.Pressed)
             {
-                MainMenu.IsPressed = false;
+                isPressed = false;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (AssetName == "Logo 2")
-                spriteBatch.Draw(_guiTexture, new Rectangle(30, 10, 700, 440), null, Color.White);
+            if (this.AssetName == "Logo 2")
+                spriteBatch.Draw(this._guiTexture, new Rectangle(30, 10, 700, 440), null, Color.White);
             else
-                spriteBatch.Draw(_guiTexture, _guiRect, Color.White);
+                spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
         }
 
 
@@ -65,8 +64,7 @@ namespace Finline.Code.GameState
         /// <param name="width"></param>
         public void CenterElement(int height, int width)
         {
-            _guiRect = new Rectangle(width/2 - _guiTexture.Width/2, height/2 - _guiTexture.Height/2, _guiTexture.Width,
-                _guiTexture.Height);
+            this._guiRect = new Rectangle(width/2 - this._guiTexture.Width/2, height/2 - this._guiTexture.Height/2, this._guiTexture.Width, this._guiTexture.Height);
         }
 
 
@@ -77,7 +75,7 @@ namespace Finline.Code.GameState
         /// <param name="y"></param>
         public void MoveElement(int x, int y)
         {
-            _guiRect = new Rectangle(_guiRect.X += x, _guiRect.Y += y, _guiRect.Width, _guiRect.Height);
+            this._guiRect = new Rectangle(this._guiRect.X += x, this._guiRect.Y += y, this._guiRect.Width, this._guiRect.Height);
         }
     }
 }
