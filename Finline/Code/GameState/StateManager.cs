@@ -6,8 +6,11 @@ using Microsoft.Xna.Framework.Input;
 namespace Finline.Code.GameState
 
 {
+    using Finline.Code.Game.Controls;
+
     public class StateManager : Microsoft.Xna.Framework.Game
     {
+        public readonly Controller controls = new Controller();
         private DrawableGameComponent _gameState;
         private EGameState _currentGameState;
         private MainMenu _main;
@@ -49,6 +52,7 @@ namespace Finline.Code.GameState
 
         protected override void Update(GameTime gameTime)
         {
+            this.controls.Update(this.GraphicsDevice);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();

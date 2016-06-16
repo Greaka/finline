@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Finline.Code.Utility
 {
-    static class VectorHelper
+    internal static class VectorHelper
     {
         public static Vector3 lerp(this Vector3 from, Vector3 target, float interval)
         {

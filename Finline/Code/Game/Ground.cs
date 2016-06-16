@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Finline.Code.Game
 {
-    class Ground
+    internal class Ground
     {
         private Texture2D checkerboardTexture;
 

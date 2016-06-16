@@ -12,7 +12,7 @@ using Timer = System.Timers.Timer;
 
 namespace Finline.Code.Game.Controls
 {
-    class Controller
+    public class Controller
     {
         public delegate void Shot();
         public event Shot Shoot;
@@ -20,7 +20,8 @@ namespace Finline.Code.Game.Controls
         private readonly Timer aTimer;
         private bool shootable = true;
         private bool alreadyshot = false;
-        const double trigger = 0.2;
+
+        private const double trigger = 0.2;
 
         public Controller()
         {

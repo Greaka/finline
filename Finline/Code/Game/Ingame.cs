@@ -15,7 +15,7 @@
 
     public class Ingame : DrawableGameComponent
     {
-        private readonly Controller controls = new Controller();
+        private readonly Controller controls;
         private readonly GraphicsDeviceManager graphics;
         private Player player;
         private Ground ground;
@@ -23,6 +23,7 @@
         public Ingame(StateManager game)
             : base(game)
         {
+            this.controls = game.controls;
             this.graphics = game.Graphics;
             this.Game.Content.RootDirectory = "Content";
         }
@@ -103,7 +104,6 @@
 
         public override void Update(GameTime gameTime)
         {
-            this.controls.Update(this.GraphicsDevice);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
