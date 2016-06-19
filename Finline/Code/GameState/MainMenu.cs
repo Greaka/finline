@@ -115,6 +115,7 @@ namespace Finline.Code.GameState
                     new Vector2(300, 100), Color.Black);
             }
 
+            if (menuState != EMenuState.None)
             foreach (var element in this.guiElements[this.menuState])
             {
                 element.Draw(this.spriteBatch);
