@@ -137,10 +137,11 @@ namespace Finline.Code.GameState
                 this.HandleGameState();
             }
 
-           
+          
 
             MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
+            if(currentGameState == EGameState.InGame)
             if (k.IsKeyDown(Keys.P) && !isPressed )
             {
                 paused = !paused;
