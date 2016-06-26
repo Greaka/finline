@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -21,6 +22,8 @@ namespace Finline.Code.GameState
         private EMenuState menuState;
         private SpriteFont font;
 
+        private bool paused = false;
+       
         /// <summary>
         /// Constructor to use the GUIElementlist to select the element
         /// </summary>
@@ -87,7 +90,7 @@ namespace Finline.Code.GameState
             
             this.guiElements[EMenuState.Credits].Find(x => x.AssetName == "Back_to_MainMenu2").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
 
-
+            
         }
 
         public override void Update(GameTime gameTime)
@@ -98,10 +101,15 @@ namespace Finline.Code.GameState
                     this.menuState = EMenuState.MainMenu;
             }
 
+            
+            
             foreach (var element in this.guiElements[this.menuState])
             {
                 element.Update(ref this.isPressed);
             }
+
+
+          
         }
 
 
@@ -109,6 +117,7 @@ namespace Finline.Code.GameState
         {
             this.spriteBatch.Begin();
          
+            
             if (this.menuState == EMenuState.Credits)
             {
                 this.spriteBatch.DrawString(this.font, 
@@ -121,6 +130,8 @@ namespace Finline.Code.GameState
             {
                 element.Draw(this.spriteBatch);
             }
+
+           
 
             this.spriteBatch.End();
         }
@@ -165,7 +176,7 @@ namespace Finline.Code.GameState
 
             if (element == "End2")
             {
-                this.menuState = EMenuState.TitleScreen;
+                this.Game.Exit();
             }
 
 

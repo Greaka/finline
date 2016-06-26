@@ -51,7 +51,18 @@ namespace Finline.Code.GameState
         /// The <see cref="SpriteBatch"/>.
         /// </summary>
         private SpriteBatch spriteBatch;
+        private bool isPressed = false;
+        private SpriteFont font;
 
+        private bool paused = false;
+        private Texture2D pausedTexture2D;
+        private Rectangle pausedRectangle;
+
+        private Texture2D quitGameTexture2D;
+        private Rectangle quitGameRectangle;
+
+
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="StateManager"/> class. 
         /// </summary>
@@ -86,6 +97,13 @@ namespace Finline.Code.GameState
             this.main = new MainMenu(this, this.spriteBatch);
             this.main.GoIngame += this.StartNewGame;
             this.main.Initialize();
+
+            pausedTexture2D = Content.Load<Texture2D>("PauseTrans");
+            pausedRectangle = new Rectangle(340, 100, pausedTexture2D.Width, pausedTexture2D.Height);
+
+            quitGameTexture2D = Content.Load<Texture2D>("End2Trans");
+            quitGameRectangle = new Rectangle(280, 300, quitGameTexture2D.Width - 20, quitGameTexture2D.Height - 20);
+
         }
 
         /// <summary>
@@ -96,6 +114,7 @@ namespace Finline.Code.GameState
             // TODO: Unload any non ContentManager content here
         }
 
+        
         /// <summary>
         /// The update.
         /// </summary>
@@ -104,19 +123,49 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
-            this.Controls.Update(this.GraphicsDevice);
+            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 this.Exit();
             }
 
+           
+
             if (this.nextGameState != this.currentGameState)
             {
                 this.HandleGameState();
             }
 
-            this.gameState.Update(gameTime);
+           
+
+            MouseState mouse = Mouse.GetState();
+            KeyboardState k = Keyboard.GetState();
+            if (k.IsKeyDown(Keys.P) && !isPressed )
+            {
+                paused = !paused;
+                isPressed = true;
+
+            }
+
+            if (isPressed && !k.IsKeyDown(Keys.P))
+            {
+                isPressed = false;
+            }
+
+
+            if (!paused)
+            {
+                this.Controls.Update(this.GraphicsDevice);
+                this.gameState.Update(gameTime);
+                
+            }
+            else
+            {
+                
+
+            }
+
 
             base.Update(gameTime);
         }
@@ -130,10 +179,24 @@ namespace Finline.Code.GameState
         protected override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.White);
-
-            this.gameState.Draw(gameTime);
+            RasterizerState r = new RasterizerState();
+            r.CullMode = CullMode.None;
+            this.GraphicsDevice.RasterizerState = r;
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
+            this.gameState.Draw(gameTime);
+            
+            
+            spriteBatch.Begin();
+            if (paused)
+            {
+                spriteBatch.Draw(pausedTexture2D, pausedRectangle, Color.White);
+                spriteBatch.Draw(quitGameTexture2D, quitGameRectangle, Color.White);
+            }
+            spriteBatch.End();
+            this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            this.GraphicsDevice.BlendState = BlendState.Opaque;
+
             base.Draw(gameTime);
         }
 
@@ -169,5 +232,8 @@ namespace Finline.Code.GameState
         {
             this.nextGameState = EGameState.InGame;
         }
+
+
+      
     }
 }
