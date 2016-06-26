@@ -19,7 +19,7 @@ namespace Finline.Code.Game.Entities
             this._type = model;
             switch (model)
             {
-                case GameConstants.EnvObjects.bottle_cap2:
+                case GameConstants.EnvObjects.enemy:
                     this.orbit = true;
                     break;
                 default:

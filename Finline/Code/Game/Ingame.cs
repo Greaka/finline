@@ -65,12 +65,12 @@
             ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(10, 3, 3), GameConstants.EnvObjects.cube));
             ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(-15, 1, 1), GameConstants.EnvObjects.cube));
             ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(15, -15, 1), GameConstants.EnvObjects.cube));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(5, -10, 3), GameConstants.EnvObjects.bottle_cap2));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(10, 1, 3), GameConstants.EnvObjects.bottle_cap2));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(5, -10, 3), GameConstants.EnvObjects.enemy));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(10, 1, 3), GameConstants.EnvObjects.enemy));
 
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(20, -3, 5), GameConstants.EnvObjects.bottle_cap2));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(-2, 6, 6), GameConstants.EnvObjects.bottle_cap2));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(8, 7, 6), GameConstants.EnvObjects.bottle_cap2));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(20, -3, 5), GameConstants.EnvObjects.enemy));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(-2, 6, 6), GameConstants.EnvObjects.enemy));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(8, 7, 6), GameConstants.EnvObjects.enemy));
 
             for (var i = -20; i < 21; i += 2)
             {

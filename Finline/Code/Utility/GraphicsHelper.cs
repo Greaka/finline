@@ -55,7 +55,7 @@ namespace Finline.Code.Utility
 
                 switch (obj.Type)
                 {
-                    case GameConstants.EnvObjects.bottle_cap2:
+                    case GameConstants.EnvObjects.enemy:
                         break;
                     case GameConstants.EnvObjects.cube:
                         colliding = true;

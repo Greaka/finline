@@ -99,7 +99,7 @@ namespace Finline.Code.GameState
             this.main.Initialize();
 
             pausedTexture2D = Content.Load<Texture2D>("PauseTrans");
-            pausedRectangle = new Rectangle(340, 100, pausedTexture2D.Width, pausedTexture2D.Height);
+            pausedRectangle = new Rectangle(345, 100, pausedTexture2D.Width, pausedTexture2D.Height);
 
             quitGameTexture2D = Content.Load<Texture2D>("End2Trans");
             quitGameRectangle = new Rectangle(280, 300, quitGameTexture2D.Width - 20, quitGameTexture2D.Height - 20);
