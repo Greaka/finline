@@ -4,7 +4,7 @@
     {
         public enum EnvObjects
         {
-            cube, 
+            cube,
             enemy
         }
 

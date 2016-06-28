@@ -9,7 +9,7 @@ namespace Finline.Code.Constants
         public const float NearClipPlane = 1;
         public const float FarClipPlane = 200;
 
-        public static readonly Vector3 CameraOffset = new Vector3(-10, -10, 25);
+        public static readonly Vector3 CameraOffset = new Vector3(-10, 0, 30);
         public static Vector3 CameraPosition => ControlsHelper.PlayerPosition + CameraOffset;
     }
 }

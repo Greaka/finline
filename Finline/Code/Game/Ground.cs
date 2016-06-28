@@ -16,7 +16,7 @@ namespace Finline.Code.Game
         public void Initialize()
         {
             const float X = 20;
-            const float Y = 20;
+            const float Y = 60;
             const float Z = -1;
 
             this.floorVerts = new VertexPositionNormalTexture[6];
@@ -43,7 +43,7 @@ namespace Finline.Code.Game
         public void LoadContent(GraphicsDevice gdevice)
         {
             this.effect = new BasicEffect(gdevice);
-            using (var stream = TitleContainer.OpenStream("Content/ground.jpg"))
+            using (var stream = TitleContainer.OpenStream("Content/finground.jpg"))
             {
                 this.checkerboardTexture = Texture2D.FromStream(gdevice, stream);
             }
