@@ -56,6 +56,8 @@ namespace Finline.Code.Utility
                 switch (obj.Type)
                 {
                     case GameConstants.EnvObjects.cube:
+                    //case GameConstants.EnvObjects.chair:
+                    //case GameConstants.EnvObjects.desk:
                         colliding = true;
                         break;
                 }
