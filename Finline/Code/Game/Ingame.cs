@@ -1,6 +1,7 @@
 ﻿namespace Finline.Code.Game
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Constants;
@@ -19,9 +20,9 @@
     public class Ingame : DrawableGameComponent
     {
         /// <summary>
-        /// The controls.
+        /// The playerControls.
         /// </summary>
-        private readonly Controller controls;
+        private readonly PlayerController playerControls;
 
         /// <summary>
         /// The graphics.
@@ -46,7 +47,7 @@
         public Ingame(StateManager game)
             : base(game)
         {
-            this.controls = game.Controls;
+            this.playerControls = game.PlayerControls;
             this.graphics = game.Graphics;
             this.Game.Content.RootDirectory = "Content";
         }
@@ -68,12 +69,18 @@
 
             this.player = new Player();
             this.player.Initialize(this.Game.Content);
-
+            
             Task.Factory.StartNew(() =>
             {
+                var enemyControls = new EnemyController();
                 var projectileHandler = new Shooting(this.Game.Content);
-                this.controls.Shoot += projectileHandler.Shoot;
-                projectileHandler.Update();
+                this.playerControls.Shoot += projectileHandler.Shoot;
+                enemyControls.Shoot += projectileHandler.Shoot;
+                Task.Factory.StartNew(() =>
+                {
+                    projectileHandler.Update();
+                });
+                //enemyControls.Update();      // nicht entfernen!!!
             });
 
             base.Initialize();
@@ -81,12 +88,12 @@
 
         protected override void LoadContent()
         {
-            this.ground.LoadContent(this.Game.GraphicsDevice);
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(-5, 55, 0), GameConstants.EnvObjects.enemy));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(15, 40, 0), GameConstants.EnvObjects.enemy));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(5, -4, 0), GameConstants.EnvObjects.enemy));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(-8, -28, 0), GameConstants.EnvObjects.enemy));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(10, -40, 0), GameConstants.EnvObjects.enemy));
+            this.ground.LoadContent(this.Game.GraphicsDevice, this.Game.Content);
+            ControlsHelper.Enemies.TryAdd(ControlsHelper.Enemies.Count, new Enemy(this.Game.Content, new Vector3(-5, 55, 0)));
+            ControlsHelper.Enemies.TryAdd(ControlsHelper.Enemies.Count, new Enemy(this.Game.Content, new Vector3(15, 40, 0)));
+            ControlsHelper.Enemies.TryAdd(ControlsHelper.Enemies.Count, new Enemy(this.Game.Content, new Vector3(5, -4, 0)));
+            ControlsHelper.Enemies.TryAdd(ControlsHelper.Enemies.Count, new Enemy(this.Game.Content, new Vector3(-8, -28, 0)));
+            ControlsHelper.Enemies.TryAdd(ControlsHelper.Enemies.Count, new Enemy(this.Game.Content, new Vector3(10, -40, 0)));
 
             for (var i = -20; i < 21; i += 2)
             {
@@ -172,6 +179,7 @@
 
         public override void Draw(GameTime gameTime)
         {
+            Console.Out.WriteLine(ControlsHelper.Projectiles.Count);
             this.GraphicsDevice.Clear(Color.Black);
 
             var aspectRatio = this.graphics.PreferredBackBufferWidth / (float)this.graphics.PreferredBackBufferHeight;
@@ -191,6 +199,11 @@
             foreach (var outch in ControlsHelper.Projectiles.Values)
             {
                 outch.Draw();
+            }
+
+            foreach (var enemy in ControlsHelper.Enemies.Values)
+            {
+                enemy.Draw();
             }
 
             base.Draw(gameTime);

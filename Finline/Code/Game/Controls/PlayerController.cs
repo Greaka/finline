@@ -12,9 +12,9 @@ using Timer = System.Timers.Timer;
 
 namespace Finline.Code.Game.Controls
 {
-    public class Controller
+    public class PlayerController
     {
-        public delegate void Shot();
+        public delegate void Shot(Vector3 position, Vector2 direction);
         public event Shot Shoot;
 
         private readonly Timer aTimer;
@@ -23,7 +23,7 @@ namespace Finline.Code.Game.Controls
 
         private const double trigger = 0.2;
 
-        public Controller()
+        public PlayerController()
         {
             this.aTimer = new Timer
             {
@@ -101,7 +101,7 @@ namespace Finline.Code.Game.Controls
                 if (!shootPressed) return;
                 this.alreadyshot = true;
                 this.shootable = false;
-                this.Shoot?.Invoke();
+                this.Shoot?.Invoke(ControlsHelper.PlayerPosition, ControlsHelper.ShootDirection);
             };
 
             if (!this.shootable) return;

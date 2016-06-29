@@ -8,7 +8,7 @@ namespace Finline.Code.Game.Entities
     public class EnvironmentObject : Entity
     {
         private readonly GameConstants.EnvObjects _type;
-        private readonly bool orbit;
+        private readonly bool orbit = false;
         public bool Visible { get; set; }
 
         public GameConstants.EnvObjects Type => this._type;
@@ -19,11 +19,8 @@ namespace Finline.Code.Game.Entities
             this._type = model;
             switch (model)
             {
-                case GameConstants.EnvObjects.enemy:
-                    this.orbit = true;
-                    break;
-                default:
-                    this.orbit = false;
+                case GameConstants.EnvObjects.cube:
+                    this._sphereScaling = 0.4f;
                     break;
             }
 

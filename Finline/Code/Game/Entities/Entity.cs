@@ -12,6 +12,10 @@ namespace Finline.Code.Game.Entities
         protected Vector3 _position;
         protected float _angle;
 
+        protected float _sphereScaling = 0.8f;
+
+        public Vector3 Position => this._position;
+
         public Model GetModel => this._model;
 
         public BoundingSphere GetBound
@@ -22,7 +26,7 @@ namespace Finline.Code.Game.Entities
                 for (var i = 1; i < this._model.Meshes.Count; i++)
                     sphere = BoundingSphere.CreateMerged(sphere, this._model.Meshes[i].BoundingSphere);
                 sphere.Center += this._position;
-                sphere.Radius *= 0.8f;
+                sphere.Radius *= this._sphereScaling;
                 return sphere;
             }
         }

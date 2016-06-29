@@ -13,6 +13,7 @@ namespace Finline.Code.Game.Controls
     using Finline.Code.Game.Entities;
     using Finline.Code.Game.Helper;
 
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
 
     /// <summary>
@@ -56,11 +57,11 @@ namespace Finline.Code.Game.Controls
         /// <summary>
         /// Creates new <see cref="Projectile"/>, adds it to the Projectile list and binds his destructor.
         /// </summary>
-        public void Shoot()
+        public void Shoot(Vector3 position, Vector2 direction)
         {
             int index;
             this.indices.TryTake(out index);
-            var projectile = new Projectile(this.stopwatch.Elapsed, this.content, index);
+            var projectile = new Projectile(this.stopwatch.Elapsed, this.content, index, position, direction);
             projectile.Destruct += this.AddIndex;
             ControlsHelper.Projectiles.TryAdd(index, projectile);
         }

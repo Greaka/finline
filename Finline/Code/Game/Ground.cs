@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Finline.Code.Game
 {
+    using Microsoft.Xna.Framework.Content;
+
     internal class Ground
     {
         private Texture2D checkerboardTexture;
@@ -40,13 +42,11 @@ namespace Finline.Code.Game
             this.floorVerts[5].TextureCoordinate = this.floorVerts[2].TextureCoordinate;
         }
 
-        public void LoadContent(GraphicsDevice gdevice)
+        public void LoadContent(GraphicsDevice gdevice, ContentManager content)
         {
             this.effect = new BasicEffect(gdevice);
-            using (var stream = TitleContainer.OpenStream("Content/finground.jpg"))
-            {
-                this.checkerboardTexture = Texture2D.FromStream(gdevice, stream);
-            }
+
+            this.checkerboardTexture = (Texture2D)content.Load<Texture>("finground");
         }
 
         public void Draw(GraphicsDevice gdevice)

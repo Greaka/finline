@@ -11,7 +11,7 @@ namespace Finline.Code.GameState
     internal class MainMenu : DrawableGameComponent
     {
         public delegate void GetIngame();
-        private readonly Controller controls;
+        private readonly PlayerController controls;
 
         private bool isPressed;
 
@@ -30,7 +30,7 @@ namespace Finline.Code.GameState
         public MainMenu(StateManager game, SpriteBatch sprite)
             : base(game)
         {
-            this.controls = game.Controls;
+            this.controls = game.PlayerControls;
 
             // The Lists with all the elements
             this.guiElements.Add(EMenuState.TitleScreen, new List<GuiElement>());

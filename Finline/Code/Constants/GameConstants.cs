@@ -4,8 +4,7 @@
     {
         public enum EnvObjects
         {
-            cube,
-            enemy
+            cube
         }
 
         public enum EWeaponShootMode

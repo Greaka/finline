@@ -11,6 +11,7 @@ namespace Finline.Code.Game.Helper
 {
     public static class ControlsHelper
     {
+        public static readonly ConcurrentDictionary<int, Enemy> Enemies = new ConcurrentDictionary<int, Enemy>();
         public static readonly ConcurrentDictionary<int, EnvironmentObject> EnvironmentObjects = new ConcurrentDictionary<int, EnvironmentObject>();
         public static readonly ConcurrentDictionary<int, Projectile> Projectiles = new ConcurrentDictionary<int, Projectile>();
 

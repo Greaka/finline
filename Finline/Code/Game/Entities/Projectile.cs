@@ -30,12 +30,12 @@ namespace Finline.Code.Game.Entities
             }
         }
 
-        public Projectile(TimeSpan actualTime, ContentManager content, int index)
+        public Projectile(TimeSpan actualTime, ContentManager content, int index, Vector3 position, Vector2 direction)
         {
             this.index = index;
             this._model = content.Load<Model>("Arrow");
-            this._position = ControlsHelper.PlayerPosition;
-            this._angle = ControlsHelper.ShootDirection.getAngle();
+            this._position = position;
+            this._angle = direction.getAngle();
             this.timeStamp = actualTime;
             this.unitsPerSecond = 60;
         }

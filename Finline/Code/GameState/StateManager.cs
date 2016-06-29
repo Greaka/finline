@@ -25,7 +25,7 @@ namespace Finline.Code.GameState
         /// <summary>
         /// The Input Parser.
         /// </summary>
-        public readonly Controller Controls = new Controller();
+        public readonly PlayerController PlayerControls = new PlayerController();
 
         /// <summary>
         /// The actual game state object.
@@ -157,7 +157,7 @@ namespace Finline.Code.GameState
 
             if (!paused)
             {
-                this.Controls.Update(this.GraphicsDevice);
+                this.PlayerControls.Update(this.GraphicsDevice);
                 this.gameState.Update(gameTime);
                 
             }
