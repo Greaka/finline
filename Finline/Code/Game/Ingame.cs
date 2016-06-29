@@ -13,13 +13,36 @@
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
 
+    /// <summary>
+    /// The ingame.
+    /// </summary>
     public class Ingame : DrawableGameComponent
     {
+        /// <summary>
+        /// The controls.
+        /// </summary>
         private readonly Controller controls;
+
+        /// <summary>
+        /// The graphics.
+        /// </summary>
         private readonly GraphicsDeviceManager graphics;
+
+        /// <summary>
+        /// The player.
+        /// </summary>
         private Player player;
+
+        /// <summary>
+        /// The ground.
+        /// </summary>
         private Ground ground;
         
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Ingame"/> class. 
+        /// </summary>
+        /// <param name="game">
+        /// </param>
         public Ingame(StateManager game)
             : base(game)
         {
