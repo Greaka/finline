@@ -4,8 +4,8 @@
     {
         public enum EnvObjects
         {
-            cube, 
-            bottle_cap2
+            cube,
+            enemy
         }
 
         public enum EWeaponShootMode

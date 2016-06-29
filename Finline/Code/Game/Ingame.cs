@@ -82,45 +82,72 @@
         protected override void LoadContent()
         {
             this.ground.LoadContent(this.Game.GraphicsDevice);
-
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(10, 1, 1), GameConstants.EnvObjects.cube));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(5, -10, 1), GameConstants.EnvObjects.cube));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(10, 3, 3), GameConstants.EnvObjects.cube));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(-15, 1, 1), GameConstants.EnvObjects.cube));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(15, -15, 1), GameConstants.EnvObjects.cube));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(5, -10, 3), GameConstants.EnvObjects.bottle_cap2));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(10, 1, 3), GameConstants.EnvObjects.bottle_cap2));
-
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(20, -3, 5), GameConstants.EnvObjects.bottle_cap2));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(-2, 6, 6), GameConstants.EnvObjects.bottle_cap2));
-            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(8, 7, 6), GameConstants.EnvObjects.bottle_cap2));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(-5, 55, 0), GameConstants.EnvObjects.enemy));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(15, 40, 0), GameConstants.EnvObjects.enemy));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(5, -4, 0), GameConstants.EnvObjects.enemy));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(-8, -28, 0), GameConstants.EnvObjects.enemy));
+            ControlsHelper.EnvironmentObjects.TryAdd(ControlsHelper.EnvironmentObjects.Count, new EnvironmentObject(this.Game.Content, new Vector3(10, -40, 0), GameConstants.EnvObjects.enemy));
 
             for (var i = -20; i < 21; i += 2)
             {
-                var bla = i == 0 ? 20 : Math.Abs(i) / i;
                 ControlsHelper.EnvironmentObjects.TryAdd(
                     ControlsHelper.EnvironmentObjects.Count, 
                     new EnvironmentObject(
                         this.Game.Content, 
-                        new Vector3(i, bla * 20, 0), 
+                        new Vector3(i, -60, 0), 
                         GameConstants.EnvObjects.cube));
                 ControlsHelper.EnvironmentObjects.TryAdd(
                     ControlsHelper.EnvironmentObjects.Count, 
                     new EnvironmentObject(
                         this.Game.Content, 
-                        new Vector3(bla * 20, i, 0), 
+                        new Vector3(i, 60, 0), 
+                        GameConstants.EnvObjects.cube));
+            }
+            for (var i = -59; i < 60; i += 2)
+            {
+                ControlsHelper.EnvironmentObjects.TryAdd(
+                    ControlsHelper.EnvironmentObjects.Count,
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(20, i, 0),
                         GameConstants.EnvObjects.cube));
                 ControlsHelper.EnvironmentObjects.TryAdd(
-                    ControlsHelper.EnvironmentObjects.Count, 
+                    ControlsHelper.EnvironmentObjects.Count,
                     new EnvironmentObject(
-                        this.Game.Content, 
-                        new Vector3(-i, bla * 20, 0), 
+                        this.Game.Content,
+                        new Vector3(-20, -i, 0),
+                        GameConstants.EnvObjects.cube));
+            }
+            for (var i = -12; i < 21; i += 2)
+            {
+                //var bla = i == 0 ? 20 : Math.Abs(i) / i;
+                ControlsHelper.EnvironmentObjects.TryAdd(
+                    ControlsHelper.EnvironmentObjects.Count,
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(i, 18, 0),
                         GameConstants.EnvObjects.cube));
                 ControlsHelper.EnvironmentObjects.TryAdd(
-                    ControlsHelper.EnvironmentObjects.Count, 
+                    ControlsHelper.EnvironmentObjects.Count,
                     new EnvironmentObject(
-                        this.Game.Content, 
-                        new Vector3(bla * 20, -i, 0), 
+                        this.Game.Content,
+                        new Vector3(i, -8, 0),
+                        GameConstants.EnvObjects.cube));
+                ControlsHelper.EnvironmentObjects.TryAdd(
+                    ControlsHelper.EnvironmentObjects.Count,
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(i, -34, 0),
+                        GameConstants.EnvObjects.cube));
+            }
+            for (var i = -58; i < 60; i += 2)
+            {
+                var j = i == 26 || i == 24 || i == 12 || i == 10 || i == -14 || i == -16 || i == -40 || i == -42 ? 60 : i;
+                ControlsHelper.EnvironmentObjects.TryAdd(
+                    ControlsHelper.EnvironmentObjects.Count,
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(-12, j, 0),
                         GameConstants.EnvObjects.cube));
             }
         }
@@ -145,7 +172,7 @@
 
         public override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.GraphicsDevice.Clear(Color.Black);
 
             var aspectRatio = this.graphics.PreferredBackBufferWidth / (float)this.graphics.PreferredBackBufferHeight;
             ControlsHelper.ViewMatrix = Matrix.CreateLookAt(
