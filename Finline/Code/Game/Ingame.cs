@@ -80,7 +80,7 @@
                 {
                     projectileHandler.Update();
                 });
-                //enemyControls.Update();      // nicht entfernen!!!
+               // enemyControls.Update();      // nicht entfernen!!!
             });
 
             base.Initialize();
@@ -156,7 +156,40 @@
                         this.Game.Content,
                         new Vector3(-12, j, 0),
                         GameConstants.EnvObjects.cube));
+          
             }
+
+            for (var i = 12; i > -5; i -= 8)
+            {
+                ControlsHelper.EnvironmentObjects.TryAdd(
+                ControlsHelper.EnvironmentObjects.Count,
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 14, -1),
+                    GameConstants.EnvObjects.desk));
+                ControlsHelper.EnvironmentObjects.TryAdd(
+                ControlsHelper.EnvironmentObjects.Count,
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 0, -1),
+                    GameConstants.EnvObjects.desk));
+            }
+            for (var i = 12; i > -5; i -= 8)
+            {
+                ControlsHelper.EnvironmentObjects.TryAdd(
+                ControlsHelper.EnvironmentObjects.Count,
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 14, -1),
+                    GameConstants.EnvObjects.chair));
+                ControlsHelper.EnvironmentObjects.TryAdd(
+                ControlsHelper.EnvironmentObjects.Count,
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 0, -1),
+                    GameConstants.EnvObjects.chair));
+            }
+
         }
 
         public override void Update(GameTime gameTime)
