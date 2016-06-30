@@ -419,3 +419,9 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:player.fbx
 
+#begin musicMainMenu.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:musicMainMenu.mp3
+
