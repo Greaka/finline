@@ -35,7 +35,7 @@ namespace Finline.Code.Game.Entities
 
         public void Initialize(ContentManager contentManager)
         {
-            this._model = contentManager.Load<Model>("Undead");
+            this._model = contentManager.Load<Model>("player");
             this._position = Vector3.Zero;
         }
 
