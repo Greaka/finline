@@ -17,6 +17,8 @@ namespace Finline.Code.GameState
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
 
+    using Microsoft.Xna.Framework.Media;
+
     /// <summary>
     /// The game state manager.
     /// </summary>
@@ -61,6 +63,8 @@ namespace Finline.Code.GameState
         private Texture2D quitGameTexture2D;
         private Rectangle quitGameRectangle;
 
+        private Song musicMainMenu;
+
 
         
         /// <summary>
@@ -82,7 +86,7 @@ namespace Finline.Code.GameState
         /// </summary>
         protected override void Initialize()
         {
-            this.nextGameState = EGameState.InGame;
+            this.nextGameState = EGameState.MainMenu;
             base.Initialize();
         }
 
@@ -104,6 +108,9 @@ namespace Finline.Code.GameState
             quitGameTexture2D = Content.Load<Texture2D>("End2Trans");
             quitGameRectangle = new Rectangle(280, 300, quitGameTexture2D.Width - 20, quitGameTexture2D.Height - 20);
 
+            musicMainMenu = Content.Load<Song>("musicMainMenu");
+            if (nextGameState == EGameState.MainMenu)
+                MediaPlayer.Play(musicMainMenu);
         }
 
         /// <summary>
@@ -123,7 +130,10 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
-            
+
+            if (nextGameState == EGameState.InGame)
+                MediaPlayer.Stop();
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
