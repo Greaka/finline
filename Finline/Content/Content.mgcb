@@ -321,7 +321,7 @@
 /processorParam:RotationX=0
 /processorParam:RotationY=90
 /processorParam:RotationZ=90
-/processorParam:Scale=0.4
+/processorParam:Scale=0.3
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:chair.fbx
@@ -352,7 +352,7 @@
 /processorParam:RotationX=0
 /processorParam:RotationY=90
 /processorParam:RotationZ=90
-/processorParam:Scale=0.4
+/processorParam:Scale=0.3
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:desk.fbx
@@ -414,7 +414,7 @@
 /processorParam:RotationX=0
 /processorParam:RotationY=270
 /processorParam:RotationZ=270
-/processorParam:Scale=1
+/processorParam:Scale=0.6
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:player.fbx
