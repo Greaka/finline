@@ -27,15 +27,25 @@ namespace Finline.Code.Game.Entities
 
         public void Update()
         {
-            var view = new Ray(this._position, ControlsHelper.PlayerPosition - this._position);
-            if (ControlsHelper.EnvironmentObjects.Values.Any(obj => view.Intersects(obj.GetBound) == null))
+            var distance = ControlsHelper.PlayerPosition - this._position;
+            var view = new Ray(this._position, distance);
+            bool any = false;
+            foreach (var obj in ControlsHelper.EnvironmentObjects.Values)
             {
-                this.SetViewDirection(ControlsHelper.PlayerPosition.get2d());
-                this.shoot = true;
+                if (view.Intersects(obj.GetBound) != null && (obj.Position - this._position).Length() < distance.Length())
+                {
+                    any = true;
+                    break;
+                }
+            }
+            if (any)
+            {
+                this.shoot = false;
             }
             else
             {
-                this.shoot = false;
+                this.SetViewDirection(ControlsHelper.PlayerPosition.get2d());
+                this.shoot = true;
             }
         }
     }

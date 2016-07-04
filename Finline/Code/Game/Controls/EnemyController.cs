@@ -22,9 +22,8 @@ namespace Finline.Code.Game.Controls
         public event Shot Shoot;
 
         private readonly System.Timers.Timer aTimer;
-        private bool shootable = true;
 
-        private const float ShotsPerSecond = 8;
+        private const float ShotsPerSecond = 2;
 
         public EnemyController()
         {
@@ -33,28 +32,29 @@ namespace Finline.Code.Game.Controls
                 Interval = 1000 / ShotsPerSecond,
                 Enabled = true
             };
-            this.aTimer.Elapsed += (sender, args) => { this.shootable = true; };
+            this.aTimer.Elapsed += (sender, args) =>
+                {
+                    //this.shootable = true;
+                    foreach (var enemy in ControlsHelper.Enemies.Values)
+                    {
+                        //enemy.Update();
+                        if (enemy.shoot)
+                            this.Shootroutine(enemy.Position);
+                    }
+                };
         }
 
         public void Update()
         {
-            while (ControlsHelper.Active)
+            foreach (var enemy in ControlsHelper.Enemies.Values)
             {
-                if (Math.Abs(this.aTimer.Interval - ShotsPerSecond) < 0.00001) this.aTimer.Interval = ShotsPerSecond;
-                foreach (var enemy in ControlsHelper.Enemies.Values)
-                {
-                    enemy.Update();
-                    if (enemy.shoot)
-                        this.Shootroutine(enemy);
-                }
-                this.shootable = false;
+                enemy.Update();
             }
         }
 
-        private void Shootroutine(Enemy enemy)
+        private void Shootroutine(Vector3 enemypos)
         {
-            if (!this.shootable) return;
-            this.Shoot?.Invoke(enemy.Position, (ControlsHelper.PlayerPosition - enemy.Position).get2d());
+            this.Shoot?.Invoke(enemypos, (ControlsHelper.PlayerPosition - enemypos).get2d());
         }
     }
 }

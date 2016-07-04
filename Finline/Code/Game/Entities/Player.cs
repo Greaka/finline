@@ -41,7 +41,7 @@ namespace Finline.Code.Game.Entities
 
         public void Update(GameTime gameTime)
         {
-            this.SetViewDirection(ControlsHelper.MoveDirection);
+            this.SetViewDirection(ControlsHelper.ShootDirection);
             this.Position += new Vector3(ControlsHelper.MoveDirection * 
                (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond, 
                0);

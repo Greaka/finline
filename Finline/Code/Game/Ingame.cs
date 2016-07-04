@@ -29,6 +29,8 @@
         /// </summary>
         private readonly GraphicsDeviceManager graphics;
 
+        private EnemyController enemyControls;
+
         /// <summary>
         /// The player.
         /// </summary>
@@ -72,14 +74,14 @@
             
             Task.Factory.StartNew(() =>
             {
-                var enemyControls = new EnemyController();
+                this.enemyControls = new EnemyController();
                 var projectileHandler = new Shooting(this.Game.Content);
                 this.playerControls.Shoot += projectileHandler.Shoot;
-                enemyControls.Shoot += projectileHandler.Shoot;
-                Task.Factory.StartNew(() =>
+                this.enemyControls.Shoot += projectileHandler.Shoot;
+                //Task.Factory.StartNew(() =>
                 {
                     projectileHandler.Update();
-                });
+                }//);
                // enemyControls.Update();      // nicht entfernen!!!
             });
 
@@ -194,6 +196,7 @@
 
         public override void Update(GameTime gameTime)
         {
+            this.enemyControls.Update();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
