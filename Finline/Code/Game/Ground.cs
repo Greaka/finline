@@ -1,6 +1,4 @@
-﻿using Finline.Code.Game.Helper;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Finline.Code.Game
@@ -49,11 +47,11 @@ namespace Finline.Code.Game
             this.checkerboardTexture = (Texture2D)content.Load<Texture>("finground");
         }
 
-        public void Draw(GraphicsDevice gdevice)
+        public void Draw(GraphicsDevice gdevice, Matrix viewMatrix, Matrix projectionMatrix)
         {
-            this.effect.View = ControlsHelper.ViewMatrix;
+            this.effect.View = viewMatrix;
 
-            this.effect.Projection = ControlsHelper.ProjectionMatrix;
+            this.effect.Projection = projectionMatrix;
 
             this.effect.TextureEnabled = true;
             this.effect.Texture = this.checkerboardTexture;

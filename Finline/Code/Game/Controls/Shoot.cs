@@ -7,11 +7,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Finline.Code.Game.Controls
 {
-    using System.Collections.Concurrent;
+    using System.Collections.Generic;
     using System.Diagnostics;
 
     using Finline.Code.Game.Entities;
-    using Finline.Code.Game.Helper;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
@@ -31,10 +30,7 @@ namespace Finline.Code.Game.Controls
         /// </summary>
         private readonly ContentManager content;
 
-        /// <summary>
-        /// The pool of indices available for Projectiles.
-        /// </summary>
-        private readonly ConcurrentBag<int> indices = new ConcurrentBag<int>();
+        private readonly List<Projectile> projectiles;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Shooting"/> class. 
@@ -43,15 +39,14 @@ namespace Finline.Code.Game.Controls
         /// <param name="shiny">
         /// <see cref="ContentManager"/> for loading models of Projectiles.
         /// </param>
-        public Shooting(ContentManager shiny)
+        /// <param name="projectiles">
+        /// <see cref="List{Projectile}"/> to have a reference on it in this class.
+        /// </param>
+        public Shooting(ContentManager shiny, List<Projectile> projectiles)
         {
-            for (var i = 0; i < 1000; i++)
-            {
-                this.indices.Add(i);
-            }
-
             this.content = shiny;
             this.stopwatch.Restart();
+            this.projectiles = projectiles;
         }
 
         /// <summary>
@@ -59,39 +54,24 @@ namespace Finline.Code.Game.Controls
         /// </summary>
         public void Shoot(Vector3 position, Vector2 direction)
         {
-            int index;
-            this.indices.TryTake(out index);
-            var projectile = new Projectile(this.stopwatch.Elapsed, this.content, index, position, direction);
-            projectile.Destruct += this.AddIndex;
-            ControlsHelper.Projectiles.TryAdd(index, projectile);
+            var projectile = new Projectile(this.stopwatch.Elapsed, this.content, position, direction);
+            this.projectiles.Add(projectile);
         }
 
         /// <summary>
         /// Update for Projectiles.
         /// </summary>
-        public void Update()
+        public void Update(List<EnvironmentObject> environmentObjects)
         {
-            while (ControlsHelper.Active)
+            List<Projectile> remove = new List<Projectile>();
+            foreach (var outch in this.projectiles)
             {
-                foreach (var outch in ControlsHelper.Projectiles.Values)
-                {
-                    outch.Update(this.stopwatch.Elapsed);
-                }
+                outch.Update(this.stopwatch.Elapsed, environmentObjects, remove);
             }
-        }
 
-        /// <summary>
-        /// Add index from destroyed <see cref="Projectile"/>.
-        /// </summary>
-        /// <param name="index">
-        /// Index of destroyed Projectile.
-        /// </param>
-        private void AddIndex(int index)
-        {
-            Projectile projectile;
-            if (ControlsHelper.Projectiles.TryRemove(index, out projectile))
+            foreach (var index in remove)
             {
-                this.indices.Add(index);
+                this.projectiles.Remove(index);
             }
         }
     }

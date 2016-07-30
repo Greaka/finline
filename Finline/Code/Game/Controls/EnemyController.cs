@@ -1,16 +1,10 @@
-﻿using System;
-
-using Finline.Code.Constants;
-using Finline.Code.Game.Helper;
-using Finline.Code.Utility;
+﻿using Finline.Code.Utility;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Finline.Code.Game.Controls
 {
-    using System.Threading;
+    using System.Collections.Generic;
 
     using Finline.Code.Game.Entities;
 
@@ -21,7 +15,9 @@ namespace Finline.Code.Game.Controls
         public delegate void Shot(Vector3 position, Vector2 direction);
         public event Shot Shoot;
 
-        private readonly System.Timers.Timer aTimer;
+        private readonly Timer aTimer;
+
+        private bool shootable;
 
         private const float ShotsPerSecond = 2;
 
@@ -29,32 +25,26 @@ namespace Finline.Code.Game.Controls
         {
             this.aTimer = new Timer
             {
-                Interval = 1000 / ShotsPerSecond,
+                Interval = 1000 / ShotsPerSecond, 
                 Enabled = true
             };
-            this.aTimer.Elapsed += (sender, args) =>
-                {
-                    //this.shootable = true;
-                    foreach (var enemy in ControlsHelper.Enemies.Values)
-                    {
-                        //enemy.Update();
-                        if (enemy.shoot)
-                            this.Shootroutine(enemy.Position);
-                    }
-                };
+            this.aTimer.Elapsed += (sender, args) => { this.shootable = true; };
         }
 
-        public void Update()
+        public void Update(IEnumerable<Enemy> enemies, Vector3 playerPosition)
         {
-            foreach (var enemy in ControlsHelper.Enemies.Values)
+            if (this.shootable != true) return;
+            foreach (var enemy in enemies)
             {
-                enemy.Update();
+                if (enemy.shoot) this.Shootroutine(enemy.Position, playerPosition);
             }
+
+            this.shootable = false;
         }
 
-        private void Shootroutine(Vector3 enemypos)
+        private void Shootroutine(Vector3 enemypos, Vector3 playerPosition)
         {
-            this.Shoot?.Invoke(enemypos, (ControlsHelper.PlayerPosition - enemypos).get2d());
+            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos).get2d());
         }
     }
 }

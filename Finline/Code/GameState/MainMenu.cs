@@ -1,17 +1,13 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Finline.Code.GameState
 {
-    using Game.Controls;
-
     internal class MainMenu : DrawableGameComponent
     {
         public delegate void GetIngame();
-        private readonly PlayerController controls;
 
         private bool isPressed;
 
@@ -24,14 +20,13 @@ namespace Finline.Code.GameState
 
         private bool paused = false;
        
+
         /// <summary>
         /// Constructor to use the GUIElementlist to select the element
         /// </summary>
         public MainMenu(StateManager game, SpriteBatch sprite)
             : base(game)
         {
-            this.controls = game.PlayerControls;
-
             // The Lists with all the elements
             this.guiElements.Add(EMenuState.TitleScreen, new List<GuiElement>());
             this.guiElements.Add(EMenuState.MainMenu, new List<GuiElement>());
@@ -83,7 +78,7 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Credits2").MoveElement(220 , 50); // move the "credits" button 200 in x-direction and 50 down in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "End2").MoveElement(0, 100); // move the "end" button down in y-direction
             
-            this.guiElements[EMenuState.CharacterScreen].Find(x=> x.AssetName =="StartGame2").MoveElement(0, -30); //move the "StartGame" button up in y-direction
+            this.guiElements[EMenuState.CharacterScreen].Find(x=> x.AssetName =="StartGame2").MoveElement(0, -30); // move the "StartGame" button up in y-direction
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back_to_MainMenu2").MoveElement(0, 100); // move the "Back_to_MainMenu" button down in y-direction
             
             this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Back_to_MainMenu2").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
@@ -125,7 +120,7 @@ namespace Finline.Code.GameState
                     new Vector2(300, 100), Color.Black);
             }
 
-            if (menuState != EMenuState.None)
+            if (this.menuState != EMenuState.None)
             foreach (var element in this.guiElements[this.menuState])
             {
                 element.Draw(this.spriteBatch);

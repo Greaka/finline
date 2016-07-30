@@ -5,10 +5,9 @@
 //   Defines the GraphicsHelper type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Finline.Code.Utility
 {
-    using System.Collections.Concurrent;
+    using System.Collections.Generic;
 
     using Finline.Code.Constants;
     using Game.Entities;
@@ -35,13 +34,12 @@ namespace Finline.Code.Utility
         /// <returns>
         /// true or false for colliding.
         /// </returns>
-        public static bool IsColliding(this Entity entity, ConcurrentDictionary<int, EnvironmentObject> environmentObjects, out float distance)
+        public static bool IsColliding(this Entity entity, List<EnvironmentObject> environmentObjects, out float distance)
         {
             var colliding = false;
             distance = 1;
-            for (var i = 0; i < environmentObjects.Values.Count; i++)
+            foreach (var obj in environmentObjects)
             {
-                var obj = environmentObjects[i];
                 float intersection;
                 if (!entity.GetBound.Intersection(obj.GetBound, out intersection))
                 {
@@ -56,8 +54,9 @@ namespace Finline.Code.Utility
                 switch (obj.Type)
                 {
                     case GameConstants.EnvObjects.cube:
-                    //case GameConstants.EnvObjects.chair:
-                    //case GameConstants.EnvObjects.desk:
+
+                        // case GameConstants.EnvObjects.chair:
+                        // case GameConstants.EnvObjects.desk:
                         colliding = true;
                         break;
                 }

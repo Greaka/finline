@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 
 namespace Finline.Code.Utility
 {
+    using Finline.Code.Constants;
+
     internal static class VectorHelper
     {
         public static Vector3 lerp(this Vector3 from, Vector3 target, float interval)
@@ -38,10 +40,20 @@ namespace Finline.Code.Utility
         public static float getAngle(this Vector2 me)
         {
             if (!(me.Length() > 0)) return 0;
-            var x = (float)Math.Acos((double)Vector2.Dot(-Vector2.UnitY, me));
+            var x = (float)Math.Atan2(me.Y, me.X); // Math.Acos((double)Vector2.Dot(-Vector2.UnitY, me));
             var angle = me.X > 0 ? x : -x;
             angle += (float)Math.PI;
-            return angle;
+            return x - (float)Math.PI/2;
+        }
+
+        public static Vector2 addPerspective(this Vector2 me)
+        {
+            if (!(me.Length() > 0)) return me;
+            var perspective = GraphicConstants.CameraOffset.get2d();
+            perspective.Normalize();
+            perspective = me.rotate((float)Math.PI + perspective.getAngle());
+            perspective.Normalize();
+            return perspective;
         }
 
         public static Vector2 get2d(this Vector3 me) { return new Vector2(me.X, me.Y);}

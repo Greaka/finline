@@ -11,7 +11,6 @@ namespace Finline.Code.GameState
     using System;
 
     using Game;
-    using Game.Controls;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -24,11 +23,6 @@ namespace Finline.Code.GameState
     /// </summary>
     public class StateManager : Game
     {
-        /// <summary>
-        /// The Input Parser.
-        /// </summary>
-        public readonly PlayerController PlayerControls = new PlayerController();
-
         /// <summary>
         /// The actual game state object.
         /// </summary>
@@ -64,9 +58,8 @@ namespace Finline.Code.GameState
         private Rectangle quitGameRectangle;
 
         private Song musicMainMenu;
-
-
         
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StateManager"/> class. 
         /// </summary>
@@ -86,7 +79,7 @@ namespace Finline.Code.GameState
         /// </summary>
         protected override void Initialize()
         {
-            this.nextGameState = EGameState.MainMenu;
+            this.nextGameState = EGameState.InGame;
             base.Initialize();
         }
 
@@ -102,15 +95,15 @@ namespace Finline.Code.GameState
             this.main.GoIngame += this.StartNewGame;
             this.main.Initialize();
 
-            pausedTexture2D = Content.Load<Texture2D>("PauseTrans");
-            pausedRectangle = new Rectangle(345, 100, pausedTexture2D.Width, pausedTexture2D.Height);
+            this.pausedTexture2D = this.Content.Load<Texture2D>("PauseTrans");
+            this.pausedRectangle = new Rectangle(345, 100, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
 
-            quitGameTexture2D = Content.Load<Texture2D>("End2Trans");
-            quitGameRectangle = new Rectangle(280, 300, quitGameTexture2D.Width - 20, quitGameTexture2D.Height - 20);
+            this.quitGameTexture2D = this.Content.Load<Texture2D>("End2Trans");
+            this.quitGameRectangle = new Rectangle(280, 300, this.quitGameTexture2D.Width - 20, this.quitGameTexture2D.Height - 20);
 
-            musicMainMenu = Content.Load<Song>("musicMainMenu");
-            if (nextGameState == EGameState.MainMenu)
-                MediaPlayer.Play(musicMainMenu);
+            this.musicMainMenu = this.Content.Load<Song>("musicMainMenu");
+            if (this.nextGameState == EGameState.MainMenu)
+                MediaPlayer.Play(this.musicMainMenu);
         }
 
         /// <summary>
@@ -120,8 +113,8 @@ namespace Finline.Code.GameState
         {
             // TODO: Unload any non ContentManager content here
         }
-
         
+
         /// <summary>
         /// The update.
         /// </summary>
@@ -131,7 +124,7 @@ namespace Finline.Code.GameState
         protected override void Update(GameTime gameTime)
         {
 
-            if (nextGameState == EGameState.InGame)
+            if (this.nextGameState == EGameState.InGame)
                 MediaPlayer.Stop();
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
@@ -140,43 +133,30 @@ namespace Finline.Code.GameState
                 this.Exit();
             }
 
-           
-
             if (this.nextGameState != this.currentGameState)
             {
                 this.HandleGameState();
             }
 
-          
-
             MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
-            if(currentGameState == EGameState.InGame)
-            if (k.IsKeyDown(Keys.P) && !isPressed )
+            if(this.currentGameState == EGameState.InGame)
+            if (k.IsKeyDown(Keys.P) && !this.isPressed )
             {
-                paused = !paused;
-                isPressed = true;
-
+                this.paused = !this.paused;
+                this.isPressed = true;
             }
 
-            if (isPressed && !k.IsKeyDown(Keys.P))
+            if (this.isPressed && !k.IsKeyDown(Keys.P))
             {
-                isPressed = false;
+                this.isPressed = false;
             }
 
-
-            if (!paused)
+            if (!this.paused)
             {
-                this.PlayerControls.Update(this.GraphicsDevice);
                 this.gameState.Update(gameTime);
                 
             }
-            else
-            {
-                
-
-            }
-
 
             base.Update(gameTime);
         }
@@ -196,15 +176,15 @@ namespace Finline.Code.GameState
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
             this.gameState.Draw(gameTime);
-            
-            
-            spriteBatch.Begin();
-            if (paused)
+
+            this.spriteBatch.Begin();
+            if (this.paused)
             {
-                spriteBatch.Draw(pausedTexture2D, pausedRectangle, Color.White);
-                spriteBatch.Draw(quitGameTexture2D, quitGameRectangle, Color.White);
+                this.spriteBatch.Draw(this.pausedTexture2D, this.pausedRectangle, Color.White);
+                this.spriteBatch.Draw(this.quitGameTexture2D, this.quitGameRectangle, Color.White);
             }
-            spriteBatch.End();
+
+            this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
 
@@ -243,8 +223,5 @@ namespace Finline.Code.GameState
         {
             this.nextGameState = EGameState.InGame;
         }
-
-
-      
     }
 }

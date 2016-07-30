@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Finline.Code.Game.Entities
 {
-    using Finline.Code.Game.Controls;
-    using Finline.Code.Game.Helper;
     using Finline.Code.Utility;
 
     using Microsoft.Xna.Framework;
@@ -21,30 +15,31 @@ namespace Finline.Code.Game.Entities
         public Enemy(ContentManager contentManager, Vector3 position)
         {
             this._model = contentManager.Load<Model>("enemy");
-            this._position = position;
+            this.position = position;
             this._angle = 0;
         }
 
-        public void Update()
+        public void Update(Vector3 playerPosition, List<EnvironmentObject> environmentObjects)
         {
-            var distance = ControlsHelper.PlayerPosition - this._position;
-            var view = new Ray(this._position, distance);
+            var distance = playerPosition - this.position;
+            var view = new Ray(this.position, distance);
             bool any = false;
-            foreach (var obj in ControlsHelper.EnvironmentObjects.Values)
+            foreach (var obj in environmentObjects)
             {
-                if (view.Intersects(obj.GetBound) != null && (obj.Position - this._position).Length() < distance.Length())
+                if (view.Intersects(obj.GetBound) != null && (obj.Position - this.position).Length() < distance.Length())
                 {
                     any = true;
                     break;
                 }
             }
+
             if (any)
             {
                 this.shoot = false;
             }
             else
             {
-                this.SetViewDirection(ControlsHelper.PlayerPosition.get2d());
+                this.SetViewDirection(playerPosition.get2d());
                 this.shoot = true;
             }
         }

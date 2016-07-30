@@ -25,7 +25,7 @@ namespace Finline.Code.Game.Entities
             }
 
             this._model = contentManager.Load<Model>(model.ToString());
-            this._position = position;
+            this.position = position;
             this._angle = 0;
         }
 
@@ -37,10 +37,10 @@ namespace Finline.Code.Game.Entities
             }
         }
 
-        public override void Draw()
+        public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
             if (this.Visible)
-                base.Draw();
+                base.Draw(viewMatrix, projectionMatrix);
         }
     }
 
