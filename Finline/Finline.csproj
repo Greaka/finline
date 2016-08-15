@@ -77,7 +77,9 @@
     <Content Include="Content\MenuFrame.png" />
     <Content Include="Content\NewGame2.png" />
     <Content Include="Content\Option2.png" />
+    <Content Include="Content\Option2Trans.png" />
     <Content Include="Content\PauseTrans.png" />
+    <Content Include="Content\PlayTrans.png" />
     <Content Include="Content\StartGame2.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>

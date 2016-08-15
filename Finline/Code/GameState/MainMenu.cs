@@ -18,7 +18,7 @@ namespace Finline.Code.GameState
         private EMenuState menuState;
         private SpriteFont font;
 
-        private bool paused = false;
+        
        
 
         /// <summary>

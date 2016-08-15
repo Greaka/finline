@@ -6,6 +6,9 @@
 //   Defines the StateManager type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+
 namespace Finline.Code.GameState
 {
     using System;
@@ -49,10 +52,17 @@ namespace Finline.Code.GameState
         private SpriteBatch spriteBatch;
         private bool isPressed = false;
         private SpriteFont font;
+        
 
         private bool paused = false;
         private Texture2D pausedTexture2D;
         private Rectangle pausedRectangle;
+
+        private Texture2D playTexture2D;
+        private Rectangle playRectangle;
+
+        private Texture2D optionTexture2D;
+        private Rectangle optionRectangle;
 
         private Texture2D quitGameTexture2D;
         private Rectangle quitGameRectangle;
@@ -96,10 +106,17 @@ namespace Finline.Code.GameState
             this.main.Initialize();
 
             this.pausedTexture2D = this.Content.Load<Texture2D>("PauseTrans");
-            this.pausedRectangle = new Rectangle(345, 100, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
+            this.pausedRectangle = new Rectangle(345, 50, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
+
+            this.playTexture2D = this.Content.Load<Texture2D>("PlayTrans");
+            this.playRectangle = new Rectangle(280, 150, this.playTexture2D.Width - 20, this.playTexture2D.Height - 20);
+
+            this.optionTexture2D = this.Content.Load<Texture2D>("Option2Trans");
+            this.optionRectangle = new Rectangle(280, 250, this.optionTexture2D.Width - 20, this.optionTexture2D.Height - 20);
+            
 
             this.quitGameTexture2D = this.Content.Load<Texture2D>("End2Trans");
-            this.quitGameRectangle = new Rectangle(280, 300, this.quitGameTexture2D.Width - 20, this.quitGameTexture2D.Height - 20);
+            this.quitGameRectangle = new Rectangle(280, 350, this.quitGameTexture2D.Width - 20, this.quitGameTexture2D.Height - 20);
 
             this.musicMainMenu = this.Content.Load<Song>("musicMainMenu");
             if (this.nextGameState == EGameState.MainMenu)
@@ -181,7 +198,9 @@ namespace Finline.Code.GameState
             if (this.paused)
             {
                 this.spriteBatch.Draw(this.pausedTexture2D, this.pausedRectangle, Color.White);
+                this.spriteBatch.Draw(this.playTexture2D, this.playRectangle, Color.White);
                 this.spriteBatch.Draw(this.quitGameTexture2D, this.quitGameRectangle, Color.White);
+                this.spriteBatch.Draw(this.optionTexture2D, this.optionRectangle, Color.White);
             }
 
             this.spriteBatch.End();
@@ -212,7 +231,7 @@ namespace Finline.Code.GameState
             }
 
             this.gameState.Initialize();
-
+            
             this.currentGameState = this.nextGameState;
         }
 
