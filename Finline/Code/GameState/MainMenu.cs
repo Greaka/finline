@@ -140,7 +140,8 @@ namespace Finline.Code.GameState
             if (this.isPressed) return;
 
             this.isPressed = true;
-            if (element == "MenuFrame") this.isPressed = false;
+            if (element == "MenuFrame")
+                this.isPressed = false;
 
             if (this.menuState == EMenuState.TitleScreen)
             {

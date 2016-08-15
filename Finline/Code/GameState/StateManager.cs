@@ -105,7 +105,7 @@ namespace Finline.Code.GameState
         /// </summary>
         protected override void Initialize()
         {
-            this.nextGameState = EGameState.InGame;
+            this.nextGameState = EGameState.MainMenu;
             base.Initialize();
         }
 
@@ -173,10 +173,10 @@ namespace Finline.Code.GameState
 
             if (element == "PlayTrans")
                 this.paused = !this.paused;
+                
             
 
             if (element == "End2Trans")
-                
                 this.Exit();
 
         }
@@ -212,17 +212,20 @@ namespace Finline.Code.GameState
             {
                 this.HandleGameState();
             }
-          
+
+           
             MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
             if(this.currentGameState == EGameState.InGame)
-              
+          
+
             if (k.IsKeyDown(Keys.P) && !this.isPressed)
                 {
                     foreach (var element in this.guiElements[this.currentGameState])
                     {
                         element.Update(ref this.isPressed);
                     }
+
                     this.paused = !this.paused;
                     this.isPressed = true;
                 }
@@ -239,8 +242,8 @@ namespace Finline.Code.GameState
                 this.gameState.Update(gameTime);
                 
             }
-          
 
+          
             base.Update(gameTime);
         }
 
