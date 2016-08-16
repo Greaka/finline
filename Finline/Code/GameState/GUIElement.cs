@@ -11,7 +11,7 @@ namespace Finline.Code.GameState
 
         private Rectangle _guiRect;
         private Texture2D _guiTexture;
-
+        
        
 
         /// <summary>
@@ -38,6 +38,9 @@ namespace Finline.Code.GameState
 
         public void Update(ref bool isPressed)
         {
+            
+
+      
             if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
                 Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
@@ -48,14 +51,16 @@ namespace Finline.Code.GameState
             {
                 isPressed = false;
             }
+
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             if (this.AssetName == "Logo 2")
-                spriteBatch.Draw(this._guiTexture, new Rectangle(30, 10, 700, 440), null, Color.White);
-          
-            
+                spriteBatch.Draw(this._guiTexture, new Rectangle(30, 10, 700, 440), null, Color.White); 
+            else if(this.AssetName == "Logo")
+                spriteBatch.Draw(this._guiTexture, new Rectangle(550 , 150, _guiTexture.Width / 2 , _guiTexture.Height / 2), null, Color.White);
             else
                 spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
         }

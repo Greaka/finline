@@ -89,9 +89,9 @@ namespace Finline.Code.GameState
             this.guiElements.Add(EGameState.InGame, new List<GuiElement>());
             
 
-            this.guiElements[EGameState.InGame].Add(new GuiElement("PlayTrans"));
-            this.guiElements[EGameState.InGame].Add(new GuiElement("Option2Trans"));
-            this.guiElements[EGameState.InGame].Add(new GuiElement("End2Trans"));
+            this.guiElements[EGameState.InGame].Add(new GuiElement("Play"));
+            this.guiElements[EGameState.InGame].Add(new GuiElement("Options"));
+            this.guiElements[EGameState.InGame].Add(new GuiElement("End"));
 
         }
 
@@ -136,9 +136,9 @@ namespace Finline.Code.GameState
                 }
             }
 
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "PlayTrans").MoveElement(0, -100);
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Option2Trans").MoveElement(0, 0);
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "End2Trans").MoveElement(0, 100);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -100);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Options").MoveElement(0, 0);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "End").MoveElement(0, 100);
 
             //this.playTexture2D = this.Content.Load<Texture2D>("PlayTrans");
             //this.playRectangle = new Rectangle(280, 150, this.playTexture2D.Width - 20, this.playTexture2D.Height - 20);
@@ -168,15 +168,17 @@ namespace Finline.Code.GameState
         private void OnClick(string element)
         {
             if (this.isPressed) return;
+                this.isPressed = true;
 
-            this.isPressed = true;
+            if (element == "Play")                 //muss noch verbessert werden, da die buttons noch nicht funktionieren
 
-            if (element == "PlayTrans")
                 this.paused = !this.paused;
-                
+            
+            //if(element == "Option2Trans")
+                   
             
 
-            if (element == "End2Trans")
+            if (element == "End")
                 this.Exit();
 
         }
@@ -217,11 +219,12 @@ namespace Finline.Code.GameState
             MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
             if(this.currentGameState == EGameState.InGame)
-          
+
+
 
             if (k.IsKeyDown(Keys.P) && !this.isPressed)
                 {
-                    foreach (var element in this.guiElements[this.currentGameState])
+                    foreach (var element in this.guiElements[this.currentGameState])  //muss noch verbessert werden, da die buttons noch nicht verwendet werden
                     {
                         element.Update(ref this.isPressed);
                     }
@@ -272,11 +275,7 @@ namespace Finline.Code.GameState
                     {
                         element.Draw(this.spriteBatch);
                     }
-
-                
-            
             }
-
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;

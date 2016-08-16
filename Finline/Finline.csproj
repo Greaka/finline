@@ -67,20 +67,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Back_to_MainMenu2.png" />
-    <Content Include="Content\Credits2.png" />
-    <Content Include="Content\End2.png" />
-    <Content Include="Content\End2Trans.png" />
     <Content Include="Content\finground.jpg" />
     <Content Include="Content\Logo 2.png" />
     <Content Include="Content\Logo.PNG" />
-    <Content Include="Content\MenuFrame.png" />
-    <Content Include="Content\NewGame2.png" />
-    <Content Include="Content\Option2.png" />
-    <Content Include="Content\Option2Trans.png" />
     <Content Include="Content\PauseTrans.png" />
-    <Content Include="Content\PlayTrans.png" />
-    <Content Include="Content\StartGame2.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
