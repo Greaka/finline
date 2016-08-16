@@ -57,9 +57,9 @@ namespace Finline.Code.GameState
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (this.AssetName == "Logo 2")
+            if (this.AssetName == "Logo 2Trans")
                 spriteBatch.Draw(this._guiTexture, new Rectangle(30, 10, 700, 440), null, Color.White); 
-            else if(this.AssetName == "Logo")
+            else if(this.AssetName == "LogoTrans")
                 spriteBatch.Draw(this._guiTexture, new Rectangle(550 , 150, _guiTexture.Width / 2 , _guiTexture.Height / 2), null, Color.White);
             else
                 spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);

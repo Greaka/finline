@@ -38,7 +38,7 @@ namespace Finline.Code.GameState
             this.spriteBatch = sprite;
             this.menuState = EMenuState.TitleScreen;
 
-            this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("Logo 2")); // Logo in the state Titlescreen
+            this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("Logo 2Trans")); // Logo in the state Titlescreen
             
             // here are the elements in the state MainMenu
             
@@ -56,7 +56,7 @@ namespace Finline.Code.GameState
 
             // here are the elements in the state Credits
             this.guiElements[EMenuState.Credits].Add(new GuiElement("Back2MainMenu"));
-            this.guiElements[EMenuState.Credits].Add(new GuiElement("Logo"));
+            this.guiElements[EMenuState.Credits].Add(new GuiElement("LogoTrans"));
             
         }
 
@@ -73,7 +73,7 @@ namespace Finline.Code.GameState
                 }
             }
             
-            this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "Logo 2").MoveElement(0, -50); // move the logo up in y-direction
+            this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "Logo 2Trans").MoveElement(0, -50); // move the logo up in y-direction
             
             
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(-200, -200); // move the "newgame" button up in y-direction
@@ -120,7 +120,7 @@ namespace Finline.Code.GameState
             {
                 this.spriteBatch.DrawString(this.font, 
                     "Minh Vuong Pham\n" + "Michl Steglich\n" + "Tim Stadelmann\n" + "Tino Nagelmueller\n", 
-                    new Vector2(300, 100), Color.Black);
+                    new Vector2(300, 100), Color.White);
             }
 
             if (this.menuState != EMenuState.None)
