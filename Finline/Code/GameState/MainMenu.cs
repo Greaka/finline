@@ -42,7 +42,7 @@ namespace Finline.Code.GameState
             
             // here are the elements in the state MainMenu
             
-            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("NewGameButton"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("NewGame"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("Options"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("Credits"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("End"));
@@ -76,7 +76,7 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "Logo 2").MoveElement(0, -50); // move the logo up in y-direction
             
             
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGameButton").MoveElement(-200, -200); // move the "newgame" button up in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(-200, -200); // move the "newgame" button up in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Options").MoveElement(-200, -125); // move the "option" button down in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Credits").MoveElement(-200 , -50); // move the "credits" button 200 in x-direction and 50 down in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "End").MoveElement(-200, 25); // move the "end" button down in y-direction
@@ -143,15 +143,13 @@ namespace Finline.Code.GameState
             if (this.isPressed) return;
 
             this.isPressed = true;
-            if (element == "MenuFrame")
-                this.isPressed = false;
 
             if (this.menuState == EMenuState.TitleScreen)
             {
                 this.menuState = EMenuState.MainMenu;
             }
 
-            if (element == "NewGameButton")
+            if (element == "NewGame")
             {
                 this.menuState = EMenuState.CharacterScreen;
             }
