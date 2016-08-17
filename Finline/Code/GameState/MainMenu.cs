@@ -38,7 +38,7 @@ namespace Finline.Code.GameState
             this.spriteBatch = sprite;
             this.menuState = EMenuState.TitleScreen;
 
-            this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("Logo 2Trans")); // Logo in the state Titlescreen
+            this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); // Logo in the state Titlescreen
             
             // here are the elements in the state MainMenu
             
@@ -73,7 +73,7 @@ namespace Finline.Code.GameState
                 }
             }
             
-            this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "Logo 2Trans").MoveElement(0, -50); // move the logo up in y-direction
+            this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "TitleScreen").MoveElement(0, -60); // move the logo up in y-direction
             
             
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(-200, -200); // move the "newgame" button up in y-direction

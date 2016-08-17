@@ -401,7 +401,7 @@
 /processorParam:TextureFormat=Color
 /build:LogoTrans.PNG
 
-#begin Logo 2Trans.png
+#begin TitleScreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -411,5 +411,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Logo 2Trans.png
+/build:TitleScreen.png
 

@@ -71,6 +71,7 @@
     <Content Include="Content\Logo 2Trans.png" />
     <Content Include="Content\LogoTrans.PNG" />
     <Content Include="Content\PauseTrans.png" />
+    <Content Include="Content\TitleScreen.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
