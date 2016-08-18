@@ -58,8 +58,8 @@ namespace Finline.Code.GameState
         public void Draw(SpriteBatch spriteBatch)
         {
              if(this.AssetName == "LogoTransparent")
-                spriteBatch.Draw(this._guiTexture, new Rectangle(550 , 150, _guiTexture.Width / 2 , _guiTexture.Height / 2), null, Color.White);
-            else
+                spriteBatch.Draw(this._guiTexture, new Rectangle(600, 270, _guiTexture.Width / 3 , _guiTexture.Height / 3), null, Color.White);
+             else
                 spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
         }
 
