@@ -54,7 +54,9 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Back2MainMenu"));
 
             // here are the elements in the state Option
+            this.guiElements[EMenuState.Option].Add(new GuiElement("Controls"));
             this.guiElements[EMenuState.Option].Add(new GuiElement("Back2MainMenu"));
+            this.guiElements[EMenuState.Option].Add(new GuiElement("LogoTransparent"));
 
             // here are the elements in the state Records
             this.guiElements[EMenuState.Records].Add(new GuiElement("Back2MainMenu"));
@@ -84,8 +86,7 @@ namespace Finline.Code.GameState
             }
             
             this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "TitleScreen").MoveElement(0, -60); // move the logo up in y-direction
-            
-            
+
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(-200, -200); // move the "newgame" button up in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Options").MoveElement(-200, -125); // move the "option" button down in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Records").MoveElement(-200, -50);
@@ -95,7 +96,8 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.CharacterScreen].Find(x=> x.AssetName =="StartGame").MoveElement(0, 25); // move the "StartGame" button up in y-direction
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 100); // move the "Back_to_MainMenu" button down in y-direction
             
-            this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
+            this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Controls").MoveElement(0, -185);
+            this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 80); // move the "Back_to_MainMenu" button down in y-direction
             
             this.guiElements[EMenuState.Records].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 70); // move the button down in y-direction
 
@@ -131,9 +133,10 @@ namespace Finline.Code.GameState
 
             if (this.menuState == EMenuState.Records)
             {
-                this.spriteBatch.DrawString(this.font, "Placement", new Vector2(80, 0), Color.White);
-                this.spriteBatch.DrawString(this.font,"Name",new Vector2(300,0),Color.White);
-                this.spriteBatch.DrawString(this.font, "Time", new Vector2(550, 0), Color.White);
+                this.spriteBatch.DrawString(this.font, "Records", new Vector2(350, 0),Color.White);
+                this.spriteBatch.DrawString(this.font, "Placement", new Vector2(80, 50), Color.White);
+                this.spriteBatch.DrawString(this.font,"Name",new Vector2(300, 50),Color.White);
+                this.spriteBatch.DrawString(this.font, "Time", new Vector2(550, 50), Color.White);
             }
             
          
