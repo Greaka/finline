@@ -130,6 +130,10 @@ namespace Finline.Code.GameState
         public override void Draw(GameTime gameTime)
         {
             this.spriteBatch.Begin();
+            if (this.menuState == EMenuState.Option)
+            {
+                this.spriteBatch.DrawString(this.font, "Sound: ", new Vector2(50, 250), Color.White);
+            }
 
             if (this.menuState == EMenuState.Records)
             {
