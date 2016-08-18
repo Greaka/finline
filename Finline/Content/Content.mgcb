@@ -389,18 +389,6 @@
 /processorParam:TextureFormat=Color
 /build:NewGame.png
 
-#begin LogoTrans.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:LogoTrans.PNG
-
 #begin TitleScreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -412,4 +400,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TitleScreen.png
+
+#begin LogoTransparent.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:LogoTransparent.PNG
 

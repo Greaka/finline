@@ -38,7 +38,7 @@ namespace Finline.Code.GameState
             this.spriteBatch = sprite;
             this.menuState = EMenuState.TitleScreen;
 
-            this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); // Logo in the state Titlescreen
+            this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); //Texture in the Titlescreen
             
             // here are the elements in the state MainMenu
             
@@ -56,7 +56,7 @@ namespace Finline.Code.GameState
 
             // here are the elements in the state Credits
             this.guiElements[EMenuState.Credits].Add(new GuiElement("Back2MainMenu"));
-            this.guiElements[EMenuState.Credits].Add(new GuiElement("LogoTrans"));
+            this.guiElements[EMenuState.Credits].Add(new GuiElement("LogoTransparent"));
             
         }
 
