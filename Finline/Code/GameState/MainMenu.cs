@@ -59,6 +59,7 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.Option].Add(new GuiElement("LogoTransparent"));
 
             // here are the elements in the state Records
+            this.guiElements[EMenuState.Records].Add(new GuiElement("RecordTexture"));
             this.guiElements[EMenuState.Records].Add(new GuiElement("Back2MainMenu"));
             this.guiElements[EMenuState.Records].Add(new GuiElement("LogoTransparent"));
 
@@ -66,10 +67,6 @@ namespace Finline.Code.GameState
             
             this.guiElements[EMenuState.Credits].Add(new GuiElement("Back2MainMenu"));
             this.guiElements[EMenuState.Credits].Add(new GuiElement("CreditscreenTexture2"));
-
-
-           
-
         }
 
         protected override void LoadContent()
@@ -99,6 +96,7 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Controls").MoveElement(-10, -165);
             this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 80); // move the "Back_to_MainMenu" button down in y-direction
             
+            this.guiElements[EMenuState.Records].Find(x => x.AssetName == "RecordTexture").MoveElement(0, -265);
             this.guiElements[EMenuState.Records].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 70); // move the button down in y-direction
 
             this.guiElements[EMenuState.Credits].Find(x => x.AssetName == "CreditscreenTexture2").MoveElement(0, -60);
@@ -114,16 +112,10 @@ namespace Finline.Code.GameState
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                     this.menuState = EMenuState.MainMenu;
             }
-
-            
-            
             foreach (var element in this.guiElements[this.menuState])
             {
                 element.Update(ref this.isPressed);
             }
-
-
-          
         }
 
 
@@ -131,24 +123,11 @@ namespace Finline.Code.GameState
         {
             this.spriteBatch.Begin();
 
-            if (this.menuState == EMenuState.Records)
-            {
-                this.spriteBatch.DrawString(this.font, "Records", new Vector2(350, 0),Color.White);
-                this.spriteBatch.DrawString(this.font, "Placement", new Vector2(80, 50), Color.White);
-                this.spriteBatch.DrawString(this.font,"Name",new Vector2(300, 50),Color.White);
-                this.spriteBatch.DrawString(this.font, "Time", new Vector2(550, 50), Color.White);
-            }
-            
-         
-
             if (this.menuState != EMenuState.None)
             foreach (var element in this.guiElements[this.menuState])
             {
                 element.Draw(this.spriteBatch);
             }
-
-           
-
             this.spriteBatch.End();
         }
 

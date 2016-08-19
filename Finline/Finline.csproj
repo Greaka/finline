@@ -73,6 +73,7 @@
     <Content Include="Content\LogoTransparent.PNG" />
     <Content Include="Content\PauseTrans.png" />
     <Content Include="Content\Records.PNG" />
+    <Content Include="Content\RecordTexture.png" />
     <Content Include="Content\TitleScreen.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
