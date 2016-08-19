@@ -96,7 +96,7 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.CharacterScreen].Find(x=> x.AssetName =="StartGame").MoveElement(0, 25); // move the "StartGame" button up in y-direction
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 100); // move the "Back_to_MainMenu" button down in y-direction
             
-            this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Controls").MoveElement(0, -185);
+            this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Controls").MoveElement(-10, -165);
             this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 80); // move the "Back_to_MainMenu" button down in y-direction
             
             this.guiElements[EMenuState.Records].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 70); // move the button down in y-direction
@@ -130,10 +130,6 @@ namespace Finline.Code.GameState
         public override void Draw(GameTime gameTime)
         {
             this.spriteBatch.Begin();
-            if (this.menuState == EMenuState.Option)
-            {
-                this.spriteBatch.DrawString(this.font, "Sound: ", new Vector2(50, 250), Color.White);
-            }
 
             if (this.menuState == EMenuState.Records)
             {
@@ -196,6 +192,7 @@ namespace Finline.Code.GameState
             if (element == "Records")
             {
                 this.menuState = EMenuState.Records;
+               
             }
 
             if (element == "Back2MainMenu")

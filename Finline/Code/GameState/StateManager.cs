@@ -61,21 +61,6 @@ namespace Finline.Code.GameState
 
         private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
 
-        //private GuiElement btnPLayElement;
-        //private GuiElement btnOptionElement;
-        //private GuiElement btnEndElement;
-
-        //private Texture2D playTexture2D;
-        //private Rectangle playRectangle;
-
-        ////private Texture2D optionTexture2D;
-        ////private Rectangle optionRectangle;
-
-        ////private Texture2D quitGameTexture2D;
-        ////private Rectangle quitGameRectangle;
-
-
-
         private Song musicMainMenu;
         
 
@@ -136,30 +121,12 @@ namespace Finline.Code.GameState
                 }
             }
 
+            // buttons in the pausescreen
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -100);
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Options").MoveElement(0, 0);
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "End").MoveElement(0, 100);
 
-            //this.playTexture2D = this.Content.Load<Texture2D>("PlayTrans");
-            //this.playRectangle = new Rectangle(280, 150, this.playTexture2D.Width - 20, this.playTexture2D.Height - 20);
-
-            //btnPLayElement = new GuiElement("PlayTrans");
-
-
-
-
-            //this.optionTexture2D = this.Content.Load<Texture2D>("Option2Trans");
-            //this.optionRectangle = new Rectangle(280, 250, this.optionTexture2D.Width - 20, this.optionTexture2D.Height - 20);
-
-            //btnOptionElement = new GuiElement("Option2Trans");
-
-
-            //this.quitGameTexture2D = this.Content.Load<Texture2D>("End2Trans");
-            //this.quitGameRectangle = new Rectangle(280, 350, this.quitGameTexture2D.Width - 20, this.quitGameTexture2D.Height - 20);
-
-            //btnEndElement = new GuiElement("End2Trans");
-
-
+            //music in titlescreen and menusystem
             this.musicMainMenu = this.Content.Load<Song>("musicMainMenu");
             if (this.nextGameState == EGameState.MainMenu)
                 MediaPlayer.Play(this.musicMainMenu);
@@ -190,7 +157,7 @@ namespace Finline.Code.GameState
         {
             // TODO: Unload any non ContentManager content here
         }
-        
+
 
         /// <summary>
         /// The update.
@@ -198,11 +165,29 @@ namespace Finline.Code.GameState
         /// <param name="gameTime">
         /// The game time.
         /// </param>
+        private bool off = false;
+        KeyboardState oldKeyState;
         protected override void Update(GameTime gameTime)
         {
-
+             
             if (this.nextGameState == EGameState.InGame)
                 MediaPlayer.Stop();
+
+            KeyboardState newKeyState = Keyboard.GetState();
+            if (newKeyState.IsKeyDown(Keys.O) && oldKeyState.IsKeyUp(Keys.O))
+            {
+                if (off == true)
+                {
+                    MediaPlayer.Pause();
+                }
+                else
+                {
+                    MediaPlayer.Resume();
+                }
+                off = !off;
+            }
+            oldKeyState = newKeyState;
+
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -224,7 +209,7 @@ namespace Finline.Code.GameState
 
             if (k.IsKeyDown(Keys.P) && !this.isPressed)
                 {
-                    foreach (var element in this.guiElements[this.currentGameState])  //muss noch verbessert werden, da die buttons noch nicht verwendet werden
+                    foreach (var element in this.guiElements[this.currentGameState])  //muss noch verbessert werden, da die buttons noch nicht verwendet werden können
                     {
                         element.Update(ref this.isPressed);
                     }
