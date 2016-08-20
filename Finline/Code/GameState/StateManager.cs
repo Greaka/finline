@@ -6,6 +6,10 @@
 //   Defines the StateManager type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Content;
+
 namespace Finline.Code.GameState
 {
     using System;
@@ -49,13 +53,13 @@ namespace Finline.Code.GameState
         private SpriteBatch spriteBatch;
         private bool isPressed = false;
         private SpriteFont font;
+        
 
         private bool paused = false;
         private Texture2D pausedTexture2D;
         private Rectangle pausedRectangle;
 
-        private Texture2D quitGameTexture2D;
-        private Rectangle quitGameRectangle;
+        private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
 
         private Song musicMainMenu;
         
@@ -67,6 +71,13 @@ namespace Finline.Code.GameState
         {
             this.Graphics = new GraphicsDeviceManager(this);
             this.IsMouseVisible = true;
+            this.guiElements.Add(EGameState.InGame, new List<GuiElement>());
+            
+
+            this.guiElements[EGameState.InGame].Add(new GuiElement("Play"));
+            this.guiElements[EGameState.InGame].Add(new GuiElement("Options"));
+            this.guiElements[EGameState.InGame].Add(new GuiElement("End"));
+
         }
 
         /// <summary>
@@ -79,7 +90,7 @@ namespace Finline.Code.GameState
         /// </summary>
         protected override void Initialize()
         {
-            this.nextGameState = EGameState.InGame;
+            this.nextGameState = EGameState.MainMenu;
             base.Initialize();
         }
 
@@ -96,16 +107,31 @@ namespace Finline.Code.GameState
             this.main.Initialize();
 
             this.pausedTexture2D = this.Content.Load<Texture2D>("PauseTrans");
-            this.pausedRectangle = new Rectangle(345, 100, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
+            this.pausedRectangle = new Rectangle(360, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
 
-            this.quitGameTexture2D = this.Content.Load<Texture2D>("End2Trans");
-            this.quitGameRectangle = new Rectangle(280, 300, this.quitGameTexture2D.Width - 20, this.quitGameTexture2D.Height - 20);
 
+            //this.font = this.Content.Load<SpriteFont>("font");
+            foreach (var elementList in this.guiElements.Values)
+            {
+                foreach (var element in elementList)
+                {
+                    element.LoadContent(this.Content);
+                    element.CenterElement(600, 800);
+                    element.ClickEvent += this.OnClick;
+                }
+            }
+
+            // buttons in the pausescreen
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -100);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Options").MoveElement(0, 0);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "End").MoveElement(0, 100);
+
+            //music in titlescreen and menusystem
             this.musicMainMenu = this.Content.Load<Song>("musicMainMenu");
             if (this.nextGameState == EGameState.MainMenu)
                 MediaPlayer.Play(this.musicMainMenu);
         }
-
+        
         /// <summary>
         /// The unload content.
         /// </summary>
@@ -113,7 +139,7 @@ namespace Finline.Code.GameState
         {
             // TODO: Unload any non ContentManager content here
         }
-        
+
 
         /// <summary>
         /// The update.
@@ -121,11 +147,29 @@ namespace Finline.Code.GameState
         /// <param name="gameTime">
         /// The game time.
         /// </param>
+        private bool off = false;
+        KeyboardState oldKeyState;
         protected override void Update(GameTime gameTime)
         {
-
+             
             if (this.nextGameState == EGameState.InGame)
                 MediaPlayer.Stop();
+
+            KeyboardState newKeyState = Keyboard.GetState();
+            if (newKeyState.IsKeyDown(Keys.O) && oldKeyState.IsKeyUp(Keys.O))
+            {
+                if (off == true)
+                {
+                    MediaPlayer.Pause();
+                }
+                else
+                {
+                    MediaPlayer.Resume();
+                }
+                off = !off;
+            }
+            oldKeyState = newKeyState;
+
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -141,23 +185,31 @@ namespace Finline.Code.GameState
             var mouse = Mouse.GetState();
             var k = Keyboard.GetState();
             if(this.currentGameState == EGameState.InGame)
-            if (k.IsKeyDown(Keys.P) && !this.isPressed )
-            {
-                this.paused = !this.paused;
-                this.isPressed = true;
-            }
+                foreach (var element in this.guiElements[this.currentGameState])  //muss noch verbessert werden, da die buttons nicht einwandfrei funktionieren
+                {
+                    element.Update(ref this.isPressed);
+                }
 
+
+            if (k.IsKeyDown(Keys.P) && !this.isPressed)
+                {
+                    this.paused = !this.paused;
+                   
+                    this.isPressed = true;
+                    
+                }
+          
             if (this.isPressed && !k.IsKeyDown(Keys.P))
             {
                 this.isPressed = false;
             }
-
+         
             if (!this.paused)
             {
                 this.gameState.Update(gameTime);
-                
             }
 
+          
             base.Update(gameTime);
         }
 
@@ -181,14 +233,41 @@ namespace Finline.Code.GameState
             if (this.paused)
             {
                 this.spriteBatch.Draw(this.pausedTexture2D, this.pausedRectangle, Color.White);
-                this.spriteBatch.Draw(this.quitGameTexture2D, this.quitGameRectangle, Color.White);
+                if (this.currentGameState != EGameState.None)
+                    foreach (var element in this.guiElements[this.currentGameState])
+                    {
+                        element.Draw(this.spriteBatch);
+                    }
             }
-
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
 
             base.Draw(gameTime);
+        }
+
+        /// <summary>
+        /// when click on the button, do something
+        /// </summary>
+        /// <param name="element"></param>
+        private void OnClick(string element)
+        {
+            if (this.isPressed) return;
+            this.isPressed = true;
+
+            if (element == "Play") //muss noch verbessert werden, da die buttons noch nicht funktionieren
+            {
+                paused = !paused;
+            }
+
+            //if (element == "Options")
+            //{
+            //    currentGameState = EGameState.MainMenu;
+            //}
+
+            if (element == "End")
+                this.Exit();
+
         }
 
         /// <summary>
@@ -212,7 +291,7 @@ namespace Finline.Code.GameState
             }
 
             this.gameState.Initialize();
-
+            
             this.currentGameState = this.nextGameState;
         }
 

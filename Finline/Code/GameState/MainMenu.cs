@@ -16,9 +16,10 @@ namespace Finline.Code.GameState
         private readonly SpriteBatch spriteBatch;
 
         private EMenuState menuState;
+
         private SpriteFont font;
 
-        private bool paused = false;
+        
        
 
         /// <summary>
@@ -27,39 +28,48 @@ namespace Finline.Code.GameState
         public MainMenu(StateManager game, SpriteBatch sprite)
             : base(game)
         {
-            // The Lists with all the elements
+            // The Lists with all the GUIElements
             this.guiElements.Add(EMenuState.TitleScreen, new List<GuiElement>());
             this.guiElements.Add(EMenuState.MainMenu, new List<GuiElement>());
             this.guiElements.Add(EMenuState.CharacterScreen, new List<GuiElement>());
             this.guiElements.Add(EMenuState.Option, new List<GuiElement>());
+            this.guiElements.Add(EMenuState.Records, new List<GuiElement>());
             this.guiElements.Add(EMenuState.Credits, new List<GuiElement>());
 
             this.spriteBatch = sprite;
             this.menuState = EMenuState.TitleScreen;
 
-            this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("Logo 2")); // Logo in the state Titlescreen
+            this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); //Texture in the Titlescreen
             
             // here are the elements in the state MainMenu
-            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("MenuFrame"));
-            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("NewGame2"));
-            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("Option2"));
-            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("Credits2"));
-            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("End2"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("NewGame"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("Options"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("Records"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("Credits"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("End"));
             
             // elements in the state characterScreen
-            this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("StartGame2"));
-            this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Back_to_MainMenu2"));
+            this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("StartGame"));
+            this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Back2MainMenu"));
 
             // here are the elements in the state Option
-            this.guiElements[EMenuState.Option].Add(new GuiElement("Back_to_MainMenu2"));
+            this.guiElements[EMenuState.Option].Add(new GuiElement("Controls"));
+            this.guiElements[EMenuState.Option].Add(new GuiElement("Back2MainMenu"));
+            this.guiElements[EMenuState.Option].Add(new GuiElement("LogoTransparent"));
 
-            // here are the elements in the state Credits
-            this.guiElements[EMenuState.Credits].Add(new GuiElement("Back_to_MainMenu2"));
+            // here are the elements in the state Records
+            this.guiElements[EMenuState.Records].Add(new GuiElement("RecordTexture"));
+            this.guiElements[EMenuState.Records].Add(new GuiElement("Back2MainMenu"));
+            this.guiElements[EMenuState.Records].Add(new GuiElement("LogoTransparent"));
+
+            // here are the elements in the state Credits 
+            this.guiElements[EMenuState.Credits].Add(new GuiElement("Back2MainMenu"));
+            this.guiElements[EMenuState.Credits].Add(new GuiElement("CreditscreenTexture2"));
         }
 
         protected override void LoadContent()
         {
-            this.font = this.Game.Content.Load<SpriteFont>("font");
+            //this.font = this.Game.Content.Load<SpriteFont>("font");
             foreach (var elementList in this.guiElements.Values)
             {
                 foreach (var element in elementList)
@@ -70,21 +80,26 @@ namespace Finline.Code.GameState
                 }
             }
             
-            this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "Logo 2").MoveElement(0, -50); // move the logo up in y-direction
-            
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "MenuFrame").MoveElement(0, -50); // frame Movement
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame2").MoveElement(0, -200); // move the "newgame" button up in y-direction
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Option2").MoveElement(0, -50); // move the "option" button down in y-direction
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Credits2").MoveElement(220 , 50); // move the "credits" button 200 in x-direction and 50 down in y-direction
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "End2").MoveElement(0, 100); // move the "end" button down in y-direction
-            
-            this.guiElements[EMenuState.CharacterScreen].Find(x=> x.AssetName =="StartGame2").MoveElement(0, -30); // move the "StartGame" button up in y-direction
-            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back_to_MainMenu2").MoveElement(0, 100); // move the "Back_to_MainMenu" button down in y-direction
-            
-            this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Back_to_MainMenu2").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
-            
-            this.guiElements[EMenuState.Credits].Find(x => x.AssetName == "Back_to_MainMenu2").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
+            this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "TitleScreen").MoveElement(0, -60); // move the logo up in y-direction
 
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(-200, -200); // move the "newgame" button up in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Options").MoveElement(-200, -125); // move the "option" button down in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Records").MoveElement(-200, -50);
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Credits").MoveElement(-200 , 25); // move the "credits" button 200 in x-direction and 50 down in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "End").MoveElement(-200, 100); // move the "end" button down in y-direction
+            
+            this.guiElements[EMenuState.CharacterScreen].Find(x=> x.AssetName =="StartGame").MoveElement(0, 25); // move the "StartGame" button up in y-direction
+            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 100); // move the "Back_to_MainMenu" button down in y-direction
+            
+            this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Controls").MoveElement(-10, -165);
+            this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 80); // move the "Back_to_MainMenu" button down in y-direction
+            
+            this.guiElements[EMenuState.Records].Find(x => x.AssetName == "RecordTexture").MoveElement(0, -265); // move the recordtexture up in y-direction
+            this.guiElements[EMenuState.Records].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 70); // move the button down in y-direction
+
+            this.guiElements[EMenuState.Credits].Find(x => x.AssetName == "CreditscreenTexture2").MoveElement(0, -60);
+            this.guiElements[EMenuState.Credits].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
+            
             
         }
 
@@ -95,39 +110,22 @@ namespace Finline.Code.GameState
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                     this.menuState = EMenuState.MainMenu;
             }
-
-            
-            
             foreach (var element in this.guiElements[this.menuState])
             {
                 element.Update(ref this.isPressed);
             }
-
-
-          
         }
 
 
         public override void Draw(GameTime gameTime)
         {
             this.spriteBatch.Begin();
-         
-            
-            if (this.menuState == EMenuState.Credits)
-            {
-                this.spriteBatch.DrawString(this.font, 
-                    "Minh Vuong Pham\n" + "Michl Steglich\n" + "Tim Stadelmann\n" + "Tino Nagelmueller\n", 
-                    new Vector2(300, 100), Color.Black);
-            }
 
             if (this.menuState != EMenuState.None)
             foreach (var element in this.guiElements[this.menuState])
             {
                 element.Draw(this.spriteBatch);
             }
-
-           
-
             this.spriteBatch.End();
         }
 
@@ -138,46 +136,47 @@ namespace Finline.Code.GameState
         private void OnClick(string element)
         {
             if (this.isPressed) return;
-
             this.isPressed = true;
-            if (element == "MenuFrame") this.isPressed = false;
-
+                
             if (this.menuState == EMenuState.TitleScreen)
             {
                 this.menuState = EMenuState.MainMenu;
             }
 
-            if (element == "NewGame2")
+            if (element == "NewGame")
             {
                 this.menuState = EMenuState.CharacterScreen;
             }
 
-            if (element == "StartGame2")
+            if (element == "StartGame")
             {
                 this.menuState = EMenuState.None;
                 this.GoIngame?.Invoke();
-
             }
 
-            if (element == "Option2")
+            if (element == "Options")
             {
                 this.menuState = EMenuState.Option;
             }
 
-            if (element == "Credits2")
+            if (element == "Credits")
             {
                 this.menuState = EMenuState.Credits;
             }
 
-            if (element == "End2")
+            if (element == "Records")
             {
-                this.Game.Exit();
+                this.menuState = EMenuState.Records;
             }
 
-
-            if (element == "Back_to_MainMenu2")
+            if (element == "Back2MainMenu")
             {
                 this.menuState = EMenuState.MainMenu;
+            }
+
+            if (element == "End")
+            {
+                this.Game.Exit();
             }
         }
 
@@ -196,11 +195,11 @@ namespace Finline.Code.GameState
 
             CharacterScreen, 
 
-            Option, 
+            Option,
+
+            Records,
 
             Credits
-
-
         }
     }
 }

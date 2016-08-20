@@ -11,7 +11,7 @@ namespace Finline.Code.GameState
 
         private Rectangle _guiRect;
         private Texture2D _guiTexture;
-
+        
        
 
         /// <summary>
@@ -52,12 +52,10 @@ namespace Finline.Code.GameState
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (this.AssetName == "Logo 2")
-                spriteBatch.Draw(this._guiTexture, new Rectangle(30, 10, 700, 440), null, Color.White);
-            else
+             if(this.AssetName == "LogoTransparent")
+                spriteBatch.Draw(this._guiTexture, new Rectangle(600, 270, _guiTexture.Width / 3 , _guiTexture.Height / 3), null, Color.White);
+             else
                 spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
-
-            
         }
 
 
