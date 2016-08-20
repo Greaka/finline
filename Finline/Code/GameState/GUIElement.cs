@@ -38,9 +38,6 @@ namespace Finline.Code.GameState
 
         public void Update(ref bool isPressed)
         {
-            
-
-      
             if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
                 Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
@@ -51,8 +48,6 @@ namespace Finline.Code.GameState
             {
                 isPressed = false;
             }
-
-            
         }
 
         public void Draw(SpriteBatch spriteBatch)
