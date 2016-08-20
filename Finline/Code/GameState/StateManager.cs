@@ -90,7 +90,7 @@ namespace Finline.Code.GameState
         /// </summary>
         protected override void Initialize()
         {
-            this.nextGameState = EGameState.MainMenu;
+            this.nextGameState = EGameState.InGame;
             base.Initialize();
         }
 
