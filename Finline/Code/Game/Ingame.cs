@@ -167,7 +167,7 @@
 
         private void LoadEnvironment()
         {
-            for (var i = 0; i < 41; i += 2)
+            for (var i = 2; i < 39; i += 4)
             {
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(

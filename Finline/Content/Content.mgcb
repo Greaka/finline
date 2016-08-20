@@ -465,10 +465,10 @@
 /processorParam:PremultiplyTextureAlpha=True
 /processorParam:PremultiplyVertexColors=True
 /processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
+/processorParam:RotationX=90
 /processorParam:RotationY=90
 /processorParam:RotationZ=90
-/processorParam:Scale=0.2
+/processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:cube.fbx
@@ -484,10 +484,10 @@
 /processorParam:PremultiplyTextureAlpha=True
 /processorParam:PremultiplyVertexColors=True
 /processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=90
+/processorParam:RotationX=0
 /processorParam:RotationY=90
 /processorParam:RotationZ=90
-/processorParam:Scale=0.2
+/processorParam:Scale=1
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:cube2.fbx
