@@ -53,7 +53,7 @@
     <Compile Include="Code\Game\Entities\Projectile.cs" />
     <Compile Include="Code\Game\Ground.cs" />
     <Compile Include="Code\Game\Entities\Player.cs" />
-    <Compile Include="Code\Utility\GraphicsHelper.cs" />
+    <Compile Include="Code\Utility\Collision.cs" />
     <Compile Include="Code\Utility\VectorHelper.cs" />
     <Compile Include="Code\Game\Ingame.cs" />
     <Compile Include="Program.cs" />

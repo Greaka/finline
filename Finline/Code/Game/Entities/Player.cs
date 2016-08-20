@@ -28,14 +28,12 @@ namespace Finline.Code.Game.Entities
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection, List<EnvironmentObject> environmentObjects)
         {
             this.SetViewDirection(shootDirection);
-            var pos = this.position;
-            float intersection;
-            this.position +=
-                new Vector3(moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond, 0);
-
-            if (this.IsColliding(environmentObjects, out intersection))
+            var pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond;
+            var collisionResult = this.IsColliding(environmentObjects, pos);
+            this.position += new Vector3(pos, 0);
+            if (collisionResult.HasValue)
             {
-                this.position = pos; // += new Vector3(ControlsHelper.MoveDirection * intersection, 0);
+                this.position += new Vector3(collisionResult.Value, 0);
             }
         }
     }

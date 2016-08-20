@@ -138,8 +138,8 @@ namespace Finline.Code.GameState
                 this.HandleGameState();
             }
 
-            MouseState mouse = Mouse.GetState();
-            KeyboardState k = Keyboard.GetState();
+            var mouse = Mouse.GetState();
+            var k = Keyboard.GetState();
             if(this.currentGameState == EGameState.InGame)
             if (k.IsKeyDown(Keys.P) && !this.isPressed )
             {
@@ -170,7 +170,7 @@ namespace Finline.Code.GameState
         protected override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.White);
-            RasterizerState r = new RasterizerState();
+            var r = new RasterizerState();
             r.CullMode = CullMode.None;
             this.GraphicsDevice.RasterizerState = r;
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;

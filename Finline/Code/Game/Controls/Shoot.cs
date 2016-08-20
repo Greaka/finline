@@ -63,7 +63,7 @@ namespace Finline.Code.Game.Controls
         /// </summary>
         public void Update(List<EnvironmentObject> environmentObjects)
         {
-            List<Projectile> remove = new List<Projectile>();
+            var remove = new List<Projectile>();
             foreach (var outch in this.projectiles)
             {
                 outch.Update(this.stopwatch.Elapsed, environmentObjects, remove);

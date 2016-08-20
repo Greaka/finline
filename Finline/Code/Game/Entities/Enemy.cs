@@ -23,10 +23,10 @@ namespace Finline.Code.Game.Entities
         {
             var distance = playerPosition - this.position;
             var view = new Ray(this.position, distance);
-            bool any = false;
+            var any = false;
             foreach (var obj in environmentObjects)
             {
-                if (view.Intersects(obj.GetBound) != null && (obj.Position - this.position).Length() < distance.Length())
+                if (view.Intersects(new BoundingSphere(obj.Position, obj.GetBound[0].Length())) != null && (obj.Position - this.position).Length() < distance.Length())
                 {
                     any = true;
                     break;
