@@ -167,60 +167,63 @@
 
         private void LoadEnvironment()
         {
-            for (var i = 2; i < 39; i += 4)
+            for (var i = 2; i <= 38; i += 4)
             {
+                var j = i == 38 ? 1.75f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 0, 2),
+                        new Vector3(j, 0, 2),
                         GameConstants.EnvObjects.cube));
             }
 
-            for (var i = 1; i < 120; i += 2)
+            for (var i = 2; i <= 150; i += 4)
             {
+                var j = i == 150 ? 149.25f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(40, i, 2),
+                        new Vector3(0, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
 
-            for (var i = 1; i < 154; i += 2)
+            for (var i = 1.75f; i <= 117.75f; i += 4)
             {
+                var j = i == 117.75f ? 115.25f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(0, i, 2),
+                        new Vector3(36, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
 
-            for (var i = 8; i < 41; i += 2)
+            for (var i = 9; i <= 37; i += 4)
             {
-                // var bla = i == 0 ? 20 : Math.Abs(i) / i;
+                var j = i == 37 ? 34 : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 78, 2),
+                        new Vector3(j, 81, 2),
                         GameConstants.EnvObjects.cube));
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 52, 2),
+                        new Vector3(j, 52, 2),
                         GameConstants.EnvObjects.cube));
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 26, 2),
+                        new Vector3(j, 23, 2),
                         GameConstants.EnvObjects.cube));
             }
 
-            for (var i = 2; i < 120; i += 2)
+            for (var i = 2.25f; i <= 114.25f; i += 4)
             {
-                var j = i == 86 || i == 84 || i == 72 || i == 70 || i == 46 || i == 44 || i == 20 || i == 18 ? 120 : i;
+                var j = i == 86.25 || i == 74.25 || i == 46.25 || i == 18.25 ? 115.25f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(8, j, 2),
+                        new Vector3(7, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
 
@@ -251,262 +254,301 @@
                     GameConstants.EnvObjects.desk));
             }
 
-            for (var i = 8; i < 55; i += 2)
+            for (var i = 9; i <= 49; i += 4)
             {
+                var j = i == 49 ? 46.75f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 120, 2),
+                        new Vector3(j, 117, 2),
                         GameConstants.EnvObjects.cube));
             }
 
-            for (var i = 120; i <= 154; i += 2)
+            for (var i = 119; i <= 151; i += 4)
             {
+                var j = i == 151 ? 149 : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(55, i, 2),
+                        new Vector3(48.5f, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
-            for (var i = 28; i < 55; i += 2)
+            for (var i = 26.25f; i <= 50.25f; i += 4)
             {
+                var j = i == 50.25f ? 46.75f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 132, 2),
+                        new Vector3(j, 129, 2),
                         GameConstants.EnvObjects.cube));
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 143, 2),
+                        new Vector3(j, 140, 2),
                         GameConstants.EnvObjects.cube));
-            }
-
-            for (var i = 1; i < 55; i += 2)
-            {
-                var j = i == 21 || i == 23 || i == 25 ? 0 : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(j, 154, 2),
+                        new Vector3(j, 151, 2),
                         GameConstants.EnvObjects.cube));
             }
 
-            for (var i = 155; i < 205; i += 2)
+            for (var i = 2; i <= 18; i += 4)
             {
-                var j = i == 189 || i == 191 ? 154 : i;
+                var j = i == 18 ? 16.5f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(20, j, 2),
+                        new Vector3(j, 151, 2),
+                        GameConstants.EnvObjects.cube));
+            }
+
+            for (var i = 154; i <= 186; i += 4)
+            {
+                var j = i == 186 ? 152.75f : i;
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(18.5f, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
-            for (var i = 133; i < 195; i += 2)
+            for (var i = 131; i <= 179; i += 4)
             {
-                var j = i == 135 || i == 137 || i == 145 || i == 147 || i == 189 || i == 191 ? 132 : i;
+                var j = i == 135 || i == 143 ? 182 : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(27, j, 2),
-                        GameConstants.EnvObjects.cube2));
-            }
-
-            for (var i = 20; i < 26; i += 2)
-            {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(i, 205, 2),
-                        GameConstants.EnvObjects.cube));
-            }
-            for (var i = 27; i < 43; i += 2)
-            {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(i, 195, 2),
-                        GameConstants.EnvObjects.cube));
-            }
-
-            for (var i = 205; i < 271; i += 2)
-            {
-                var j = i == 223 || i == 225 || i == 239 || i == 241 ? 205 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(26, j, 2),
-                        GameConstants.EnvObjects.cube2));
-            }
-            for (var i = 197; i < 239; i += 2)
-            {
-                var j = i == 205 || i == 207 ? 195 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(32, j, 2),
+                        new Vector3(24.5f, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
 
-            for (var i = 0; i < 54; i += 2)
+            for (var i = 190; i <= 202; i += 4)
             {
-                var j = i == 8 || i == 10 ? 0 : i;
+                var j = i == 202 ? 199.75f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(j, 245, 2),
-                        GameConstants.EnvObjects.cube));
+                        new Vector3(18.5f, j, 2),
+                        GameConstants.EnvObjects.cube2));
             }
-            for (var i = 32; i < 54; i += 2)
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(24.5f, 190, 2),
+                        GameConstants.EnvObjects.cube2));
+
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(20.25f, 201.75f, 2),
+                        GameConstants.EnvObjects.cube));
+
+            for (var i = 26.5f; i <= 38.5f; i += 4)
             {
+                var j = i == 38.5f ? 36.75f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 239, 2),
+                        new Vector3(j, 191.75f, 2),
                         GameConstants.EnvObjects.cube));
             }
 
-            for (var i = 245; i < 251; i += 2)
-            {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(53, i, 2),
-                        GameConstants.EnvObjects.cube2));
-            }
-            for (var i = 239; i > 233; i -= 2)
-            {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(53, i, 2),
-                        GameConstants.EnvObjects.cube2));
-            }
 
-            for (var i = 53; i < 65; i += 2)
+            for (var i = 203.5f; i <= 259.5f; i += 4)
             {
+                var j = i == 219.5f || i == 235.5f ? 262 : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 251, 2),
-                        GameConstants.EnvObjects.cube));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(i, 233, 2),
-                        GameConstants.EnvObjects.cube));
-            }
-
-            for (var i = 247; i < 269; i += 2)
-            {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(65, i, 2),
+                        new Vector3(22.25f, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
-            for (var i = 237; i > 215; i -= 2)
+            for (var i = 194; i <= 230; i += 4)
             {
+                var j = i == 202 ? 233 : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(65, i, 2),
+                        new Vector3(28.25f, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
 
-            for (var i = 65; i < 148; i += 2)
+            for (var i = 2; i <= 42; i += 4)
             {
+                var j = i == 10 ? 45.5f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 269, 2),
+                        new Vector3(j, 240.5f, 2),
                         GameConstants.EnvObjects.cube));
+            }
+            for (var i = 30; i <= 46; i += 4)
+            {
+                var j = i == 46 ? 45.5f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 215, 2),
+                        new Vector3(j, 235f, 2),
                         GameConstants.EnvObjects.cube));
             }
 
-            for (var i = 215; i < 271; i += 2)
+            for (var i = 242.5f; i <= 246.5f; i += 4)
             {
+                var j = i == 246.5f ? 244 : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(148, i, 2),
+                        new Vector3(47.25f, j, 2),
+                        GameConstants.EnvObjects.cube2));
+            }
+            for (var i = 231.5f; i <= 235.5f; i += 4)
+            {
+                var j = i == 235.5f ? 233 : i;
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(47.25f, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
 
-            for (var i = 0; i < 26; i += 2)
+            for (var i = 49; i <= 57; i += 4)
             {
+                var j = i == 57 ? 56 : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 269, 2),
+                        new Vector3(j, 245.75f, 2),
                         GameConstants.EnvObjects.cube));
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 228, 2),
-                        GameConstants.EnvObjects.cube));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(i, 215, 2),
+                        new Vector3(j, 229.25f, 2),
                         GameConstants.EnvObjects.cube));
             }
-            for (var i = 215; i < 269; i += 2)
+
+            for (var i = 231.5f; i >= 211.5f; i -= 4)
             {
+                var j = i == 211.5f ? (i + 1.25f) : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(0, i, 2),
+                        new Vector3(58, j, 2),
+                        GameConstants.EnvObjects.cube2));
+            }
+            for (var i = 243.5f; i <= 263.5f; i += 4)
+            {
+                var j = i == 263.5f ? (i - 1.25f) : i;
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(58, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
 
-            for (var i = 0; i < 20; i += 2)
+            for (var i = 60; i <= 132; i += 4)
             {
+                var j = i == 132 ? 130.5f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 194, 2),
+                        new Vector3(j, 264, 2),
                         GameConstants.EnvObjects.cube));
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 180, 2),
+                        new Vector3(j, 211, 2),
                         GameConstants.EnvObjects.cube));
             }
-            for (var i = 180; i < 194; i += 2)
+
+            for (var i = 213; i <= 265; i += 4)
             {
+                var j = i == 265 ? 262.25f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(0, i, 2),
+                        new Vector3(132.25f, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
 
-            for (var i = 33; i < 45; i += 2)
+            for (var i = 2; i <= 22; i += 4)
             {
+                var j = i == 22 ? 20.5f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 212, 2),
+                        new Vector3(j, 264, 2),
+                        GameConstants.EnvObjects.cube));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(j, 223.5f, 2),
+                        GameConstants.EnvObjects.cube));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(j, 212, 2),
                         GameConstants.EnvObjects.cube));
             }
-            for (var i = 28; i < 43; i += 2)
+
+            for (var i = 213.75f; i <= 265.75f; i += 4)
             {
+                var j = i == 265.75f ? 262.25f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(i, 185, 2),
+                        new Vector3(0, j, 2),
+                        GameConstants.EnvObjects.cube2));
+            }
+
+            for (var i = 2; i <= 18; i += 4)
+            {
+                var j = i == 18 ? 16.5f : i;
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(j, 191, 2),
+                        GameConstants.EnvObjects.cube));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(j, 177.5f, 2),
                         GameConstants.EnvObjects.cube));
             }
-            for (var i = 185; i < 213; i += 2)
+            for (var i = 179.25f; i <= 191.25f; i += 4)
             {
+                var j = i == 191.25f ? 189.25f : i;
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                         this.Game.Content,
-                        new Vector3(43, i, 2),
+                        new Vector3(0, j, 2),
+                        GameConstants.EnvObjects.cube2));
+            }
+
+            for (var i = 30; i <= 38; i += 4)
+            {
+                var j = i == 38 ? 36.75f : i;
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(j, 208, 2),
+                        GameConstants.EnvObjects.cube));
+            }
+            for (var i = 26.5f; i <= 38.5f; i += 4)
+            {
+                var j = i == 38.5f ? 36.75f : i;
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(j, 182, 2),
+                        GameConstants.EnvObjects.cube));
+            }
+            for (var i = 184; i <= 208; i += 4)
+            {
+                var j = i == 208 ? 206 : i;
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                        this.Game.Content,
+                        new Vector3(38.5f, j, 2),
                         GameConstants.EnvObjects.cube2));
             }
         }
