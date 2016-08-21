@@ -32,11 +32,12 @@ namespace Finline.Code.GameState
         /// </summary>
         private DrawableGameComponent gameState;
 
+        private EGameState? newRes = null;
         /// <summary>
         /// The current game state.
         /// </summary>
         private EGameState currentGameState;
-
+        
         /// <summary>
         /// The main menu.
         /// </summary>
@@ -74,7 +75,7 @@ namespace Finline.Code.GameState
             
 
             this.guiElements[EGameState.InGame].Add(new GuiElement("Play"));
-            this.guiElements[EGameState.InGame].Add(new GuiElement("End"));
+            this.guiElements[EGameState.InGame].Add(new GuiElement("Back2MainMenu"));
 
         }
 
@@ -121,7 +122,7 @@ namespace Finline.Code.GameState
 
             // buttons in the pausescreen
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -100);
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "End").MoveElement(0, 0);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 0);
 
             //music in titlescreen and menusystem
             this.musicMainMenu = this.Content.Load<Song>("musicMainMenu");
@@ -149,7 +150,7 @@ namespace Finline.Code.GameState
         KeyboardState oldKeyState;
         protected override void Update(GameTime gameTime)
         {
-             
+            
             if (this.nextGameState == EGameState.InGame)
                 MediaPlayer.Stop();
 
@@ -175,6 +176,12 @@ namespace Finline.Code.GameState
                 this.Exit();
             }
 
+            if (newRes.HasValue)
+            {
+                nextGameState = newRes.Value;
+                newRes = null;
+            }
+
             if (this.nextGameState != this.currentGameState)
             {
                 this.HandleGameState();
@@ -190,7 +197,7 @@ namespace Finline.Code.GameState
                 }
 
 
-            if (k.IsKeyDown(Keys.P) && !this.isPressed)
+            if (currentGameState == EGameState.InGame && k.IsKeyDown(Keys.P) && !this.isPressed)
                 {
                   
                     this.paused = !this.paused;
@@ -232,7 +239,7 @@ namespace Finline.Code.GameState
             if (this.paused)
             {
                 this.spriteBatch.Draw(this.pausedTexture2D, this.pausedRectangle, Color.White);
-                if (this.currentGameState != EGameState.None)
+                if (this.currentGameState != EGameState.None && currentGameState != EGameState.MainMenu)
                     foreach (var element in this.guiElements[this.currentGameState])
                     {
                         element.Draw(this.spriteBatch);
@@ -249,6 +256,7 @@ namespace Finline.Code.GameState
         /// when click on the button, do something
         /// </summary>
         /// <param name="element"></param>
+        
         private void OnClick(string element)
         {
             if (this.isPressed) return;
@@ -259,9 +267,12 @@ namespace Finline.Code.GameState
                 paused = !paused;
             }
 
-            if (element == "End")
-               this.Exit();
-
+            if (element == "Back2MainMenu")
+            {
+                newRes = EGameState.MainMenu;
+                paused = false;
+                main.MakeHeile();
+            }
         }
 
         /// <summary>

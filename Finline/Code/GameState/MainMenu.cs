@@ -103,6 +103,11 @@ namespace Finline.Code.GameState
             
         }
 
+        public void MakeHeile()
+        {
+            menuState = EMenuState.MainMenu;
+        }
+
         public override void Update(GameTime gameTime)
         {
             if (this.menuState == EMenuState.TitleScreen)
