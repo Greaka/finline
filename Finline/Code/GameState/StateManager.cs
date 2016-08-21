@@ -50,11 +50,10 @@ namespace Finline.Code.GameState
         /// <summary>
         /// The <see cref="SpriteBatch"/>.
         /// </summary>
-        private SpriteBatch spriteBatch;
-        private bool isPressed = false;
+        private SpriteBatch spriteBatch; 
         private SpriteFont font;
-        
 
+        private bool isPressed = false;
         private bool paused = false;
         private Texture2D pausedTexture2D;
         private Rectangle pausedRectangle;
@@ -75,7 +74,6 @@ namespace Finline.Code.GameState
             
 
             this.guiElements[EGameState.InGame].Add(new GuiElement("Play"));
-            this.guiElements[EGameState.InGame].Add(new GuiElement("Options"));
             this.guiElements[EGameState.InGame].Add(new GuiElement("End"));
 
         }
@@ -123,8 +121,7 @@ namespace Finline.Code.GameState
 
             // buttons in the pausescreen
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -100);
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Options").MoveElement(0, 0);
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "End").MoveElement(0, 100);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "End").MoveElement(0, 0);
 
             //music in titlescreen and menusystem
             this.musicMainMenu = this.Content.Load<Song>("musicMainMenu");
@@ -147,6 +144,7 @@ namespace Finline.Code.GameState
         /// <param name="gameTime">
         /// The game time.
         /// </param>
+        private bool MouseIsPressed = false;
         private bool off = false;
         KeyboardState oldKeyState;
         protected override void Update(GameTime gameTime)
@@ -185,20 +183,20 @@ namespace Finline.Code.GameState
            
             MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
-            if(this.currentGameState == EGameState.InGame)
-                foreach (var element in this.guiElements[this.currentGameState])  //muss noch verbessert werden, da die buttons nicht einwandfrei funktionieren
+            if(this.currentGameState == EGameState.InGame && this.paused)
+                foreach (var element in this.guiElements[this.currentGameState])
                 {
-                    element.Update(ref this.isPressed);
+                    element.Update(ref this.MouseIsPressed);
                 }
 
 
             if (k.IsKeyDown(Keys.P) && !this.isPressed)
                 {
+                  
                     this.paused = !this.paused;
                    
                     this.isPressed = true;
-                    
-                }
+            }
           
             if (this.isPressed && !k.IsKeyDown(Keys.P))
             {
@@ -256,18 +254,13 @@ namespace Finline.Code.GameState
             if (this.isPressed) return;
             this.isPressed = true;
 
-            if (element == "Play") //muss noch verbessert werden, da die buttons noch nicht funktionieren
+            if (element == "Play")
             {
                 paused = !paused;
             }
 
-            //if (element == "Options")
-            //{
-            //    currentGameState = EGameState.MainMenu;
-            //}
-
             if (element == "End")
-                this.Exit();
+               this.Exit();
 
         }
 
