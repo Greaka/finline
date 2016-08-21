@@ -103,10 +103,7 @@ namespace Finline.Code.GameState
             
         }
 
-        public void MakeHeile()
-        {
-            menuState = EMenuState.MainMenu;
-        }
+        
 
         public override void Update(GameTime gameTime)
         {
@@ -205,6 +202,13 @@ namespace Finline.Code.GameState
             Records,
 
             Credits
+        }
+        /// <summary>
+        /// put menuState to EMenuState MainMenu
+        /// </summary>
+        public void MakeHeile()
+        {
+            menuState = EMenuState.MainMenu;
         }
     }
 }

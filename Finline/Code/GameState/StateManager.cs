@@ -32,6 +32,9 @@ namespace Finline.Code.GameState
         /// </summary>
         private DrawableGameComponent gameState;
 
+        /// <summary>
+        /// newRes puts an EGameState to null
+        /// </summary>
         private EGameState? newRes = null;
         /// <summary>
         /// The current game state.
@@ -139,15 +142,16 @@ namespace Finline.Code.GameState
         }
 
 
+      
+        private bool MouseIsPressed = false;
+        private bool off = false;
+        KeyboardState oldKeyState;
         /// <summary>
         /// The update.
         /// </summary>
         /// <param name="gameTime">
         /// The game time.
         /// </param>
-        private bool MouseIsPressed = false;
-        private bool off = false;
-        KeyboardState oldKeyState;
         protected override void Update(GameTime gameTime)
         {
             
