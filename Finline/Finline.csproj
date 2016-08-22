@@ -69,7 +69,6 @@
   <ItemGroup>
     <Content Include="Content\Controls.PNG" />
     <Content Include="Content\CreditscreenTexture2.PNG" />
-    <Content Include="Content\finground.jpg" />
     <Content Include="Content\LogoTransparent.PNG" />
     <Content Include="Content\PauseTrans.png" />
     <Content Include="Content\Records.PNG" />

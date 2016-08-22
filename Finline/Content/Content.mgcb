@@ -144,18 +144,6 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:rectangle.fbx
 
-#begin finground.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:finground.jpg
-
 #begin chair.fbx
 /importer:FbxImporter
 /processor:ModelProcessor
@@ -480,7 +468,7 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:cube2.fbx
 
-#begin MapV5a.png
+#begin MapV6a.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -490,5 +478,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:MapV5a.png
+/build:MapV6a.jpg
 

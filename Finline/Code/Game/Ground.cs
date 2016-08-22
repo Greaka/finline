@@ -44,7 +44,7 @@ namespace Finline.Code.Game
         {
             this.effect = new BasicEffect(gdevice);
 
-            this.checkerboardTexture = (Texture2D)content.Load<Texture>("MapV5a");
+            this.checkerboardTexture = (Texture2D)content.Load<Texture>("MapV6a");
         }
 
         public void Draw(GraphicsDevice gdevice, Matrix viewMatrix, Matrix projectionMatrix)
