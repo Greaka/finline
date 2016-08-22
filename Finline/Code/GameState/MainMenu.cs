@@ -51,6 +51,7 @@ namespace Finline.Code.GameState
             // elements in the state characterScreen
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("StartGame"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Back2MainMenu"));
+            this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("LogoTransparent"));
 
             // here are the elements in the state Option
             this.guiElements[EMenuState.Option].Add(new GuiElement("Controls"));
@@ -132,6 +133,14 @@ namespace Finline.Code.GameState
         }
 
         /// <summary>
+        /// put menuState to EMenuState MainMenu
+        /// </summary>
+        public void MakeHeile()
+        {
+            menuState = EMenuState.MainMenu;
+        }
+
+        /// <summary>
         /// when click on the element change to next state
         /// </summary>
         /// <param name="element"></param>
@@ -203,12 +212,6 @@ namespace Finline.Code.GameState
 
             Credits
         }
-        /// <summary>
-        /// put menuState to EMenuState MainMenu
-        /// </summary>
-        public void MakeHeile()
-        {
-            menuState = EMenuState.MainMenu;
-        }
+
     }
 }

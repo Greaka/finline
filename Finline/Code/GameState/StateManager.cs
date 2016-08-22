@@ -55,7 +55,10 @@ namespace Finline.Code.GameState
         /// The <see cref="SpriteBatch"/>.
         /// </summary>
         private SpriteBatch spriteBatch; 
+
         private SpriteFont font;
+        private float timer = 0;
+
 
         private bool isPressed = false;
         private bool paused = false;
@@ -103,11 +106,13 @@ namespace Finline.Code.GameState
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            
             this.Content.RootDirectory = "Content";
             this.main = new MainMenu(this, this.spriteBatch);
             this.main.GoIngame += this.StartNewGame;
+            
             this.main.Initialize();
-
+            this.font = Content.Load<SpriteFont>("font");
             this.pausedTexture2D = this.Content.Load<Texture2D>("PauseTrans");
             this.pausedRectangle = new Rectangle(360, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
 
@@ -154,9 +159,12 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
-            
+
             if (this.nextGameState == EGameState.InGame)
+            {
                 MediaPlayer.Stop();
+                timer += (float) gameTime.ElapsedGameTime.TotalSeconds;
+            }
 
             KeyboardState newKeyState = Keyboard.GetState();
             if (newKeyState.IsKeyDown(Keys.O) && oldKeyState.IsKeyUp(Keys.O))
@@ -190,12 +198,13 @@ namespace Finline.Code.GameState
             {
                 this.HandleGameState();
             }
-
+          
            
             MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
             if(this.currentGameState == EGameState.InGame && this.paused)
-                foreach (var element in this.guiElements[this.currentGameState])
+                
+            foreach (var element in this.guiElements[this.currentGameState])
                 {
                     element.Update(ref this.MouseIsPressed);
                 }
@@ -249,6 +258,8 @@ namespace Finline.Code.GameState
                         element.Draw(this.spriteBatch);
                     }
             }
+            if(this.currentGameState == EGameState.InGame)
+            spriteBatch.DrawString(font, "Your actual time is: "+ timer.ToString("00.00"), new Vector2(220, 10), Color.Black);
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
