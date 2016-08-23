@@ -256,12 +256,6 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:player.fbx
 
-#begin musicMainMenu.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:musicMainMenu.mp3
-
 #begin PauseTrans.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -479,4 +473,22 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MapV6a.jpg
+
+#begin Sounds/musicIngame1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/musicIngame1.mp3
+
+#begin Sounds/musicIngame2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/musicIngame2.mp3
+
+#begin Sounds/musicMainMenu.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/musicMainMenu.mp3
 
