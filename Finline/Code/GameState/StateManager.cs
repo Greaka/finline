@@ -57,7 +57,8 @@ namespace Finline.Code.GameState
         private SpriteBatch spriteBatch; 
 
         private SpriteFont font;
-        private float timer = 0;
+        
+        
 
 
         private bool isPressed = false;
@@ -146,8 +147,8 @@ namespace Finline.Code.GameState
             // TODO: Unload any non ContentManager content here
         }
 
-
-      
+        private float timer = 0;
+        private bool timePaused = false;
         private bool MouseIsPressed = false;
         private bool off = false;
         KeyboardState oldKeyState;
@@ -163,7 +164,6 @@ namespace Finline.Code.GameState
             if (this.nextGameState == EGameState.InGame)
             {
                 MediaPlayer.Stop();
-                timer += (float) gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             KeyboardState newKeyState = Keyboard.GetState();
@@ -213,18 +213,24 @@ namespace Finline.Code.GameState
             if (currentGameState == EGameState.InGame && k.IsKeyDown(Keys.P) && !this.isPressed)
                 {
                   
-                    this.paused = !this.paused;
-                   
-                    this.isPressed = true;
-            }
+                this.paused = !this.paused;
+                this.isPressed = true;
+                this.timePaused = true;
+                }
           
             if (this.isPressed && !k.IsKeyDown(Keys.P))
             {
                 this.isPressed = false;
+                this.timePaused = false;
             }
          
             if (!this.paused)
             {
+                timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (currentGameState == EGameState.MainMenu)
+                {
+                    timer = 0;
+                }
                 this.gameState.Update(gameTime);
             }
 
