@@ -265,7 +265,7 @@ namespace Finline.Code.GameState
                     }
             }
             if(this.currentGameState == EGameState.InGame)
-            spriteBatch.DrawString(font, "Your actual time is: "+ timer.ToString("00.00"), new Vector2(220, 10), Color.Black);
+            spriteBatch.DrawString(font, "Your actual time is: "+ timer.ToString("00.00"), new Vector2(500, 390), Color.WhiteSmoke);
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
