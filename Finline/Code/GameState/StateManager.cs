@@ -111,14 +111,14 @@ namespace Finline.Code.GameState
             this.Content.RootDirectory = "Content";
             this.main = new MainMenu(this, this.spriteBatch);
             this.main.GoIngame += this.StartNewGame;
-            
             this.main.Initialize();
+
             this.font = Content.Load<SpriteFont>("font");
             this.pausedTexture2D = this.Content.Load<Texture2D>("PauseTrans");
             this.pausedRectangle = new Rectangle(360, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
 
 
-            //this.font = this.Content.Load<SpriteFont>("font");
+            
             foreach (var elementList in this.guiElements.Values)
             {
                 foreach (var element in elementList)
@@ -160,7 +160,6 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
-
             if (this.nextGameState == EGameState.InGame)
             {
                 MediaPlayer.Stop();
@@ -181,6 +180,7 @@ namespace Finline.Code.GameState
             }
             oldKeyState = newKeyState;
 
+            
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -198,8 +198,8 @@ namespace Finline.Code.GameState
             {
                 this.HandleGameState();
             }
-          
-           
+#region Pause
+
             MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
             if(this.currentGameState == EGameState.InGame && this.paused)
@@ -233,8 +233,8 @@ namespace Finline.Code.GameState
                 }
                 this.gameState.Update(gameTime);
             }
+#endregion
 
-          
             base.Update(gameTime);
         }
 
