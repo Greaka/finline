@@ -156,7 +156,6 @@ namespace Finline.Code.GameState
         private float timer = 0;
         private bool timePaused = false;
         private bool MouseIsPressed = false;
-        private bool off = false;
         KeyboardState oldKeyState;
         /// <summary>
         /// The update.
@@ -192,15 +191,11 @@ namespace Finline.Code.GameState
             KeyboardState newKeyState = Keyboard.GetState();
             if (newKeyState.IsKeyDown(Keys.O) && oldKeyState.IsKeyUp(Keys.O))
             {
-                off = !off;
-                if (off == true)
-                {
-                    MediaPlayer.Pause();
-                }
-                else
+                if (MediaPlayer.State == MediaState.Paused)
                 {
                     MediaPlayer.Resume();
                 }
+                else MediaPlayer.Pause();
             }
             oldKeyState = newKeyState;
             #endregion
