@@ -58,11 +58,19 @@ namespace Finline.Code.GameState
 
         private SpriteFont font;
 
-
+#region PauseStuff
         private bool isPressed = false;
         private bool paused = false;
         private Texture2D pausedTexture2D;
         private Rectangle pausedRectangle;
+        #endregion
+
+#region SoundIcons
+        private Texture2D soundOnTexture2D;
+        private Rectangle soundOnRectangle;
+        private Texture2D soundOffTexture2D;
+        private Rectangle soundOffRectangle;
+#endregion
 
         private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
 
@@ -117,11 +125,18 @@ namespace Finline.Code.GameState
 
             this.main.Initialize();
             this.font = Content.Load<SpriteFont>("font");
+#region Loading Pause and Sound Icons
             this.pausedTexture2D = this.Content.Load<Texture2D>("PauseTrans");
             this.pausedRectangle = new Rectangle(360, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
 
+            this.soundOnTexture2D = this.Content.Load<Texture2D>("SoundOn");
+            this.soundOnRectangle = new Rectangle(700, 30, this.soundOnTexture2D.Width, this.soundOnTexture2D.Height);
+            this.soundOffTexture2D = this.Content.Load<Texture2D>("SoundOff");
+            this.soundOffRectangle = new Rectangle(700, 30, this.soundOffTexture2D.Width, this.soundOffTexture2D.Height);
+#endregion
 
-            //this.font = this.Content.Load<SpriteFont>("font");
+
+
             foreach (var elementList in this.guiElements.Values)
             {
                 foreach (var element in elementList)
@@ -278,6 +293,19 @@ namespace Finline.Code.GameState
             this.gameState.Draw(gameTime);
 
             this.spriteBatch.Begin();
+
+            if (currentGameState == EGameState.InGame)
+            {
+                if (MediaPlayer.State == MediaState.Paused)
+                {
+                    this.spriteBatch.Draw(this.soundOffTexture2D, this.soundOffRectangle, Color.White);
+                }
+                if (MediaPlayer.State == MediaState.Playing)
+                {
+                    this.spriteBatch.Draw(this.soundOnTexture2D, this.soundOffRectangle, Color.White);
+                }
+            }
+
             if (this.paused)
             {
                 this.spriteBatch.Draw(this.pausedTexture2D, this.pausedRectangle, Color.White);
@@ -288,7 +316,7 @@ namespace Finline.Code.GameState
                     }
             }
             if (this.currentGameState == EGameState.InGame)
-                spriteBatch.DrawString(font, "Your current time is: " + timer.ToString("00.00"), new Vector2(500, 390), Color.WhiteSmoke);
+                spriteBatch.DrawString(font, "Your current time is: " + timer.ToString("00.0")+ "s", new Vector2(500, 390), Color.WhiteSmoke);
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
@@ -309,6 +337,7 @@ namespace Finline.Code.GameState
             if (element == "Play")
             {
                 paused = !paused;
+                MediaPlayer.Resume();
             }
 
             if (element == "Back2MainMenu")
