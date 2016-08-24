@@ -171,6 +171,8 @@ namespace Finline.Code.GameState
             {
                 MediaPlayer.Play(musicMainMenu);
                 MediaPlayer.IsRepeating = true;
+                currentSong += 1;
+                currentSong = currentSong % 2;
             }
             if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame)
             {
@@ -179,7 +181,7 @@ namespace Finline.Code.GameState
             }
             if (this.currentGameState == EGameState.InGame)
             {
-                if (MediaPlayer.State != MediaState.Playing)
+                if (MediaPlayer.State == MediaState.Stopped)
                 {
                     currentSong += 1;
                     currentSong = currentSong % 2;
@@ -190,6 +192,7 @@ namespace Finline.Code.GameState
             KeyboardState newKeyState = Keyboard.GetState();
             if (newKeyState.IsKeyDown(Keys.O) && oldKeyState.IsKeyUp(Keys.O))
             {
+                off = !off;
                 if (off == true)
                 {
                     MediaPlayer.Pause();
@@ -198,7 +201,6 @@ namespace Finline.Code.GameState
                 {
                     MediaPlayer.Resume();
                 }
-                off = !off;
             }
             oldKeyState = newKeyState;
             #endregion
@@ -232,10 +234,15 @@ namespace Finline.Code.GameState
 
             if (currentGameState == EGameState.InGame && k.IsKeyDown(Keys.P) && !this.isPressed)
             {
-
                 this.paused = !this.paused;
                 this.isPressed = true;
                 this.timePaused = true;
+
+                if (this.paused)
+                {
+                    MediaPlayer.Pause();
+                }
+                else MediaPlayer.Resume();
             }
 
             if (this.isPressed && !k.IsKeyDown(Keys.P))
@@ -252,7 +259,6 @@ namespace Finline.Code.GameState
                     timer = 0;
                 }
                 this.gameState.Update(gameTime);
-                
             }
             
             #endregion
