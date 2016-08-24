@@ -67,7 +67,7 @@ namespace Finline.Code.GameState
         private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
 
         #region MusicStuff
-        int kindaRandom = 0;
+        int currentSong = 0;
         private Song musicMainMenu;
         private Song musicIngame1;
         private Song musicIngame2;
@@ -166,16 +166,25 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
+            #region Hintergrundmusik
             if (this.currentGameState == EGameState.None || newRes.HasValue)
             {
                 MediaPlayer.Play(musicMainMenu);
+                MediaPlayer.IsRepeating = true;
             }
             if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame)
             {
-                kindaRandom += 1;
-                kindaRandom = kindaRandom % 2;
-                MediaPlayer.IsShuffled = true;
-                MediaPlayer.Play(musicIngame[kindaRandom]);
+                MediaPlayer.Play(musicIngame[currentSong]);
+                MediaPlayer.IsRepeating = false;
+            }
+            if (this.currentGameState == EGameState.InGame)
+            {
+                if (MediaPlayer.State != MediaState.Playing)
+                {
+                    currentSong += 1;
+                    currentSong = currentSong % 2;
+                    MediaPlayer.Play(musicIngame[currentSong]);
+                }
             }
 
             KeyboardState newKeyState = Keyboard.GetState();
@@ -192,7 +201,7 @@ namespace Finline.Code.GameState
                 off = !off;
             }
             oldKeyState = newKeyState;
-
+            #endregion
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -243,7 +252,9 @@ namespace Finline.Code.GameState
                     timer = 0;
                 }
                 this.gameState.Update(gameTime);
+                
             }
+            
             #endregion
 
             base.Update(gameTime);

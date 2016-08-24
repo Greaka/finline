@@ -13,7 +13,7 @@ namespace Finline.Code.Game
     using Microsoft.Xna.Framework.Input;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Media;
-
+    /*
     class Sounds : Game
     {
         Song musicMainMenu;
@@ -48,5 +48,5 @@ namespace Finline.Code.Game
 
             oldKeyState = newKeyState;
         }
-    }
+    }*/
 }
