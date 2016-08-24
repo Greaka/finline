@@ -67,11 +67,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Controls.PNG" />
+    <Content Include="Content\ControlsButton.png" />
+    <Content Include="Content\ControlScreen.png" />
+    <Content Include="Content\CreditsButton.png" />
     <Content Include="Content\CreditscreenTexture2.PNG" />
+    <Content Include="Content\EndButton.png" />
     <Content Include="Content\LogoTransparent.PNG" />
+    <Content Include="Content\NewGame.png" />
     <Content Include="Content\PauseTrans.png" />
-    <Content Include="Content\Records.PNG" />
+    <Content Include="Content\RecordsButton.png" />
     <Content Include="Content\RecordTexture.png" />
     <Content Include="Content\TitleScreen.png" />
     <Content Include="Icon.ico" />

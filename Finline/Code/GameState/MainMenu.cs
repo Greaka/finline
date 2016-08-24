@@ -32,7 +32,7 @@ namespace Finline.Code.GameState
             this.guiElements.Add(EMenuState.TitleScreen, new List<GuiElement>());
             this.guiElements.Add(EMenuState.MainMenu, new List<GuiElement>());
             this.guiElements.Add(EMenuState.CharacterScreen, new List<GuiElement>());
-            this.guiElements.Add(EMenuState.Option, new List<GuiElement>());
+            this.guiElements.Add(EMenuState.Controls, new List<GuiElement>());
             this.guiElements.Add(EMenuState.Records, new List<GuiElement>());
             this.guiElements.Add(EMenuState.Credits, new List<GuiElement>());
 
@@ -43,10 +43,10 @@ namespace Finline.Code.GameState
 
 #region MainMenu  // here are the elements in the state MainMenu
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("NewGame"));
-            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("Options"));
-            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("Records"));
-            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("Credits"));
-            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("End"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("ControlsButton"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("RecordsButton"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("CreditsButton"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("EndButton"));
             #endregion
 
 #region CharacterScreen           // elements in the state characterScreen
@@ -56,9 +56,9 @@ namespace Finline.Code.GameState
 #endregion
 
 #region Option           // here are the elements in the state Option
-            this.guiElements[EMenuState.Option].Add(new GuiElement("Controls"));
-            this.guiElements[EMenuState.Option].Add(new GuiElement("Back2MainMenu"));
-            this.guiElements[EMenuState.Option].Add(new GuiElement("LogoTransparent"));
+            this.guiElements[EMenuState.Controls].Add(new GuiElement("ControlScreen"));
+            this.guiElements[EMenuState.Controls].Add(new GuiElement("Back2MainMenu"));
+            this.guiElements[EMenuState.Controls].Add(new GuiElement("LogoTransparent"));
             #endregion
 
 #region Records            // here are the elements in the state Records
@@ -90,18 +90,18 @@ namespace Finline.Code.GameState
 
 #region Moved Elements From MainMenu
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(-200, -200); // move the "newgame" button up in y-direction
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Options").MoveElement(-200, -125); // move the "option" button down in y-direction
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Records").MoveElement(-200, -50);
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "Credits").MoveElement(-200 , 25); // move the "credits" button 200 in x-direction and 50 down in y-direction
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "End").MoveElement(-200, 100); // move the "end" button down in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "ControlsButton").MoveElement(-200, -125); // move the "option" button down in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "RecordsButton").MoveElement(-200, -50);
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "CreditsButton").MoveElement(-200 , 25); // move the "credits" button 200 in x-direction and 50 down in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "EndButton").MoveElement(-200, 100); // move the "end" button down in y-direction
             #endregion
 #region Moved Elements From CharacterScreen
             this.guiElements[EMenuState.CharacterScreen].Find(x=> x.AssetName =="StartGame").MoveElement(0, 25); // move the "StartGame" button up in y-direction
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 100); // move the "Back_to_MainMenu" button down in y-direction
             #endregion
 #region Moved Elements From Option
-            this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Controls").MoveElement(-10, -165);
-            this.guiElements[EMenuState.Option].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 80); // move the "Back_to_MainMenu" button down in y-direction
+            this.guiElements[EMenuState.Controls].Find(x => x.AssetName == "ControlScreen").MoveElement(50, -150);
+            this.guiElements[EMenuState.Controls].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 80); // move the "Back_to_MainMenu" button down in y-direction
             #endregion
 #region Moved Elements From Records
             this.guiElements[EMenuState.Records].Find(x => x.AssetName == "RecordTexture").MoveElement(0, -265); // move the recordtexture up in y-direction
@@ -175,17 +175,17 @@ namespace Finline.Code.GameState
                 this.GoIngame?.Invoke();
             }
 
-            if (element == "Options")
+            if (element == "ControlsButton")
             {
-                this.menuState = EMenuState.Option;
+                this.menuState = EMenuState.Controls;
             }
 
-            if (element == "Credits")
+            if (element == "CreditsButton")
             {
                 this.menuState = EMenuState.Credits;
             }
 
-            if (element == "Records")
+            if (element == "RecordsButton")
             {
                 this.menuState = EMenuState.Records;
             }
@@ -195,7 +195,7 @@ namespace Finline.Code.GameState
                 this.menuState = EMenuState.MainMenu;
             }
 
-            if (element == "End")
+            if (element == "EndButton")
             {
                 this.Game.Exit();
             }
@@ -217,7 +217,7 @@ namespace Finline.Code.GameState
 
             CharacterScreen, 
 
-            Option,
+            Controls,
 
             Records,
 

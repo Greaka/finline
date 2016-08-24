@@ -113,11 +113,11 @@
                 this.projectionMatrix,
                 this.viewMatrix);
             this.projectileHandler.Update(this.EnvironmentObjects);
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                this.Game.Exit();
-            }
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+            //    || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //{
+            //    this.Game.Exit();
+            //}
 
             this.player.Update(gameTime, this.moveDirection, this.shootDirection, this.EnvironmentObjects);
 

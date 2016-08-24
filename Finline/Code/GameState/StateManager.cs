@@ -200,11 +200,11 @@ namespace Finline.Code.GameState
             oldKeyState = newKeyState;
             #endregion
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                this.Exit();
-            }
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+            //    || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //{
+            //    this.Exit();
+            //}
 
             if (newRes.HasValue)
             {
@@ -227,7 +227,7 @@ namespace Finline.Code.GameState
                     element.Update(ref this.MouseIsPressed);
                 }
 
-            if (currentGameState == EGameState.InGame && k.IsKeyDown(Keys.P) && !this.isPressed)
+            if (currentGameState == EGameState.InGame && k.IsKeyDown(Keys.Escape) && !this.isPressed)
             {
                 this.paused = !this.paused;
                 this.isPressed = true;
@@ -240,7 +240,7 @@ namespace Finline.Code.GameState
                 else MediaPlayer.Resume();
             }
 
-            if (this.isPressed && !k.IsKeyDown(Keys.P))
+            if (this.isPressed && !k.IsKeyDown(Keys.Escape))
             {
                 this.isPressed = false;
                 this.timePaused = false;
