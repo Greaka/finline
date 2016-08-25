@@ -55,8 +55,8 @@ namespace Finline.Code.Utility
                 {
                     case GameConstants.EnvObjects.wallV:
 
-                        // case GameConstants.EnvObjects.chair:
-                        // case GameConstants.EnvObjects.desk:
+                        // case GameConstants.EnvObjects.chairDown:
+                        // case GameConstants.EnvObjects.deskDown:
                         colliding = true;
                         break;
                 }

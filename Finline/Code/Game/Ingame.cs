@@ -98,7 +98,7 @@
 
             this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(25, 5, 0)));
             this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 27, 0)));
-            this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 39, 0)));
+            this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 27, 0)));
             this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(30, 65, 0)));
             this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(27, 108, 0)));
             this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 112, 0)));
@@ -537,34 +537,196 @@
                         new Vector3(38.5f, j, 2),
                         GameConstants.EnvObjects.wallH));
             }
-#endregion
+            #endregion
 
+            #region Loading Desks & Chairs
             for (var i = 32; i > 15; i -= 8)
             {
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
                     new Vector3(i, 74, -1),
-                    GameConstants.EnvObjects.chair));
+                    GameConstants.EnvObjects.chairDown));
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
                     new Vector3(i, 60, -1),
-                    GameConstants.EnvObjects.chair));
-            }
-            for (var i = 32; i > 15; i -= 8)
-            {
+                    GameConstants.EnvObjects.chairDown));
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
                     new Vector3(i, 74, -1),
-                    GameConstants.EnvObjects.desk));
+                    GameConstants.EnvObjects.deskDown));
                 this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
                     new Vector3(i, 60, -1),
-                    GameConstants.EnvObjects.desk));
+                    GameConstants.EnvObjects.deskDown));
             }
+
+            for (var i = 32; i > 15; i -= 4)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 33, -1),
+                    GameConstants.EnvObjects.deskRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 40, -1),
+                    GameConstants.EnvObjects.deskRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 47, -1),
+                    GameConstants.EnvObjects.deskRight));
+            }
+            for (var i = 33; i >14; i -= 3)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 33, -1),
+                    GameConstants.EnvObjects.chairRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 40, -1),
+                    GameConstants.EnvObjects.chairRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 47, -1),
+                    GameConstants.EnvObjects.chairRight));
+            }
+
+            for (var i = 25.1f; i < 34; i += 4)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 91, -1),
+                    GameConstants.EnvObjects.deskRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 101, -1),
+                    GameConstants.EnvObjects.deskRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 111, -1),
+                    GameConstants.EnvObjects.deskRight));
+            }
+            for (var i = 25; i < 35; i += 3)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 91, -1),
+                    GameConstants.EnvObjects.chairRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 101, -1),
+                    GameConstants.EnvObjects.chairRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 111, -1),
+                    GameConstants.EnvObjects.chairRight));
+            }
+            for (var i = 26.6f; i < 35; i += 4)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 88, -1),
+                    GameConstants.EnvObjects.deskLeft));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 98, -1),
+                    GameConstants.EnvObjects.deskLeft));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 108, -1),
+                    GameConstants.EnvObjects.deskLeft));
+            }
+            for (var i = 25.8f; i < 36.5f; i += 3)
+            {
+                this.EnvironmentObjects.Add(
+                     new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 88, -1),
+                    GameConstants.EnvObjects.chairLeft));
+                this.EnvironmentObjects.Add(
+                     new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 98, -1),
+                    GameConstants.EnvObjects.chairLeft));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 108, -1),
+                    GameConstants.EnvObjects.chairLeft));
+            }
+            for (var i = 8.1f; i < 17; i += 4)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 101, -1),
+                    GameConstants.EnvObjects.deskRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 111, -1),
+                    GameConstants.EnvObjects.deskRight));
+            }
+            for (var i = 8; i < 18; i += 3)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 101, -1),
+                    GameConstants.EnvObjects.chairRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 111, -1),
+                    GameConstants.EnvObjects.chairRight));
+            }
+            for (var i = 9.6f; i < 18; i += 4)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 98, -1),
+                    GameConstants.EnvObjects.deskLeft));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 108, -1),
+                    GameConstants.EnvObjects.deskLeft));
+            }
+            for (var i = 8.8f; i < 19.5f; i += 3)
+            {
+                this.EnvironmentObjects.Add(
+                     new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 98, -1),
+                    GameConstants.EnvObjects.chairLeft));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 108, -1),
+                    GameConstants.EnvObjects.chairLeft));
+            }
+
+            #endregion
         }
     }
 }

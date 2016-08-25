@@ -4,7 +4,7 @@
     {
         public enum EnvObjects
         {
-            wallV, wallH, desk, chair
+            wallV, wallH, deskUp, chairUp, deskDown, chairDown, deskLeft, chairLeft, deskRight, chairRight
         }
 
         public enum EWeaponShootMode
