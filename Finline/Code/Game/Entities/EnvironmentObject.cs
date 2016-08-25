@@ -19,7 +19,7 @@ namespace Finline.Code.Game.Entities
             this._type = model;
             switch (model)
             {
-                case GameConstants.EnvObjects.cube:
+                case GameConstants.EnvObjects.wallV:
                     this._sphereScaling = 0.4f;
                     break;
             }

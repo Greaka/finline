@@ -80,7 +80,7 @@ namespace Finline.Code.GameState
         private Song musicIngame1;
         private Song musicIngame2;
         private List<Song> musicIngame = new List<Song>(2);
-        #endregion
+#endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StateManager"/> class. 
@@ -157,7 +157,7 @@ namespace Finline.Code.GameState
             this.musicIngame2 = this.Content.Load<Song>("Sounds/musicIngame2");
             musicIngame.Insert(0, musicIngame1);
             musicIngame.Insert(1, musicIngame2);
-            #endregion
+#endregion
         }
 
         /// <summary>
@@ -316,7 +316,7 @@ namespace Finline.Code.GameState
                     }
             }
             if (this.currentGameState == EGameState.InGame)
-                spriteBatch.DrawString(font, "Your current time is: " + timer.ToString("00.0")+ "s", new Vector2(500, 390), Color.WhiteSmoke);
+                spriteBatch.DrawString(font, "Your current time is: " + timer.ToString("00.0")+ "s", new Vector2(500, 420), Color.WhiteSmoke);
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;

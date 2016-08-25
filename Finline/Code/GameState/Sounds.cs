@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Finline.Code.Game
 {
@@ -13,28 +10,42 @@ namespace Finline.Code.Game
     using Microsoft.Xna.Framework.Input;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Media;
-    /*
-    class Sounds : Game
+    using Microsoft.Xna.Framework.Audio;
+
+    
+    public class Sounds : Game
     {
+        /*
         Song musicMainMenu;
-
-        private bool off = false;
+        SoundEffect shot;
         KeyboardState oldKeyState;
+        private bool off = false;
 
-        public Sounds(ContentManager Content)
+
+        public Sounds()
         {
-            this.musicMainMenu = Content.Load<Song>("musicMainMenu");
-            MediaPlayer.Play(musicMainMenu);
+            Content.RootDirectory = "Content";
         }
 
 
+        protected override void LoadContent()
+        {
+            this.musicMainMenu = Content.Load<Song>("Sounds/musicMainMenu");
+            MediaPlayer.Stop();
+        }
+
+        
         protected override void Update(GameTime gameTime)
         {
-            //if (nextGameState == GameState.EGameState.InGame)
-
+            MediaPlayer.Play(musicMainMenu);
+            base.Update(gameTime);
             KeyboardState newKeyState = Keyboard.GetState();
-            if (newKeyState.IsKeyDown(Keys.O) && oldKeyState.IsKeyUp(Keys.O))
+
+            if (newKeyState.IsKeyDown(Keys.P) && oldKeyState.IsKeyUp(Keys.P))
             {
+                Exit();
+                
+                off = !off;
                 if (off == true)
                 {
                     MediaPlayer.Pause();
@@ -43,10 +54,10 @@ namespace Finline.Code.Game
                 {
                     MediaPlayer.Resume();
                 }
-                off = !off;
+                
             }
-
             oldKeyState = newKeyState;
         }
-    }*/
+    */
+    }
 }
