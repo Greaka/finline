@@ -70,12 +70,6 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:Arrow.fbx
 
-#begin NewSpriteFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:NewSpriteFont.spritefont
-
 #begin font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
