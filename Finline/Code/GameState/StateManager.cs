@@ -74,13 +74,13 @@ namespace Finline.Code.GameState
 
         private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
 
-        #region MusicStuff
+#region MusicStuff
         int currentSong = 0;
         private Song musicMainMenu;
         private Song musicIngame1;
         private Song musicIngame2;
         private List<Song> musicIngame = new List<Song>(2);
-        #endregion
+#endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StateManager"/> class. 
@@ -151,13 +151,13 @@ namespace Finline.Code.GameState
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -100);
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 0);
 
-            #region LoadingMusic
+#region LoadingMusic
             this.musicMainMenu = this.Content.Load<Song>("Sounds/musicMainMenu");
             this.musicIngame1 = this.Content.Load<Song>("Sounds/musicIngame1");
             this.musicIngame2 = this.Content.Load<Song>("Sounds/musicIngame2");
             musicIngame.Insert(0, musicIngame1);
             musicIngame.Insert(1, musicIngame2);
-            #endregion
+#endregion
         }
 
         /// <summary>
@@ -316,7 +316,7 @@ namespace Finline.Code.GameState
                     }
             }
             if (this.currentGameState == EGameState.InGame)
-                spriteBatch.DrawString(font, "Your current time is: " + timer.ToString("00.0")+ "s", new Vector2(500, 390), Color.WhiteSmoke);
+                spriteBatch.DrawString(font, "Your current time is: " + timer.ToString("00.0")+ "s", new Vector2(500, 420), Color.WhiteSmoke);
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
