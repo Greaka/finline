@@ -55,7 +55,7 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("LogoTransparent"));
 #endregion
 
-#region Option           // here are the elements in the state Option
+#region Controls           // here are the elements in the state Option
             this.guiElements[EMenuState.Controls].Add(new GuiElement("ControlScreen"));
             this.guiElements[EMenuState.Controls].Add(new GuiElement("Back2MainMenu"));
             this.guiElements[EMenuState.Controls].Add(new GuiElement("LogoTransparent"));
@@ -99,7 +99,7 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.CharacterScreen].Find(x=> x.AssetName =="StartGame").MoveElement(0, 25); // move the "StartGame" button up in y-direction
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 100); // move the "Back_to_MainMenu" button down in y-direction
             #endregion
-#region Moved Elements From Option
+#region Moved Elements From Controls
             this.guiElements[EMenuState.Controls].Find(x => x.AssetName == "ControlScreen").MoveElement(50, -150);
             this.guiElements[EMenuState.Controls].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 80); // move the "Back_to_MainMenu" button down in y-direction
             #endregion
@@ -118,6 +118,7 @@ namespace Finline.Code.GameState
 
         public override void Update(GameTime gameTime)
         {
+            
             if (this.menuState == EMenuState.TitleScreen)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
@@ -133,7 +134,6 @@ namespace Finline.Code.GameState
         public override void Draw(GameTime gameTime)
         {
             this.spriteBatch.Begin();
-
             if (this.menuState != EMenuState.None)
             foreach (var element in this.guiElements[this.menuState])
             {
