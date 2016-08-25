@@ -74,7 +74,7 @@ namespace Finline.Code.GameState
 
         private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
 
-        #region MusicStuff
+#region MusicStuff
         int currentSong = 0;
         private Song musicMainMenu;
         private Song musicIngame1;
@@ -133,10 +133,9 @@ namespace Finline.Code.GameState
             this.soundOnRectangle = new Rectangle(700, 30, this.soundOnTexture2D.Width, this.soundOnTexture2D.Height);
             this.soundOffTexture2D = this.Content.Load<Texture2D>("SoundOff");
             this.soundOffRectangle = new Rectangle(700, 30, this.soundOffTexture2D.Width, this.soundOffTexture2D.Height);
-#endregion
+            #endregion
 
-
-
+#region Moved Buttons in PauseScreen
             foreach (var elementList in this.guiElements.Values)
             {
                 foreach (var element in elementList)
@@ -150,8 +149,9 @@ namespace Finline.Code.GameState
             // buttons in the pausescreen
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -100);
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 0);
+            #endregion
 
-            #region LoadingMusic
+#region LoadingMusic
             this.musicMainMenu = this.Content.Load<Song>("Sounds/musicMainMenu");
             this.musicIngame1 = this.Content.Load<Song>("Sounds/musicIngame1");
             this.musicIngame2 = this.Content.Load<Song>("Sounds/musicIngame2");
@@ -180,7 +180,7 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
-            #region Hintergrundmusik
+#region Hintergrundmusik
             if (this.currentGameState == EGameState.None || newRes.HasValue)
             {
                 MediaPlayer.Play(musicMainMenu);
@@ -232,7 +232,7 @@ namespace Finline.Code.GameState
                 this.HandleGameState();
             }
 
-            #region Pause
+#region Pause
             MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
             if (this.currentGameState == EGameState.InGame && this.paused)
