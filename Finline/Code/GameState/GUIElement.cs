@@ -11,6 +11,7 @@ namespace Finline.Code.GameState
 
         private Rectangle _guiRect;
         private Texture2D _guiTexture;
+        
 
         
        
@@ -35,6 +36,8 @@ namespace Finline.Code.GameState
             this._guiTexture = content.Load<Texture2D>(this.AssetName);
 
             this._guiRect = new Rectangle(0, 0, this._guiTexture.Width, this._guiTexture.Height);
+
+            
         }
 
         public void Update(ref bool isPressed)
@@ -54,7 +57,7 @@ namespace Finline.Code.GameState
         public void Draw(SpriteBatch spriteBatch)
         {
              if(this.AssetName == "LogoTransparent")
-                spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150 , 150), null, Color.White);
+                spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150 , 120), null, Color.White);
              else
                 spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
         }
