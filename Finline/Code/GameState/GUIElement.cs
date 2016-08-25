@@ -52,13 +52,32 @@ namespace Finline.Code.GameState
             {
                 isPressed = false;
             }
+ 
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-             if(this.AssetName == "LogoTransparent")
-                spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150 , 150), null, Color.White);
-             else
+            if (this.AssetName == "LogoTransparent")
+            {
+                spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
+            }
+
+            //else if (this.AssetName == "Ashe Test")
+            //{
+            //    spriteBatch.Draw(this._guiTexture, new Rectangle(200, 100, 100, 100), null, Color.White);
+            //    if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
+            //    Mouse.GetState().LeftButton == ButtonState.Pressed && this.AssetName == "Ashe Test")
+            //        spriteBatch.Draw(this._guiTexture, new Rectangle(200, 100, 100, 100), null, Color.Black);
+            //}
+
+            //else if (this.AssetName == "Yasuo Test")
+            //{
+            //    spriteBatch.Draw(this._guiTexture, new Rectangle(500, 100, 100, 100), null, Color.White);
+            //    if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
+            //    Mouse.GetState().LeftButton == ButtonState.Pressed && this.AssetName == "Yasuo Test")
+            //        spriteBatch.Draw(this._guiTexture, new Rectangle(200, 100, 100, 100), null, Color.Black);
+            //}
+            else
                 spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
         }
 
