@@ -68,7 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Ashe Test.jpg" />
+    <Content Include="Content\Ashe.jpg" />
     <Content Include="Content\ControlsButton.png" />
     <Content Include="Content\ControlScreen.png" />
     <Content Include="Content\CreditsButton.png" />
@@ -82,7 +82,7 @@
     <Content Include="Content\SoundOff.png" />
     <Content Include="Content\SoundOn.png" />
     <Content Include="Content\TitleScreen.png" />
-    <Content Include="Content\Yasuo Test.jpg" />
+    <Content Include="Content\Yasuo.jpg" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -62,21 +62,21 @@ namespace Finline.Code.GameState
                 spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
             }
 
-            //else if (this.AssetName == "Ashe Test")
-            //{
-            //    spriteBatch.Draw(this._guiTexture, new Rectangle(200, 100, 100, 100), null, Color.White);
-            //    if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
-            //    Mouse.GetState().LeftButton == ButtonState.Pressed && this.AssetName == "Ashe Test")
-            //        spriteBatch.Draw(this._guiTexture, new Rectangle(200, 100, 100, 100), null, Color.Black);
-            //}
+            else if (this.AssetName == "Ashe")
+            {
+                spriteBatch.Draw(this._guiTexture, new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null, Color.White);
+                if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
+                Mouse.GetState().LeftButton == ButtonState.Pressed && this.AssetName == "Ashe")
+                    spriteBatch.Draw(this._guiTexture, new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null, Color.DarkGoldenrod);
+            }
 
-            //else if (this.AssetName == "Yasuo Test")
-            //{
-            //    spriteBatch.Draw(this._guiTexture, new Rectangle(500, 100, 100, 100), null, Color.White);
-            //    if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
-            //    Mouse.GetState().LeftButton == ButtonState.Pressed && this.AssetName == "Yasuo Test")
-            //        spriteBatch.Draw(this._guiTexture, new Rectangle(200, 100, 100, 100), null, Color.Black);
-            //}
+            else if (this.AssetName == "Yasuo")
+            {
+                spriteBatch.Draw(this._guiTexture, new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null, Color.White);
+                if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
+                Mouse.GetState().LeftButton == ButtonState.Pressed && this.AssetName == "Yasuo")
+                    spriteBatch.Draw(this._guiTexture, new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null, Color.DarkGoldenrod);
+            }
             else
                 spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
         }
