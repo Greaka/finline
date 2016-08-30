@@ -11,8 +11,8 @@ namespace Finline.Code.GameState
 
         private Rectangle _guiRect;
         private Texture2D _guiTexture;
-        
-
+        MouseState oldMouseState;
+        bool ausgewaehlt;
         
        
 
@@ -57,22 +57,44 @@ namespace Finline.Code.GameState
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            MouseState newMouseState = Mouse.GetState();
             switch (this.AssetName)
             {
                 case "LogoTransparent":
                     spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
                     break;
                 case "Ashe":
-                    spriteBatch.Draw(this._guiTexture, new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null, Color.White);
+                    //spriteBatch.Draw(this._guiTexture, new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null, Color.White);
                     if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
-                        Mouse.GetState().LeftButton == ButtonState.Pressed && this.AssetName == "Ashe")
+                        oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed
+                        && this.AssetName == "Ashe")
+                    {
+                        ausgewaehlt = !ausgewaehlt;
+                    }
+                    if (ausgewaehlt)
                     {
                         spriteBatch.Draw(this._guiTexture,
                             new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null,
                             Color.DarkGoldenrod);
                     }
+                    else spriteBatch.Draw(this._guiTexture, new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null, Color.White);
                     break;
                 case "Yasuo":
+                    if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
+                        oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed
+                        && this.AssetName == "Yasuo")
+                    {
+                        ausgewaehlt = !ausgewaehlt;
+                    }
+                    if (ausgewaehlt)
+                    {
+                        spriteBatch.Draw(this._guiTexture,
+                            new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
+                            Color.DarkGoldenrod);
+                    }
+                    else spriteBatch.Draw(this._guiTexture, new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null, Color.White);
+                    break;
+                /*case "Yasuo":
                     spriteBatch.Draw(this._guiTexture, new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null, Color.White);
                     if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
                         Mouse.GetState().LeftButton == ButtonState.Pressed && this.AssetName == "Yasuo")
@@ -81,11 +103,13 @@ namespace Finline.Code.GameState
                             new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
                             Color.DarkGoldenrod);
                     }
-                    break;
+                    break;*/
                 default:
                     spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
                     break;
+                
             }
+            oldMouseState = newMouseState;
         }
 
 
