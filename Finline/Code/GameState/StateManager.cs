@@ -57,7 +57,6 @@ namespace Finline.Code.GameState
         private SpriteBatch spriteBatch;
 
         private SpriteFont font;
-
 #region PauseStuff
         private bool isPressed = false;
         private bool paused = false;
@@ -74,7 +73,7 @@ namespace Finline.Code.GameState
 
         private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
 
-        #region MusicStuff
+#region MusicStuff
         Sounds sounds = new Sounds();
 #endregion
 
@@ -170,7 +169,7 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
-            #region Hintergrundmusik
+#region Hintergrundmusik
             sounds.Update(gameTime);
 
             if (this.currentGameState == EGameState.None || newRes.HasValue)
@@ -270,6 +269,11 @@ namespace Finline.Code.GameState
 
             this.spriteBatch.Begin();
 
+#region Draw SoundIcon, PauseScreen
+
+            
+
+            
             if (currentGameState == EGameState.InGame)
             {
                 if (MediaPlayer.State == MediaState.Paused)
@@ -296,7 +300,7 @@ namespace Finline.Code.GameState
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
-
+            #endregion
             base.Draw(gameTime);
         }
 
@@ -316,12 +320,10 @@ namespace Finline.Code.GameState
                 MediaPlayer.Resume();
             }
 
-            if (element == "Back2MainMenu")
-            {
-                newRes = EGameState.MainMenu;
-                paused = false;
-                main.MakeHeile();
-            }
+            if (element != "Back2MainMenu") return;
+            newRes = EGameState.MainMenu;
+            paused = false;
+            main.MakeHeile();
         }
 
         /// <summary>

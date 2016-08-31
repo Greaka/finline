@@ -12,6 +12,7 @@ namespace Finline.Code.GameState
         private bool isPressed;
 
         private readonly Dictionary<EMenuState, List<GuiElement>> guiElements = new Dictionary<EMenuState, List<GuiElement>>();
+        
 
         private readonly SpriteBatch spriteBatch;
 
@@ -55,6 +56,7 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("LogoTransparent"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Ashe"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Yasuo"));
+            this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("CharacterTrans"));
             #endregion
 
 #region Controls           // here are the elements in the state Option
