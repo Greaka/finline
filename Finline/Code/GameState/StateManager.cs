@@ -74,12 +74,8 @@ namespace Finline.Code.GameState
 
         private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
 
-#region MusicStuff
-        int currentSong = 0;
-        private Song musicMainMenu;
-        private Song musicIngame1;
-        private Song musicIngame2;
-        private List<Song> musicIngame = new List<Song>(2);
+        #region MusicStuff
+        Sounds sounds = new Sounds();
 #endregion
 
         /// <summary>
@@ -90,7 +86,6 @@ namespace Finline.Code.GameState
             this.Graphics = new GraphicsDeviceManager(this);
             this.IsMouseVisible = true;
             this.guiElements.Add(EGameState.InGame, new List<GuiElement>());
-
 
             this.guiElements[EGameState.InGame].Add(new GuiElement("Play"));
             this.guiElements[EGameState.InGame].Add(new GuiElement("Back2MainMenu"));
@@ -152,11 +147,7 @@ namespace Finline.Code.GameState
             #endregion
 
 #region LoadingMusic
-            this.musicMainMenu = this.Content.Load<Song>("Sounds/musicMainMenu");
-            this.musicIngame1 = this.Content.Load<Song>("Sounds/musicIngame1");
-            this.musicIngame2 = this.Content.Load<Song>("Sounds/musicIngame2");
-            musicIngame.Insert(0, musicIngame1);
-            musicIngame.Insert(1, musicIngame2);
+            sounds.LoadContent(Content);
 #endregion
         }
 
@@ -167,11 +158,10 @@ namespace Finline.Code.GameState
         {
             // TODO: Unload any non ContentManager content here
         }
-
+        
         private float timer = 0;
         private bool timePaused = false;
         private bool MouseIsPressed = false;
-        KeyboardState oldKeyState;
         /// <summary>
         /// The update.
         /// </summary>
@@ -180,46 +170,32 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
-#region Hintergrundmusik
+            #region Hintergrundmusik
+            sounds.Update(gameTime);
+
             if (this.currentGameState == EGameState.None || newRes.HasValue)
             {
-                MediaPlayer.Play(musicMainMenu);
+                MediaPlayer.Play(sounds.musicMainMenu);
                 MediaPlayer.IsRepeating = true;
-                currentSong += 1;
-                currentSong = currentSong % 2;
+                sounds.currentSong += 1;
+                sounds.currentSong = sounds.currentSong % 2;
             }
             if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame)
             {
-                MediaPlayer.Play(musicIngame[currentSong]);
+                MediaPlayer.Play(sounds.musicIngame[sounds.currentSong]);
                 MediaPlayer.IsRepeating = false;
             }
             if (this.currentGameState == EGameState.InGame)
             {
                 if (MediaPlayer.State == MediaState.Stopped)
                 {
-                    currentSong += 1;
-                    currentSong = currentSong % 2;
-                    MediaPlayer.Play(musicIngame[currentSong]);
+                    sounds.currentSong += 1;
+                    sounds.currentSong = sounds.currentSong % 2;
+                    MediaPlayer.Play(sounds.musicIngame[sounds.currentSong]);
                 }
             }
 
-            KeyboardState newKeyState = Keyboard.GetState();
-            if (newKeyState.IsKeyDown(Keys.O) && oldKeyState.IsKeyUp(Keys.O))
-            {
-                if (MediaPlayer.State == MediaState.Paused)
-                {
-                    MediaPlayer.Resume();
-                }
-                else MediaPlayer.Pause();
-            }
-            oldKeyState = newKeyState;
             #endregion
-
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-            //    || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            //{
-            //    this.Exit();
-            //}
 
             if (newRes.HasValue)
             {

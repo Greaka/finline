@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Finline.Code.Game
 {
-    using Game;
     using GameState;
 
     using Microsoft.Xna.Framework;
@@ -13,51 +11,41 @@ namespace Finline.Code.Game
     using Microsoft.Xna.Framework.Audio;
 
     
-    public class Sounds : Game
+    public class Sounds
     {
-        /*
-        Song musicMainMenu;
+        public int currentSong = 0;
+        public Song musicMainMenu;
+        private Song musicIngame1;
+        private Song musicIngame2;
+        public List<Song> musicIngame = new List<Song>(2);
         SoundEffect shot;
         KeyboardState oldKeyState;
         private bool off = false;
 
 
-        public Sounds()
+        public void LoadContent(ContentManager content)
         {
-            Content.RootDirectory = "Content";
-        }
-
-
-        protected override void LoadContent()
-        {
-            this.musicMainMenu = Content.Load<Song>("Sounds/musicMainMenu");
-            MediaPlayer.Stop();
+            this.musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
+            musicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
+            musicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
         }
 
         
-        protected override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            MediaPlayer.Play(musicMainMenu);
-            base.Update(gameTime);
+            #region Hintergrundmusik pausieren
             KeyboardState newKeyState = Keyboard.GetState();
-
-            if (newKeyState.IsKeyDown(Keys.P) && oldKeyState.IsKeyUp(Keys.P))
+            if (newKeyState.IsKeyDown(Keys.O) && oldKeyState.IsKeyUp(Keys.O))
             {
-                Exit();
-                
-                off = !off;
-                if (off == true)
-                {
-                    MediaPlayer.Pause();
-                }
-                else
+                if (MediaPlayer.State == MediaState.Paused)
                 {
                     MediaPlayer.Resume();
                 }
-                
+                else MediaPlayer.Pause();
             }
             oldKeyState = newKeyState;
+            #endregion
         }
-    */
+
     }
 }
