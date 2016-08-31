@@ -13,7 +13,7 @@ namespace Finline.Code.GameState
         private Texture2D _guiTexture;
 
         MouseState oldMouseState;
-        public int ausgewaehlt = 0;
+        public int ausgewaehlt = -1;
 
 
 
@@ -62,26 +62,45 @@ namespace Finline.Code.GameState
           
             if (this.AssetName == "LogoTransparent")
                 spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
+            else if (this.AssetName == "Rahmen")
+            {
+                spriteBatch.Draw(this._guiTexture,
+                    new Rectangle(135, 135, this._guiTexture.Width, this._guiTexture.Height), null,
+                    Color.Transparent);
+                spriteBatch.Draw(this._guiTexture,
+                        new Rectangle(535, 135, this._guiTexture.Width, this._guiTexture.Height), null,
+                        Color.Transparent);
+            }
+            else if (this.AssetName == "Ashe")
+            {
+                spriteBatch.Draw(this._guiTexture,
+                    new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null,
+                    Color.White);
+            }
+            else if (this.AssetName == "Yasuo")
+            {
+                spriteBatch.Draw(this._guiTexture,
+                    new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
+                    Color.White);
+            }
+            
             else spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
 
-
             if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
-                        oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed)
+                        oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed
+                        )
             {
                 ausgewaehlt = (ausgewaehlt + 1) % 2;
             }
 
-            if (this.AssetName == "Ashe")
+            if (this.AssetName == "Rahmen")
             {
                 spriteBatch.Draw(this._guiTexture,
-                    new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null,
-                    ausgewaehlt == 1 ? Color.Goldenrod : Color.White);
-            }
-            if (this.AssetName == "Yasuo")
-            {
+                    new Rectangle(135, 135, this._guiTexture.Width, this._guiTexture.Height), null,
+                    ausgewaehlt == 0 ? Color.Goldenrod : Color.Black);
                 spriteBatch.Draw(this._guiTexture,
-                    new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
-                    ausgewaehlt == 1 ? Color.Goldenrod : Color.White);
+                    new Rectangle(535, 135, this._guiTexture.Width, this._guiTexture.Height), null,
+                    ausgewaehlt == 1 ? Color.Goldenrod : Color.Black);
             }
 
             oldMouseState = newMouseState;

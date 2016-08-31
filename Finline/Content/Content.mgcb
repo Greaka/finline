@@ -648,7 +648,7 @@
 /processorParam:TextureFormat=Color
 /build:Yasuo.jpg
 
-#begin CharacterTrans.png
+#begin Rahmen.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -658,5 +658,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:CharacterTrans.png
+/build:Rahmen.png
 

@@ -69,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Ashe.jpg" />
-    <Content Include="Content\CharacterTrans.png" />
     <Content Include="Content\ControlsButton.png" />
     <Content Include="Content\ControlScreen.png" />
     <Content Include="Content\CreditsButton.png" />
