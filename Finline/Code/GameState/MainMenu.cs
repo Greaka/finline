@@ -173,43 +173,33 @@ namespace Finline.Code.GameState
                 this.menuState = EMenuState.MainMenu;
             }
 
-            if (element == "NewGame")
-            {
-                this.menuState = EMenuState.CharacterScreen;
-            }
-
-            if (element == "StartGame")
-            {
-                this.menuState = EMenuState.None;
-                GuiElement.ausgewaehlt = 3;
-                this.GoIngame?.Invoke();
-            }
-
-            if (element == "ControlsButton")
-            {
-                this.menuState = EMenuState.Controls;
-            }
-
-            if (element == "CreditsButton")
-            {
-                this.menuState = EMenuState.Credits;
-            }
-
-            if (element == "RecordsButton")
-            {
-                this.menuState = EMenuState.Records;
-            }
-
-            if (element == "Back2MainMenu")
-            {
-                this.menuState = EMenuState.MainMenu;
-                GuiElement.ausgewaehlt = 3;
-            }
-
-            if (element == "EndButton")
-            {
-                this.Game.Exit();
-            }
+           switch (element)
+           {
+               case "NewGame":
+                   this.menuState = EMenuState.CharacterScreen;
+                   break;
+               case "StartGame":
+                   this.menuState = EMenuState.None;
+                   GuiElement.ausgewaehlt = 3;
+                   this.GoIngame?.Invoke();
+                   break;
+               case "ControlsButton":
+                   this.menuState = EMenuState.Controls;
+                   break;
+               case "CreditsButton":
+                   this.menuState = EMenuState.Credits;
+                   break;
+               case "RecordsButton":
+                   this.menuState = EMenuState.Records;
+                   break;
+               case "Back2MainMenu":
+                   this.menuState = EMenuState.MainMenu;
+                   GuiElement.ausgewaehlt = 3;
+                   break;
+               case "EndButton":
+                   this.Game.Exit();
+                   break;
+           }
 #endregion
         }
 

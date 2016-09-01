@@ -67,21 +67,25 @@ namespace Finline.Code.GameState
                 if (this.AssetName == "Yasuo") ausgewaehlt = 1;
             }
 
-            if (this.AssetName == "LogoTransparent")
-                spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
-            else if (this.AssetName == "Ashe")
+            switch (this.AssetName)
             {
-                spriteBatch.Draw(this._guiTexture,
-                    new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null,
-                    ausgewaehlt == 0 ? Color.White : Color.DarkSlateGray);
+                case "LogoTransparent":
+                    spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
+                    break;
+                case "Ashe":
+                    spriteBatch.Draw(this._guiTexture,
+                        new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null,
+                        ausgewaehlt == 0 ? Color.White : Color.DarkSlateGray);
+                    break;
+                case "Yasuo":
+                    spriteBatch.Draw(this._guiTexture,
+                        new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
+                        ausgewaehlt == 1 ? Color.White : Color.DarkSlateGray);
+                    break;
+                default:
+                    spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
+                    break;
             }
-            else if (this.AssetName == "Yasuo")
-            {
-                spriteBatch.Draw(this._guiTexture,
-                    new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
-                    ausgewaehlt == 1 ? Color.White : Color.DarkSlateGray);
-            }
-            else spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
 
             oldMouseState = newMouseState;
         }
