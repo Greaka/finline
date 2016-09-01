@@ -797,6 +797,32 @@
             }
             #endregion
 
+            #region Zweiter Raum unten
+            for (var i = 3.6f; i <= 17.6f; i += 7)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i-3, 215-1.5f, -1),
+                    GameConstants.EnvObjects.deskUp));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i-3, 215-1.5f, -1),
+                    GameConstants.EnvObjects.chairUp));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 215, -1),
+                    GameConstants.EnvObjects.deskDown));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 215, -1),
+                    GameConstants.EnvObjects.chairDown));
+            }
+            #endregion
+
             #region Dritter Raum unten
             #endregion
 
