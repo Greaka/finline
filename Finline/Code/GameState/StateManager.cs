@@ -120,8 +120,8 @@ namespace Finline.Code.GameState
             this.main.Initialize();
             this.font = Content.Load<SpriteFont>("font");
 #region Loading Pause and Sound Icons
-            this.pausedTexture2D = this.Content.Load<Texture2D>("PauseTrans");
-            this.pausedRectangle = new Rectangle(360, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
+            this.pausedTexture2D = this.Content.Load<Texture2D>("PauseIcon");
+            this.pausedRectangle = new Rectangle(320, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
 
             this.soundOnTexture2D = this.Content.Load<Texture2D>("SoundOn");
             this.soundOnRectangle = new Rectangle(700, 30, this.soundOnTexture2D.Width, this.soundOnTexture2D.Height);
@@ -141,8 +141,8 @@ namespace Finline.Code.GameState
             }
 
             // buttons in the pausescreen
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -100);
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 0);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -40);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 40);
             #endregion
 
 #region LoadingMusic
