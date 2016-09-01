@@ -13,7 +13,7 @@ namespace Finline.Code.GameState
         private Texture2D _guiTexture;
 
         MouseState oldMouseState;
-        private static int ausgewaehlt = -1;
+        public static int ausgewaehlt = -1;
 
 
 
@@ -63,8 +63,8 @@ namespace Finline.Code.GameState
             if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
                         oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed)
             {
-                if (this.AssetName == "Rahmen") ausgewaehlt = 0;
-                if (this.AssetName == "Rahmen2") ausgewaehlt = 1;
+                if (this.AssetName == "Ashe") ausgewaehlt = 0;
+                if (this.AssetName == "Yasuo") ausgewaehlt = 1;
             }
 
             if (this.AssetName == "LogoTransparent")
@@ -73,33 +73,14 @@ namespace Finline.Code.GameState
             {
                 spriteBatch.Draw(this._guiTexture,
                     new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null,
-                    Color.White);
+                    ausgewaehlt == 0 ? Color.White : Color.DarkSlateGray);
             }
             else if (this.AssetName == "Yasuo")
             {
                 spriteBatch.Draw(this._guiTexture,
                     new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
-                    Color.White);
+                    ausgewaehlt == 1 ? Color.White : Color.DarkSlateGray);
             }
-            else if (this.AssetName == "Rahmen")
-            {
-                spriteBatch.Draw(this._guiTexture,
-                    new Rectangle(135, 135, this._guiTexture.Width, this._guiTexture.Height), null,
-                    ausgewaehlt == 0 ? Color.Goldenrod : Color.Transparent);
-                spriteBatch.Draw(this._guiTexture,
-                    new Rectangle(535, 135, this._guiTexture.Width, this._guiTexture.Height), null,
-                    ausgewaehlt == 0 ? Color.Black : Color.Transparent);
-            }
-            else if (this.AssetName == "Rahmen2")
-            {
-                spriteBatch.Draw(this._guiTexture,
-                    new Rectangle(135, 135, this._guiTexture.Width, this._guiTexture.Height), null,
-                    ausgewaehlt == 1 ? Color.Black : Color.Transparent);
-                spriteBatch.Draw(this._guiTexture,
-                    new Rectangle(535, 135, this._guiTexture.Width, this._guiTexture.Height), null,
-                    ausgewaehlt == 1 ? Color.Goldenrod : Color.Transparent);
-            }
-
             else spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
 
             oldMouseState = newMouseState;
