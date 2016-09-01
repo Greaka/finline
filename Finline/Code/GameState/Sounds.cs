@@ -13,21 +13,19 @@ namespace Finline.Code.Game
     
     public class Sounds
     {
-        public int currentSong = 0;
+        public int currentSong = 1;
         public Song musicMainMenu;
-        private Song musicIngame1;
-        private Song musicIngame2;
         public List<Song> musicIngame = new List<Song>(2);
-        SoundEffect shot;
-        KeyboardState oldKeyState;
-        private bool off = false;
+        private SoundEffect gunshot;
+        private KeyboardState oldKeyState;
 
 
         public void LoadContent(ContentManager content)
         {
-            this.musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
+            musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
             musicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
             musicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
+            //gunshot = content.Load<SoundEffect>("Sounds/gunshot");
         }
 
         

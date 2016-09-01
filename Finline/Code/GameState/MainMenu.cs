@@ -12,6 +12,7 @@ namespace Finline.Code.GameState
         private bool isPressed;
 
         private readonly Dictionary<EMenuState, List<GuiElement>> guiElements = new Dictionary<EMenuState, List<GuiElement>>();
+        
 
         private readonly SpriteBatch spriteBatch;
 
@@ -50,11 +51,13 @@ namespace Finline.Code.GameState
             #endregion
 
 #region CharacterScreen           // elements in the state characterScreen
+            this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("ChooseText"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("StartGame"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Back2MainMenu"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("LogoTransparent"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Ashe"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Yasuo"));
+
             #endregion
 
 #region Controls           // here are the elements in the state Option
@@ -98,9 +101,10 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "EndButton").MoveElement(-200, 100); // move the "end" button down in y-direction
             #endregion
 #region Moved Elements From CharacterScreen
+            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "ChooseText").MoveElement(0,-265);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Ashe").MoveElement(-200, -100);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Yasuo").MoveElement(200, -100);
-            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName =="StartGame").MoveElement(0, 25); // move the "StartGame" button up in y-direction
+            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "StartGame").MoveElement(0, 25); // move the "StartGame" button up in y-direction
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 100); // move the "Back_to_MainMenu" button down in y-direction
             #endregion
 #region Moved Elements From Controls
@@ -171,41 +175,36 @@ namespace Finline.Code.GameState
                 this.menuState = EMenuState.MainMenu;
             }
 
-            if (element == "NewGame")
-            {
-                this.menuState = EMenuState.CharacterScreen;
-            }
-
-            if (element == "StartGame")
-            {
-                this.menuState = EMenuState.None;
-                this.GoIngame?.Invoke();
-            }
-
-            if (element == "ControlsButton")
-            {
-                this.menuState = EMenuState.Controls;
-            }
-
-            if (element == "CreditsButton")
-            {
-                this.menuState = EMenuState.Credits;
-            }
-
-            if (element == "RecordsButton")
-            {
-                this.menuState = EMenuState.Records;
-            }
-
-            if (element == "Back2MainMenu")
-            {
-                this.menuState = EMenuState.MainMenu;
-            }
-
-            if (element == "EndButton")
-            {
-                this.Game.Exit();
-            }
+           switch (element)
+           {
+               case "NewGame":
+                   this.menuState = EMenuState.CharacterScreen;
+                   break;
+               case "StartGame":
+                    if (GuiElement.ausgewaehlt == 1 || GuiElement.ausgewaehlt == 2)
+                    {
+                        this.menuState = EMenuState.None;
+                        GuiElement.ausgewaehlt = 3;
+                        this.GoIngame?.Invoke();
+                    }
+                   break;
+               case "ControlsButton":
+                   this.menuState = EMenuState.Controls;
+                   break;
+               case "CreditsButton":
+                   this.menuState = EMenuState.Credits;
+                   break;
+               case "RecordsButton":
+                   this.menuState = EMenuState.Records;
+                   break;
+               case "Back2MainMenu":
+                   this.menuState = EMenuState.MainMenu;
+                   GuiElement.ausgewaehlt = 3;
+                   break;
+               case "EndButton":
+                   this.Game.Exit();
+                   break;
+           }
 #endregion
         }
 

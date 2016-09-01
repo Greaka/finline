@@ -11,8 +11,9 @@ namespace Finline.Code.GameState
 
         private Rectangle _guiRect;
         private Texture2D _guiTexture;
+
         MouseState oldMouseState;
-        public int ausgewaehlt = 0;
+        public static byte ausgewaehlt = 3;
 
 
 
@@ -33,11 +34,9 @@ namespace Finline.Code.GameState
 
         public void LoadContent(ContentManager content)
         {
-            this._guiTexture = content.Load<Texture2D>(this.AssetName);
+            this._guiTexture = content.Load<Texture2D>("GuiElements/" + this.AssetName);
 
             this._guiRect = new Rectangle(0, 0, this._guiTexture.Width, this._guiTexture.Height);
-
-
         }
 
         public void Update(ref bool isPressed)
@@ -59,18 +58,15 @@ namespace Finline.Code.GameState
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            MouseState newMouseState = Mouse.GetState();
-
-            if (this.AssetName == "LogoTransparent")
-                spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
-            else spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
+            var newMouseState = Mouse.GetState();
 
             if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
                         oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed)
             {
-                ausgewaehlt = (ausgewaehlt + 1) % 2;
+                if (this.AssetName == "Ashe") ausgewaehlt = 1;
+                if (this.AssetName == "Yasuo") ausgewaehlt = 2;
             }
-            
+
             switch (this.AssetName)
             {
                 case "LogoTransparent":
@@ -78,13 +74,16 @@ namespace Finline.Code.GameState
                     break;
                 case "Ashe":
                     spriteBatch.Draw(this._guiTexture,
-                            new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null,
-                            ausgewaehlt == 1 ? Color.Goldenrod : Color.White);
+                        new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null,
+                        ausgewaehlt == 1 ? Color.White : Color.DimGray);
                     break;
                 case "Yasuo":
                     spriteBatch.Draw(this._guiTexture,
-                            new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
-                            ausgewaehlt == 1 ? Color.Goldenrod : Color.White);
+                        new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
+                        ausgewaehlt == 2 ? Color.White : Color.DimGray);
+                    break;
+                default:
+                    spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
                     break;
             }
 
