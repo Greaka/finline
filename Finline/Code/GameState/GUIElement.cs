@@ -34,7 +34,7 @@ namespace Finline.Code.GameState
 
         public void LoadContent(ContentManager content)
         {
-            this._guiTexture = content.Load<Texture2D>(this.AssetName);
+            this._guiTexture = content.Load<Texture2D>("GuiElements/" + this.AssetName);
 
             this._guiRect = new Rectangle(0, 0, this._guiTexture.Width, this._guiTexture.Height);
         }

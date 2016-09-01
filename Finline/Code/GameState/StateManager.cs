@@ -271,9 +271,6 @@ namespace Finline.Code.GameState
 
 #region Draw SoundIcon, PauseScreen
 
-            
-
-            
             if (currentGameState == EGameState.InGame)
             {
                 if (MediaPlayer.State == MediaState.Paused)
