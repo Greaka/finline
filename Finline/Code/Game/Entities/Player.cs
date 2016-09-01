@@ -21,7 +21,7 @@ namespace Finline.Code.Game.Entities
 
         public void Initialize(ContentManager contentManager)
         {
-            this._model = contentManager.Load<Model>("player");
+            this._model = contentManager.Load<Model>("student");
             this.position = new Vector3(4,4,0);
         }
 
