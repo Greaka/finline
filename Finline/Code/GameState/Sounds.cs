@@ -13,7 +13,7 @@ namespace Finline.Code.Game
     
     public class Sounds
     {
-        public int currentSong = 0;
+        public int currentSong = 1;
         public Song musicMainMenu;
         public List<Song> musicIngame = new List<Song>(2);
         private SoundEffect gunshot;
