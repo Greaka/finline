@@ -13,7 +13,7 @@ namespace Finline.Code.GameState
         private Texture2D _guiTexture;
 
         MouseState oldMouseState;
-        public static int ausgewaehlt = -1;
+        public static byte ausgewaehlt = 3;
 
 
 
@@ -63,8 +63,8 @@ namespace Finline.Code.GameState
             if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
                         oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed)
             {
-                if (this.AssetName == "Ashe") ausgewaehlt = 0;
-                if (this.AssetName == "Yasuo") ausgewaehlt = 1;
+                if (this.AssetName == "Ashe") ausgewaehlt = 1;
+                if (this.AssetName == "Yasuo") ausgewaehlt = 2;
             }
 
             switch (this.AssetName)
@@ -75,12 +75,12 @@ namespace Finline.Code.GameState
                 case "Ashe":
                     spriteBatch.Draw(this._guiTexture,
                         new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null,
-                        ausgewaehlt == 0 ? Color.White : Color.DarkSlateGray);
+                        ausgewaehlt == 1 ? Color.White : Color.DimGray);
                     break;
                 case "Yasuo":
                     spriteBatch.Draw(this._guiTexture,
                         new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
-                        ausgewaehlt == 1 ? Color.White : Color.DarkSlateGray);
+                        ausgewaehlt == 2 ? Color.White : Color.DimGray);
                     break;
                 default:
                     spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);

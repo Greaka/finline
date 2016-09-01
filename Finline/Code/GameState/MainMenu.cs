@@ -179,9 +179,12 @@ namespace Finline.Code.GameState
                    this.menuState = EMenuState.CharacterScreen;
                    break;
                case "StartGame":
-                   this.menuState = EMenuState.None;
-                   GuiElement.ausgewaehlt = 3;
-                   this.GoIngame?.Invoke();
+                    if (GuiElement.ausgewaehlt == 1 || GuiElement.ausgewaehlt == 2)
+                    {
+                        this.menuState = EMenuState.None;
+                        GuiElement.ausgewaehlt = 3;
+                        this.GoIngame?.Invoke();
+                    }
                    break;
                case "ControlsButton":
                    this.menuState = EMenuState.Controls;
