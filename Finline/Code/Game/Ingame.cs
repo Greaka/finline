@@ -540,6 +540,46 @@
             #endregion
 
             #region Loading Desks & Chairs
+            #region 335
+            for (var i = 32; i > 15; i -= 4)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 33, -1),
+                    GameConstants.EnvObjects.deskRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 40, -1),
+                    GameConstants.EnvObjects.deskRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 47, -1),
+                    GameConstants.EnvObjects.deskRight));
+            }
+            for (var i = 33; i > 14; i -= 3)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 33, -1),
+                    GameConstants.EnvObjects.chairRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 40, -1),
+                    GameConstants.EnvObjects.chairRight));
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i, 47, -1),
+                    GameConstants.EnvObjects.chairRight));
+            }
+            #endregion
+
+            #region 334
             for (var i = 32; i > 15; i -= 8)
             {
                 this.EnvironmentObjects.Add(
@@ -563,44 +603,9 @@
                     new Vector3(i, 60, -1),
                     GameConstants.EnvObjects.deskDown));
             }
+            #endregion
 
-            for (var i = 32; i > 15; i -= 4)
-            {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 33, -1),
-                    GameConstants.EnvObjects.deskRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 40, -1),
-                    GameConstants.EnvObjects.deskRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 47, -1),
-                    GameConstants.EnvObjects.deskRight));
-            }
-            for (var i = 33; i >14; i -= 3)
-            {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 33, -1),
-                    GameConstants.EnvObjects.chairRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 40, -1),
-                    GameConstants.EnvObjects.chairRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 47, -1),
-                    GameConstants.EnvObjects.chairRight));
-            }
-
+            #region 333
             for (var i = 25.1f; i < 34; i += 4)
             {
                 this.EnvironmentObjects.Add(
@@ -725,6 +730,78 @@
                     new Vector3(i, 108, -1),
                     GameConstants.EnvObjects.chairLeft));
             }
+            #endregion
+
+            #region Treppenhaus
+            for (var i = 25.1f; i < 34; i += 4)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i+5, 124.5f, -1),
+                    GameConstants.EnvObjects.deskRight));
+            }
+            for (var i = 25; i < 35; i += 3)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i+5, 124.5f, -1),
+                    GameConstants.EnvObjects.chairRight));
+            }
+            for (var i = 26.6f; i < 35; i += 4)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i+5, 121.5f, -1),
+                    GameConstants.EnvObjects.deskLeft));
+            }
+            for (var i = 25.8f; i < 36.5f; i += 3)
+            {
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(i+5, 121.5f, -1),
+                    GameConstants.EnvObjects.chairLeft));
+            }
+            #endregion
+
+            #region Erster Raum unten
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(8, 188, -1),
+                    GameConstants.EnvObjects.chairUp));
+            this.EnvironmentObjects.Add(
+                new EnvironmentObject(
+                this.Game.Content,
+                new Vector3(8, 188, -1),
+                GameConstants.EnvObjects.deskUp));
+            this.EnvironmentObjects.Add(
+                new EnvironmentObject(
+                this.Game.Content,
+                new Vector3(6.86f, 186.3f, -1),
+                GameConstants.EnvObjects.deskRight));
+            #endregion
+
+            #region Erster Raum oben
+            for (var i = 31; i <= 39; i += 4)
+            {
+                var j = i == 39 ? 37 : i;
+                this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(j, 206, -1),
+                    GameConstants.EnvObjects.deskLeft));
+            }
+            #endregion
+
+            #region Dritter Raum unten
+            #endregion
+
+            #region Vierter Raum unten
+            #endregion
 
             #endregion
         }
