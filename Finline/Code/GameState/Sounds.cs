@@ -15,8 +15,6 @@ namespace Finline.Code.Game
     {
         public int currentSong = 0;
         public Song musicMainMenu;
-        private Song musicIngame1;
-        private Song musicIngame2;
         public List<Song> musicIngame = new List<Song>(2);
         SoundEffect shot;
         KeyboardState oldKeyState;

@@ -55,6 +55,7 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Back2MainMenu"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("LogoTransparent"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Rahmen"));
+            this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Rahmen2"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Ashe"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("Yasuo"));
 
@@ -103,7 +104,8 @@ namespace Finline.Code.GameState
 #region Moved Elements From CharacterScreen
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Ashe").MoveElement(-200, -100);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Yasuo").MoveElement(200, -100);
-            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Rahmen").MoveElement(000, -100);
+            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Rahmen").MoveElement(-200, -100);
+            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Rahmen2").MoveElement(200, -100);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName =="StartGame").MoveElement(0, 25); // move the "StartGame" button up in y-direction
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 100); // move the "Back_to_MainMenu" button down in y-direction
             #endregion
