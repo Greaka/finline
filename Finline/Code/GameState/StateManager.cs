@@ -120,12 +120,12 @@ namespace Finline.Code.GameState
             this.main.Initialize();
             this.font = Content.Load<SpriteFont>("font");
 #region Loading Pause and Sound Icons
-            this.pausedTexture2D = this.Content.Load<Texture2D>("PauseIcon");
+            this.pausedTexture2D = this.Content.Load<Texture2D>("Icons/PauseIcon");
             this.pausedRectangle = new Rectangle(320, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
 
-            this.soundOnTexture2D = this.Content.Load<Texture2D>("SoundOn");
+            this.soundOnTexture2D = this.Content.Load<Texture2D>("Icons/SoundOn");
             this.soundOnRectangle = new Rectangle(700, 30, this.soundOnTexture2D.Width, this.soundOnTexture2D.Height);
-            this.soundOffTexture2D = this.Content.Load<Texture2D>("SoundOff");
+            this.soundOffTexture2D = this.Content.Load<Texture2D>("Icons/SoundOff");
             this.soundOffRectangle = new Rectangle(700, 30, this.soundOffTexture2D.Width, this.soundOffTexture2D.Height);
             #endregion
 
