@@ -159,6 +159,7 @@ namespace Finline.Code.GameState
         }
         
         private float timer = 0;
+        private float deltaTime;
         private bool timePaused = false;
         private bool MouseIsPressed = false;
         /// <summary>
@@ -169,6 +170,7 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
+            
 #region Hintergrundmusik
             sounds.Update(gameTime);
 
@@ -243,7 +245,12 @@ namespace Finline.Code.GameState
                 {
                     timer = 0;
                 }
+                
+
+              
+
                 this.gameState.Update(gameTime);
+
             }
             
             #endregion
@@ -275,11 +282,18 @@ namespace Finline.Code.GameState
             {
                 if (MediaPlayer.State == MediaState.Paused)
                 {
+                    deltaTime = 0;
                     this.spriteBatch.Draw(this.soundOffTexture2D, this.soundOffRectangle, Color.White);
                 }
                 if (MediaPlayer.State == MediaState.Playing)
                 {
-                    this.spriteBatch.Draw(this.soundOnTexture2D, this.soundOffRectangle, Color.White);
+                    deltaTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (deltaTime < 3)
+                        this.spriteBatch.Draw(this.soundOnTexture2D, this.soundOnRectangle, Color.White);
+                    else
+                        spriteBatch.Draw(soundOnTexture2D, soundOnRectangle, Color.Transparent);
+
+                    
                 }
             }
 
