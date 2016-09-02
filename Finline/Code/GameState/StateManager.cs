@@ -178,8 +178,7 @@ namespace Finline.Code.GameState
             {
                 MediaPlayer.Play(sounds.musicMainMenu);
                 MediaPlayer.IsRepeating = true;
-                sounds.currentSong += 1;
-                sounds.currentSong = sounds.currentSong % 2;
+                sounds.currentSong = (sounds.currentSong + 1) % 2;
             }
             if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame)
             {
@@ -190,8 +189,7 @@ namespace Finline.Code.GameState
             {
                 if (MediaPlayer.State == MediaState.Stopped)
                 {
-                    sounds.currentSong += 1;
-                    sounds.currentSong = sounds.currentSong % 2;
+                    sounds.currentSong = (sounds.currentSong + 1)% 2;
                     MediaPlayer.Play(sounds.musicIngame[sounds.currentSong]);
                 }
             }
