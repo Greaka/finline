@@ -286,7 +286,7 @@ namespace Finline.Code.GameState
                 if (MediaPlayer.State == MediaState.Playing)
                 {
                     deltaTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    if (deltaTime < 3)
+                    if (deltaTime < 1.5f)
                         this.spriteBatch.Draw(this.soundOnTexture2D, this.soundOnRectangle, Color.White);
                     else
                         spriteBatch.Draw(soundOnTexture2D, soundOnRectangle, Color.Transparent);
@@ -305,7 +305,7 @@ namespace Finline.Code.GameState
                     }
             }
             if (this.currentGameState == EGameState.InGame)
-                spriteBatch.DrawString(font, "Your current time is: " + timer.ToString("00.0")+ "s", new Vector2(500, 420), Color.WhiteSmoke);
+                spriteBatch.DrawString(font, "Your current time is: " + timer.ToString("00.0")+ "s", new Vector2(500, 440), Color.WhiteSmoke);
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;

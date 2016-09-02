@@ -781,7 +781,7 @@
 /processorParam:RotationX=270
 /processorParam:RotationY=270
 /processorParam:RotationZ=270
-/processorParam:Scale=0.3
+/processorParam:Scale=0.25
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:student.fbx

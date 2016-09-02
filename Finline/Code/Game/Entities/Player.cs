@@ -22,7 +22,7 @@ namespace Finline.Code.Game.Entities
         public void Initialize(ContentManager contentManager)
         {
             this._model = contentManager.Load<Model>("student");
-            this.position = new Vector3(4,4,0);
+            this.position = new Vector3(4,4,-0.5f);
         }
 
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection, List<EnvironmentObject> environmentObjects)
