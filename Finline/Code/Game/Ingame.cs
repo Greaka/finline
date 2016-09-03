@@ -973,6 +973,11 @@
                     this.Game.Content,
                     new Vector3(6.99f,5,2),
                     GameConstants.EnvObjects.mirkopir));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(9, 3, 1),
+                    GameConstants.EnvObjects.plant));
         }
     }
 }
