@@ -63,8 +63,8 @@ namespace Finline.Code.GameState
             if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
                         oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed)
             {
-                if (this.AssetName == "Ashe") ausgewaehlt = 1;
-                if (this.AssetName == "Yasuo") ausgewaehlt = 2;
+                if (this.AssetName == "studentprofile") ausgewaehlt = 1;
+                if (this.AssetName == "profprofile") ausgewaehlt = 2;
             }
 
             switch (this.AssetName)
@@ -72,14 +72,14 @@ namespace Finline.Code.GameState
                 case "LogoTransparent":
                     spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
                     break;
-                case "Ashe":
+                case "studentprofile":
                     spriteBatch.Draw(this._guiTexture,
-                        new Rectangle(150, 150, this._guiTexture.Width, this._guiTexture.Height), null,
+                        new Rectangle(120, 120, this._guiTexture.Width, this._guiTexture.Height), null,
                         ausgewaehlt == 1 ? Color.White : Color.DimGray);
                     break;
-                case "Yasuo":
+                case "profprofile":
                     spriteBatch.Draw(this._guiTexture,
-                        new Rectangle(550, 150, this._guiTexture.Width, this._guiTexture.Height), null,
+                        new Rectangle(520, 120, this._guiTexture.Width, this._guiTexture.Height), null,
                         ausgewaehlt == 2 ? Color.White : Color.DimGray);
                     break;
                 default:
