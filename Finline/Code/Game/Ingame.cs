@@ -973,11 +973,18 @@
                     this.Game.Content,
                     new Vector3(6.99f,5,2),
                     GameConstants.EnvObjects.mirkopir));
+          
+            LevelDekoPlant(9, 3, 1);
+            LevelDekoPlant(14.5f, 256.5f, 0);
+        }
+        private void LevelDekoPlant(float x, float y, float z)
+        {
             this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
-                    new Vector3(9, 3, 1),
+                    new Vector3(x, y, z ),
                     GameConstants.EnvObjects.plant));
         }
+
     }
 }
