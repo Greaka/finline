@@ -459,18 +459,6 @@
 /processorParam:TextureFormat=Color
 /build:GuiElements/StartGame.png
 
-#begin GuiElements/Ashe.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:GuiElements/Ashe.jpg
-
 #begin GuiElements/ControlScreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -518,18 +506,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:GuiElements/TitleScreen.png
-
-#begin GuiElements/Yasuo.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:GuiElements/Yasuo.jpg
 
 #begin GuiElements/RecordTexture.png
 /importer:TextureImporter
@@ -828,6 +804,30 @@
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:mirkopir.fbx
+
+#begin GuiElements/studentprofile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GuiElements/studentprofile.png
+
+#begin GuiElements/profprofile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GuiElements/profprofile.png
 
 #begin wallH.fbx
 /importer:FbxImporter
