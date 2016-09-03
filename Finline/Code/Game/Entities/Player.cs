@@ -17,7 +17,7 @@ namespace Finline.Code.Game.Entities
 
     public class Player : Entity
     {
-        private readonly float unitsPerSecond = 15;
+        private readonly float unitsPerSecond = 15; 
 
         public void Initialize(ContentManager contentManager)
         {
