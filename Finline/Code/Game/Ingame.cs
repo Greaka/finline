@@ -975,11 +975,99 @@
                     new Vector3(90, 245, 0),
                     GameConstants.EnvObjects.podest));
 
+            #region Loading Monitore 
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(14.8f, 60.5f, 2),
+                    GameConstants.EnvObjects.monitor));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(14.8f, 74, 2),
+                    GameConstants.EnvObjects.monitor));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(22.8f, 74, 2),
+                    GameConstants.EnvObjects.monitor));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(22.8f, 60.5f, 2),
+                    GameConstants.EnvObjects.monitor));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(30.8f, 74, 2),
+                    GameConstants.EnvObjects.monitor));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(30.8f, 60.5f, 2),
+                    GameConstants.EnvObjects.monitor));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(11, 188, 2),
+                    GameConstants.EnvObjects.monitor_gedreht));   //Erster Raum unten links
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(37.5f, 185, 2),
+                    GameConstants.EnvObjects.monitor_gedreht)); //Raum links neben Klos
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(36.5f, 185, 2),
+                    GameConstants.EnvObjects.monitor_gedreht)); //Raum links neben Klos
+
+            #endregion
+
+            #region Loading Rechner
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(15.5f, 58.5f, 2),
+                    GameConstants.EnvObjects.rechner));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(15.5f, 72.2f, 2),
+                    GameConstants.EnvObjects.rechner));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(23.5f, 72.2f, 2),
+                    GameConstants.EnvObjects.rechner));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(23.5f,58.5f, 2),
+                    GameConstants.EnvObjects.rechner));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(31.5f, 72.2f, 2),
+                    GameConstants.EnvObjects.rechner));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(31.5f, 58.5f, 2),
+                    GameConstants.EnvObjects.rechner));
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(10.5f, 190, 2),
+                    GameConstants.EnvObjects.rechner_gedreht)); //Erster Raum unten links
+            #endregion
+
             this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
                     new Vector3(6.99f,5,2),
-                    GameConstants.EnvObjects.mirkopir));
+                    GameConstants.EnvObjects.mirkopir));  //Poster
+
             this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
@@ -991,6 +1079,7 @@
                     new Vector3(16, 23.5f, 2),
                     GameConstants.EnvObjects.whiteboard));
             
+
 
             #region Loarding Pissour
             this.EnvironmentObjects.Add(
