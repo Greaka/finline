@@ -968,14 +968,78 @@
             #endregion
 
             #endregion
+
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(90, 245, 0),
+                    GameConstants.EnvObjects.podest));
+
             this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
                     new Vector3(6.99f,5,2),
                     GameConstants.EnvObjects.mirkopir));
-          
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(29, 23.5f, 2),
+                    GameConstants.EnvObjects.whiteboard));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(16, 23.5f, 2),
+                    GameConstants.EnvObjects.whiteboard));
+            
+
+            #region Loarding Pissour
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(30, 139.9f, 0),
+                    GameConstants.EnvObjects.pissoir));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(35, 139.9f, 0),
+                    GameConstants.EnvObjects.pissoir));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(40, 139.9f, 0),
+                    GameConstants.EnvObjects.pissoir));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(45, 139.9f, 0),
+                    GameConstants.EnvObjects.pissoir));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(30, 140, 0),
+                    GameConstants.EnvObjects.pissoir_gedreht));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(35, 140, 0),
+                    GameConstants.EnvObjects.pissoir_gedreht));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(40, 140, 0),
+                    GameConstants.EnvObjects.pissoir_gedreht));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(45, 140, 0),
+                    GameConstants.EnvObjects.pissoir_gedreht));
+            
+            #endregion
+
+
             LevelDekoPlant(9, 3, 1);
             LevelDekoPlant(14.5f, 256.5f, 0);
+
         }
         private void LevelDekoPlant(float x, float y, float z)
         {
