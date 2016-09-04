@@ -49,6 +49,7 @@
         private Ground ground;
 
         private readonly List<Enemy> Enemies = new List<Enemy>();
+        private readonly List<Boss> Bosses = new List<Boss>();
 
         private readonly List<EnvironmentObject> EnvironmentObjects = new List<EnvironmentObject>();
 
@@ -112,6 +113,8 @@
             this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(4, 233, 0)));
             this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 246, 0)));
             this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 259, 0)));
+            this.Bosses.Add(new Boss(this.Game.Content, new Vector3(100, 228, 0)));
+            this.Bosses.Add(new Boss(this.Game.Content, new Vector3(100, 252, 0)));
 
             this.LoadEnvironment();
         }
@@ -172,6 +175,10 @@
             foreach (var enemy in this.Enemies)
             {
                 enemy.Draw(this.viewMatrix, this.projectionMatrix);
+            }
+            foreach (var boss in this.Bosses)
+            {
+                boss.Draw(this.viewMatrix, this.projectionMatrix);
             }
 
             base.Draw(gameTime);
