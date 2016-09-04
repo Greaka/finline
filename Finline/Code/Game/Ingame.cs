@@ -980,7 +980,7 @@
                     new EnvironmentObject(
                     this.Game.Content,
                     new Vector3(90, 245, 0),
-                    GameConstants.EnvObjects.podest));
+                    GameConstants.EnvObjects.podest));    //Podest
 
             #region Loading Monitore 
             this.EnvironmentObjects.Add(
@@ -1069,12 +1069,33 @@
                     GameConstants.EnvObjects.rechner_gedreht)); //Erster Raum unten links
             #endregion
 
+            #region Loading Poster 
+            this.EnvironmentObjects.Add(
+            new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(6.99f,5,2),
+                    GameConstants.EnvObjects.mirkopir));
             this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
-                    new Vector3(6.99f,5,2),
-                    GameConstants.EnvObjects.mirkopir));  //Poster
-
+                    new Vector3(6.7f, 10, 2),
+                    GameConstants.EnvObjects.poster_vader));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(6.7f, 25, 2),
+                    GameConstants.EnvObjects.poster_deadpool));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(6.7f, 32, 2),
+                    GameConstants.EnvObjects.poster_zombie));
+            this.EnvironmentObjects.Add(
+                    new EnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(6.7f, 40, 2),
+                    GameConstants.EnvObjects.poster_cat));
+            #endregion
             this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
