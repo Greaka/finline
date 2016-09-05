@@ -190,359 +190,190 @@
             for (var i = 2; i <= 38; i += 4)
             {
                 var j = i == 38 ? 1.75f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 0, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 0, 2, GameConstants.EnvObjects.wallV);
             }
 
             for (var i = 2; i <= 150; i += 4)
             {
                 var j = i == 150 ? 149.25f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(0, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(0, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 1.75f; i <= 117.75f; i += 4)
             {
                 var j = i == 117.75f ? 115.25f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(36, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(36, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 9; i <= 37; i += 4)
             {
                 var j = i == 37 ? 34 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 81, 2),
-                        GameConstants.EnvObjects.wallV));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 52, 2),
-                        GameConstants.EnvObjects.wallV));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 23, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 81, 2, GameConstants.EnvObjects.wallV);
+                LevelObjects(j, 52, 2, GameConstants.EnvObjects.wallV);
+                LevelObjects(j, 23, 2, GameConstants.EnvObjects.wallV);
             }
 
             for (var i = 2.25f; i <= 114.25f; i += 4)
             {
                 var j = i == 86.25 || i == 74.25 || i == 46.25 || i == 18.25 ? 115.25f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(7, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(7, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 9; i <= 49; i += 4)
             {
                 var j = i == 49 ? 46.75f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 117, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 117, 2, GameConstants.EnvObjects.wallV);
             }
 
             for (var i = 119; i <= 151; i += 4)
             {
                 var j = i == 151 ? 149 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(48.5f, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(48.5f, j, 2, GameConstants.EnvObjects.wallH);
             }
             for (var i = 26.25f; i <= 50.25f; i += 4)
             {
                 var j = i == 50.25f ? 46.75f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 129, 2),
-                        GameConstants.EnvObjects.wallV));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 140, 2),
-                        GameConstants.EnvObjects.wallV));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 151, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 129, 2, GameConstants.EnvObjects.wallV);
+                LevelObjects(j, 140, 2, GameConstants.EnvObjects.wallV);
+                LevelObjects(j, 151, 2, GameConstants.EnvObjects.wallV);
             }
 
             for (var i = 2; i <= 18; i += 4)
             {
                 var j = i == 18 ? 16.5f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 151, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 151, 2, GameConstants.EnvObjects.wallV);
             }
 
             for (var i = 154; i <= 186; i += 4)
             {
                 var j = i == 186 ? 152.75f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(18.5f, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(18.5f, j, 2, GameConstants.EnvObjects.wallH);
             }
             for (var i = 131; i <= 179; i += 4)
             {
                 var j = i == 135 || i == 143 ? 182 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(24.5f, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(24.5f, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 190; i <= 202; i += 4)
             {
                 var j = i == 202 ? 199.75f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(18.5f, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(18.5f, j, 2, GameConstants.EnvObjects.wallH);
             }
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(24.5f, 190, 2),
-                        GameConstants.EnvObjects.wallH));
-
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(20.25f, 201.75f, 2),
-                        GameConstants.EnvObjects.wallV));
+            LevelObjects(24.5f, 190, 2, GameConstants.EnvObjects.wallH);
+            LevelObjects(20.5f, 201.75f, 2, GameConstants.EnvObjects.wallV);
 
             for (var i = 26.5f; i <= 38.5f; i += 4)
             {
                 var j = i == 38.5f ? 36.75f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 191.75f, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 191.75f, 2, GameConstants.EnvObjects.wallV);
             }
 
 
             for (var i = 203.5f; i <= 259.5f; i += 4)
             {
                 var j = i == 219.5f || i == 235.5f ? 262 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(22.25f, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(22.25f, j, 2, GameConstants.EnvObjects.wallH);
             }
             for (var i = 194; i <= 230; i += 4)
             {
                 var j = i == 202 ? 233 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(28.25f, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(28.25f, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 2; i <= 42; i += 4)
             {
                 var j = i == 10 ? 45.5f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 240.5f, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 240.5f, 2, GameConstants.EnvObjects.wallV);
             }
             for (var i = 30; i <= 46; i += 4)
             {
                 var j = i == 46 ? 45.5f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 235f, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 235f, 2, GameConstants.EnvObjects.wallV);
             }
 
             for (var i = 242.5f; i <= 246.5f; i += 4)
             {
                 var j = i == 246.5f ? 244 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(47.25f, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(47.25f, j, 2, GameConstants.EnvObjects.wallH);
             }
             for (var i = 231.5f; i <= 235.5f; i += 4)
             {
                 var j = i == 235.5f ? 233 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(47.25f, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(47.25f, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 49; i <= 57; i += 4)
             {
                 var j = i == 57 ? 56 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 245.75f, 2),
-                        GameConstants.EnvObjects.wallV));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 229.25f, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 245.75f, 2, GameConstants.EnvObjects.wallV);
+                LevelObjects(j, 229.25f, 2, GameConstants.EnvObjects.wallV);
             }
 
             for (var i = 231.5f; i >= 211.5f; i -= 4)
             {
                 var j = i == 211.5f ? (i + 1.25f) : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(58, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(58, j, 2, GameConstants.EnvObjects.wallH);
             }
             for (var i = 243.5f; i <= 263.5f; i += 4)
             {
                 var j = i == 263.5f ? (i - 1.25f) : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(58, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(58, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 60; i <= 132; i += 4)
             {
                 var j = i == 132 ? 130.5f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 264, 2),
-                        GameConstants.EnvObjects.wallV));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 211, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 264, 2, GameConstants.EnvObjects.wallV);
+                LevelObjects(j, 211, 2, GameConstants.EnvObjects.wallV);
             }
 
             for (var i = 213; i <= 265; i += 4)
             {
                 var j = i == 265 ? 262.25f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(132.25f, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(132.25f, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 2; i <= 22; i += 4)
             {
                 var j = i == 22 ? 20.5f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 264, 2),
-                        GameConstants.EnvObjects.wallV));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 223.5f, 2),
-                        GameConstants.EnvObjects.wallV));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 212, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 264, 2, GameConstants.EnvObjects.wallV);
+                LevelObjects(j, 223.5f, 2, GameConstants.EnvObjects.wallV);
+                LevelObjects(j, 212, 2, GameConstants.EnvObjects.wallV);
             }
 
             for (var i = 213.75f; i <= 265.75f; i += 4)
             {
                 var j = i == 265.75f ? 262.25f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(0, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(0, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 2; i <= 18; i += 4)
             {
                 var j = i == 18 ? 16.5f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 191, 2),
-                        GameConstants.EnvObjects.wallV));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 177.5f, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 191, 2, GameConstants.EnvObjects.wallV);
+                LevelObjects(j, 177.5f, 2, GameConstants.EnvObjects.wallV);
             }
             for (var i = 179.25f; i <= 191.25f; i += 4)
             {
                 var j = i == 191.25f ? 189.25f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(0, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(0, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 30; i <= 38; i += 4)
             {
                 var j = i == 38 ? 36.75f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 208, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 208, 2, GameConstants.EnvObjects.wallV);
             }
             for (var i = 26.5f; i <= 38.5f; i += 4)
             {
                 var j = i == 38.5f ? 36.75f : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(j, 182, 2),
-                        GameConstants.EnvObjects.wallV));
+                LevelObjects(j, 182, 2, GameConstants.EnvObjects.wallV);
             }
             for (var i = 184; i <= 208; i += 4)
             {
                 var j = i == 208 ? 206 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                        this.Game.Content,
-                        new Vector3(38.5f, j, 2),
-                        GameConstants.EnvObjects.wallH));
+                LevelObjects(38.5f, j, 2, GameConstants.EnvObjects.wallH);
             }
             #endregion
 
