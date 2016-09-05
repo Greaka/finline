@@ -614,6 +614,8 @@
             #region Loading Whiteboards
             LevelObjects(29, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
             LevelObjects(16, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
+            LevelObjects(21, 116.65f, 2, GameConstants.EnvObjects.whiteboard_gedreht);
+
             #endregion
 
             #region Loading Pissour

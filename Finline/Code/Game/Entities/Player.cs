@@ -34,8 +34,9 @@ namespace Finline.Code.Game.Entities
             //    this._model = contentManager.Load<Model>("student_stand");
             if (GuiElement.ausgewaehlt == 1) this._model = contentManager.Load<Model>("student_stand"); else
                 this._model = contentManager.Load<Model>("prof_stand");
-            this.position = new Vector3(4,4,-0.5f);    //Start
-           // this.position = new Vector3(90, 240, 0);     // Hörsaal
+            this.position = new Vector3(4,4,-0.5f);    //Standard
+            // this.position = new Vector3(90, 240, 0);   // Hörsaal
+            //this.position = new Vector3(26, 90, 0);      // 333
             
             studentStand = contentManager.Load<Model>("student_stand");
             studentLinks = contentManager.Load<Model>("student_linkesBein");
