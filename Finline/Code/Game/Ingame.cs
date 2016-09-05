@@ -146,6 +146,10 @@
                 enemy.Update(this.player.Position, this.EnvironmentObjects);
             }
 
+            foreach (var boss in this.Bosses)
+            {
+                boss.Update(this.player.Position, this.EnvironmentObjects, gameTime);
+            }
             base.Update(gameTime);
         }
 
