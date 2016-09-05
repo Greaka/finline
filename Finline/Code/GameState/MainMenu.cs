@@ -187,6 +187,7 @@ namespace Finline.Code.GameState
                     if (GuiElement.ausgewaehlt == 1 || GuiElement.ausgewaehlt == 2)
                     {
                         this.menuState = EMenuState.None;
+                       
                         this.GoIngame?.Invoke();
                     }
                    break;
