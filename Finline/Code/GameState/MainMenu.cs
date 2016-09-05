@@ -181,12 +181,12 @@ namespace Finline.Code.GameState
            {
                case "NewGame":
                    this.menuState = EMenuState.CharacterScreen;
-                   break;
+                    GuiElement.ausgewaehlt = 3;
+                    break;
                case "StartGame":
                     if (GuiElement.ausgewaehlt == 1 || GuiElement.ausgewaehlt == 2)
                     {
                         this.menuState = EMenuState.None;
-                        GuiElement.ausgewaehlt = 3;
                         this.GoIngame?.Invoke();
                     }
                    break;

@@ -550,325 +550,133 @@
             #region 335
             for (var i = 32; i > 15; i -= 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 33, -1),
-                    GameConstants.EnvObjects.deskRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 40, -1),
-                    GameConstants.EnvObjects.deskRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 47, -1),
-                    GameConstants.EnvObjects.deskRight));
+                LevelObjects(i, 33, -1, GameConstants.EnvObjects.deskRight);
+                LevelObjects(i, 40, -1, GameConstants.EnvObjects.deskRight);
+                LevelObjects(i, 47, -1, GameConstants.EnvObjects.deskRight);
             }
             for (var i = 33; i > 14; i -= 3)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 33, -1),
-                    GameConstants.EnvObjects.chairRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 40, -1),
-                    GameConstants.EnvObjects.chairRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 47, -1),
-                    GameConstants.EnvObjects.chairRight));
+                LevelObjects(i, 33, -1, GameConstants.EnvObjects.chairRight);
+                LevelObjects(i, 40, -1, GameConstants.EnvObjects.chairRight);
+                LevelObjects(i, 47, -1, GameConstants.EnvObjects.chairRight);
             }
             #endregion
 
             #region 334
             for (var i = 32; i > 15; i -= 8)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 74, -1),
-                    GameConstants.EnvObjects.chairDown));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 60, -1),
-                    GameConstants.EnvObjects.chairDown));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 74, -1),
-                    GameConstants.EnvObjects.deskDown));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 60, -1),
-                    GameConstants.EnvObjects.deskDown));
+                LevelObjects(i, 60, -1, GameConstants.EnvObjects.chairDown);
+                LevelObjects(i, 74, -1, GameConstants.EnvObjects.chairDown);
+                LevelObjects(i, 60, -1, GameConstants.EnvObjects.deskDown);
+                LevelObjects(i, 74, -1, GameConstants.EnvObjects.deskDown);
             }
             #endregion
 
             #region 333
             for (var i = 25.1f; i < 34; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 91, -1),
-                    GameConstants.EnvObjects.deskRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 101, -1),
-                    GameConstants.EnvObjects.deskRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 111, -1),
-                    GameConstants.EnvObjects.deskRight));
+                LevelObjects(i, 91, -1, GameConstants.EnvObjects.deskRight);
+                LevelObjects(i, 101, -1, GameConstants.EnvObjects.deskRight);
+                LevelObjects(i, 111, -1, GameConstants.EnvObjects.deskRight);
             }
             for (var i = 25; i < 35; i += 3)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 91, -1),
-                    GameConstants.EnvObjects.chairRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 101, -1),
-                    GameConstants.EnvObjects.chairRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 111, -1),
-                    GameConstants.EnvObjects.chairRight));
+                LevelObjects(i, 91, -1, GameConstants.EnvObjects.chairRight);
+                LevelObjects(i, 101, -1, GameConstants.EnvObjects.chairRight);
+                LevelObjects(i, 111, -1, GameConstants.EnvObjects.chairRight);
             }
             for (var i = 26.6f; i < 35; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 88, -1),
-                    GameConstants.EnvObjects.deskLeft));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 98, -1),
-                    GameConstants.EnvObjects.deskLeft));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 108, -1),
-                    GameConstants.EnvObjects.deskLeft));
+                LevelObjects(i, 88, -1, GameConstants.EnvObjects.deskLeft);
+                LevelObjects(i, 98, -1, GameConstants.EnvObjects.deskLeft);
+                LevelObjects(i, 108, -1, GameConstants.EnvObjects.deskLeft);
             }
             for (var i = 25.8f; i < 36.5f; i += 3)
             {
-                this.EnvironmentObjects.Add(
-                     new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 88, -1),
-                    GameConstants.EnvObjects.chairLeft));
-                this.EnvironmentObjects.Add(
-                     new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 98, -1),
-                    GameConstants.EnvObjects.chairLeft));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 108, -1),
-                    GameConstants.EnvObjects.chairLeft));
+                LevelObjects(i, 88, -1, GameConstants.EnvObjects.chairLeft);
+                LevelObjects(i, 98, -1, GameConstants.EnvObjects.chairLeft);
+                LevelObjects(i, 108, -1, GameConstants.EnvObjects.chairLeft);
             }
             for (var i = 8.1f; i < 17; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 101, -1),
-                    GameConstants.EnvObjects.deskRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 111, -1),
-                    GameConstants.EnvObjects.deskRight));
+                LevelObjects(i, 101, -1, GameConstants.EnvObjects.deskRight);
+                LevelObjects(i, 111, -1, GameConstants.EnvObjects.deskRight);
             }
             for (var i = 8; i < 18; i += 3)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 101, -1),
-                    GameConstants.EnvObjects.chairRight));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 111, -1),
-                    GameConstants.EnvObjects.chairRight));
+                LevelObjects(i, 101, -1, GameConstants.EnvObjects.chairRight);
+                LevelObjects(i, 111, -1, GameConstants.EnvObjects.chairRight);
             }
             for (var i = 9.6f; i < 18; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 98, -1),
-                    GameConstants.EnvObjects.deskLeft));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 108, -1),
-                    GameConstants.EnvObjects.deskLeft));
+                LevelObjects(i, 98, -1, GameConstants.EnvObjects.deskLeft);
+                LevelObjects(i, 108, -1, GameConstants.EnvObjects.deskLeft);
             }
             for (var i = 8.8f; i < 19.5f; i += 3)
             {
-                this.EnvironmentObjects.Add(
-                     new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 98, -1),
-                    GameConstants.EnvObjects.chairLeft));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 108, -1),
-                    GameConstants.EnvObjects.chairLeft));
+                LevelObjects(i, 98, -1, GameConstants.EnvObjects.chairLeft);
+                LevelObjects(i, 108, -1, GameConstants.EnvObjects.chairLeft);
             }
             #endregion
 
             #region Treppenhaus
-            for (var i = 25.1f; i < 34; i += 4)
+            for (var i = 30.1f; i < 39; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i+5, 124.5f, -1),
-                    GameConstants.EnvObjects.deskRight));
+                LevelObjects(i, 124.5f, -1, GameConstants.EnvObjects.deskRight);
             }
-            for (var i = 25; i < 35; i += 3)
+            for (var i = 30; i < 40; i += 3)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i+5, 124.5f, -1),
-                    GameConstants.EnvObjects.chairRight));
+                LevelObjects(i, 124.5f, -1, GameConstants.EnvObjects.chairRight);
             }
-            for (var i = 26.6f; i < 35; i += 4)
+            for (var i = 31.6f; i < 40; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i+5, 121.5f, -1),
-                    GameConstants.EnvObjects.deskLeft));
+                LevelObjects(i, 121.5f, -1, GameConstants.EnvObjects.deskLeft);
             }
-            for (var i = 25.8f; i < 36.5f; i += 3)
+            for (var i = 30.8f; i < 41.5f; i += 3)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i+5, 121.5f, -1),
-                    GameConstants.EnvObjects.chairLeft));
+                LevelObjects(i, 121.5f, -1, GameConstants.EnvObjects.chairLeft);
             }
             #endregion
 
             #region Erster Raum oben
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(36.5f, 183.5f, -1),
-                    GameConstants.EnvObjects.deskUp));
+            LevelObjects(36.5f, 183.5f, -1, GameConstants.EnvObjects.deskUp);
             #endregion
 
             #region Erster Raum unten
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(10, 188, -1),
-                    GameConstants.EnvObjects.chairUp));
-            this.EnvironmentObjects.Add(
-                new EnvironmentObject(
-                this.Game.Content,
-                new Vector3(10, 188, -1),
-                GameConstants.EnvObjects.deskUp));
+            LevelObjects(10, 188, -1, GameConstants.EnvObjects.chairUp);
+            LevelObjects(10, 188, -1, GameConstants.EnvObjects.deskUp);
             for (var i = 4.86f; i < 9; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 186.2f, -1),
-                    GameConstants.EnvObjects.deskRight));
+                LevelObjects(i, 186.2f, -1, GameConstants.EnvObjects.deskRight);
             }
-            this.EnvironmentObjects.Add(
-                new EnvironmentObject(
-                this.Game.Content,
-                new Vector3(4.86f, 186.2f, -1),
-                GameConstants.EnvObjects.chairRight));
+            LevelObjects(4.86f, 186.2f, -1, GameConstants.EnvObjects.chairRight);
             #endregion
 
             #region Zweiter Raum oben
             for (var i = 31; i <= 39; i += 4)
             {
                 var j = i == 39 ? 37 : i;
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(j, 206, -1),
-                    GameConstants.EnvObjects.deskLeft));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(j, 206, -1),
-                    GameConstants.EnvObjects.chairLeft));
+                LevelObjects(j, 206, -1, GameConstants.EnvObjects.deskLeft);
+                LevelObjects(j, 206, -1, GameConstants.EnvObjects.chairLeft);
             }
             #endregion
 
             #region Zweiter Raum unten
             for (var i = 7; i <= 15; i += 8)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i-3, 215-1.5f, -1),
-                    GameConstants.EnvObjects.deskUp));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i-3, 215-1.5f, -1),
-                    GameConstants.EnvObjects.chairUp));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 215, -1),
-                    GameConstants.EnvObjects.deskDown));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 215, -1),
-                    GameConstants.EnvObjects.chairDown));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i-2, 217, -1),
-                    GameConstants.EnvObjects.chairRight));
+                LevelObjects(i-3, 213.5f, -1, GameConstants.EnvObjects.deskUp);
+                LevelObjects(i-3, 213.5f, -1, GameConstants.EnvObjects.chairUp);
+                LevelObjects(i, 215, -1, GameConstants.EnvObjects.deskDown);
+                LevelObjects(i, 215, -1, GameConstants.EnvObjects.chairDown);
+                LevelObjects(i-2, 217, -1, GameConstants.EnvObjects.chairRight);
             }
             #endregion
 
             #region Dritter Raum unten
             for (var i = 17; i<=21; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 228, -1),
-                    GameConstants.EnvObjects.chairLeft));
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 228, -1),
-                    GameConstants.EnvObjects.deskLeft));
+                LevelObjects(i, 228, -1, GameConstants.EnvObjects.deskLeft);
+                LevelObjects(i, 228, -1, GameConstants.EnvObjects.chairLeft);
             }
             for (var i = 3.5f; i < 6; i += 2)
             {
@@ -896,81 +704,41 @@
             #region Vierter Raum unten
             for (var i = 11; i < 18; i += 2)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 260.5f, -1),
-                    GameConstants.EnvObjects.chairRight));
+                LevelObjects(i, 260.5f, -1, GameConstants.EnvObjects.chairRight);
             }
             for (var i = 12.0f; i < 17; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 260, -1),
-                    GameConstants.EnvObjects.deskRight));
+                LevelObjects(i, 260, -1, GameConstants.EnvObjects.deskRight);
             }
 
             for (var i = 12.45f; i < 19; i += 2)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 252.22f, -1),
-                    GameConstants.EnvObjects.chairLeft));
+                LevelObjects(i, 252.22f, -1, GameConstants.EnvObjects.chairLeft);
             }
             for (var i = 13.45f; i < 18; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(i, 252.72f, -1),
-                    GameConstants.EnvObjects.deskLeft));
+                LevelObjects(i, 252.72f, -1, GameConstants.EnvObjects.deskLeft);
             }
 
             for (var i = 254.1f; i < 261; i += 2)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(18.66f, i, -1),
-                    GameConstants.EnvObjects.chairDown));
+                LevelObjects(18.66f, i, -1, GameConstants.EnvObjects.chairDown);
             }
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(18.16f, 257.1f, -1),
-                    GameConstants.EnvObjects.deskDown));
+            LevelObjects(18.16f, 257.1f, -1, GameConstants.EnvObjects.deskDown);
 
             for (var i = 253f; i < 260; i += 2)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(10.5f, i, -1),
-                    GameConstants.EnvObjects.chairUp));
+                LevelObjects(10.5f, i, -1, GameConstants.EnvObjects.chairUp);
             }
-            this.EnvironmentObjects.Add(
-                new EnvironmentObject(
-                this.Game.Content,
-                new Vector3(11.3f, 255.6f, -1),
-                GameConstants.EnvObjects.deskUp));
+            LevelObjects(11.3f, 255.6f, -1, GameConstants.EnvObjects.deskUp);
 
             for (var i = 242.5f; i < 249; i += 3)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(1.8f, i, -1),
-                    GameConstants.EnvObjects.chairDown));
+                LevelObjects(1.8f, i, -1, GameConstants.EnvObjects.chairDown);
             }
             for (var i = 243.6f; i < 248; i += 4)
             {
-                this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(1.8f, i, -1),
-                    GameConstants.EnvObjects.deskDown));
+                LevelObjects(1.8f, i, -1, GameConstants.EnvObjects.deskDown);
             }
             #endregion
 
@@ -985,9 +753,9 @@
             LevelObjects(22.8f, 74, 2, GameConstants.EnvObjects.monitor);
             LevelObjects(30.8f, 60.5f, 2, GameConstants.EnvObjects.monitor);
             LevelObjects(30.8f, 74, 2, GameConstants.EnvObjects.monitor);
-            LevelObjects(36, 184.5f, 2, GameConstants.EnvObjects.monitor_gedreht);    //Erster Raum unten links
-            LevelObjects(36.8f, 184.5f, 2, GameConstants.EnvObjects.monitor_gedreht);    //Raum links neben Klos
-            LevelObjects(37.6f, 184.5f, 2, GameConstants.EnvObjects.monitor_gedreht);    //Raum links neben Klos
+            LevelObjects(10, 188, 2, GameConstants.EnvObjects.monitor_gedreht);    //Erster Raum unten links
+            LevelObjects(36.3f, 184.5f, 2, GameConstants.EnvObjects.monitor_gedreht);    //Raum links neben Klos
+            LevelObjects(37.4f, 184.5f, 2, GameConstants.EnvObjects.monitor_gedreht);    //Raum links neben Klos
             #endregion
 
             #region Loading Rechner
