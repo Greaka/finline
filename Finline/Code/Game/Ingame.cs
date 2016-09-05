@@ -143,7 +143,7 @@
 
             foreach (var enemy in this.Enemies)
             {
-                enemy.Update(this.player.Position, this.EnvironmentObjects);
+                enemy.Update(this.player.Position, this.EnvironmentObjects, gameTime);
             }
 
             foreach (var boss in this.Bosses)
