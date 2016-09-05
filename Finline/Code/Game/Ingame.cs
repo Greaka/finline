@@ -976,195 +976,63 @@
 
             #endregion
 
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(90, 245, 0),
-                    GameConstants.EnvObjects.podest));    //Podest
+            LevelObjects(90, 245, 0, GameConstants.EnvObjects.podest);  //podest
 
-            #region Loading Monitore 
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(14.8f, 60.5f, 2),
-                    GameConstants.EnvObjects.monitor));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(14.8f, 74, 2),
-                    GameConstants.EnvObjects.monitor));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(22.8f, 74, 2),
-                    GameConstants.EnvObjects.monitor));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(22.8f, 60.5f, 2),
-                    GameConstants.EnvObjects.monitor));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(30.8f, 74, 2),
-                    GameConstants.EnvObjects.monitor));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(30.8f, 60.5f, 2),
-                    GameConstants.EnvObjects.monitor));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(11, 188, 2),
-                    GameConstants.EnvObjects.monitor_gedreht));   //Erster Raum unten links
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(37.5f, 185, 2),
-                    GameConstants.EnvObjects.monitor_gedreht)); //Raum links neben Klos
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(36.5f, 185, 2),
-                    GameConstants.EnvObjects.monitor_gedreht)); //Raum links neben Klos
-
+            #region Loading Monitore
+            LevelObjects(14.8f, 60.5f, 2, GameConstants.EnvObjects.monitor);
+            LevelObjects(14.8f, 74, 2, GameConstants.EnvObjects.monitor);
+            LevelObjects(22.8f, 60.5f, 2, GameConstants.EnvObjects.monitor);
+            LevelObjects(22.8f, 74, 2, GameConstants.EnvObjects.monitor);
+            LevelObjects(30.8f, 60.5f, 2, GameConstants.EnvObjects.monitor);
+            LevelObjects(30.8f, 74, 2, GameConstants.EnvObjects.monitor);
+            LevelObjects(36, 184.5f, 2, GameConstants.EnvObjects.monitor_gedreht);    //Erster Raum unten links
+            LevelObjects(36.8f, 184.5f, 2, GameConstants.EnvObjects.monitor_gedreht);    //Raum links neben Klos
+            LevelObjects(37.6f, 184.5f, 2, GameConstants.EnvObjects.monitor_gedreht);    //Raum links neben Klos
             #endregion
 
             #region Loading Rechner
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(15.5f, 58.5f, 2),
-                    GameConstants.EnvObjects.rechner));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(15.5f, 72.2f, 2),
-                    GameConstants.EnvObjects.rechner));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(23.5f, 72.2f, 2),
-                    GameConstants.EnvObjects.rechner));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(23.5f,58.5f, 2),
-                    GameConstants.EnvObjects.rechner));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(31.5f, 72.2f, 2),
-                    GameConstants.EnvObjects.rechner));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(31.5f, 58.5f, 2),
-                    GameConstants.EnvObjects.rechner));
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(10.5f, 190, 2),
-                    GameConstants.EnvObjects.rechner_gedreht)); //Erster Raum unten links
+            LevelObjects(15.5f, 58.5f, 2, GameConstants.EnvObjects.rechner);
+            LevelObjects(15.5f, 72.2f, 2, GameConstants.EnvObjects.rechner);
+            LevelObjects(23.5f, 58.5f, 2, GameConstants.EnvObjects.rechner);
+            LevelObjects(23.5f, 72.2f, 2, GameConstants.EnvObjects.rechner);
+            LevelObjects(31.5f, 58.5f, 2, GameConstants.EnvObjects.rechner);
+            LevelObjects(31.5f, 72.2f, 2, GameConstants.EnvObjects.rechner);
+            LevelObjects(10.5f, 190, 2, GameConstants.EnvObjects.rechner_gedreht);  //Erster Raum unten links
             #endregion
 
-            #region Loading Poster 
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(6.99f,5,2),
-                    GameConstants.EnvObjects.mirkopir));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(6.7f, 10, 2),
-                    GameConstants.EnvObjects.poster_vader));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(6.7f, 25, 2),
-                    GameConstants.EnvObjects.poster_deadpool));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(6.7f, 32, 2),
-                    GameConstants.EnvObjects.poster_zombie));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(6.7f, 40, 2),
-                    GameConstants.EnvObjects.poster_cat));
-            #endregion
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(29, 23.5f, 2),
-                    GameConstants.EnvObjects.whiteboard));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(16, 23.5f, 2),
-                    GameConstants.EnvObjects.whiteboard));
-            
-
-
-            #region Loarding Pissour
-            this.EnvironmentObjects.Add(
-            new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(30, 139.9f, 0),
-                    GameConstants.EnvObjects.pissoir));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(35, 139.9f, 0),
-                    GameConstants.EnvObjects.pissoir));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(40, 139.9f, 0),
-                    GameConstants.EnvObjects.pissoir));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(45, 139.9f, 0),
-                    GameConstants.EnvObjects.pissoir));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(30, 140, 0),
-                    GameConstants.EnvObjects.pissoir_gedreht));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(35, 140, 0),
-                    GameConstants.EnvObjects.pissoir_gedreht));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(40, 140, 0),
-                    GameConstants.EnvObjects.pissoir_gedreht));
-            this.EnvironmentObjects.Add(
-                    new EnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(45, 140, 0),
-                    GameConstants.EnvObjects.pissoir_gedreht));
-            
+            #region Loading Poster
+            LevelObjects(6.99f, 5, 2, GameConstants.EnvObjects.mirkopir);
+            LevelObjects(6.7f, 10, 2, GameConstants.EnvObjects.poster_vader);
+            LevelObjects(6.7f, 25, 2, GameConstants.EnvObjects.poster_deadpool);
+            LevelObjects(6.7f, 32, 2, GameConstants.EnvObjects.poster_zombie);
+            LevelObjects(6.7f, 40, 2, GameConstants.EnvObjects.poster_cat);
             #endregion
 
+            #region Loading Whiteboards
+            LevelObjects(29, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
+            LevelObjects(16, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
+            #endregion
 
-            LevelDekoPlant(9, 3, 1);
-            LevelDekoPlant(14.5f, 256.5f, 0);
+            #region Loading Pissour
+            for (var i = 30; i<=45; i+=5)
+            {
+                LevelObjects(i, 139.9f, 0, GameConstants.EnvObjects.pissoir);
+                LevelObjects(i, 140, 0, GameConstants.EnvObjects.pissoir_gedreht);
+            }
+            #endregion
 
+            #region Loading Plants
+            LevelObjects(9, 3, 1, GameConstants.EnvObjects.plant);
+            LevelObjects(14.5f, 256.5f, 0, GameConstants.EnvObjects.plant);
+            #endregion
         }
-        private void LevelDekoPlant(float x, float y, float z)
+        private void LevelObjects(float x, float y, float z, GameConstants.EnvObjects model)
         {
             this.EnvironmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content,
                     new Vector3(x, y, z ),
-                    GameConstants.EnvObjects.plant));
+                    model));
         }
 
     }

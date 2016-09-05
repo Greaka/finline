@@ -548,12 +548,6 @@
 /processorParam:TextureFormat=Color
 /build:GuiElements/ChooseText.PNG
 
-#begin Sounds/gunshot.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sounds/gunshot.mp3
-
 #begin brown_eye.png
 /importer:TextureImporter
 /processor:TextureProcessor
