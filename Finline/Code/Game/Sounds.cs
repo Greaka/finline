@@ -16,7 +16,7 @@ namespace Finline.Code.Game
         public int currentSong = 1;
         public Song musicMainMenu;
         public List<Song> musicIngame = new List<Song>(2);
-        private SoundEffect gunshot;
+        public SoundEffect gunshot;
         private KeyboardState oldKeyState;
 
 
@@ -25,10 +25,46 @@ namespace Finline.Code.Game
             musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
             musicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
             musicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
-            //gunshot = content.Load<SoundEffect>("Sounds/gunshot");
+            gunshot = content.Load<SoundEffect>("Sounds/gunshot");
         }
 
+
+        public void GunshotPlay()
+        {
+            if (MediaPlayer.State != MediaState.Paused)
+                gunshot.Play();
+        }
+
+        public void PlayMainMenuMusic()
+        {
+            MediaPlayer.Play(musicMainMenu);
+            MediaPlayer.IsRepeating = true;
+            currentSong = (currentSong + 1) % 2;
+        }
+
+        public void PlayIngameMusic()
+        {
+            MediaPlayer.Play(musicIngame[currentSong]);
+            MediaPlayer.IsRepeating = false;
+
+        }
         
+        public void PlayIngameSongChange()
+        {
+            if (MediaPlayer.State == MediaState.Stopped)
+            {
+                currentSong = (currentSong + 1) % 2;
+                MediaPlayer.Play(musicIngame[currentSong]);
+            }
+        }
+        /*
+        public void PauseMusic()
+        {
+            if (MediaPlayer.State == MediaState.Playing)
+                MediaPlayer.Pause();
+            else MediaPlayer.Resume();
+        }*/
+
         public void Update(GameTime gameTime)
         {
             #region Hintergrundmusik pausieren
@@ -44,6 +80,5 @@ namespace Finline.Code.Game
             oldKeyState = newKeyState;
             #endregion
         }
-
     }
 }

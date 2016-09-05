@@ -11,6 +11,7 @@ namespace Finline.Code.Game.Controls
     using System.Diagnostics;
 
     using Finline.Code.Game.Entities;
+    using Finline.Code.Game;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
@@ -20,6 +21,8 @@ namespace Finline.Code.Game.Controls
     /// </summary>
     public class Shooting
     {
+        Sounds sounds = new Sounds();
+
         /// <summary>
         /// The stopwatch.
         /// </summary>
@@ -29,7 +32,7 @@ namespace Finline.Code.Game.Controls
         /// The <see cref="ContentManager"/>.
         /// </summary>
         private readonly ContentManager content;
-
+        
         private readonly List<Projectile> projectiles;
 
         /// <summary>
@@ -47,6 +50,7 @@ namespace Finline.Code.Game.Controls
             this.content = shiny;
             this.stopwatch.Restart();
             this.projectiles = projectiles;
+            sounds.LoadContent(shiny);
         }
 
         /// <summary>
@@ -56,6 +60,8 @@ namespace Finline.Code.Game.Controls
         {
             var projectile = new Projectile(this.stopwatch.Elapsed, this.content, position, direction);
             this.projectiles.Add(projectile);
+            sounds.GunshotPlay();
+
         }
 
         /// <summary>

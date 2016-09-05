@@ -175,24 +175,13 @@ namespace Finline.Code.GameState
             sounds.Update(gameTime);
 
             if (this.currentGameState == EGameState.None || newRes.HasValue)
-            {
-                MediaPlayer.Play(sounds.musicMainMenu);
-                MediaPlayer.IsRepeating = true;
-                sounds.currentSong = (sounds.currentSong + 1) % 2;
-            }
+                sounds.PlayMainMenuMusic();
+
             if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame)
-            {
-                MediaPlayer.Play(sounds.musicIngame[sounds.currentSong]);
-                MediaPlayer.IsRepeating = false;
-            }
+                sounds.PlayIngameMusic();
+
             if (this.currentGameState == EGameState.InGame)
-            {
-                if (MediaPlayer.State == MediaState.Stopped)
-                {
-                    sounds.currentSong = (sounds.currentSong + 1)% 2;
-                    MediaPlayer.Play(sounds.musicIngame[sounds.currentSong]);
-                }
-            }
+                sounds.PlayIngameSongChange();
 
             #endregion
 
@@ -208,7 +197,7 @@ namespace Finline.Code.GameState
             }
 
 #region Pause
-            MouseState mouse = Mouse.GetState();
+            //MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
             if (this.currentGameState == EGameState.InGame && this.paused)
 

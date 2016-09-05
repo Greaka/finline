@@ -1192,3 +1192,9 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:poster_zombie.fbx
 
+#begin Sounds/gunshot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gunshot.wav
+
