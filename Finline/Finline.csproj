@@ -48,6 +48,7 @@
     <Compile Include="Code\Game\Controls\EnemyController.cs" />
     <Compile Include="Code\Game\Controls\PlayerController.cs" />
     <Compile Include="Code\Game\Controls\Shoot.cs" />
+    <Compile Include="Code\Game\Entities\Boss.cs" />
     <Compile Include="Code\Game\Entities\Enemy.cs" />
     <Compile Include="Code\Game\Entities\Entity.cs" />
     <Compile Include="Code\Game\Entities\EnvironmentObject.cs" />
@@ -55,6 +56,8 @@
     <Compile Include="Code\Game\Ground.cs" />
     <Compile Include="Code\Game\Entities\Player.cs" />
     <Compile Include="Code\Utility\Collision.cs" />
+    <Compile Include="Code\Game\Sounds.cs" />
+    <Compile Include="Code\Utility\GraphicsHelper.cs" />
     <Compile Include="Code\Utility\VectorHelper.cs" />
     <Compile Include="Code\Game\Ingame.cs" />
     <Compile Include="Program.cs" />
@@ -68,18 +71,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Controls.PNG" />
-    <Content Include="Content\CreditscreenTexture2.PNG" />
-    <Content Include="Content\finground.jpg" />
-    <Content Include="Content\LogoTransparent.PNG" />
-    <Content Include="Content\PauseTrans.png" />
-    <Content Include="Content\Records.PNG" />
-    <Content Include="Content\RecordTexture.png" />
-    <Content Include="Content\TitleScreen.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <MonoGameContentReference Include="Content\Content.mgcb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </MonoGameContentReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

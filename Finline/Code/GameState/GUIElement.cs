@@ -11,8 +11,11 @@ namespace Finline.Code.GameState
 
         private Rectangle _guiRect;
         private Texture2D _guiTexture;
-        
-       
+
+        MouseState oldMouseState;
+        public static byte ausgewaehlt = 3;
+
+
 
         /// <summary>
         ///     Constructor for GUIElements
@@ -31,7 +34,7 @@ namespace Finline.Code.GameState
 
         public void LoadContent(ContentManager content)
         {
-            this._guiTexture = content.Load<Texture2D>(this.AssetName);
+            this._guiTexture = content.Load<Texture2D>("GuiElements/" + this.AssetName);
 
             this._guiRect = new Rectangle(0, 0, this._guiTexture.Width, this._guiTexture.Height);
         }
@@ -48,14 +51,43 @@ namespace Finline.Code.GameState
             {
                 isPressed = false;
             }
+
+
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-             if(this.AssetName == "LogoTransparent")
-                spriteBatch.Draw(this._guiTexture, new Rectangle(600, 270, _guiTexture.Width / 3 , _guiTexture.Height / 3), null, Color.White);
-             else
-                spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
+            var newMouseState = Mouse.GetState();
+
+            if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
+                        oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed)
+            {
+                if (this.AssetName == "studentprofile") ausgewaehlt = 1;
+                if (this.AssetName == "profprofile") ausgewaehlt = 2;
+            }
+
+            switch (this.AssetName)
+            {
+                case "LogoTransparent":
+                    spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
+                    break;
+                case "studentprofile":
+                    spriteBatch.Draw(this._guiTexture,
+                        new Rectangle(120, 120, this._guiTexture.Width, this._guiTexture.Height), null,
+                        ausgewaehlt == 1 ? Color.White : Color.DimGray);
+                    break;
+                case "profprofile":
+                    spriteBatch.Draw(this._guiTexture,
+                        new Rectangle(520, 120, this._guiTexture.Width, this._guiTexture.Height), null,
+                        ausgewaehlt == 2 ? Color.White : Color.DimGray);
+                    break;
+                default:
+                    spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
+                    break;
+            }
+
+            oldMouseState = newMouseState;
         }
 
 
@@ -66,7 +98,7 @@ namespace Finline.Code.GameState
         /// <param name="width"></param>
         public void CenterElement(int height, int width)
         {
-            this._guiRect = new Rectangle(width/2 - this._guiTexture.Width/2, height/2 - this._guiTexture.Height/2, this._guiTexture.Width, this._guiTexture.Height);
+            this._guiRect = new Rectangle(width / 2 - this._guiTexture.Width / 2, height / 2 - this._guiTexture.Height / 2, this._guiTexture.Width, this._guiTexture.Height);
         }
 
 

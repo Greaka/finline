@@ -33,6 +33,10 @@ namespace Finline.Code.GameState
         private DrawableGameComponent gameState;
 
         /// <summary>
+        /// newRes puts an EGameState to null
+        /// </summary>
+        private EGameState? newRes = null;
+        /// <summary>
         /// The current game state.
         /// </summary>
         private EGameState currentGameState;
@@ -51,18 +55,27 @@ namespace Finline.Code.GameState
         /// The <see cref="SpriteBatch"/>.
         /// </summary>
         private SpriteBatch spriteBatch;
-        private bool isPressed = false;
-        private SpriteFont font;
-        
 
+        private SpriteFont font;
+#region PauseStuff
+        private bool isPressed = false;
         private bool paused = false;
         private Texture2D pausedTexture2D;
         private Rectangle pausedRectangle;
+        #endregion
+
+#region SoundIcons
+        private Texture2D soundOnTexture2D;
+        private Rectangle soundOnRectangle;
+        private Texture2D soundOffTexture2D;
+        private Rectangle soundOffRectangle;
+#endregion
 
         private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
 
-        private Song musicMainMenu;
-        
+#region MusicStuff
+        Sounds sounds = new Sounds();
+#endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StateManager"/> class. 
@@ -72,11 +85,9 @@ namespace Finline.Code.GameState
             this.Graphics = new GraphicsDeviceManager(this);
             this.IsMouseVisible = true;
             this.guiElements.Add(EGameState.InGame, new List<GuiElement>());
-            
 
             this.guiElements[EGameState.InGame].Add(new GuiElement("Play"));
-            this.guiElements[EGameState.InGame].Add(new GuiElement("Options"));
-            this.guiElements[EGameState.InGame].Add(new GuiElement("End"));
+            this.guiElements[EGameState.InGame].Add(new GuiElement("Back2MainMenu"));
 
         }
 
@@ -101,16 +112,24 @@ namespace Finline.Code.GameState
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
+
             this.Content.RootDirectory = "Content";
             this.main = new MainMenu(this, this.spriteBatch);
             this.main.GoIngame += this.StartNewGame;
+
             this.main.Initialize();
+            this.font = Content.Load<SpriteFont>("font");
+#region Loading Pause and Sound Icons
+            this.pausedTexture2D = this.Content.Load<Texture2D>("Icons/PauseIcon");
+            this.pausedRectangle = new Rectangle(320, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
 
-            this.pausedTexture2D = this.Content.Load<Texture2D>("PauseTrans");
-            this.pausedRectangle = new Rectangle(360, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
+            this.soundOnTexture2D = this.Content.Load<Texture2D>("Icons/SoundOn");
+            this.soundOnRectangle = new Rectangle(700, 30, this.soundOnTexture2D.Width, this.soundOnTexture2D.Height);
+            this.soundOffTexture2D = this.Content.Load<Texture2D>("Icons/SoundOff");
+            this.soundOffRectangle = new Rectangle(700, 30, this.soundOffTexture2D.Width, this.soundOffTexture2D.Height);
+            #endregion
 
-
-            //this.font = this.Content.Load<SpriteFont>("font");
+#region Moved Buttons in PauseScreen
             foreach (var elementList in this.guiElements.Values)
             {
                 foreach (var element in elementList)
@@ -122,16 +141,15 @@ namespace Finline.Code.GameState
             }
 
             // buttons in the pausescreen
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -100);
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Options").MoveElement(0, 0);
-            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "End").MoveElement(0, 100);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -40);
+            this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 40);
+            #endregion
 
-            //music in titlescreen and menusystem
-            this.musicMainMenu = this.Content.Load<Song>("musicMainMenu");
-            if (this.nextGameState == EGameState.MainMenu)
-                MediaPlayer.Play(this.musicMainMenu);
+#region LoadingMusic
+            sounds.LoadContent(Content);
+#endregion
         }
-        
+
         /// <summary>
         /// The unload content.
         /// </summary>
@@ -139,42 +157,38 @@ namespace Finline.Code.GameState
         {
             // TODO: Unload any non ContentManager content here
         }
-
-
+        
+        private float timer = 0;
+        private float deltaTime;
+        private bool timePaused = false;
+        private bool MouseIsPressed = false;
         /// <summary>
         /// The update.
         /// </summary>
         /// <param name="gameTime">
         /// The game time.
         /// </param>
-        private bool off = false;
-        KeyboardState oldKeyState;
         protected override void Update(GameTime gameTime)
         {
-             
-            if (this.nextGameState == EGameState.InGame)
-                MediaPlayer.Stop();
+            
+#region Hintergrundmusik
+            sounds.Update(gameTime);
 
-            KeyboardState newKeyState = Keyboard.GetState();
-            if (newKeyState.IsKeyDown(Keys.O) && oldKeyState.IsKeyUp(Keys.O))
+            if (this.currentGameState == EGameState.None || newRes.HasValue)
+                sounds.PlayMainMenuMusic();
+
+            if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame)
+                sounds.PlayIngameMusic();
+
+            if (this.currentGameState == EGameState.InGame)
+                sounds.PlayIngameSongChange();
+
+            #endregion
+
+            if (newRes.HasValue)
             {
-                if (off == true)
-                {
-                    MediaPlayer.Pause();
-                }
-                else
-                {
-                    MediaPlayer.Resume();
-                }
-                off = !off;
-            }
-            oldKeyState = newKeyState;
-
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                this.Exit();
+                nextGameState = newRes.Value;
+                newRes = null;
             }
 
             if (this.nextGameState != this.currentGameState)
@@ -182,34 +196,52 @@ namespace Finline.Code.GameState
                 this.HandleGameState();
             }
 
-            var mouse = Mouse.GetState();
-            var k = Keyboard.GetState();
-            if(this.currentGameState == EGameState.InGame)
-                foreach (var element in this.guiElements[this.currentGameState])  //muss noch verbessert werden, da die buttons nicht einwandfrei funktionieren
+#region Pause
+            //MouseState mouse = Mouse.GetState();
+            KeyboardState k = Keyboard.GetState();
+            if (this.currentGameState == EGameState.InGame && this.paused)
+
+                foreach (var element in this.guiElements[this.currentGameState])
                 {
-                    element.Update(ref this.isPressed);
+                    element.Update(ref this.MouseIsPressed);
                 }
 
+            if (currentGameState == EGameState.InGame && k.IsKeyDown(Keys.Escape) && !this.isPressed)
+            {
+                this.paused = !this.paused;
+                this.isPressed = true;
+                this.timePaused = true;
 
-            if (k.IsKeyDown(Keys.P) && !this.isPressed)
+                if (this.paused)
                 {
-                    this.paused = !this.paused;
-                   
-                    this.isPressed = true;
-                    
+                    MediaPlayer.Pause();
                 }
-          
-            if (this.isPressed && !k.IsKeyDown(Keys.P))
+                else MediaPlayer.Resume();
+            }
+
+            if (this.isPressed && !k.IsKeyDown(Keys.Escape))
             {
                 this.isPressed = false;
-            }
-         
-            if (!this.paused)
-            {
-                this.gameState.Update(gameTime);
+                this.timePaused = false;
             }
 
-          
+            if (!this.paused)
+            {
+                timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (currentGameState == EGameState.MainMenu)
+                {
+                    timer = 0;
+                }
+                
+
+              
+
+                this.gameState.Update(gameTime);
+
+            }
+            
+            #endregion
+
             base.Update(gameTime);
         }
 
@@ -230,19 +262,43 @@ namespace Finline.Code.GameState
             this.gameState.Draw(gameTime);
 
             this.spriteBatch.Begin();
+
+#region Draw SoundIcon, PauseScreen
+
+            if (currentGameState == EGameState.InGame)
+            {
+                if (MediaPlayer.State == MediaState.Paused)
+                {
+                    deltaTime = 0;
+                    this.spriteBatch.Draw(this.soundOffTexture2D, this.soundOffRectangle, Color.White);
+                }
+                if (MediaPlayer.State == MediaState.Playing)
+                {
+                    deltaTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (deltaTime < 1.5f)
+                        this.spriteBatch.Draw(this.soundOnTexture2D, this.soundOnRectangle, Color.White);
+                    else
+                        spriteBatch.Draw(soundOnTexture2D, soundOnRectangle, Color.Transparent);
+
+                    
+                }
+            }
+
             if (this.paused)
             {
                 this.spriteBatch.Draw(this.pausedTexture2D, this.pausedRectangle, Color.White);
-                if (this.currentGameState != EGameState.None)
+                if (this.currentGameState != EGameState.None && currentGameState != EGameState.MainMenu)
                     foreach (var element in this.guiElements[this.currentGameState])
                     {
                         element.Draw(this.spriteBatch);
                     }
             }
+            if (this.currentGameState == EGameState.InGame)
+                spriteBatch.DrawString(font, "Your current time is: " + timer.ToString("00.0")+ "s", new Vector2(500, 440), Color.WhiteSmoke);
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
-
+            #endregion
             base.Draw(gameTime);
         }
 
@@ -250,24 +306,22 @@ namespace Finline.Code.GameState
         /// when click on the button, do something
         /// </summary>
         /// <param name="element"></param>
+
         private void OnClick(string element)
         {
             if (this.isPressed) return;
             this.isPressed = true;
 
-            if (element == "Play") //muss noch verbessert werden, da die buttons noch nicht funktionieren
+            if (element == "Play")
             {
                 paused = !paused;
+                MediaPlayer.Resume();
             }
 
-            //if (element == "Options")
-            //{
-            //    currentGameState = EGameState.MainMenu;
-            //}
-
-            if (element == "End")
-                this.Exit();
-
+            if (element != "Back2MainMenu") return;
+            newRes = EGameState.MainMenu;
+            paused = false;
+            main.MakeHeile();
         }
 
         /// <summary>
@@ -291,7 +345,7 @@ namespace Finline.Code.GameState
             }
 
             this.gameState.Initialize();
-            
+
             this.currentGameState = this.nextGameState;
         }
 

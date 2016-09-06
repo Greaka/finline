@@ -17,6 +17,12 @@ namespace Finline.Code.Game.Entities
         {
             this.Visible = true;
             this._type = model;
+            switch (model)
+            {
+                case GameConstants.EnvObjects.wallV:
+                    this._sphereScaling = 0.4f;
+                    break;
+            }
 
             this._model = contentManager.Load<Model>(model.ToString());
             this.position = position;
