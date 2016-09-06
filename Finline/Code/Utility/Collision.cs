@@ -55,6 +55,8 @@ namespace Finline.Code.Utility
                 {
                     continue;
                 }
+
+                colliding = collision.MinimumTranslationVector;
             }
 
             return colliding;

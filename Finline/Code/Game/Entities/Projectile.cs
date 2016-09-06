@@ -59,6 +59,8 @@ namespace Finline.Code.Game.Entities
                 {
                     continue;
                 }
+
+                colliding = collision.MinimumTranslationVector;
             }
 
             return colliding;
