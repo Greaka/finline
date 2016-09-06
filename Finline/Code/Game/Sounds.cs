@@ -12,10 +12,10 @@ namespace Finline.Code.Game
 
     public class Sounds
     {
-        private int currentSong = 1;
+        private int CurrentSong = 1;
         public bool soundOn = true;
         private Song musicMainMenu;
-        private List<Song> musicIngame = new List<Song>(2);
+        private List<Song> MusicIngame = new List<Song>(2);
         private SoundEffect playerShot;
         private static SoundEffectInstance playerShotInstance;
         private SoundEffect enemyShot;
@@ -27,8 +27,8 @@ namespace Finline.Code.Game
         public void LoadContent(ContentManager content)
         {
             musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
-            musicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
-            musicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
+            MusicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
+            MusicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
             playerShot = content.Load<SoundEffect>("Sounds/gunshot");
         }
  
