@@ -279,19 +279,11 @@ namespace Finline.Code.Utility
             var edgeCountB = edgesB.Count;
             var minIntervalDistance = float.PositiveInfinity;
             var translationAxis = new Vector2();
-            Vector3 edge;
 
             // Loop through all the edges of both polygons
             for (var edgeIndex = 0; edgeIndex < edgeCountA + edgeCountB; edgeIndex++)
             {
-                if (edgeIndex < edgeCountA)
-                {
-                    edge = edgesA[edgeIndex];
-                }
-                else
-                {
-                    edge = edgesB[edgeIndex - edgeCountA];
-                }
+                var edge = edgeIndex < edgeCountA ? edgesA[edgeIndex] : edgesB[edgeIndex - edgeCountA];
 
                 // ===== 1. Find if the polygons are currently intersecting =====
 
@@ -300,12 +292,18 @@ namespace Finline.Code.Utility
                 axis.Normalize();
 
                 // Find the projection of the polygon on the current axis
-                float minA = 0; float minB = 0; float maxA = 0; float maxB = 0;
+                float minA = 0;
+                float minB = 0;
+                float maxA = 0;
+                float maxB = 0;
                 ProjectPolygon(axis, polygonA, ref minA, ref maxA);
                 ProjectPolygon(axis, polygonB, ref minB, ref maxB);
 
                 // Check if the polygon projections are currentlty intersecting
-                if (IntervalDistance(minA, maxA, minB, maxB) > 0) result.Intersect = false;
+                if (IntervalDistance(minA, maxA, minB, maxB) > 0)
+                {
+                    result.Intersect = false;
+                }
 
                 // ===== 2. Now find if the polygons *will* intersect =====
 
@@ -324,31 +322,45 @@ namespace Finline.Code.Utility
 
                 // Do the same test as above for the new projection
                 var intervalDistance = IntervalDistance(minA, maxA, minB, maxB);
-                if (intervalDistance > 0) result.WillIntersect = false;
+                if (intervalDistance > 0)
+                {
+                    result.WillIntersect = false;
+                }
 
                 // If the polygons are not intersecting and won't intersect, exit the loop
-                if (!result.Intersect && !result.WillIntersect) break;
+                if (!result.Intersect && !result.WillIntersect)
+                {
+                    break;
+                }
 
                 // Check if the current interval distance is the minimum one. If so store
                 // the interval distance and the current distance.
                 // This will be used to calculate the minimum translation Vector2
                 intervalDistance = Math.Abs(intervalDistance);
-                if (intervalDistance < minIntervalDistance)
+                if (!(intervalDistance < minIntervalDistance))
                 {
-                    minIntervalDistance = intervalDistance;
-                    translationAxis = axis;
+                    continue;
+                }
 
-                    var centerA = polygonA.Center();
-                    var centerB = polygonB.Center();
-                    Vector2 d = centerA.Get2D() - centerB.Get2D();
-                    if (Vector2.Dot(d, translationAxis) < 0) translationAxis = -translationAxis;
+                minIntervalDistance = intervalDistance;
+                translationAxis = axis;
+
+                var centerA = polygonA.Center();
+                var centerB = polygonB.Center();
+                var d = centerA.Get2D() - centerB.Get2D();
+                if (Vector2.Dot(d, translationAxis) < 0)
+                {
+                    translationAxis = -translationAxis;
                 }
             }
 
             // The minimum translation Vector2 can be used to push the polygons appart.
             // First moves the polygons by their velocity
             // then move polygonA by MinimumTranslationVector.
-            if (result.WillIntersect) result.MinimumTranslationVector = translationAxis * minIntervalDistance;
+            if (result.WillIntersect)
+            {
+                result.MinimumTranslationVector = translationAxis * minIntervalDistance;
+            }
 
             return result;
         }
