@@ -1,5 +1,8 @@
 ﻿namespace Finline.Code.Constants
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static class GameConstants
     {
         public enum EnvObjects

@@ -13,31 +13,34 @@ namespace Finline.Code.Game
 
     public class Animation
     {
-        private readonly List<Model> animationList;
+        private readonly Model[] animationList;
         private byte index;
 
         private readonly Timer timer = new Timer();
-
-        public Animation(byte index)
-        {
-            this.index = index;
-            this.animationList = new List<Model>();
-            this.timer.Interval = 0.1f;
-            this.timer.Enabled = true;
-            this.timer.Elapsed += (sender, args) =>
-                {
-                    ++index;
-                };
-        }
-
+        
         public Animation(int anzahl)
         {
-            this.animationList = new List<Model>(anzahl);
+            this.animationList = new Model[anzahl];
+            this.timer.Interval = 0.1f;
+            this.timer.Enabled = false;
+            this.timer.Elapsed += (sender, args) =>
+                {
+                    if (this.index > this.animationList.Length)
+                    {
+                        this.index = 0;
+                    }
+                    else
+                    {
+                        ++this.index;
+                    }
+            };
         }
 
         public void Add(Model model)
         {
-            this.animationList.Add(model);
+            this.animationList[this.index] = model;
+            ++this.index;
+            if (this.animationList.Length <= this.index) this.timer.Enabled = true;
         }
 
         public Model CurrentModel => this.animationList[this.index];
