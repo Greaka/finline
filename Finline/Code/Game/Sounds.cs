@@ -12,10 +12,10 @@ namespace Finline.Code.Game
 
     public class Sounds
     {
-        private int CurrentSong = 1;
-        public bool soundOn = true;
+        private int currentSong = 1;
+        public bool SoundOn = true;
         private Song musicMainMenu;
-        private List<Song> MusicIngame = new List<Song>(2);
+        private List<Song> musicIngame = new List<Song>(2);
         private SoundEffect playerShot;
         private static SoundEffectInstance playerShotInstance;
         private SoundEffect enemyShot;
@@ -26,31 +26,31 @@ namespace Finline.Code.Game
 
         public void LoadContent(ContentManager content)
         {
-            musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
-            MusicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
-            MusicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
-            playerShot = content.Load<SoundEffect>("Sounds/gunshot");
+            this.musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
+            this.musicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
+            this.musicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
+            this.playerShot = content.Load<SoundEffect>("Sounds/gunshot");
         }
  
         public void GunshotPlay()
         {
-            playerShotInstance = playerShot.CreateInstance();
-            if (soundOn == true)
+            playerShotInstance = this.playerShot.CreateInstance();
+            if (this.SoundOn == true)
                 playerShotInstance.Play();
             else playerShotInstance.Stop();
         }
 
         public void PlayMainMenuMusic()
         {
-            MediaPlayer.Play(musicMainMenu);
+            MediaPlayer.Play(this.musicMainMenu);
             MediaPlayer.Volume = 1.0f;
             MediaPlayer.IsRepeating = true;
-            this.CurrentSong = (this.CurrentSong + 1) % 2;
+            this.currentSong = (this.currentSong + 1) % 2;
         }
 
         public void PlayIngameMusic()
         {
-            MediaPlayer.Play(this.MusicIngame[this.CurrentSong]);
+            MediaPlayer.Play(this.musicIngame[this.currentSong]);
             MediaPlayer.IsRepeating = false;
         }
 
@@ -58,14 +58,14 @@ namespace Finline.Code.Game
         {
             if (MediaPlayer.State == MediaState.Stopped)
             {
-                this.CurrentSong = (this.CurrentSong + 1) % 2;
-                MediaPlayer.Play(this.MusicIngame[this.CurrentSong]);
+                this.currentSong = (this.currentSong + 1) % 2;
+                MediaPlayer.Play(this.musicIngame[this.currentSong]);
             }
         }
         
         public void TurnSoundOnOff()
         {
-            soundOn = !soundOn;
+            this.SoundOn = !this.SoundOn;
         }
 
         public void PauseMusic()
@@ -80,16 +80,17 @@ namespace Finline.Code.Game
             KeyboardState newKeyState = Keyboard.GetState();
             if (newKeyState.IsKeyDown(Keys.O) && this.oldKeyState.IsKeyUp(Keys.O))
             {
-                soundOn = !soundOn;
+                this.SoundOn = !this.SoundOn;
             }
 
-            if (soundOn == true)
+            if (this.SoundOn == true)
             {
                 MediaPlayer.Resume();
                 if (playerShotInstance != null || enemyShotInstance != null)
                 {
                     playerShotInstance.Volume = 1.0f;
-                    //enemyShotInstance.Volume = 1.0f;
+
+                    // enemyShotInstance.Volume = 1.0f;
                 }
             }
             else
@@ -98,7 +99,8 @@ namespace Finline.Code.Game
                 if (playerShotInstance != null || enemyShotInstance != null)
                 {
                     playerShotInstance.Volume = 0.0f;
-                    //enemyShotInstance.Volume = 0.0f;
+
+                    // enemyShotInstance.Volume = 0.0f;
                 }
             }
 

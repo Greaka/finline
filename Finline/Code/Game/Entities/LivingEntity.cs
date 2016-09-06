@@ -10,11 +10,11 @@ namespace Finline.Code.Game.Entities
 
     public class LivingEntity : Entity
     {
-        protected Animation modelAnimation;
+        protected Animation ModelAnimation;
 
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
-            base.Draw(viewMatrix, projectionMatrix, this.modelAnimation.CurrentModel);
+            base.Draw(viewMatrix, projectionMatrix, this.ModelAnimation.CurrentModel);
         }
     }
 }

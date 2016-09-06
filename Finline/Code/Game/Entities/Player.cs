@@ -24,18 +24,18 @@ namespace Finline.Code.Game.Entities
     {
         private readonly float unitsPerSecond = 15;
 
-        private bool IsMoving;
+        private bool isMoving;
 
         [SuppressMessage("ReSharper", "InconsistentNaming")]
         public enum PlayerSelection
         {
-            student,
+            student, 
             prof
         }
 
         public void Initialize(ContentManager contentManager)
         {
-            this.modelAnimation = new Animation(4);
+            this.ModelAnimation = new Animation(4);
             this.position = new Vector3(4, 4, -0.5f); // Standard
 
             // this.position = new Vector3(90, 240, 0);   // Hörsaal
@@ -44,10 +44,10 @@ namespace Finline.Code.Game.Entities
             var modelLinks = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_linkesBein");
             var modelRechts = contentManager.Load<Model>(GuiElement.Ausgewaehlt.ToString());
 
-            this.modelAnimation.Add(modelRechts);
-            this.modelAnimation.Add(modelStand);
-            this.modelAnimation.Add(modelLinks);
-            this.modelAnimation.Add(modelStand);
+            this.ModelAnimation.Add(modelRechts);
+            this.ModelAnimation.Add(modelStand);
+            this.ModelAnimation.Add(modelLinks);
+            this.ModelAnimation.Add(modelStand);
 
             this.Model = modelStand;
         }
@@ -56,7 +56,7 @@ namespace Finline.Code.Game.Entities
         {
             this.SetViewDirection(shootDirection);
 
-            this.IsMoving = !moveDirection.Equals(Vector2.Zero);
+            this.isMoving = !moveDirection.Equals(Vector2.Zero);
 
             var pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond;
             var collisionResult = this.IsColliding(environmentObjects, pos);
@@ -69,7 +69,7 @@ namespace Finline.Code.Game.Entities
 
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
-            base.Draw(viewMatrix, projectionMatrix, this.IsMoving ? this.modelAnimation.CurrentModel : this.Model);
+            base.Draw(viewMatrix, projectionMatrix, this.isMoving ? this.ModelAnimation.CurrentModel : this.Model);
         }
     }
 }

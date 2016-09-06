@@ -16,7 +16,7 @@ namespace Finline.Code.Game.Entities
 
         public Enemy(ContentManager contentManager, Vector3 position)
         {
-            this.modelAnimation = new Animation(3);
+            this.ModelAnimation = new Animation(3);
             this.position = position;
             this.Angle = 0;
             var enemy = contentManager.Load<Model>("enemy");
@@ -24,9 +24,9 @@ namespace Finline.Code.Game.Entities
 
             this.Model = enemy;
 
-            this.modelAnimation.Add(enemy);
-            this.modelAnimation.Add(enemyUnten);
-            this.modelAnimation.Add(enemy);
+            this.ModelAnimation.Add(enemy);
+            this.ModelAnimation.Add(enemyUnten);
+            this.ModelAnimation.Add(enemy);
         }
 
         public void Update(Vector3 playerPosition, List<EnvironmentObject> environmentObjects, GameTime gameTime)

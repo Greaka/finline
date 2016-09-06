@@ -412,7 +412,7 @@
             }
             
 
-#region Loading Desks & Chairs
+
 #region 335
             for (var i = 32; i > 15; i -= 4)
             {
@@ -637,7 +637,7 @@
 
 #endregion
 
-#endregion
+
 
             this.LevelObjects(90, 245, 0, GameConstants.EnvObjects.Podest);  // podest
 
