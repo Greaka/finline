@@ -45,6 +45,11 @@ namespace Finline.Code.Utility
             Vector2? colliding = null;
             foreach (var obj in environmentObjects)
             {
+                if (!((entity.Position - obj.Position).LengthSquared() < 64))
+                {
+                    continue;
+                }
+
                 var collision = entity.GetBound.PolygonCollision(obj.GetBound, direction);
                 if (!collision.WillIntersect)
                 {
@@ -105,7 +110,7 @@ namespace Finline.Code.Utility
                         return initialPoints[jCur].X < initialPoints[jMin].X ? jCur : jMin;
                     });
 
-            // Sort them by polar angle from iMin, 
+            // Sort them by polar angle from minI, 
             var sortQuery = Enumerable.Range(0, initialPoints.Count).Where(i => i != minI) // Skip the min point
                 .Select(
                     i =>
@@ -243,43 +248,35 @@ namespace Finline.Code.Utility
             public Vector2 MinimumTranslationVector; // The translation to apply to polygon A to push the polygons appart.
         }
 
-        private static List<Vector2> BuildEdges(this IList<Vector2> points)
+        private static IList<Vector3> BuildEdges(this VertexPositionColor[] points)
         {
-            var edges = new List<Vector2>();
-            for (var i = 0; i < points.Count; i++)
+            var edges = new Vector3[points.Length];
+            for (var i = 0; i < points.Length; i++)
             {
                 var p1 = points[i];
-                Vector2 p2;
-                if (i + 1 >= points.Count)
-                {
-                    p2 = points[0];
-                }
-                else
-                {
-                    p2 = points[i + 1];
-                }
+                var p2 = i + 1 >= points.Length ? points[0] : points[i + 1];
 
-                edges.Add(p2 - p1);
+                edges[i] = p2.Position - p1.Position;
             }
 
             return edges;
         }
 
-        public static Vector2 Center(this IList<Vector2> points)
+        public static Vector3 Center(this VertexPositionColor[] points)
         {
             float totalX = 0;
             float totalY = 0;
-            for (var i = 0; i < points.Count; i++)
+            for (var i = 0; i < points.Length; i++)
             {
-                totalX += points[i].X;
-                totalY += points[i].Y;
+                totalX += points[i].Position.X;
+                totalY += points[i].Position.Y;
             }
 
-            return new Vector2(totalX / (float)points.Count, totalY / (float)points.Count);
+            return new Vector3(totalX / (float)points.Length, totalY / (float)points.Length, 0);
         }
 
         // Check if polygon A is going to collide with polygon B for the given velocity
-        public static PolygonCollisionResult PolygonCollision(this IList<Vector2> polygonA, IList<Vector2> polygonB, Vector2 velocity)
+        public static PolygonCollisionResult PolygonCollision(this VertexPositionColor[] polygonA, VertexPositionColor[] polygonB, Vector2 velocity)
         {
             var edgesA = polygonA.BuildEdges();
             var edgesB = polygonB.BuildEdges();
@@ -292,7 +289,7 @@ namespace Finline.Code.Utility
             var edgeCountB = edgesB.Count;
             var minIntervalDistance = float.PositiveInfinity;
             var translationAxis = new Vector2();
-            Vector2 edge;
+            Vector3 edge;
 
             // Loop through all the edges of both polygons
             for (var edgeIndex = 0; edgeIndex < edgeCountA + edgeCountB; edgeIndex++)
@@ -353,7 +350,7 @@ namespace Finline.Code.Utility
 
                     var centerA = polygonA.Center();
                     var centerB = polygonB.Center();
-                    Vector2 d = centerA - centerB;
+                    Vector2 d = centerA.get2d() - centerB.get2d();
                     if (Vector2.Dot(d, translationAxis) < 0) translationAxis = -translationAxis;
                 }
             }
@@ -381,15 +378,16 @@ namespace Finline.Code.Utility
         }
 
         // Calculate the projection of a polygon on an axis and returns it as a [min, max] interval
-        public static void ProjectPolygon(Vector2 axis, IList<Vector2> polygon, ref float min, ref float max)
+        public static void ProjectPolygon(Vector2 ax, VertexPositionColor[] polygon, ref float min, ref float max)
         {
+            var axis = new Vector3(ax, 0);
             // To project a point on an axis use the dot product
-            var d = Vector2.Dot(axis, polygon[0]);
+            var d = Vector3.Dot(axis, polygon[0].Position);
             min = d;
             max = d;
-            for (var i = 0; i < polygon.Count; i++)
+            for (var i = 0; i < polygon.Length; i++)
             {
-                d = Vector2.Dot(polygon[i], axis);
+                d = Vector3.Dot(polygon[i].Position, axis);
                 if (d < min)
                 {
                     min = d;

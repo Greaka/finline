@@ -90,7 +90,7 @@ namespace Finline.Code.GameState
         /// </summary>
         protected override void Initialize()
         {
-            this.nextGameState = EGameState.MainMenu;
+            this.nextGameState = EGameState.InGame;
             base.Initialize();
         }
 
@@ -282,7 +282,7 @@ namespace Finline.Code.GameState
                     break;
 
                 case EGameState.InGame:
-                    this.gameState = new Ingame(this);
+                    this.gameState = new Ingame(this, this.spriteBatch);
                     break;
                 case EGameState.None:
                     break;

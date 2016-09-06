@@ -26,7 +26,7 @@ namespace Finline.Code.Game.Entities
             var any = false;
             foreach (var obj in environmentObjects)
             {
-                if (view.Intersects(new BoundingSphere(obj.Position, obj.GetBound[0].Length())) != null && (obj.Position - this.position).Length() < distance.Length())
+                if (view.Intersects(new BoundingSphere(obj.Position, obj.GetBound[0].Position.Length())) != null && (obj.Position - this.position).Length() < distance.Length())
                 {
                     any = true;
                     break;

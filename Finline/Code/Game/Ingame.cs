@@ -1,10 +1,14 @@
 ﻿namespace Finline.Code.Game
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using Constants;
     using Controls;
     using Entities;
+
+    using Finline.Code.DebugUtils;
+
     using GameState;
 
     using Microsoft.Xna.Framework;
@@ -16,6 +20,10 @@
     /// </summary>
     public class Ingame : DrawableGameComponent
     {
+#if DEBUG
+        private HullDrawing hullDrawing;
+#endif
+
         /// <summary>
         /// The Input Parser.
         /// </summary>
@@ -59,11 +67,14 @@
         /// </summary>
         /// <param name="game">
         /// </param>
-        public Ingame(StateManager game)
+        public Ingame(StateManager game, SpriteBatch sb)
             : base(game)
         {
             this.graphics = game.Graphics;
             this.Game.Content.RootDirectory = "Content";
+#if DEBUG
+            this.hullDrawing = new HullDrawing(game, sb);
+#endif
         }
 
         public override void Initialize()
@@ -101,6 +112,9 @@
             this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(-8, -28, 0)));
             this.Enemies.Add(new Enemy(this.Game.Content, new Vector3(10, -40, 0)));
 
+#if DEBUG
+            this.hullDrawing.LoadEntities(this.EnvironmentObjects, this.Enemies, this.Projectiles, this.player);
+#endif
             this.LoadEnvironment();
         }
 
@@ -161,6 +175,10 @@
             {
                 enemy.Draw(this.viewMatrix, this.projectionMatrix);
             }
+
+#if DEBUG
+            this.hullDrawing.Draw(gameTime, this.projectionMatrix, this.viewMatrix);
+#endif
 
             base.Draw(gameTime);
         }
