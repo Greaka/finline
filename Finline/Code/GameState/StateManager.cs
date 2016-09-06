@@ -127,7 +127,7 @@ namespace Finline.Code.GameState
             this.soundOffRectangle = new Rectangle(700, 30, this.soundOffTexture2D.Width, this.soundOffTexture2D.Height);
             
 
-#region Moved Buttons in PauseScreen
+
             foreach (var elementList in this.guiElements.Values)
             {
                 foreach (var element in elementList)
@@ -141,7 +141,7 @@ namespace Finline.Code.GameState
             // buttons in the pausescreen
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -40);
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 40);
-            #endregion
+            
 
 #region LoadingMusic
 
@@ -189,7 +189,7 @@ namespace Finline.Code.GameState
                 this.HandleGameState();
             }
 
-            #region Pause
+            
 
             // MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
@@ -206,7 +206,7 @@ namespace Finline.Code.GameState
                 this.isPressed = true;
                 this.timePaused = true;
 
-                sounds.PauseMusic();
+                this.sounds.PauseMusic();
             }
 
             if (this.isPressed && !k.IsKeyDown(Keys.Escape))
@@ -226,7 +226,7 @@ namespace Finline.Code.GameState
                 this.gameState.Update(gameTime);
             }
 
-            #endregion
+            
 
             base.Update(gameTime);
         }
@@ -253,7 +253,7 @@ namespace Finline.Code.GameState
 
             if (this.currentGameState == EGameState.InGame)
             {
-                if (sounds.soundOn == false)
+                if (this.sounds.SoundOn == false)
                 {
                     this.deltaTime = 0;
                     this.spriteBatch.Draw(this.soundOffTexture2D, this.soundOffRectangle, Color.White);
@@ -262,8 +262,8 @@ namespace Finline.Code.GameState
                 {
                     this.deltaTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                     this.spriteBatch.Draw(
-                        this.soundOnTexture2D,
-                        this.soundOnRectangle,
+                        this.soundOnTexture2D, 
+                        this.soundOnRectangle, 
                         this.deltaTime < 1.5f ? Color.White : Color.Transparent);
                 }
             }
@@ -304,7 +304,7 @@ namespace Finline.Code.GameState
 
             if (element == "Play")
             {
-                paused = !paused;
+                this.paused = !this.paused;
             }
 
             if (element != "Back2MainMenu") return;

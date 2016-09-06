@@ -9,7 +9,7 @@ namespace Finline.Code.Game.Entities
 
     public abstract class Entity
     {
-        private Model _model;
+        private Model model;
         protected Vector3 position;
         protected float Angle;
 
@@ -17,12 +17,12 @@ namespace Finline.Code.Game.Entities
         {
             get
             {
-                return this._model;
+                return this.model;
             }
 
             set
             {
-                this._model = value;
+                this.model = value;
                 var sphere = this.RelativeToPosition(this.Model.GetVerticies().GetHull());
                 this.bound = sphere;
             }
