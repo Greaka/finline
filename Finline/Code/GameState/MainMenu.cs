@@ -41,7 +41,7 @@ namespace Finline.Code.GameState
             this.guiElements.Add(EMenuState.GameOver, new List<GuiElement>());
 
             this.spriteBatch = sprite;
-            this.menuState = EMenuState.TitleScreen;
+            this.menuState = EMenuState.GameOver;
 
             this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); // Texture in the Titlescreen
 
@@ -193,8 +193,8 @@ namespace Finline.Code.GameState
             {
                 this.menuState = EMenuState.MainMenu;
             }
-
-           switch (element)
+#region clickable Buttons
+            switch (element)
            {
                case "NewGame":
                    this.menuState = EMenuState.CharacterScreen;
@@ -224,7 +224,7 @@ namespace Finline.Code.GameState
                    this.menuState = EMenuState.CharacterScreen;
                    break;
             }
-
+#endregion
         }
 
         public event GetIngame GoIngame;
