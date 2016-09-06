@@ -22,15 +22,15 @@ namespace Finline.Code.Game.Controls
 
         private GameConstants.EWeaponShootMode actualShootMode = GameConstants.EWeaponShootMode.Automatic;
 
-        private const float shotsPerSecond = 4;
+        private const float ShotsPerSecond = 4;
 
-        private const double trigger = 0.2;
+        private const double Trigger = 0.2;
 
         public PlayerController()
         {
             this.aTimer = new Timer
             {
-                Interval = 1000/shotsPerSecond, 
+                Interval = 1000/ShotsPerSecond, 
                 Enabled = true
             };
             this.aTimer.Elapsed += (sender, args) => { this.shootable = true; };
@@ -43,16 +43,17 @@ namespace Finline.Code.Game.Controls
             Matrix projectionMatrix, 
             Matrix viewMatrix)
         {
-            if (Math.Abs(this.aTimer.Interval - shotsPerSecond) < 0.00001) this.aTimer.Interval = shotsPerSecond;
+            if (Math.Abs(this.aTimer.Interval - ShotsPerSecond) < 0.00001) this.aTimer.Interval = ShotsPerSecond;
             var inputstate = GamePad.GetState(PlayerIndex.One);
             if (inputstate.IsConnected)
             {
-                moveDirection = inputstate.ThumbSticks.Left.addPerspective();
+                moveDirection = inputstate.ThumbSticks.Left.AddPerspective();
                 if (inputstate.ThumbSticks.Right.Length() > 0)
                 {
-                    shootDirection = inputstate.ThumbSticks.Right.addPerspective();
+                    shootDirection = inputstate.ThumbSticks.Right.AddPerspective();
                 }
-                this.Shootroutine(inputstate.Triggers.Right > trigger, shootDirection, playerPosition);
+
+                this.Shootroutine(inputstate.Triggers.Right > Trigger, shootDirection, playerPosition);
             }
             else
             {
@@ -66,15 +67,16 @@ namespace Finline.Code.Game.Controls
                 if (Keyboard.GetState().IsKeyDown(Keys.D))
                     moveDir += Vector2.UnitX;
 
-                moveDirection = moveDir.addPerspective();
+                moveDirection = moveDir.AddPerspective();
                 
-                var shootDir = MousePosition(device, projectionMatrix, viewMatrix).get2d()
-                    - playerPosition.get2d();
+                var shootDir = MousePosition(device, projectionMatrix, viewMatrix).Get2D()
+                    - playerPosition.Get2D();
                 if (shootDir.Length() > 0)
                 {
                     shootDir.Normalize();
                     shootDirection = shootDir;
                 }
+
                 this.Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed, shootDirection, playerPosition);
             }
         }

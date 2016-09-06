@@ -17,9 +17,9 @@ namespace Finline.Code.Game.Entities
 
         public Projectile(TimeSpan actualTime, ContentManager content, Vector3 position, Vector2 direction)
         {
-            this._model = content.Load<Model>("Arrow");
+            this.Model = content.Load<Model>("Arrow");
             this.position = position;
-            this._angle = direction.getAngle();
+            this.Angle = direction.GetAngle();
             this.timeStamp = actualTime;
             this.unitsPerSecond = 60;
         }
@@ -27,9 +27,7 @@ namespace Finline.Code.Game.Entities
         public void Update(TimeSpan actualTime, List<EnvironmentObject> environmentObjects, List<Projectile> remove)
         {
             var elapsedTime = (actualTime - this.timeStamp).TotalSeconds;
-            float unused;
-            this.position += new Vector3(this.GetViewDirection(), 0) * this.unitsPerSecond * (float)elapsedTime;
-            if (this.IsColliding(environmentObjects, out unused))
+            if (this.IsColliding(environmentObjects, this.GetViewDirection() * this.unitsPerSecond * (float)elapsedTime).HasValue)
             {
                 remove.Add(this);
             }

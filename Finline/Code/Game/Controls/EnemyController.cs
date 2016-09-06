@@ -36,7 +36,7 @@ namespace Finline.Code.Game.Controls
             if (this.shootable != true) return;
             foreach (var enemy in enemies)
             {
-                if (enemy.shoot) this.Shootroutine(enemy.Position, playerPosition);
+                if (enemy.Shoot) this.Shootroutine(enemy.Position, playerPosition);
             }
 
             this.shootable = false;
@@ -44,7 +44,7 @@ namespace Finline.Code.Game.Controls
 
         private void Shootroutine(Vector3 enemypos, Vector3 playerPosition)
         {
-            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos).get2d());
+            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos).Get2D());
         }
     }
 }

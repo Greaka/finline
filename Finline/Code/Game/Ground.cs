@@ -29,14 +29,14 @@ namespace Finline.Code.Game
             this.floorVerts[4].Position = new Vector3(2 * X, 2 * Y, Z);
             this.floorVerts[5].Position = this.floorVerts[2].Position;
 
-            const int repetitions = 1;
+            const int Repetitions = 1;
 
             this.floorVerts[0].TextureCoordinate = new Vector2(0, 0);
-            this.floorVerts[1].TextureCoordinate = new Vector2(0, repetitions);
-            this.floorVerts[2].TextureCoordinate = new Vector2(repetitions, 0);
+            this.floorVerts[1].TextureCoordinate = new Vector2(0, Repetitions);
+            this.floorVerts[2].TextureCoordinate = new Vector2(Repetitions, 0);
 
             this.floorVerts[3].TextureCoordinate = this.floorVerts[1].TextureCoordinate;
-            this.floorVerts[4].TextureCoordinate = new Vector2(repetitions, repetitions);
+            this.floorVerts[4].TextureCoordinate = new Vector2(Repetitions, Repetitions);
             this.floorVerts[5].TextureCoordinate = this.floorVerts[2].TextureCoordinate;
         }
 
@@ -61,9 +61,9 @@ namespace Finline.Code.Game
                 pass.Apply();
 
                 gdevice.DrawUserPrimitives(
-                    PrimitiveType.TriangleList,
-                    this.floorVerts,
-                    0,
+                    PrimitiveType.TriangleList, 
+                    this.floorVerts, 
+                    0, 
                     2);
             }
         }

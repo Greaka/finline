@@ -5,15 +5,17 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Finline.Code.GameState
 {
+    using Finline.Code.Game.Entities;
+
     internal class GuiElement
     {
         public delegate void ElementClicked(string element);
 
-        private Rectangle _guiRect;
-        private Texture2D _guiTexture;
+        private Rectangle guiRect;
+        private Texture2D guiTexture;
 
         MouseState oldMouseState;
-        public static byte ausgewaehlt = 3;
+        public static Player.PlayerSelection Ausgewaehlt = Player.PlayerSelection.student;
 
 
 
@@ -34,14 +36,14 @@ namespace Finline.Code.GameState
 
         public void LoadContent(ContentManager content)
         {
-            this._guiTexture = content.Load<Texture2D>("GuiElements/" + this.AssetName);
+            this.guiTexture = content.Load<Texture2D>("GuiElements/" + this.AssetName);
 
-            this._guiRect = new Rectangle(0, 0, this._guiTexture.Width, this._guiTexture.Height);
+            this.guiRect = new Rectangle(0, 0, this.guiTexture.Width, this.guiTexture.Height);
         }
 
         public void Update(ref bool isPressed)
         {
-            if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
+            if (this.guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
                 Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 this.ClickEvent?.Invoke(this.AssetName);
@@ -60,34 +62,33 @@ namespace Finline.Code.GameState
         {
             var newMouseState = Mouse.GetState();
 
-            if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
-                        oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed)
+            if (this.guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && this.oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed)
             {
-                if (this.AssetName == "studentprofile") ausgewaehlt = 1;
-                if (this.AssetName == "profprofile") ausgewaehlt = 2;
+                if (this.AssetName == "studentprofile") Ausgewaehlt = Player.PlayerSelection.student;
+                if (this.AssetName == "profprofile") Ausgewaehlt = Player.PlayerSelection.prof;
             }
 
             switch (this.AssetName)
             {
                 case "LogoTransparent":
-                    spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
+                    spriteBatch.Draw(this.guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
                     break;
                 case "studentprofile":
-                    spriteBatch.Draw(this._guiTexture,
-                        new Rectangle(120, 120, this._guiTexture.Width, this._guiTexture.Height), null,
-                        ausgewaehlt == 1 ? Color.White : Color.DimGray);
+                    spriteBatch.Draw(this.guiTexture, 
+                        new Rectangle(120, 120, this.guiTexture.Width, this.guiTexture.Height), null, 
+                        Ausgewaehlt == Player.PlayerSelection.student ? Color.White : Color.DimGray);
                     break;
                 case "profprofile":
-                    spriteBatch.Draw(this._guiTexture,
-                        new Rectangle(520, 120, this._guiTexture.Width, this._guiTexture.Height), null,
-                        ausgewaehlt == 2 ? Color.White : Color.DimGray);
+                    spriteBatch.Draw(this.guiTexture, 
+                        new Rectangle(520, 120, this.guiTexture.Width, this.guiTexture.Height), null, 
+                        Ausgewaehlt == Player.PlayerSelection.prof ? Color.White : Color.DimGray);
                     break;
                 default:
-                    spriteBatch.Draw(this._guiTexture, this._guiRect, Color.White);
+                    spriteBatch.Draw(this.guiTexture, this.guiRect, Color.White);
                     break;
             }
 
-            oldMouseState = newMouseState;
+            this.oldMouseState = newMouseState;
         }
 
 
@@ -98,7 +99,7 @@ namespace Finline.Code.GameState
         /// <param name="width"></param>
         public void CenterElement(int height, int width)
         {
-            this._guiRect = new Rectangle(width / 2 - this._guiTexture.Width / 2, height / 2 - this._guiTexture.Height / 2, this._guiTexture.Width, this._guiTexture.Height);
+            this.guiRect = new Rectangle(width / 2 - this.guiTexture.Width / 2, height / 2 - this.guiTexture.Height / 2, this.guiTexture.Width, this.guiTexture.Height);
         }
 
 
@@ -109,7 +110,7 @@ namespace Finline.Code.GameState
         /// <param name="y"></param>
         public void MoveElement(int x, int y)
         {
-            this._guiRect = new Rectangle(this._guiRect.X += x, this._guiRect.Y += y, this._guiRect.Width, this._guiRect.Height);
+            this.guiRect = new Rectangle(this.guiRect.X += x, this.guiRect.Y += y, this.guiRect.Width, this.guiRect.Height);
         }
     }
 }
