@@ -20,8 +20,6 @@ namespace Finline.Code.GameState
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
 
-    using Microsoft.Xna.Framework.Media;
-
     /// <summary>
     /// The game state manager.
     /// </summary>
@@ -212,11 +210,7 @@ namespace Finline.Code.GameState
                 this.isPressed = true;
                 this.timePaused = true;
 
-                if (this.paused)
-                {
-                    MediaPlayer.Pause();
-                }
-                else MediaPlayer.Resume();
+                sounds.PauseMusic();
             }
 
             if (this.isPressed && !k.IsKeyDown(Keys.Escape))
@@ -233,11 +227,7 @@ namespace Finline.Code.GameState
                     timer = 0;
                 }
                 
-
-              
-
                 this.gameState.Update(gameTime);
-
             }
             
             #endregion
@@ -267,12 +257,12 @@ namespace Finline.Code.GameState
 
             if (currentGameState == EGameState.InGame)
             {
-                if (MediaPlayer.State == MediaState.Paused)
+                if (sounds.soundOn == false)
                 {
                     deltaTime = 0;
                     this.spriteBatch.Draw(this.soundOffTexture2D, this.soundOffRectangle, Color.White);
                 }
-                if (MediaPlayer.State == MediaState.Playing)
+                else
                 {
                     deltaTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                     if (deltaTime < 1.5f)
@@ -315,7 +305,6 @@ namespace Finline.Code.GameState
             if (element == "Play")
             {
                 paused = !paused;
-                MediaPlayer.Resume();
             }
 
             if (element != "Back2MainMenu") return;
