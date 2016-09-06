@@ -268,11 +268,10 @@ namespace Finline.Code.GameState
                 if (MediaPlayer.State == MediaState.Playing)
                 {
                     this.deltaTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    if (this.deltaTime < 1.5f)
-                        this.spriteBatch.Draw(this.soundOnTexture2D, this.soundOnRectangle, Color.White);
-                    else this.spriteBatch.Draw(this.soundOnTexture2D, this.soundOnRectangle, Color.Transparent);
-
-                    
+                    this.spriteBatch.Draw(
+                        this.soundOnTexture2D,
+                        this.soundOnRectangle,
+                        this.deltaTime < 1.5f ? Color.White : Color.Transparent);
                 }
             }
 
@@ -280,13 +279,19 @@ namespace Finline.Code.GameState
             {
                 this.spriteBatch.Draw(this.pausedTexture2D, this.pausedRectangle, Color.White);
                 if (this.currentGameState != EGameState.None && this.currentGameState != EGameState.MainMenu)
+                {
                     foreach (var element in this.guiElements[this.currentGameState])
                     {
                         element.Draw(this.spriteBatch);
                     }
+                }
             }
 
-            if (this.currentGameState == EGameState.InGame) this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0")+ "s", new Vector2(500, 440), Color.WhiteSmoke);
+            if (this.currentGameState == EGameState.InGame)
+            {
+                this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0")+ "s", new Vector2(500, 440), Color.WhiteSmoke);
+            }
+
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
