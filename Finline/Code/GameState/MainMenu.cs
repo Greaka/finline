@@ -36,9 +36,10 @@ namespace Finline.Code.GameState
             this.guiElements.Add(EMenuState.Controls, new List<GuiElement>());
             this.guiElements.Add(EMenuState.Records, new List<GuiElement>());
             this.guiElements.Add(EMenuState.Credits, new List<GuiElement>());
+            this.guiElements.Add(EMenuState.GameOver, new List<GuiElement>());
 
             this.spriteBatch = sprite;
-            this.menuState = EMenuState.TitleScreen;
+            this.menuState = EMenuState.GameOver;
 
             this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); //Texture in the Titlescreen
 
@@ -76,6 +77,12 @@ namespace Finline.Code.GameState
 #region Credits            // here are the elements in the state Credits 
             this.guiElements[EMenuState.Credits].Add(new GuiElement("Back2MainMenu"));
             this.guiElements[EMenuState.Credits].Add(new GuiElement("CreditscreenTexture2"));
+            #endregion
+
+            #region GameOver
+            this.guiElements[EMenuState.GameOver].Add(new GuiElement("TryAgain"));
+            this.guiElements[EMenuState.GameOver].Add(new GuiElement("Back2MainMenu"));
+            this.guiElements[EMenuState.GameOver].Add(new GuiElement("GameOverScreen"));
             #endregion
         }
 
@@ -120,11 +127,18 @@ namespace Finline.Code.GameState
 #region Moved Elements From Credits
             this.guiElements[EMenuState.Credits].Find(x => x.AssetName == "CreditscreenTexture2").MoveElement(0, -60);
             this.guiElements[EMenuState.Credits].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction
-#endregion          
+            #endregion
 
+            #region Game Over
+            this.guiElements[EMenuState.GameOver].Find(x => x.AssetName == "GameOverScreen").MoveElement(0, -60);
+            this.guiElements[EMenuState.GameOver].Find(x => x.AssetName == "TryAgain").MoveElement(0, -10);
+            this.guiElements[EMenuState.GameOver].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 75);
+
+
+            #endregion
         }
 
-        
+
 
         public override void Update(GameTime gameTime)
         {
@@ -207,7 +221,10 @@ namespace Finline.Code.GameState
                case "EndButton":
                    this.Game.Exit();
                    break;
-           }
+               case "TryAgain":
+                   this.menuState = EMenuState.CharacterScreen;
+                   break;
+            }
 #endregion
         }
 
@@ -230,7 +247,11 @@ namespace Finline.Code.GameState
 
             Records,
 
-            Credits
+            Credits,
+
+            GameOver,
+
+
         }
 
     }
