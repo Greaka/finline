@@ -40,15 +40,15 @@ namespace Finline.Code.GameState
             this.spriteBatch = sprite;
             this.menuState = EMenuState.TitleScreen;
 
-            this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); //Texture in the Titlescreen
+            this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); // Texture in the Titlescreen
 
-#region MainMenu  // here are the elements in the state MainMenu
+
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("NewGame"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("ControlsButton"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("RecordsButton"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("CreditsButton"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("EndButton"));
-            #endregion
+            
 
 #region CharacterScreen           // elements in the state characterScreen
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("ChooseText"));
@@ -81,7 +81,7 @@ namespace Finline.Code.GameState
 
         protected override void LoadContent()
         {
-            //this.font = this.Game.Content.Load<SpriteFont>("font");
+            // this.font = this.Game.Content.Load<SpriteFont>("font");
             foreach (var elementList in this.guiElements.Values)
             {
                 foreach (var element in elementList)
@@ -94,15 +94,15 @@ namespace Finline.Code.GameState
             
             this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "TitleScreen").MoveElement(0, -60); // move the logo up in y-direction
 
-#region Moved Elements From MainMenu
+
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(-200, -200); // move the "newgame" button up in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "ControlsButton").MoveElement(-200, -125); // move the "option" button down in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "RecordsButton").MoveElement(-200, -50);
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "CreditsButton").MoveElement(-200 , 25); // move the "credits" button 200 in x-direction and 50 down in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "EndButton").MoveElement(-200, 100); // move the "end" button down in y-direction
-            #endregion
+            
 #region Moved Elements From CharacterScreen
-            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "ChooseText").MoveElement(0,-265);
+            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "ChooseText").MoveElement(0, -265);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "studentprofile").MoveElement(-200, -100);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "profprofile").MoveElement(200, -100);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "StartGame").MoveElement(-270, 80); // move the "StartGame" button up in y-direction
@@ -152,6 +152,7 @@ namespace Finline.Code.GameState
             {
                 element.Draw(this.spriteBatch);
             }
+
             this.spriteBatch.End();
         }
 
@@ -160,7 +161,7 @@ namespace Finline.Code.GameState
         /// </summary>
         public void MakeHeile()
         {
-            menuState = EMenuState.MainMenu;
+            this.menuState = EMenuState.MainMenu;
         }
 
         /// <summary>
@@ -171,7 +172,7 @@ namespace Finline.Code.GameState
         {
             if (this.isPressed) return;
             this.isPressed = true;
-#region Clickable Elements              
+
             if (this.menuState == EMenuState.TitleScreen)
             {
                 this.menuState = EMenuState.MainMenu;
@@ -190,6 +191,7 @@ namespace Finline.Code.GameState
                        
                         this.GoIngame?.Invoke();
                     }
+
                    break;
                case "ControlsButton":
                    this.menuState = EMenuState.Controls;
@@ -208,7 +210,7 @@ namespace Finline.Code.GameState
                    this.Game.Exit();
                    break;
            }
-#endregion
+
         }
 
         public event GetIngame GoIngame;
@@ -226,9 +228,9 @@ namespace Finline.Code.GameState
 
             CharacterScreen, 
 
-            Controls,
+            Controls, 
 
-            Records,
+            Records, 
 
             Credits
         }

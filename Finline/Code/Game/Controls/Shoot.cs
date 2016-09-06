@@ -10,8 +10,8 @@ namespace Finline.Code.Game.Controls
     using System.Collections.Generic;
     using System.Diagnostics;
 
-    using Finline.Code.Game.Entities;
     using Finline.Code.Game;
+    using Finline.Code.Game.Entities;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
@@ -50,7 +50,7 @@ namespace Finline.Code.Game.Controls
             this.content = shiny;
             this.stopwatch.Restart();
             this.projectiles = projectiles;
-            sounds.LoadContent(shiny);
+            this.sounds.LoadContent(shiny);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Finline.Code.Game.Controls
         {
             var projectile = new Projectile(this.stopwatch.Elapsed, this.content, position, direction);
             this.projectiles.Add(projectile);
-            sounds.GunshotPlay();
+            this.sounds.GunshotPlay();
 
         }
 

@@ -30,6 +30,7 @@ namespace Finline.Code.DebugUtils
         protected override void LoadContent()
         {
             this.effect = new BasicEffect(this.GraphicsDevice);
+
             // create 1x1 texture for line drawing
             this.t = new Texture2D(this.GraphicsDevice, 1, 1);
             this.t.SetData<Color>(new[] { Color.White });
@@ -98,6 +99,7 @@ namespace Finline.Code.DebugUtils
 
             this.spriteBatch.End();*/
             var pbound = this.player.GetBound;
+
             // Initialize an array of indices of type short.
             var lineListIndices = new short[pbound.Length + 1];
 
@@ -117,6 +119,7 @@ namespace Finline.Code.DebugUtils
             foreach (var pass in this.effect.CurrentTechnique.Passes)
             {
                 pass.Apply();
+
                 /*this.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionColor>(
                     PrimitiveType.LineStrip,
                     pbound,

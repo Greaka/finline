@@ -55,16 +55,6 @@ namespace Finline.Code.Utility
                 {
                     continue;
                 }
-
-                switch (obj.Type)
-                {
-                    case GameConstants.EnvObjects.cube:
-
-                        // case GameConstants.EnvObjects.chair:
-                        // case GameConstants.EnvObjects.desk:
-                        colliding = collision.MinimumTranslationVector;
-                        break;
-                }
             }
 
             return colliding;
@@ -381,6 +371,7 @@ namespace Finline.Code.Utility
         public static void ProjectPolygon(Vector2 ax, VertexPositionColor[] polygon, ref float min, ref float max)
         {
             var axis = new Vector3(ax, 0);
+
             // To project a point on an axis use the dot product
             var d = Vector3.Dot(axis, polygon[0].Position);
             min = d;

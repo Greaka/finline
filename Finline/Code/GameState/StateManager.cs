@@ -6,7 +6,6 @@
 //   Defines the StateManager type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
 
@@ -36,6 +35,7 @@ namespace Finline.Code.GameState
         /// newRes puts an EGameState to null
         /// </summary>
         private EGameState? newRes = null;
+
         /// <summary>
         /// The current game state.
         /// </summary>
@@ -101,7 +101,7 @@ namespace Finline.Code.GameState
         /// </summary>
         protected override void Initialize()
         {
-            this.nextGameState = EGameState.InGame;
+            this.nextGameState = EGameState.MainMenu;
             base.Initialize();
         }
 
@@ -118,8 +118,8 @@ namespace Finline.Code.GameState
             this.main.GoIngame += this.StartNewGame;
 
             this.main.Initialize();
-            this.font = Content.Load<SpriteFont>("font");
-#region Loading Pause and Sound Icons
+            this.font = this.Content.Load<SpriteFont>("font");
+
             this.pausedTexture2D = this.Content.Load<Texture2D>("Icons/PauseIcon");
             this.pausedRectangle = new Rectangle(320, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
 
@@ -127,7 +127,7 @@ namespace Finline.Code.GameState
             this.soundOnRectangle = new Rectangle(700, 30, this.soundOnTexture2D.Width, this.soundOnTexture2D.Height);
             this.soundOffTexture2D = this.Content.Load<Texture2D>("Icons/SoundOff");
             this.soundOffRectangle = new Rectangle(700, 30, this.soundOffTexture2D.Width, this.soundOffTexture2D.Height);
-            #endregion
+            
 
 #region Moved Buttons in PauseScreen
             foreach (var elementList in this.guiElements.Values)
@@ -146,7 +146,8 @@ namespace Finline.Code.GameState
             #endregion
 
 #region LoadingMusic
-            sounds.LoadContent(Content);
+
+            this.sounds.LoadContent(this.Content);
 #endregion
         }
 
@@ -162,6 +163,7 @@ namespace Finline.Code.GameState
         private float deltaTime;
         private bool timePaused = false;
         private bool MouseIsPressed = false;
+
         /// <summary>
         /// The update.
         /// </summary>
@@ -170,25 +172,18 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
-            
-#region Hintergrundmusik
-            sounds.Update(gameTime);
+            this.sounds.Update(gameTime);
 
-            if (this.currentGameState == EGameState.None || newRes.HasValue)
-                sounds.PlayMainMenuMusic();
+            if (this.currentGameState == EGameState.None || this.newRes.HasValue) this.sounds.PlayMainMenuMusic();
 
-            if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame)
-                sounds.PlayIngameMusic();
+            if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame) this.sounds.PlayIngameMusic();
 
-            if (this.currentGameState == EGameState.InGame)
-                sounds.PlayIngameSongChange();
+            if (this.currentGameState == EGameState.InGame) this.sounds.PlayIngameSongChange();
 
-            #endregion
-
-            if (newRes.HasValue)
+            if (this.newRes.HasValue)
             {
-                nextGameState = newRes.Value;
-                newRes = null;
+                this.nextGameState = this.newRes.Value;
+                this.newRes = null;
             }
 
             if (this.nextGameState != this.currentGameState)
@@ -196,8 +191,9 @@ namespace Finline.Code.GameState
                 this.HandleGameState();
             }
 
-#region Pause
-            //MouseState mouse = Mouse.GetState();
+            #region Pause
+
+            // MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
             if (this.currentGameState == EGameState.InGame && this.paused)
 
@@ -206,7 +202,7 @@ namespace Finline.Code.GameState
                     element.Update(ref this.MouseIsPressed);
                 }
 
-            if (currentGameState == EGameState.InGame && k.IsKeyDown(Keys.Escape) && !this.isPressed)
+            if (this.currentGameState == EGameState.InGame && k.IsKeyDown(Keys.Escape) && !this.isPressed)
             {
                 this.paused = !this.paused;
                 this.isPressed = true;
@@ -227,19 +223,15 @@ namespace Finline.Code.GameState
 
             if (!this.paused)
             {
-                timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (currentGameState == EGameState.MainMenu)
+                this.timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (this.currentGameState == EGameState.MainMenu)
                 {
-                    timer = 0;
+                    this.timer = 0;
                 }
-                
-
-              
 
                 this.gameState.Update(gameTime);
-
             }
-            
+
             #endregion
 
             base.Update(gameTime);
@@ -263,22 +255,22 @@ namespace Finline.Code.GameState
 
             this.spriteBatch.Begin();
 
-#region Draw SoundIcon, PauseScreen
 
-            if (currentGameState == EGameState.InGame)
+
+            if (this.currentGameState == EGameState.InGame)
             {
                 if (MediaPlayer.State == MediaState.Paused)
                 {
-                    deltaTime = 0;
+                    this.deltaTime = 0;
                     this.spriteBatch.Draw(this.soundOffTexture2D, this.soundOffRectangle, Color.White);
                 }
+
                 if (MediaPlayer.State == MediaState.Playing)
                 {
-                    deltaTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    if (deltaTime < 1.5f)
+                    this.deltaTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (this.deltaTime < 1.5f)
                         this.spriteBatch.Draw(this.soundOnTexture2D, this.soundOnRectangle, Color.White);
-                    else
-                        spriteBatch.Draw(soundOnTexture2D, soundOnRectangle, Color.Transparent);
+                    else this.spriteBatch.Draw(this.soundOnTexture2D, this.soundOnRectangle, Color.Transparent);
 
                     
                 }
@@ -287,18 +279,18 @@ namespace Finline.Code.GameState
             if (this.paused)
             {
                 this.spriteBatch.Draw(this.pausedTexture2D, this.pausedRectangle, Color.White);
-                if (this.currentGameState != EGameState.None && currentGameState != EGameState.MainMenu)
+                if (this.currentGameState != EGameState.None && this.currentGameState != EGameState.MainMenu)
                     foreach (var element in this.guiElements[this.currentGameState])
                     {
                         element.Draw(this.spriteBatch);
                     }
             }
-            if (this.currentGameState == EGameState.InGame)
-                spriteBatch.DrawString(font, "Your current time is: " + timer.ToString("00.0")+ "s", new Vector2(500, 440), Color.WhiteSmoke);
+
+            if (this.currentGameState == EGameState.InGame) this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0")+ "s", new Vector2(500, 440), Color.WhiteSmoke);
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
-            #endregion
+            
             base.Draw(gameTime);
         }
 
@@ -314,14 +306,14 @@ namespace Finline.Code.GameState
 
             if (element == "Play")
             {
-                paused = !paused;
+                this.paused = !this.paused;
                 MediaPlayer.Resume();
             }
 
             if (element != "Back2MainMenu") return;
-            newRes = EGameState.MainMenu;
-            paused = false;
-            main.MakeHeile();
+            this.newRes = EGameState.MainMenu;
+            this.paused = false;
+            this.main.MakeHeile();
         }
 
         /// <summary>
