@@ -12,32 +12,38 @@ namespace Finline.Code.Game
 
     public class Sounds
     {
-        public int CurrentSong = 1;
+        private int currentSong = 1;
+        public bool soundOn = true;
+        private Song musicMainMenu;
+        private List<Song> musicIngame = new List<Song>(2);
+        private SoundEffect playerShot;
+        private static SoundEffectInstance playerShotInstance;
+        private SoundEffect enemyShot;
+        private static SoundEffectInstance enemyShotInstance;
 
-        public Song MusicMainMenu;
-
-        public List<Song> MusicIngame = new List<Song>(2);
-
-        public SoundEffect Gunshot;
 
         private KeyboardState oldKeyState;
 
         public void LoadContent(ContentManager content)
         {
-            this.MusicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
-            this.MusicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
-            this.MusicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
-            this.Gunshot = content.Load<SoundEffect>("Sounds/gunshot");
+            musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
+            musicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
+            musicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
+            playerShot = content.Load<SoundEffect>("Sounds/gunshot");
         }
-
+ 
         public void GunshotPlay()
         {
-            if (MediaPlayer.State != MediaState.Paused) this.Gunshot.Play();
+            playerShotInstance = playerShot.CreateInstance();
+            if (soundOn == true)
+                playerShotInstance.Play();
+            else playerShotInstance.Stop();
         }
 
         public void PlayMainMenuMusic()
         {
-            MediaPlayer.Play(this.MusicMainMenu);
+            MediaPlayer.Play(musicMainMenu);
+            MediaPlayer.Volume = 1.0f;
             MediaPlayer.IsRepeating = true;
             this.CurrentSong = (this.CurrentSong + 1) % 2;
         }
@@ -56,24 +62,44 @@ namespace Finline.Code.Game
                 MediaPlayer.Play(this.MusicIngame[this.CurrentSong]);
             }
         }
+        
+        public void TurnSoundOnOff()
+        {
+            soundOn = !soundOn;
+        }
 
-        /*
         public void PauseMusic()
         {
-            if (MediaPlayer.State == MediaState.Playing)
-                MediaPlayer.Pause();
-            else MediaPlayer.Resume();
-        }*/
+            if (MediaPlayer.Volume == 1.0f)
+                MediaPlayer.Volume = 0.4f;
+            else MediaPlayer.Volume = 1.0f;
+        }
+
         public void Update(GameTime gameTime)
         {
             KeyboardState newKeyState = Keyboard.GetState();
             if (newKeyState.IsKeyDown(Keys.O) && this.oldKeyState.IsKeyUp(Keys.O))
             {
-                if (MediaPlayer.State == MediaState.Paused)
+                soundOn = !soundOn;
+            }
+
+            if (soundOn == true)
+            {
+                MediaPlayer.Resume();
+                if (playerShotInstance != null || enemyShotInstance != null)
                 {
-                    MediaPlayer.Resume();
+                    playerShotInstance.Volume = 1.0f;
+                    //enemyShotInstance.Volume = 1.0f;
                 }
-                else MediaPlayer.Pause();
+            }
+            else
+            {
+                MediaPlayer.Pause();
+                if (playerShotInstance != null || enemyShotInstance != null)
+                {
+                    playerShotInstance.Volume = 0.0f;
+                    //enemyShotInstance.Volume = 0.0f;
+                }
             }
 
             this.oldKeyState = newKeyState;
