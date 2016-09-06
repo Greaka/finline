@@ -10,7 +10,7 @@
             wallV, wallH, deskUp, chairUp, deskDown, chairDown, deskLeft, chairLeft, deskRight, chairRight, mirkopir, 
             plant, pissoir, pissoir_gedreht, whiteboard, whiteboard_gedreht, podest, 
             monitor, monitor_gedreht, rechner, rechner_gedreht, poster_vader, poster_deadpool, poster_cat, poster_zombie,
-            schrank
+            schrank, schrank_eintürig
         }
 
         public enum EWeaponShootMode
