@@ -245,7 +245,7 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.White);
+            this.GraphicsDevice.Clear(Color.Black);
             var r = new RasterizerState();
             r.CullMode = CullMode.None;
             this.GraphicsDevice.RasterizerState = r;
