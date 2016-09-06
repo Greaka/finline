@@ -41,7 +41,7 @@ namespace Finline.Code.GameState
             this.guiElements.Add(EMenuState.GameOver, new List<GuiElement>());
 
             this.spriteBatch = sprite;
-            this.menuState = EMenuState.GameOver;
+            this.menuState = EMenuState.TitleScreen;
 
             this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); // Texture in the Titlescreen
 
