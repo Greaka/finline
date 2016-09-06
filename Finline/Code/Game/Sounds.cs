@@ -5,12 +5,11 @@ namespace Finline.Code.Game
     using GameState;
 
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Input;
-    using Microsoft.Xna.Framework.Content;
-    using Microsoft.Xna.Framework.Media;
     using Microsoft.Xna.Framework.Audio;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Input;
+    using Microsoft.Xna.Framework.Media;
 
-    
     public class Sounds
     {
         private int currentSong = 1;
@@ -22,8 +21,8 @@ namespace Finline.Code.Game
         private SoundEffect enemyShot;
         private static SoundEffectInstance enemyShotInstance;
 
-        private KeyboardState oldKeyState;
 
+        private KeyboardState oldKeyState;
 
         public void LoadContent(ContentManager content)
         {
@@ -46,21 +45,21 @@ namespace Finline.Code.Game
             MediaPlayer.Play(musicMainMenu);
             MediaPlayer.Volume = 1.0f;
             MediaPlayer.IsRepeating = true;
-            currentSong = (currentSong + 1) % 2;
+            this.currentSong = (this.currentSong + 1) % 2;
         }
 
         public void PlayIngameMusic()
         {
-            MediaPlayer.Play(musicIngame[currentSong]);
+            MediaPlayer.Play(this.musicIngame[this.currentSong]);
             MediaPlayer.IsRepeating = false;
         }
-        
+
         public void PlayIngameSongChange()
         {
             if (MediaPlayer.State == MediaState.Stopped)
             {
-                currentSong = (currentSong + 1) % 2;
-                MediaPlayer.Play(musicIngame[currentSong]);
+                this.currentSong = (this.currentSong + 1) % 2;
+                MediaPlayer.Play(this.musicIngame[this.currentSong]);
             }
         }
         
@@ -79,7 +78,7 @@ namespace Finline.Code.Game
         public void Update(GameTime gameTime)
         {
             KeyboardState newKeyState = Keyboard.GetState();
-            if (newKeyState.IsKeyDown(Keys.O) && oldKeyState.IsKeyUp(Keys.O))
+            if (newKeyState.IsKeyDown(Keys.O) && this.oldKeyState.IsKeyUp(Keys.O))
             {
                 soundOn = !soundOn;
             }
@@ -103,7 +102,7 @@ namespace Finline.Code.Game
                 }
             }
 
-            oldKeyState = newKeyState;
+            this.oldKeyState = newKeyState;
         }
     }
 }

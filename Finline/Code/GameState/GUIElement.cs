@@ -60,8 +60,7 @@ namespace Finline.Code.GameState
         {
             var newMouseState = Mouse.GetState();
 
-            if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) &&
-                        oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed)
+            if (this._guiRect.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && this.oldMouseState.LeftButton == ButtonState.Released && newMouseState.LeftButton == ButtonState.Pressed)
             {
                 if (this.AssetName == "studentprofile") ausgewaehlt = 1;
                 if (this.AssetName == "profprofile") ausgewaehlt = 2;
@@ -73,13 +72,13 @@ namespace Finline.Code.GameState
                     spriteBatch.Draw(this._guiTexture, new Rectangle(620, 300, 150, 150), null, Color.White);
                     break;
                 case "studentprofile":
-                    spriteBatch.Draw(this._guiTexture,
-                        new Rectangle(120, 120, this._guiTexture.Width, this._guiTexture.Height), null,
+                    spriteBatch.Draw(this._guiTexture, 
+                        new Rectangle(120, 120, this._guiTexture.Width, this._guiTexture.Height), null, 
                         ausgewaehlt == 1 ? Color.White : Color.DimGray);
                     break;
                 case "profprofile":
-                    spriteBatch.Draw(this._guiTexture,
-                        new Rectangle(520, 120, this._guiTexture.Width, this._guiTexture.Height), null,
+                    spriteBatch.Draw(this._guiTexture, 
+                        new Rectangle(520, 120, this._guiTexture.Width, this._guiTexture.Height), null, 
                         ausgewaehlt == 2 ? Color.White : Color.DimGray);
                     break;
                 default:
@@ -87,7 +86,7 @@ namespace Finline.Code.GameState
                     break;
             }
 
-            oldMouseState = newMouseState;
+            this.oldMouseState = newMouseState;
         }
 
 

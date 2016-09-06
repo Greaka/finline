@@ -52,6 +52,7 @@ namespace Finline.Code.Game.Controls
                 {
                     shootDirection = inputstate.ThumbSticks.Right.addPerspective();
                 }
+
                 this.Shootroutine(inputstate.Triggers.Right > trigger, shootDirection, playerPosition);
             }
             else
@@ -75,6 +76,7 @@ namespace Finline.Code.Game.Controls
                     shootDir.Normalize();
                     shootDirection = shootDir;
                 }
+
                 this.Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed, shootDirection, playerPosition);
             }
         }

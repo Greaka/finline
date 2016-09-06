@@ -5,13 +5,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Finline.Code.Game.Entities
 {
+    using System.Collections.Generic;
+
     public abstract class Entity
     {
         private Model model;
         protected Vector3 position;
         protected float _angle;
-
-        private Vector3 centerOffset;
 
         protected Model _model
         {
@@ -23,29 +23,40 @@ namespace Finline.Code.Game.Entities
             set
             {
                 this.model = value;
-                var sphere = this._model.Meshes[0].BoundingSphere;
-                for (var i = 1; i < this._model.Meshes.Count; i++) sphere = BoundingSphere.CreateMerged(sphere, this._model.Meshes[i].BoundingSphere);
-                this.centerOffset = sphere.Center;
-                sphere.Center += this.position;
-                sphere.Radius *= this._sphereScaling;
+                var sphere = this.RelativeToPosition(this._model.GetVerticies().GetHull());
                 this.bound = sphere;
             }
         }
 
-        private BoundingSphere bound;
+        private IList<Vector3> RelativeToPosition(IEnumerable<Vector3> points)
+        {
+            var list = new List<Vector3>();
+            foreach (var vec in points)
+            {
+                 list.Add(vec - this.Position);
+            }
 
-        protected float _sphereScaling = 0.8f;
+            return list;
+        }
+
+        private IList<Vector3> bound;
 
         public Vector3 Position => this.position;
 
         public Model GetModel => this._model;
 
-        public BoundingSphere GetBound
+        public VertexPositionColor[] GetBound
         {
             get
             {
-                this.bound.Center = this.centerOffset + this.position;
-                return this.bound;
+                var list = new VertexPositionColor[this.bound.Count];
+                for (var i = 0; i < list.Length; ++i)
+                {
+                    list[i].Position = this.bound[i] + this.Position;
+                    list[i].Color = Color.GreenYellow;
+                }
+                
+                return list;
             }
         }
 

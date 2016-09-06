@@ -3,6 +3,10 @@ using Microsoft.Xna.Framework;
 
 namespace Finline.Code.Utility
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+
     using Finline.Code.Constants;
 
     internal static class VectorHelper
@@ -57,5 +61,16 @@ namespace Finline.Code.Utility
         }
 
         public static Vector2 get2d(this Vector3 me) { return new Vector2(me.X, me.Y);}
+
+        public static List<Vector2> get2d(this IEnumerable<Vector3> me)
+        {
+            var result = new List<Vector2>();
+            foreach (var vec in me)
+            {
+                result.Add(vec.get2d());
+            }
+
+            return result;
+        }
     }
 }
