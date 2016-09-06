@@ -224,7 +224,7 @@ namespace Finline.Code.GameState
                    this.menuState = EMenuState.CharacterScreen;
                    break;
             }
-#endregion
+
         }
 
         public event GetIngame GoIngame;
