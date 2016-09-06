@@ -9,7 +9,7 @@ namespace Finline.Code.Game.Entities
 
     public abstract class Entity
     {
-        private Model model;
+        protected Model model;
         protected Vector3 position;
         protected float Angle;
 

@@ -188,9 +188,7 @@ namespace Finline.Code.GameState
             {
                 this.HandleGameState();
             }
-
             
-
             // MouseState mouse = Mouse.GetState();
             KeyboardState k = Keyboard.GetState();
             if (this.currentGameState == EGameState.InGame && this.paused)
@@ -225,9 +223,7 @@ namespace Finline.Code.GameState
                 
                 this.gameState.Update(gameTime);
             }
-
             
-
             base.Update(gameTime);
         }
 
@@ -282,7 +278,7 @@ namespace Finline.Code.GameState
 
             if (this.currentGameState == EGameState.InGame)
             {
-                this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0")+ "s", new Vector2(500, 440), Color.WhiteSmoke);
+                this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0") + "s", new Vector2(500, 440), Color.WhiteSmoke);
             }
 
             this.spriteBatch.End();

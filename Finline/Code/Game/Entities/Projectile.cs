@@ -15,6 +15,22 @@ namespace Finline.Code.Game.Entities
         private TimeSpan timeStamp;
         private readonly float unitsPerSecond;
 
+        /// <summary>
+        /// Gets or sets the model.
+        /// </summary>
+        private new Model Model
+        {
+            get
+            {
+                return this.model;
+            }
+
+            set
+            {
+                this.model = value;
+            }
+        }
+
         public Projectile(TimeSpan actualTime, ContentManager content, Vector3 position, Vector2 direction)
         {
             this.Model = content.Load<Model>("Arrow");
