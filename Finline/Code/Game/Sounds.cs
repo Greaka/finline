@@ -12,39 +12,39 @@ namespace Finline.Code.Game
 
     public class Sounds
     {
-        public int currentSong = 1;
+        public int CurrentSong = 1;
 
-        public Song musicMainMenu;
+        public Song MusicMainMenu;
 
-        public List<Song> musicIngame = new List<Song>(2);
+        public List<Song> MusicIngame = new List<Song>(2);
 
-        public SoundEffect gunshot;
+        public SoundEffect Gunshot;
 
         private KeyboardState oldKeyState;
 
         public void LoadContent(ContentManager content)
         {
-            this.musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
-            this.musicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
-            this.musicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
-            this.gunshot = content.Load<SoundEffect>("Sounds/gunshot");
+            this.MusicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
+            this.MusicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
+            this.MusicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
+            this.Gunshot = content.Load<SoundEffect>("Sounds/gunshot");
         }
 
         public void GunshotPlay()
         {
-            if (MediaPlayer.State != MediaState.Paused) this.gunshot.Play();
+            if (MediaPlayer.State != MediaState.Paused) this.Gunshot.Play();
         }
 
         public void PlayMainMenuMusic()
         {
-            MediaPlayer.Play(this.musicMainMenu);
+            MediaPlayer.Play(this.MusicMainMenu);
             MediaPlayer.IsRepeating = true;
-            this.currentSong = (this.currentSong + 1) % 2;
+            this.CurrentSong = (this.CurrentSong + 1) % 2;
         }
 
         public void PlayIngameMusic()
         {
-            MediaPlayer.Play(this.musicIngame[this.currentSong]);
+            MediaPlayer.Play(this.MusicIngame[this.CurrentSong]);
             MediaPlayer.IsRepeating = false;
         }
 
@@ -52,8 +52,8 @@ namespace Finline.Code.Game
         {
             if (MediaPlayer.State == MediaState.Stopped)
             {
-                this.currentSong = (this.currentSong + 1) % 2;
-                MediaPlayer.Play(this.musicIngame[this.currentSong]);
+                this.CurrentSong = (this.CurrentSong + 1) % 2;
+                MediaPlayer.Play(this.MusicIngame[this.CurrentSong]);
             }
         }
 

@@ -4,8 +4,8 @@
     {
         public enum EnvObjects
         {
-            wallV, wallH, deskUp, chairUp, deskDown, chairDown, deskLeft, chairLeft, deskRight, chairRight, mirkopir, plant, pissoir, pissoir_gedreht, whiteboard, whiteboard_gedreht, podest, 
-            monitor, monitor_gedreht, rechner, rechner_gedreht, poster_vader, poster_deadpool, poster_cat, poster_zombie
+            WallV, WallH, DeskUp, ChairUp, DeskDown, ChairDown, DeskLeft, ChairLeft, DeskRight, ChairRight, Mirkopir, Plant, Pissoir, PissoirGedreht, Whiteboard, WhiteboardGedreht, Podest, 
+            Monitor, MonitorGedreht, Rechner, RechnerGedreht, PosterVader, PosterDeadpool, PosterCat, PosterZombie
         }
 
         public enum EWeaponShootMode

@@ -45,6 +45,7 @@
     <Compile Include="Code\GameState\GameState.cs" />
     <Compile Include="Code\GameState\GuiElement.cs" />
     <Compile Include="Code\GameState\MainMenu.cs" />
+    <Compile Include="Code\Game\Animation.cs" />
     <Compile Include="Code\Game\Controls\EnemyController.cs" />
     <Compile Include="Code\Game\Controls\PlayerController.cs" />
     <Compile Include="Code\Game\Controls\Shoot.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Code\Game\Entities\Enemy.cs" />
     <Compile Include="Code\Game\Entities\Entity.cs" />
     <Compile Include="Code\Game\Entities\EnvironmentObject.cs" />
+    <Compile Include="Code\Game\Entities\LivingEntity.cs" />
     <Compile Include="Code\Game\Entities\Projectile.cs" />
     <Compile Include="Code\Game\Ground.cs" />
     <Compile Include="Code\Game\Entities\Player.cs" />

@@ -7,27 +7,27 @@ namespace Finline.Code.Game.Entities
 {
     public class EnvironmentObject : Entity
     {
-        private readonly GameConstants.EnvObjects _type;
+        private readonly GameConstants.EnvObjects type;
         private readonly bool orbit = false;
         public bool Visible { get; set; }
 
-        public GameConstants.EnvObjects Type => this._type;
+        public GameConstants.EnvObjects Type => this.type;
 
         public EnvironmentObject(ContentManager contentManager, Vector3 position, GameConstants.EnvObjects model)
         {
             this.Visible = true;
-            this._type = model;
+            this.type = model;
 
-            this._model = contentManager.Load<Model>(model.ToString());
+            this.Model = contentManager.Load<Model>(model.ToString());
             this.position = position;
-            this._angle = 0;
+            this.Angle = 0;
         }
 
         public void Update(GameTime gameTime)
         {
             if (this.orbit)
             {
-                this._angle += 0.1f;
+                this.Angle += 0.1f;
             }
         }
 

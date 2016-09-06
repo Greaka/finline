@@ -183,7 +183,7 @@ namespace Finline.Code.Utility
             list[j] = temp;
         }
 
-        static double CCW(Vector3 p1, Vector3 p2, Vector3 p3)
+        static double Ccw(Vector3 p1, Vector3 p2, Vector3 p3)
         {
             // Compute (p2 - p1) X (p3 - p1)
             double cross1 = (p2.X - p1.X) * (p3.Y - p1.Y);
@@ -205,7 +205,7 @@ namespace Finline.Code.Utility
 
         static RemovalFlag WhichToRemoveFromBoundary(Vector3 p1, Vector3 p2, Vector3 p3)
         {
-            var cross = CCW(p1, p2, p3);
+            var cross = Ccw(p1, p2, p3);
             if (cross < 0)
 
                 // Remove p2
@@ -340,7 +340,7 @@ namespace Finline.Code.Utility
 
                     var centerA = polygonA.Center();
                     var centerB = polygonB.Center();
-                    Vector2 d = centerA.get2d() - centerB.get2d();
+                    Vector2 d = centerA.Get2D() - centerB.Get2D();
                     if (Vector2.Dot(d, translationAxis) < 0) translationAxis = -translationAxis;
                 }
             }

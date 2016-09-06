@@ -162,7 +162,7 @@ namespace Finline.Code.GameState
         private float timer = 0;
         private float deltaTime;
         private bool timePaused = false;
-        private bool MouseIsPressed = false;
+        private bool mouseIsPressed = false;
 
         /// <summary>
         /// The update.
@@ -199,7 +199,7 @@ namespace Finline.Code.GameState
 
                 foreach (var element in this.guiElements[this.currentGameState])
                 {
-                    element.Update(ref this.MouseIsPressed);
+                    element.Update(ref this.mouseIsPressed);
                 }
 
             if (this.currentGameState == EGameState.InGame && k.IsKeyDown(Keys.Escape) && !this.isPressed)

@@ -17,9 +17,9 @@ namespace Finline.Code.Game.Entities
 
         public Projectile(TimeSpan actualTime, ContentManager content, Vector3 position, Vector2 direction)
         {
-            this._model = content.Load<Model>("Arrow");
+            this.Model = content.Load<Model>("Arrow");
             this.position = position;
-            this._angle = direction.getAngle();
+            this.Angle = direction.GetAngle();
             this.timeStamp = actualTime;
             this.unitsPerSecond = 60;
         }

@@ -8,6 +8,8 @@
 namespace Finline.Code.Game.Entities
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Net;
 
     using Finline.Code.Utility;
 
@@ -18,88 +20,56 @@ namespace Finline.Code.Game.Entities
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
 
-    public class Player : Entity
+    public class Player : LivingEntity
     {
         private readonly float unitsPerSecond = 15;
-        Model profStand;
 
-        Model profLinks;
+        private bool IsMoving;
 
-        Model profRechts;
-
-        Model studentStand;
-
-        Model studentLinks;
-
-        Model studentRechts;
-
-        List<Model> AnimationProf = new List<Model>(4);
-        List<Model> AnimationStudent = new List<Model>(4);
-        int i = 0;
-        float time;
-        
-      
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
+        public enum PlayerSelection
+        {
+            student,
+            prof
+        }
 
         public void Initialize(ContentManager contentManager)
         {
-            // this._model = contentManager.Load<Model>("student_stand");
-            if (GuiElement.ausgewaehlt == 1) this._model = contentManager.Load<Model>("student_stand");
-            else this._model = contentManager.Load<Model>("prof_stand");
+            this.modelAnimation = new Animation(4);
             this.position = new Vector3(4, 4, -0.5f); // Standard
 
             // this.position = new Vector3(90, 240, 0);   // Hörsaal
             // this.position = new Vector3(26, 90, 0);      // 333
-            this.studentStand = contentManager.Load<Model>("student_stand");
-            this.studentLinks = contentManager.Load<Model>("student_linkesBein");
-            this.studentRechts = contentManager.Load<Model>("student");
+            var modelStand = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_stand");
+            var modelLinks = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_linkesBein");
+            var modelRechts = contentManager.Load<Model>(GuiElement.Ausgewaehlt.ToString());
 
-            this.profStand = contentManager.Load<Model>("prof_stand");
-            this.profLinks = contentManager.Load<Model>("prof_linkesBein");
-            this.profRechts = contentManager.Load<Model>("prof");
+            this.modelAnimation.Add(modelRechts);
+            this.modelAnimation.Add(modelStand);
+            this.modelAnimation.Add(modelLinks);
+            this.modelAnimation.Add(modelStand);
 
-            this.AnimationStudent.Insert(0, this.studentLinks);
-            this.AnimationStudent.Insert(1, this.studentStand);
-            this.AnimationStudent.Insert(2, this.studentRechts);
-            this.AnimationStudent.Insert(3, this.studentStand);
-
-            this.AnimationProf.Insert(0, this.profLinks);
-            this.AnimationProf.Insert(1, this.profStand);
-            this.AnimationProf.Insert(2, this.profRechts);
-            this.AnimationProf.Insert(3, this.profStand);
+            this.Model = modelStand;
         }
 
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection, List<EnvironmentObject> environmentObjects)
         {
             this.SetViewDirection(shootDirection);
-            this.time += (float)gameTime.ElapsedGameTime.TotalSeconds;            if (GuiElement.ausgewaehlt == 2 && (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.D)))
-            {
-                if (this.time>0.1f)
-                {
-                    this.i = this.i + 1;
-                    this.time = 0;
-                }
-                
-                if (this.i > 3) this.i = 0;
-                this._model = this.AnimationProf[this.i];
-            }
 
-            if (GuiElement.ausgewaehlt == 1 && (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.D)))
-            {
-                if (this.time > 0.1f)
-                {
-                    this.i = this.i + 1;
-                    this.time = 0;
-                }
+            this.IsMoving = !moveDirection.Equals(Vector2.Zero);
 
-                if (this.i > 3) this.i = 0;
-                this._model = this.AnimationStudent[this.i];
-            }
             var pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond;
             var collisionResult = this.IsColliding(environmentObjects, pos);
             this.position += new Vector3(pos, 0);
-            if (collisionResult.HasValue)            {
+            if (collisionResult.HasValue)
+            {
                 this.position += new Vector3(collisionResult.Value, 0);
             }
+        }
+
+        public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
+        {
+            base.Draw(viewMatrix, projectionMatrix, this.IsMoving ? this.modelAnimation.CurrentModel : this.Model);
         }
     }
 }

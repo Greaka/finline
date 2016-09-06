@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Finline.Code.GameState
 {
+    using Finline.Code.Game.Entities;
+
     internal class MainMenu : DrawableGameComponent
     {
         public delegate void GetIngame();
@@ -182,16 +184,11 @@ namespace Finline.Code.GameState
            {
                case "NewGame":
                    this.menuState = EMenuState.CharacterScreen;
-                    GuiElement.ausgewaehlt = 3;
+                    GuiElement.Ausgewaehlt = Player.PlayerSelection.student;
                     break;
                case "StartGame":
-                    if (GuiElement.ausgewaehlt == 1 || GuiElement.ausgewaehlt == 2)
-                    {
                         this.menuState = EMenuState.None;
-                       
                         this.GoIngame?.Invoke();
-                    }
-
                    break;
                case "ControlsButton":
                    this.menuState = EMenuState.Controls;
@@ -204,7 +201,7 @@ namespace Finline.Code.GameState
                    break;
                case "Back2MainMenu":
                    this.menuState = EMenuState.MainMenu;
-                   GuiElement.ausgewaehlt = 3;
+                   GuiElement.Ausgewaehlt = Player.PlayerSelection.student;
                    break;
                case "EndButton":
                    this.Game.Exit();
