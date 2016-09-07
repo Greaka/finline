@@ -641,6 +641,12 @@
 
             this.LevelObjects(90, 245, 0, GameConstants.EnvObjects.podest);  // podest
 
+#region Loading Schränke
+            this.LevelObjects(34.8f, 5, -1, GameConstants.EnvObjects.schrank);
+            this.LevelObjects(34.8f, 9, -1, GameConstants.EnvObjects.schrank);
+            this.LevelObjects(34.8f, 13, -1, GameConstants.EnvObjects.schrank);
+#endregion
+
 #region Loading Monitore
 
             this.LevelObjects(14.8f, 60.5f, 2, GameConstants.EnvObjects.monitor);
