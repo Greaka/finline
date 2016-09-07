@@ -144,6 +144,8 @@
                 this.viewMatrix);
             this.projectileHandler.Update(this.environmentObjects);
 
+            this.enemyControls.Update(this.enemies, this.player.Position);
+
             // if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
             // || Keyboard.GetState().IsKeyDown(Keys.Escape))
             // {
