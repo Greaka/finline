@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Finline.Code.Game.Entities
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     public abstract class Entity
     {
@@ -23,21 +24,11 @@ namespace Finline.Code.Game.Entities
             set
             {
                 this.model = value;
-                var sphere = this.RelativeToPosition(this.Model.GetVerticies().GetHull());
+                var sphere = this.Model.GetVerticies().GetHull();
                 this.bound = sphere;
             }
         }
 
-        private IList<Vector3> RelativeToPosition(IEnumerable<Vector3> points)
-        {
-            var list = new List<Vector3>();
-            foreach (var vec in points)
-            {
-                 list.Add(vec - this.Position);
-            }
-
-            return list;
-        }
 
         private IList<Vector3> bound;
 
@@ -65,17 +56,17 @@ namespace Finline.Code.Game.Entities
             this.Angle = angle;
         }
 
-        public void SetViewDirection(Vector2 direction)
+        protected void SetViewDirection(Vector2 direction)
         {
             if (direction.Length() > 0) this.Angle = direction.GetAngle();
         }
 
-        public Vector2 GetViewDirection()
+        protected Vector2 GetViewDirection()
         {
             return Vector2.UnitY.Rotate(this.Angle);
         }
 
-        public virtual void Draw(Matrix viewMatrix, Matrix projectionMatrix, Model model)
+        protected virtual void Draw(Matrix viewMatrix, Matrix projectionMatrix, Model model)
         {
             var worldMatrix = this.GetWorldMatrix();
 
