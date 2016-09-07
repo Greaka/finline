@@ -33,7 +33,7 @@ namespace Finline.Code.Game.Entities
 
         public Projectile(TimeSpan actualTime, ContentManager content, Vector3 position, Vector2 direction)
         {
-            this.Model = content.Load<Model>("Arrow");
+            this.Model = content.Load<Model>("ball");
             this.position = new Vector3(position.X, position.Y, 3f);
             this.Angle = direction.GetAngle();
             this.timeStamp = actualTime;
