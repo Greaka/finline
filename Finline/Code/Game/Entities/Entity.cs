@@ -14,7 +14,7 @@ namespace Finline.Code.Game.Entities
         protected Vector3 position;
         protected float Angle;
 
-        protected Model Model
+        protected virtual Model Model
         {
             get
             {
@@ -25,12 +25,11 @@ namespace Finline.Code.Game.Entities
             {
                 this.model = value;
                 var sphere = this.Model.GetVerticies().GetHull();
-                this.bound = sphere;
+                this.Bound = sphere;
             }
         }
 
-
-        private IList<Vector3> bound;
+        protected IList<Vector3> Bound { private get; set; }
 
         public Vector3 Position => this.position;
 
@@ -40,10 +39,10 @@ namespace Finline.Code.Game.Entities
         {
             get
             {
-                var list = new VertexPositionColor[this.bound.Count];
+                var list = new VertexPositionColor[this.Bound.Count];
                 for (var i = 0; i < list.Length; ++i)
                 {
-                    list[i].Position = this.bound[i] + this.Position;
+                    list[i].Position = this.Bound[i] + this.Position;
                     list[i].Color = Color.GreenYellow;
                 }
                 

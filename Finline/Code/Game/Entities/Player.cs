@@ -9,6 +9,7 @@ namespace Finline.Code.Game.Entities
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using System.Net;
 
     using Finline.Code.Utility;
@@ -25,6 +26,20 @@ namespace Finline.Code.Game.Entities
         private readonly float unitsPerSecond = 15;
 
         private bool isMoving;
+
+        protected override Model Model
+        {
+            get
+            {
+                return base.Model;
+            }
+            set
+            {
+                this.model = value;
+                var sphere = this.Model.GetVerticies().Select(vec => vec * 0.14f).ToList().GetHull();
+                this.Bound = sphere;
+            }
+        }
 
         [SuppressMessage("ReSharper", "InconsistentNaming")]
         public enum PlayerSelection

@@ -18,7 +18,7 @@ namespace Finline.Code.Game.Entities
         /// <summary>
         /// Gets or sets the model.
         /// </summary>
-        private new Model Model
+        protected override Model Model
         {
             get
             {

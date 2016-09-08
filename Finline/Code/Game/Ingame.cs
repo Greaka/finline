@@ -62,6 +62,7 @@
         private readonly List<Boss> bosses = new List<Boss>();
 
         private readonly List<EnvironmentObject> environmentObjects = new List<EnvironmentObject>();
+        private readonly List<NonEnvironmentObject> nonenvironmentObjects = new List<NonEnvironmentObject>();
 
         private readonly List<Projectile> projectiles = new List<Projectile>();
 
@@ -166,6 +167,11 @@
                 obj.Update(gameTime);
             }
 
+            foreach(var obj in this.nonenvironmentObjects)
+            {
+                obj.Update(gameTime);
+            }
+
             foreach (var enemy in this.enemies)
             {
                 enemy.Update(this.player.Position, this.environmentObjects, gameTime);
@@ -193,6 +199,11 @@
             this.player.Draw(this.viewMatrix, this.projectionMatrix);
 
             foreach (var obj in this.environmentObjects)
+            {
+                obj.Draw(this.viewMatrix, this.projectionMatrix);
+            }
+
+            foreach (var obj in this.nonenvironmentObjects)
             {
                 obj.Draw(this.viewMatrix, this.projectionMatrix);
             }
@@ -684,10 +695,10 @@
 #region Loading Poster
 
             this.LevelObjects(6.99f, 5, 2, GameConstants.EnvObjects.mirkopir);
-            this.LevelObjects(6.7f, 10, 2, GameConstants.EnvObjects.poster_vader);
-            this.LevelObjects(6.7f, 25, 2, GameConstants.EnvObjects.poster_deadpool);
-            this.LevelObjects(6.7f, 32, 2, GameConstants.EnvObjects.poster_zombie);
-            this.LevelObjects(6.7f, 40, 2, GameConstants.EnvObjects.poster_cat);
+            this.LevelObjects2(6.7f, 10, 2, GameConstants.NonEnvObjects.poster_cat);
+            this.LevelObjects2(6.7f, 25, 2, GameConstants.NonEnvObjects.poster_deadpool);
+            this.LevelObjects2(6.7f, 32, 2, GameConstants.NonEnvObjects.poster_zombie);
+            this.LevelObjects2(6.7f, 40, 2, GameConstants.NonEnvObjects.poster_cat);
 #endregion
 
 #region Loading Whiteboards
@@ -720,6 +731,15 @@
                     new EnvironmentObject(
                     this.Game.Content, 
                     new Vector3(x, y, z ), 
+                    model));
+        }
+
+        private void LevelObjects2(float x, float y, float z, GameConstants.NonEnvObjects model)
+        {
+            this.nonenvironmentObjects.Add(
+                    new NonEnvironmentObject(
+                    this.Game.Content,
+                    new Vector3(x, y, z),
                     model));
         }
 
