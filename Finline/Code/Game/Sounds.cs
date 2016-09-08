@@ -15,8 +15,8 @@ namespace Finline.Code.Game
         private int currentSong = 1;
         public bool SoundOn = true;
         private Song musicMainMenu;
-        private List<Song> musicIngame = new List<Song>(2);
-        private List<SoundEffect> shotList = new List<SoundEffect>(2);
+        private List<Song> musicIngame = new List<Song>();
+        private List<SoundEffect> shotList = new List<SoundEffect>();
         private static SoundEffectInstance shotInstance;
 
 
@@ -25,10 +25,10 @@ namespace Finline.Code.Game
         public void LoadContent(ContentManager content)
         {
             this.musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
-            this.musicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
-            this.musicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
-            this.shotList.Insert(0, content.Load<SoundEffect>("Sounds/gunshot"));
-            this.shotList.Insert(1, content.Load<SoundEffect>("Sounds/enemyshot"));
+            this.musicIngame.Add(content.Load<Song>("Sounds/musicIngame1"));
+            this.musicIngame.Add(content.Load<Song>("Sounds/musicIngame2"));
+            this.shotList.Add(content.Load<SoundEffect>("Sounds/gunshot"));
+            this.shotList.Add(content.Load<SoundEffect>("Sounds/enemyshot"));
         }
  
         public void SoundEffectPlay(int index)
@@ -62,11 +62,6 @@ namespace Finline.Code.Game
                 MediaPlayer.Play(this.musicIngame[this.currentSong]);
             }
         }
-        
-        public void TurnSoundOnOff()
-        {
-            this.SoundOn = !this.SoundOn;
-        }
 
         public void PauseMusic()
         {
@@ -96,6 +91,7 @@ namespace Finline.Code.Game
                 MediaPlayer.Pause();
                 if (shotInstance != null)
                 {
+                    shotInstance.Stop();
                     shotInstance.Volume = 0.0f;
                 }
             }

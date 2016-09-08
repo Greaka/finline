@@ -301,6 +301,7 @@ namespace Finline.Code.GameState
             if (element == "Play")
             {
                 this.paused = !this.paused;
+                this.sounds.PauseMusic();
             }
 
             if (element != "Back2MainMenu") return;
