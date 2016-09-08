@@ -1502,3 +1502,9 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:blobball.fbx
 
+#begin Sounds/enemyshot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/enemyshot.wav
+

@@ -16,10 +16,8 @@ namespace Finline.Code.Game
         public bool SoundOn = true;
         private Song musicMainMenu;
         private List<Song> musicIngame = new List<Song>(2);
-        private SoundEffect playerShot;
-        private static SoundEffectInstance playerShotInstance;
-        private SoundEffect enemyShot;
-        private static SoundEffectInstance enemyShotInstance;
+        private List<SoundEffect> shotList = new List<SoundEffect>(2);
+        private static SoundEffectInstance shotInstance;
 
 
         private KeyboardState oldKeyState;
@@ -29,15 +27,17 @@ namespace Finline.Code.Game
             this.musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
             this.musicIngame.Insert(0, content.Load<Song>("Sounds/musicIngame1"));
             this.musicIngame.Insert(1, content.Load<Song>("Sounds/musicIngame2"));
-            this.playerShot = content.Load<SoundEffect>("Sounds/gunshot");
+            this.shotList.Insert(0, content.Load<SoundEffect>("Sounds/gunshot"));
+            this.shotList.Insert(1, content.Load<SoundEffect>("Sounds/enemyshot"));
         }
  
-        public void GunshotPlay()
+        public void SoundEffectPlay(int index)
         {
-            playerShotInstance = this.playerShot.CreateInstance();
+            shotInstance = shotList[index].CreateInstance();
+
             if (this.SoundOn == true)
-                playerShotInstance.Play();
-            else playerShotInstance.Stop();
+                shotInstance.Play();
+            else shotInstance.Stop();
         }
 
         public void PlayMainMenuMusic()
@@ -86,21 +86,17 @@ namespace Finline.Code.Game
             if (this.SoundOn == true)
             {
                 MediaPlayer.Resume();
-                if (playerShotInstance != null || enemyShotInstance != null)
+                if (shotInstance != null)
                 {
-                    playerShotInstance.Volume = 1.0f;
-
-                    // enemyShotInstance.Volume = 1.0f;
+                    shotInstance.Volume = 1.0f;
                 }
             }
             else
             {
                 MediaPlayer.Pause();
-                if (playerShotInstance != null || enemyShotInstance != null)
+                if (shotInstance != null)
                 {
-                    playerShotInstance.Volume = 0.0f;
-
-                    // enemyShotInstance.Volume = 0.0f;
+                    shotInstance.Volume = 0.0f;
                 }
             }
 

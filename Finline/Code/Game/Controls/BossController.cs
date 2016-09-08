@@ -12,7 +12,7 @@ namespace Finline.Code.Game.Controls
 
     public class BossController
     {
-        public delegate void Shot(Vector3 position, Vector2 direction);
+        public delegate void Shot(Vector3 position, Vector2 direction, int index);
         public event Shot Shoot;
 
         private readonly Timer aTimer;
@@ -36,17 +36,17 @@ namespace Finline.Code.Game.Controls
             if (this.shootable != true) return;
             foreach (var boss in bosses)
             {
-                if (boss.Shoot) this.Shootroutine(boss.Position, playerPosition);
+                if (boss.Shoot) this.Shootroutine(boss.Position, playerPosition, 1);
             }
 
             this.shootable = false;
         }
 
-        private void Shootroutine(Vector3 enemypos, Vector3 playerPosition)
+        private void Shootroutine(Vector3 enemypos, Vector3 playerPosition, int index)
         {
-            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos).Get2D());
-            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos + new Vector3(2 ,2 ,0)).Get2D());
-            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos - new Vector3(2, 2, 0)).Get2D());
+            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos).Get2D(), index);
+            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos + new Vector3(2 ,2 ,0)).Get2D(), index);
+            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos - new Vector3(2, 2, 0)).Get2D(), index);
         }
     }
 }

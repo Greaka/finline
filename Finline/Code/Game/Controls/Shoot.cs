@@ -56,11 +56,11 @@ namespace Finline.Code.Game.Controls
         /// <summary>
         /// Creates new <see cref="Projectile"/>, adds it to the Projectile list and binds his destructor.
         /// </summary>
-        public void Shoot(Vector3 position, Vector2 direction)
+        public void Shoot(Vector3 position, Vector2 direction, int index)
         {
             var projectile = new Projectile(this.stopwatch.Elapsed, this.content, position, direction);
             this.projectiles.Add(projectile);
-            this.sounds.GunshotPlay();
+            this.sounds.SoundEffectPlay(index);
 
         }
 
