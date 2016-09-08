@@ -46,6 +46,7 @@
     <Compile Include="Code\GameState\GuiElement.cs" />
     <Compile Include="Code\GameState\MainMenu.cs" />
     <Compile Include="Code\Game\Animation.cs" />
+    <Compile Include="Code\Game\Controls\BossController.cs" />
     <Compile Include="Code\Game\Controls\EnemyController.cs" />
     <Compile Include="Code\Game\Controls\PlayerController.cs" />
     <Compile Include="Code\Game\Controls\Shoot.cs" />

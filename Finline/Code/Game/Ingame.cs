@@ -36,6 +36,8 @@
 
         private EnemyController enemyControls;
 
+        private BossController bossControls;
+
         private Shooting projectileHandler;
 
         private Matrix projectionMatrix;
@@ -97,9 +99,11 @@
             this.player.Initialize(this.Game.Content);
 
             this.enemyControls = new EnemyController();
+            this.bossControls = new BossController();
             this.projectileHandler = new Shooting(this.Game.Content, this.projectiles);
             this.PlayerControls.Shoot += this.projectileHandler.Shoot;
             this.enemyControls.Shoot += this.projectileHandler.Shoot;
+            this.bossControls.Shoot += this.projectileHandler.Shoot;
 
             base.Initialize();
         }
@@ -107,6 +111,9 @@
         protected override void LoadContent()
         {
             this.ground.LoadContent(this.Game.GraphicsDevice, this.Game.Content);
+
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(8, -15, 0)));
+            //this.bosses.Add(new Boss(this.Game.Content, new Vector3(12, -10, 0)));
 
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(25, 5, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 27, 0)));
@@ -145,6 +152,7 @@
             this.projectileHandler.Update(this.environmentObjects);
 
             this.enemyControls.Update(this.enemies, this.player.Position);
+            this.bossControls.Update(this.bosses, this.player.Position);
 
             // if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
             // || Keyboard.GetState().IsKeyDown(Keys.Escape))

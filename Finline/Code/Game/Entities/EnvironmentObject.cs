@@ -38,8 +38,4 @@ namespace Finline.Code.Game.Entities
         }
     }
 
-
-
-
-
 }
