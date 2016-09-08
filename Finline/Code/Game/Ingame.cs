@@ -120,8 +120,8 @@
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 27, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 27, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(30, 65, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(27, 108, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 112, 0)));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(27, 105, 0)));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 90, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(43, 121, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(14, 147, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(38, 148, 0)));
