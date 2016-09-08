@@ -56,7 +56,7 @@ namespace Finline.Code.Utility
                     continue;
                 }
 
-                colliding = collision.MinimumTranslationVector;
+                colliding = colliding != null ? colliding + collision.MinimumTranslationVector : collision.MinimumTranslationVector;
             }
 
             return colliding;
@@ -65,13 +65,29 @@ namespace Finline.Code.Utility
         public static List<Vector3> GetVerticies(this Model modModel)
         {
             var verticies = new List<Vector3>();
-            foreach (var modmModel in modModel.Meshes)
+            var transforms = new Matrix[modModel.Bones.Count];
+            modModel.CopyAbsoluteBoneTransformsTo(transforms);
+            foreach (var mesh in modModel.Meshes)
             {
-                foreach (var mmpModel in modmModel.MeshParts)
+                foreach (var meshPart in mesh.MeshParts)
                 {
-                    var arrVectors = new Vector3[mmpModel.NumVertices * 2];
-                    mmpModel.VertexBuffer.GetData<Vector3>(arrVectors);
-                    verticies.AddRange(arrVectors);
+                    // Vertex buffer parameters
+                    var vertexStride = meshPart.VertexBuffer.VertexDeclaration.VertexStride;
+                    var vertexBufferSize = meshPart.NumVertices * vertexStride;
+
+                    // Get vertex data as float
+                    var vertexData = new float[vertexBufferSize / sizeof(float)];
+                    meshPart.VertexBuffer.GetData<float>(vertexData);
+
+                    for (var i = 0; i < vertexBufferSize / sizeof(float); i += vertexStride / sizeof(float))
+                    {
+                        var transformedPosition =
+                            Vector3.Transform(
+                                new Vector3(vertexData[i], vertexData[i + 1], vertexData[i + 2]), 
+                                transforms[mesh.ParentBone.Index]);
+
+                        verticies.Add(transformedPosition);
+                    }
                 }
             }
 
