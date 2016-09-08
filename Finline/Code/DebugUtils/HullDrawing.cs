@@ -88,7 +88,7 @@ namespace Finline.Code.DebugUtils
                 var p2 =
                     (i + 1 >= this.player.GetBound.Length ? this.player.GetBound[0] : this.player.GetBound[i + 1])
                         .Position.Get2D() * Multiplikator;
-                this.DrawLine(this.spriteBatch, p1, p2, Color.Green);
+                this.DrawLine(this.spriteBatch, p1, p2, Color.LimeGreen);
             }
 
             this.spriteBatch.End();
