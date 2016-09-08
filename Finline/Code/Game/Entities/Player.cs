@@ -24,8 +24,9 @@ namespace Finline.Code.Game.Entities
     public class Player : LivingEntity
     {
         private readonly float unitsPerSecond = 15;
-
+        Animation DeathAnimation = new Animation(4);
         private bool isMoving;
+        private bool dead = false;
 
         protected override Model Model
         {
@@ -52,6 +53,8 @@ namespace Finline.Code.Game.Entities
         {
             this.ModelAnimation = new Animation(4);
             this.position = new Vector3(4, 4, -0.5f); // Standard
+           // Animation DeathAnimation = new Animation(4);
+            
 
             // this.position = new Vector3(90, 240, 0);   // Hörsaal
             // this.position = new Vector3(26, 90, 0);      // 333
@@ -59,12 +62,23 @@ namespace Finline.Code.Game.Entities
             var modelLinks = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_linkesBein");
             var modelRechts = contentManager.Load<Model>(GuiElement.Ausgewaehlt.ToString());
 
+            var Death1 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death1");
+            var Death2 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death2");
+            var Death3 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death3");
+            var Death4 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death4");
+
+            DeathAnimation.Add(Death1);
+            DeathAnimation.Add(Death2);
+            DeathAnimation.Add(Death3);
+            DeathAnimation.Add(Death4);
+
             this.ModelAnimation.Add(modelRechts);
             this.ModelAnimation.Add(modelStand);
             this.ModelAnimation.Add(modelLinks);
             this.ModelAnimation.Add(modelStand);
 
             this.Model = modelStand;
+
         }
 
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection, List<EnvironmentObject> environmentObjects)
@@ -80,11 +94,13 @@ namespace Finline.Code.Game.Entities
             {
                 this.position += new Vector3(collisionResult.Value, 0);
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.N)) dead = true;
+            if (Keyboard.GetState().IsKeyDown(Keys.M)) dead = false;
         }
 
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
-            base.Draw(viewMatrix, projectionMatrix, this.isMoving ? this.ModelAnimation.CurrentModel : this.Model);
+            if (dead == false) base.Draw(viewMatrix, projectionMatrix, this.isMoving ? this.ModelAnimation.CurrentModel : this.Model); else base.Draw(viewMatrix, projectionMatrix, this.DeathAnimation.CurrentModel);
         }
     }
 }
