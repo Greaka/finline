@@ -249,7 +249,7 @@ namespace Finline.Code.GameState
 
             if (this.currentGameState == EGameState.InGame)
             {
-                if (this.sounds.SoundOn == false)
+                if (this.sounds.GetSoundOn() == false)
                 {
                     this.deltaTime = 0;
                     this.spriteBatch.Draw(this.soundOffTexture2D, this.soundOffRectangle, Color.White);

@@ -13,14 +13,14 @@ namespace Finline.Code.Game
     public class Sounds
     {
         private int currentSong = 1;
-        public bool SoundOn = true;
+        private static bool SoundOn = true;
         private Song musicMainMenu;
         private List<Song> musicIngame = new List<Song>();
         private List<SoundEffect> shotList = new List<SoundEffect>();
         private static SoundEffectInstance shotInstance;
 
-
         private KeyboardState oldKeyState;
+
 
         public void LoadContent(ContentManager content)
         {
@@ -30,14 +30,19 @@ namespace Finline.Code.Game
             this.shotList.Add(content.Load<SoundEffect>("Sounds/gunshot"));
             this.shotList.Add(content.Load<SoundEffect>("Sounds/enemyshot"));
         }
- 
+
+        public bool GetSoundOn()
+        {
+            return SoundOn;
+        }
+
         public void SoundEffectPlay(int index)
         {
             shotInstance = shotList[index].CreateInstance();
 
-            if (this.SoundOn == true)
+            if (this.GetSoundOn() == true)
                 shotInstance.Play();
-            else shotInstance.Stop();
+            //else shotInstance.Stop();
         }
 
         public void PlayMainMenuMusic()
@@ -75,10 +80,10 @@ namespace Finline.Code.Game
             KeyboardState newKeyState = Keyboard.GetState();
             if (newKeyState.IsKeyDown(Keys.O) && this.oldKeyState.IsKeyUp(Keys.O))
             {
-                this.SoundOn = !this.SoundOn;
+                SoundOn = !SoundOn;
             }
 
-            if (this.SoundOn == true)
+            if (this.GetSoundOn() == true)
             {
                 MediaPlayer.Resume();
                 if (shotInstance != null)
