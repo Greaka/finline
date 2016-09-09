@@ -18,7 +18,7 @@ namespace Finline.Code.GameState
 
         private readonly SpriteBatch spriteBatch;
 
-        private EMenuState menuState;
+        public static EMenuState menuState;
 
         private SpriteFont font;
 
@@ -41,7 +41,7 @@ namespace Finline.Code.GameState
             this.guiElements.Add(EMenuState.GameOver, new List<GuiElement>());
 
             this.spriteBatch = sprite;
-            this.menuState = EMenuState.TitleScreen;
+            MainMenu.menuState = EMenuState.TitleScreen;
 
             this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); // Texture in the Titlescreen
 
@@ -146,14 +146,14 @@ namespace Finline.Code.GameState
         {
             
             
-            if (this.menuState == EMenuState.TitleScreen)
+            if (MainMenu.menuState == EMenuState.TitleScreen)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                    this.menuState = EMenuState.MainMenu;
+                    MainMenu.menuState = EMenuState.MainMenu;
             }
 
           
-            foreach (var element in this.guiElements[this.menuState])
+            foreach (var element in this.guiElements[MainMenu.menuState])
             {
                 element.Update(ref this.isPressed);
             }
@@ -163,8 +163,8 @@ namespace Finline.Code.GameState
         public override void Draw(GameTime gameTime)
         {
             this.spriteBatch.Begin();
-            if (this.menuState != EMenuState.None)
-            foreach (var element in this.guiElements[this.menuState])
+            if (MainMenu.menuState != EMenuState.None)
+            foreach (var element in this.guiElements[MainMenu.menuState])
             {
                 element.Draw(this.spriteBatch);
             }
@@ -177,7 +177,7 @@ namespace Finline.Code.GameState
         /// </summary>
         public void MakeHeile()
         {
-            this.menuState = EMenuState.MainMenu;
+            MainMenu.menuState = EMenuState.MainMenu;
         }
 
         /// <summary>
@@ -189,39 +189,39 @@ namespace Finline.Code.GameState
             if (this.isPressed) return;
             this.isPressed = true;
 
-            if (this.menuState == EMenuState.TitleScreen)
+            if (MainMenu.menuState == EMenuState.TitleScreen)
             {
-                this.menuState = EMenuState.MainMenu;
+                MainMenu.menuState = EMenuState.MainMenu;
             }
 
             switch (element)
            {
                case "NewGame":
-                   this.menuState = EMenuState.CharacterScreen;
+                   MainMenu.menuState = EMenuState.CharacterScreen;
                     GuiElement.Ausgewaehlt = Player.PlayerSelection.student;
                     break;
                case "StartGame":
-                        this.menuState = EMenuState.None;
+                        MainMenu.menuState = EMenuState.None;
                         this.GoIngame?.Invoke();
                    break;
                case "ControlsButton":
-                   this.menuState = EMenuState.Controls;
+                   MainMenu.menuState = EMenuState.Controls;
                    break;
                case "CreditsButton":
-                   this.menuState = EMenuState.Credits;
+                   MainMenu.menuState = EMenuState.Credits;
                    break;
                case "RecordsButton":
-                   this.menuState = EMenuState.Records;
+                   MainMenu.menuState = EMenuState.Records;
                    break;
                case "Back2MainMenu":
-                   this.menuState = EMenuState.MainMenu;
+                   MainMenu.menuState = EMenuState.MainMenu;
                    GuiElement.Ausgewaehlt = Player.PlayerSelection.student;
                    break;
                case "EndButton":
                    this.Game.Exit();
                    break;
                case "TryAgain":
-                   this.menuState = EMenuState.CharacterScreen;
+                   MainMenu.menuState = EMenuState.CharacterScreen;
                    break;
             }
 
@@ -232,7 +232,7 @@ namespace Finline.Code.GameState
         /// <summary>
         ///     MenuState to manage all States
         /// </summary>
-        private enum EMenuState
+        public enum EMenuState
         {
             None, 
 

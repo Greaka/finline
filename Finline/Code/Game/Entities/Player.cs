@@ -11,6 +11,8 @@ namespace Finline.Code.Game.Entities
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Net;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using Finline.Code.Utility;
 
@@ -24,7 +26,7 @@ namespace Finline.Code.Game.Entities
     public class Player : LivingEntity
     {
         private readonly float unitsPerSecond = 15;
-        Animation deathAnimation = new Animation(4);
+        Animation deathAnimation = new Animation(4, false);
         private bool isMoving;
        
         protected override Model Model
@@ -98,9 +100,24 @@ namespace Finline.Code.Game.Entities
 
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection, List<EnvironmentObject> environmentObjects)
         {
-            
+            if (this.Dead)
+            {
+                this.deathAnimation.active = true;
+
+                if (this.deathAnimation.LastModel)
+                {
+                    Task.Factory.StartNew(
+                        () =>
+                            {
+                                System.Threading.Thread.Sleep(400);
+                                MainMenu.menuState = MainMenu.EMenuState.GameOver;
+                            });
+                }
+
+                return;
+            }
+
             this.SetViewDirection(shootDirection);
-         
 
             this.isMoving = !moveDirection.Equals(Vector2.Zero);
 
