@@ -57,8 +57,9 @@
     <Compile Include="Code\Game\Entities\EnvironmentObject.cs" />
     <Compile Include="Code\Game\Entities\LivingEntity.cs" />
     <Compile Include="Code\Game\Entities\Projectile.cs" />
-    <Compile Include="Code\Game\Ground.cs" />
+    <Compile Include="Code\Game\Entities\Weapon.cs" />
     <Compile Include="Code\Game\Entities\Player.cs" />
+    <Compile Include="Code\Game\Ground.cs" />
     <Compile Include="Code\Utility\Collision.cs" />
     <Compile Include="Code\Game\Sounds.cs" />
     <Compile Include="Code\Utility\VectorHelper.cs" />

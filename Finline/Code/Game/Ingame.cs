@@ -52,6 +52,7 @@
         /// The player.
         /// </summary>
         private Player player;
+        private Weapon weapon;
 
         /// <summary>
         /// The ground.
@@ -97,7 +98,9 @@
             this.ground.Initialize();
 
             this.player = new Player();
+            this.weapon = new Weapon();
             this.player.Initialize(this.Game.Content);
+            this.weapon.Initialize(this.Game.Content);
 
             this.enemyControls = new EnemyController();
             this.bossControls = new BossController();
@@ -160,6 +163,8 @@
             // this.Game.Exit();
             // }
             this.player.Update(gameTime, this.moveDirection, this.shootDirection, this.environmentObjects);
+            this.weapon.Update(gameTime, this.moveDirection, this.shootDirection);
+            
 
             foreach (var obj in this.environmentObjects)
             {
@@ -196,6 +201,7 @@
 
             this.ground.Draw(this.Game.GraphicsDevice, this.viewMatrix, this.projectionMatrix);
             this.player.Draw(this.viewMatrix, this.projectionMatrix);
+            this.weapon.Draw(this.viewMatrix, this.projectionMatrix);
 
             foreach (var obj in this.environmentObjects)
             {

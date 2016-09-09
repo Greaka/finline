@@ -27,7 +27,10 @@ namespace Finline.Code.Game.Entities
         Animation DeathAnimation = new Animation(4);
         private bool isMoving;
         private bool dead = false;
+        Vector2 pos;
 
+        
+       
         protected override Model Model
         {
             get
@@ -94,17 +97,21 @@ namespace Finline.Code.Game.Entities
             this.ModelAnimation.Add(modelStand);
 
             this.Model = modelStand;
+            
         }
 
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection, List<EnvironmentObject> environmentObjects)
         {
+            
             this.SetViewDirection(shootDirection);
+         
 
             this.isMoving = !moveDirection.Equals(Vector2.Zero);
 
-            var pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond;
+            pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond;
             var collisionResult = this.IsColliding(environmentObjects, pos);
             this.position += new Vector3(pos, 0);
+        //  getPlayerPosition();
             if (collisionResult.HasValue)
             {
                 this.position += new Vector3(collisionResult.Value, 0);
@@ -117,6 +124,11 @@ namespace Finline.Code.Game.Entities
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
             if (dead == false) base.Draw(viewMatrix, projectionMatrix, this.isMoving ? this.ModelAnimation.CurrentModel : this.Model); else base.Draw(viewMatrix, projectionMatrix, this.DeathAnimation.CurrentModel);
+        }
+
+        public Vector3 getPlayerPosition()
+        {
+            return position;
         }
     }
 }
