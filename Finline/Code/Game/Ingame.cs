@@ -98,7 +98,7 @@
             this.ground.Initialize();
 
             this.player = new Player();
-            this.weapon = new Weapon();
+            this.weapon = new Weapon(this.player);
             this.player.Initialize(this.Game.Content);
             this.weapon.Initialize(this.Game.Content);
 
@@ -163,7 +163,7 @@
             // this.Game.Exit();
             // }
             this.player.Update(gameTime, this.moveDirection, this.shootDirection, this.environmentObjects);
-            this.weapon.Update(gameTime, this.moveDirection, this.shootDirection);
+            this.weapon.Update(this.shootDirection);
             
 
             foreach (var obj in this.environmentObjects)

@@ -26,8 +26,6 @@ namespace Finline.Code.Game.Entities
         private readonly float unitsPerSecond = 15;
         Animation deathAnimation = new Animation(4);
         private bool isMoving;
-
-        
        
         protected override Model Model
         {
@@ -125,11 +123,6 @@ namespace Finline.Code.Game.Entities
             {
                 base.Draw(viewMatrix, projectionMatrix, this.deathAnimation.CurrentModel);
             }
-        }
-
-        public Vector3 getPlayerPosition()
-        {
-            return position;
         }
     }
 }
