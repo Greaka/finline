@@ -82,10 +82,10 @@ namespace Finline.Code.Game.Entities
                 {
                     effect.EnableDefaultLighting();
 
-                    // effect.FogEnabled = true;                            //Nebel
-                    // effect.FogColor = Color.Gray.ToVector3();
-                    // effect.FogStart = 15;
-                    // effect.FogEnd = 30;
+                     effect.FogEnabled = true;                            //Nebel
+                     effect.FogColor = Color.Gray.ToVector3();
+                     effect.FogStart = 15;
+                     effect.FogEnd = 30;
                     // effect.LightingEnabled = true;  //Turn on the lighting subsystem.
                     // effect.DirectionalLight0.DiffuseColor = new Vector3(0.5f, 0, 0);  // a red light
                     // effect.DirectionalLight0.Direction = new Vector3(1, 0, 0);     // coming along the x-axis
