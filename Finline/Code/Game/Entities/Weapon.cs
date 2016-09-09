@@ -37,11 +37,11 @@
             this.Model = contentManager.Load<Model>("weapon");
         }
 
-        public void Update(Vector2 shootDirection)
+        public void Update()
         {
+            this.SetViewDirection(this.player.GetViewDirection());
             var offset = new Vector3(0.5f, 1, 2);
-            this.position = this.player.Position + offset.Rotate2D(shootDirection.GetAngle());
-            this.SetViewDirection(shootDirection);
+            this.position = this.player.Position + offset.Rotate2D(this.Angle);
         }
 
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)

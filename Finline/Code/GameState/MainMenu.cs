@@ -7,7 +7,9 @@ namespace Finline.Code.GameState
 {
     using Finline.Code.Game.Entities;
 
-    internal class MainMenu : DrawableGameComponent
+    using Game = Microsoft.Xna.Framework.Game;
+
+    public class MainMenu : DrawableGameComponent
     {
         public delegate void GetIngame();
 
@@ -18,17 +20,12 @@ namespace Finline.Code.GameState
 
         private readonly SpriteBatch spriteBatch;
 
-        public static EMenuState menuState;
-
-        private SpriteFont font;
-
-        
-       
+        public EMenuState MenuState;
 
         /// <summary>
         /// Constructor to use the GUIElementlist to select the element
         /// </summary>
-        public MainMenu(StateManager game, SpriteBatch sprite)
+        public MainMenu(Game game, SpriteBatch sprite)
             : base(game)
         {
             // The Lists with all the GUIElements
@@ -41,7 +38,7 @@ namespace Finline.Code.GameState
             this.guiElements.Add(EMenuState.GameOver, new List<GuiElement>());
 
             this.spriteBatch = sprite;
-            MainMenu.menuState = EMenuState.TitleScreen;
+            this.MenuState = EMenuState.TitleScreen;
 
             this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); // Texture in the Titlescreen
 
@@ -140,20 +137,21 @@ namespace Finline.Code.GameState
             #endregion
         }
 
-
+        public void GameOver()
+        {
+            this.MenuState = EMenuState.GameOver;
+        }
 
         public override void Update(GameTime gameTime)
         {
-            
-            
-            if (MainMenu.menuState == EMenuState.TitleScreen)
+            if (this.MenuState == EMenuState.TitleScreen)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                    MainMenu.menuState = EMenuState.MainMenu;
+                    this.MenuState = EMenuState.MainMenu;
             }
 
           
-            foreach (var element in this.guiElements[MainMenu.menuState])
+            foreach (var element in this.guiElements[this.MenuState])
             {
                 element.Update(ref this.isPressed);
             }
@@ -163,8 +161,8 @@ namespace Finline.Code.GameState
         public override void Draw(GameTime gameTime)
         {
             this.spriteBatch.Begin();
-            if (MainMenu.menuState != EMenuState.None)
-            foreach (var element in this.guiElements[MainMenu.menuState])
+            if (this.MenuState != EMenuState.None)
+            foreach (var element in this.guiElements[this.MenuState])
             {
                 element.Draw(this.spriteBatch);
             }
@@ -177,7 +175,7 @@ namespace Finline.Code.GameState
         /// </summary>
         public void MakeHeile()
         {
-            MainMenu.menuState = EMenuState.MainMenu;
+            this.MenuState = EMenuState.MainMenu;
         }
 
         /// <summary>
@@ -189,39 +187,39 @@ namespace Finline.Code.GameState
             if (this.isPressed) return;
             this.isPressed = true;
 
-            if (MainMenu.menuState == EMenuState.TitleScreen)
+            if (this.MenuState == EMenuState.TitleScreen)
             {
-                MainMenu.menuState = EMenuState.MainMenu;
+                this.MenuState = EMenuState.MainMenu;
             }
 
             switch (element)
            {
                case "NewGame":
-                   MainMenu.menuState = EMenuState.CharacterScreen;
+                   this.MenuState = EMenuState.CharacterScreen;
                     GuiElement.Ausgewaehlt = Player.PlayerSelection.student;
                     break;
                case "StartGame":
-                        MainMenu.menuState = EMenuState.None;
+                        this.MenuState = EMenuState.None;
                         this.GoIngame?.Invoke();
                    break;
                case "ControlsButton":
-                   MainMenu.menuState = EMenuState.Controls;
+                   this.MenuState = EMenuState.Controls;
                    break;
                case "CreditsButton":
-                   MainMenu.menuState = EMenuState.Credits;
+                   this.MenuState = EMenuState.Credits;
                    break;
                case "RecordsButton":
-                   MainMenu.menuState = EMenuState.Records;
+                   this.MenuState = EMenuState.Records;
                    break;
                case "Back2MainMenu":
-                   MainMenu.menuState = EMenuState.MainMenu;
+                   this.MenuState = EMenuState.MainMenu;
                    GuiElement.Ausgewaehlt = Player.PlayerSelection.student;
                    break;
                case "EndButton":
                    this.Game.Exit();
                    break;
                case "TryAgain":
-                   MainMenu.menuState = EMenuState.CharacterScreen;
+                   this.MenuState = EMenuState.CharacterScreen;
                    break;
             }
 

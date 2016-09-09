@@ -42,7 +42,7 @@ namespace Finline.Code.GameState
         /// <summary>
         /// The main menu.
         /// </summary>
-        private MainMenu main;
+        public MainMenu main;
 
         /// <summary>
         /// The next game state.
@@ -99,8 +99,13 @@ namespace Finline.Code.GameState
         /// </summary>
         protected override void Initialize()
         {
-            this.nextGameState = EGameState.InGame;
+            this.nextGameState = EGameState.MainMenu;
             base.Initialize();
+        }
+
+        public void GoMenu()
+        {
+            this.nextGameState = EGameState.MainMenu;
         }
 
         /// <summary>

@@ -45,6 +45,7 @@ namespace Finline.Code.Game.Controls
             Matrix projectionMatrix, 
             Matrix viewMatrix)
         {
+            if (player.Dead) this.shootable = false;
             if (Math.Abs(this.aTimer.Interval - ShotsPerSecond) < 0.00001) this.aTimer.Interval = ShotsPerSecond;
             var inputstate = GamePad.GetState(PlayerIndex.One);
             if (inputstate.IsConnected)

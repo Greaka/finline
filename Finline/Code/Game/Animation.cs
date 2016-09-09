@@ -54,6 +54,6 @@ namespace Finline.Code.Game
 
         public Model CurrentModel => this.animationList[this.index];
 
-        public bool LastModel => this.index == this.animationList.Length;
+        public bool LastModel => this.index == this.animationList.Length - 1;
     }
 }

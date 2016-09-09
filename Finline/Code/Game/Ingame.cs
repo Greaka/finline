@@ -75,6 +75,9 @@
         public Ingame(StateManager game, SpriteBatch sb)
             : base(game)
         {
+            this.player = new Player();
+            this.player.Death += game.main.GameOver;
+            this.player.Death += game.GoMenu;
             this.graphics = game.Graphics;
             this.Game.Content.RootDirectory = "Content";
 #if DEBUG
@@ -97,7 +100,6 @@
             this.ground = new Ground();
             this.ground.Initialize();
 
-            this.player = new Player();
             this.weapon = new Weapon(this.player);
             this.player.Initialize(this.Game.Content);
             this.weapon.Initialize(this.Game.Content);
@@ -163,7 +165,7 @@
             // this.Game.Exit();
             // }
             this.player.Update(gameTime, this.moveDirection, this.shootDirection, this.environmentObjects);
-            this.weapon.Update(this.shootDirection);
+            this.weapon.Update();
             
 
             foreach (var obj in this.environmentObjects)
@@ -171,7 +173,7 @@
                 obj.Update(gameTime);
             }
 
-            foreach(var obj in this.nonenvironmentObjects)
+            foreach (var obj in this.nonenvironmentObjects)
             {
                 obj.Update(gameTime);
             }

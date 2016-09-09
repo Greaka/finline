@@ -61,12 +61,23 @@ namespace Finline.Code.Game.Controls
             var projectile = new Projectile(this.stopwatch.Elapsed, this.content, firedFrom, direction);
             this.projectiles.Add(projectile);
             this.sounds.SoundEffectPlay(index);
-
         }
 
         /// <summary>
         /// Update for Projectiles.
         /// </summary>
+        /// <param name="player">
+        /// The player.
+        /// </param>
+        /// <param name="bosses">
+        /// The bosses.
+        /// </param>
+        /// <param name="enemies">
+        /// The enemies.
+        /// </param>
+        /// <param name="environmentObjects">
+        /// The environment Objects.
+        /// </param>
         public void Update(Player player, List<Boss> bosses, List<Enemy> enemies, List<EnvironmentObject> environmentObjects)
         {
             var remove = new List<Projectile>();

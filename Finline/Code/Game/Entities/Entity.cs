@@ -67,7 +67,7 @@ namespace Finline.Code.Game.Entities
             if (direction.Length() > 0) this.Angle = direction.GetAngle();
         }
 
-        protected Vector2 GetViewDirection()
+        public Vector2 GetViewDirection()
         {
             return Vector2.UnitY.Rotate(this.Angle);
         }

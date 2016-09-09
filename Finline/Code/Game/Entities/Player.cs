@@ -7,10 +7,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Finline.Code.Game.Entities
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Net;
+    using System.Net.Mime;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -25,10 +27,31 @@ namespace Finline.Code.Game.Entities
 
     public class Player : LivingEntity
     {
+        /// <summary>
+        /// The units per second.
+        /// </summary>
         private readonly float unitsPerSecond = 15;
-        Animation deathAnimation = new Animation(4, false);
+
+        /// <summary>
+        /// The death animation.
+        /// </summary>
+        private readonly Animation deathAnimation = new Animation(4, false);
+
+        /// <summary>
+        /// The is moving.
+        /// </summary>
         private bool isMoving;
-       
+
+        /// <summary>
+        /// The game over.
+        /// </summary>
+        public delegate void GameOver();
+
+        /// <summary>
+        /// The death.
+        /// </summary>
+        public event GameOver Death;
+
         protected override Model Model
         {
             get
@@ -95,7 +118,6 @@ namespace Finline.Code.Game.Entities
             this.ModelAnimation.Add(modelStand);
 
             this.Model = modelStand;
-            
         }
 
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection, List<EnvironmentObject> environmentObjects)
@@ -104,15 +126,12 @@ namespace Finline.Code.Game.Entities
             {
                 this.deathAnimation.active = true;
 
-                if (this.deathAnimation.LastModel)
+                if (!this.deathAnimation.LastModel)
                 {
-                    Task.Factory.StartNew(
-                        () =>
-                            {
-                                System.Threading.Thread.Sleep(400);
-                                MainMenu.menuState = MainMenu.EMenuState.GameOver;
-                            });
+                    return;
                 }
+
+                this.Death?.Invoke();
 
                 return;
             }
