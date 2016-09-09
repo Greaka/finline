@@ -1696,3 +1696,15 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:gun.fbx
 
+#begin Sounds/enemydeath.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/enemydeath.wav
+
+#begin Sounds/playerdeath.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/playerdeath.wav
+

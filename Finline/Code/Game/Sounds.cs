@@ -16,19 +16,20 @@ namespace Finline.Code.Game
         private static bool soundOn = true;
         private Song musicMainMenu;
         private List<Song> musicIngame = new List<Song>();
-        private List<SoundEffect> shotList = new List<SoundEffect>();
-        private static SoundEffectInstance shotInstance;
+        private List<SoundEffect> soundeffectList = new List<SoundEffect>();
+        private static SoundEffectInstance soundInstance;
 
         private KeyboardState oldKeyState;
-
 
         public void LoadContent(ContentManager content)
         {
             this.musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
             this.musicIngame.Add(content.Load<Song>("Sounds/musicIngame1"));
             this.musicIngame.Add(content.Load<Song>("Sounds/musicIngame2"));
-            this.shotList.Add(content.Load<SoundEffect>("Sounds/gunshot"));
-            this.shotList.Add(content.Load<SoundEffect>("Sounds/enemyshot"));
+            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/gunshot"));          //position [0]
+            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemyshot"));        //position [1]
+            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/playerdeath"));      //position [2]
+            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemydeath"));       //position [3]
         }
 
         public bool GetSoundOn()
@@ -38,11 +39,11 @@ namespace Finline.Code.Game
 
         public void SoundEffectPlay(int index)
         {
-            shotInstance = this.shotList[index].CreateInstance();
+            soundInstance = this.soundeffectList[index].CreateInstance();
 
-            if (this.GetSoundOn() == true) shotInstance.Play();
+            if (this.GetSoundOn() == true) soundInstance.Play();
 
-            // else shotInstance.Stop();
+            // else soundInstance.Stop();
         }
 
         public void PlayMainMenuMusic()
@@ -86,18 +87,18 @@ namespace Finline.Code.Game
             if (this.GetSoundOn() == true)
             {
                 MediaPlayer.Resume();
-                if (shotInstance != null)
+                if (soundInstance != null)
                 {
-                    shotInstance.Volume = 1.0f;
+                    soundInstance.Volume = 1.0f;
                 }
             }
             else
             {
                 MediaPlayer.Pause();
-                if (shotInstance != null)
+                if (soundInstance != null)
                 {
-                    shotInstance.Stop();
-                    shotInstance.Volume = 0.0f;
+                    soundInstance.Stop();
+                    soundInstance.Volume = 0.0f;
                 }
             }
 
