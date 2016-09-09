@@ -35,7 +35,9 @@ namespace Finline.Code.Game.Entities
             var view = new Ray(this.position, distance);
 
             var any = environmentObjects.Any(obj => view.Intersects(new BoundingSphere(obj.Position, obj.GetBound[0].Position.Length()))
-                        != null && (obj.Position - this.position).Length() < 0.4f*distance.Length());
+                        != null && (obj.Position - this.position).Length() < 0.4f * distance.Length());
+            //var any = environmentObjects.Any(obj => new BoundingSphere(obj.Position, obj.GetBound[2].Position.Length()).Intersects(view)
+            //            == null && (obj.Type == Constants.GameConstants.EnvObjects.wallV));
 
             if (any)
             {
