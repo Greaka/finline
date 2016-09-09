@@ -13,7 +13,7 @@ namespace Finline.Code.Game
     public class Sounds
     {
         private int currentSong = 1;
-        private static bool SoundOn = true;
+        private static bool soundOn = true;
         private Song musicMainMenu;
         private List<Song> musicIngame = new List<Song>();
         private List<SoundEffect> shotList = new List<SoundEffect>();
@@ -33,16 +33,16 @@ namespace Finline.Code.Game
 
         public bool GetSoundOn()
         {
-            return SoundOn;
+            return soundOn;
         }
 
         public void SoundEffectPlay(int index)
         {
-            shotInstance = shotList[index].CreateInstance();
+            shotInstance = this.shotList[index].CreateInstance();
 
-            if (this.GetSoundOn() == true)
-                shotInstance.Play();
-            //else shotInstance.Stop();
+            if (this.GetSoundOn() == true) shotInstance.Play();
+
+            // else shotInstance.Stop();
         }
 
         public void PlayMainMenuMusic()
@@ -80,7 +80,7 @@ namespace Finline.Code.Game
             KeyboardState newKeyState = Keyboard.GetState();
             if (newKeyState.IsKeyDown(Keys.O) && this.oldKeyState.IsKeyUp(Keys.O))
             {
-                SoundOn = !SoundOn;
+                soundOn = !soundOn;
             }
 
             if (this.GetSoundOn() == true)

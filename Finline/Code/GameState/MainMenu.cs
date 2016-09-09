@@ -70,11 +70,11 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.Controls].Add(new GuiElement("LogoTransparent"));
             
 
-#region Records            // here are the elements in the state Records
+
             this.guiElements[EMenuState.Records].Add(new GuiElement("RecordTexture"));
             this.guiElements[EMenuState.Records].Add(new GuiElement("Back2MainMenu"));
             this.guiElements[EMenuState.Records].Add(new GuiElement("LogoTransparent"));
-            #endregion
+            
 
 #region Credits            // here are the elements in the state Credits 
             this.guiElements[EMenuState.Credits].Add(new GuiElement("Back2MainMenu"));
@@ -122,10 +122,10 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.Controls].Find(x => x.AssetName == "ControlScreen").MoveElement(50, -150);
             this.guiElements[EMenuState.Controls].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 80); // move the "Back_to_MainMenu" button down in y-direction
             
-#region Moved Elements From Records
+
             this.guiElements[EMenuState.Records].Find(x => x.AssetName == "RecordTexture").MoveElement(0, -265); // move the recordtexture up in y-direction
             this.guiElements[EMenuState.Records].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 70); // move the button down in y-direction
-            #endregion
+            
 #region Moved Elements From Credits
             this.guiElements[EMenuState.Credits].Find(x => x.AssetName == "CreditscreenTexture2").MoveElement(0, -60);
             this.guiElements[EMenuState.Credits].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 50); // move the "Back_to_MainMenu" button down in y-direction

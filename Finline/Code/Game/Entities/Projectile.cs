@@ -10,10 +10,12 @@ namespace Finline.Code.Game.Entities
 {
     using System.Collections.Generic;
 
-    public class Projectile : Entity
+    public sealed class Projectile : Entity
     {
         private TimeSpan timeStamp;
         private readonly float unitsPerSecond;
+
+        private Entity firingEntity;
 
         /// <summary>
         /// Gets or sets the model.
@@ -31,20 +33,67 @@ namespace Finline.Code.Game.Entities
             }
         }
 
-        public Projectile(TimeSpan actualTime, ContentManager content, Vector3 position, Vector2 direction)
+        public Projectile(TimeSpan actualTime, ContentManager content, Entity firedFrom, Vector2 direction)
         {
+            this.firingEntity = firedFrom;
             this.Model = content.Load<Model>("ball");
-            this.position = new Vector3(position.X, position.Y, 3f);
+            this.position = new Vector3(firedFrom.Position.X, firedFrom.Position.Y, 3f);
             this.Angle = direction.GetAngle();
             this.timeStamp = actualTime;
             this.unitsPerSecond = 60;
+            this.Bound = new List<Vector3>() { Vector3.Zero };
         }
 
-        public void Update(TimeSpan actualTime, List<EnvironmentObject> environmentObjects, List<Projectile> remove)
+        public void Update(TimeSpan actualTime, Player player, List<Boss> bosses, List<Enemy> enemies, List<EnvironmentObject> environmentObjects, List<Projectile> remove)
         {
             var elapsedTime = (actualTime - this.timeStamp).TotalSeconds;
             var direction = this.GetViewDirection() * this.unitsPerSecond * (float)elapsedTime;
-            if (this.IsColliding(environmentObjects, direction).HasValue)
+            this.timeStamp = actualTime;
+
+            if (this.IsColliding(player, direction))
+            {
+                if (this.firingEntity == player)
+                {
+                    this.position += new Vector3(direction, 0);
+                    return;
+                }
+
+                remove.Add(this);
+                player.Dead = true;
+                return;
+            }
+
+            var colliding = this.IsColliding(enemies, direction);
+            if (colliding.Translation.HasValue)
+            {
+                var hitEntity = enemies[enemies.IndexOf((Enemy)colliding.HitEntities[0])];
+                if (this.firingEntity == hitEntity)
+                {
+                    this.position += new Vector3(direction, 0);
+                    return;
+                }
+
+                remove.Add(this);
+                hitEntity.Dead = true;
+                return;
+            }
+
+            colliding = this.IsColliding(bosses, direction);
+            if (colliding.Translation.HasValue)
+            {
+                var hitEntity = bosses[bosses.IndexOf((Boss)colliding.HitEntities[0])];
+                if (this.firingEntity == hitEntity)
+                {
+                    this.position += new Vector3(direction, 0);
+                    return;
+                }
+
+                remove.Add(this);
+                hitEntity.Dead = true;
+                return;
+            }
+
+            if (this.IsColliding(environmentObjects, direction).Translation.HasValue)
             {
                 remove.Add(this);
             }
@@ -52,34 +101,6 @@ namespace Finline.Code.Game.Entities
             {
                 this.position += new Vector3(direction, 0);
             }
-
-            this.timeStamp = actualTime;
-        }
-
-        private Vector2? IsColliding(List<EnvironmentObject> environmentObjects, Vector2 direction)
-        {
-            Vector2? colliding = null;
-            var bound = new VertexPositionColor[1]
-                            {
-                                new VertexPositionColor(this.Position, Color.Blue)
-                            };
-            foreach (var obj in environmentObjects)
-            {
-                if (!((this.Position - obj.Position).LengthSquared() < 256))
-                {
-                    continue;
-                }
-
-                var collision = bound.PolygonCollision(obj.GetBound, direction);
-                if (!collision.WillIntersect)
-                {
-                    continue;
-                }
-
-                colliding = collision.MinimumTranslationVector;
-            }
-
-            return colliding;
         }
     }
 }

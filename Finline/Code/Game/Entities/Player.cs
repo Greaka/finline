@@ -24,10 +24,8 @@ namespace Finline.Code.Game.Entities
     public class Player : LivingEntity
     {
         private readonly float unitsPerSecond = 15;
-        Animation DeathAnimation = new Animation(4);
+        Animation deathAnimation = new Animation(4);
         private bool isMoving;
-        private bool dead = false;
-        Vector2 pos;
 
         
        
@@ -81,15 +79,15 @@ namespace Finline.Code.Game.Entities
             var modelLinks = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_linkesBein");
             var modelRechts = contentManager.Load<Model>(GuiElement.Ausgewaehlt.ToString());
 
-            var Death1 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death1");
-            var Death2 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death2");
-            var Death3 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death3");
-            var Death4 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death4");
+            var death1 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death1");
+            var death2 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death2");
+            var death3 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death3");
+            var death4 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death4");
 
-            DeathAnimation.Add(Death1);
-            DeathAnimation.Add(Death2);
-            DeathAnimation.Add(Death3);
-            DeathAnimation.Add(Death4);
+            this.deathAnimation.Add(death1);
+            this.deathAnimation.Add(death2);
+            this.deathAnimation.Add(death3);
+            this.deathAnimation.Add(death4);
 
             this.ModelAnimation.Add(modelRechts);
             this.ModelAnimation.Add(modelStand);
@@ -111,19 +109,22 @@ namespace Finline.Code.Game.Entities
             pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond;
             var collisionResult = this.IsColliding(environmentObjects, pos);
             this.position += new Vector3(pos, 0);
-        //  getPlayerPosition();
-            if (collisionResult.HasValue)
+            if (collisionResult.Translation.HasValue)
             {
-                this.position += new Vector3(collisionResult.Value, 0);
+                this.position += new Vector3(collisionResult.Translation.Value, 0);
             }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.N)) dead = true;
-            if (Keyboard.GetState().IsKeyDown(Keys.M)) dead = false;
         }
 
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
-            if (dead == false) base.Draw(viewMatrix, projectionMatrix, this.isMoving ? this.ModelAnimation.CurrentModel : this.Model); else base.Draw(viewMatrix, projectionMatrix, this.DeathAnimation.CurrentModel);
+            if (this.Dead == false)
+            {
+                base.Draw(viewMatrix, projectionMatrix, this.isMoving ? this.ModelAnimation.CurrentModel : this.Model);
+            }
+            else
+            {
+                base.Draw(viewMatrix, projectionMatrix, this.deathAnimation.CurrentModel);
+            }
         }
 
         public Vector3 getPlayerPosition()

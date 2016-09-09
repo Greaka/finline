@@ -149,10 +149,10 @@
                 this.GraphicsDevice, 
                 out this.moveDirection, 
                 ref this.shootDirection, 
-                this.player.Position, 
+                this.player, 
                 this.projectionMatrix, 
                 this.viewMatrix);
-            this.projectileHandler.Update(this.environmentObjects);
+            this.projectileHandler.Update(this.player, this.bosses, this.enemies, this.environmentObjects);
 
             this.enemyControls.Update(this.enemies, this.player.Position);
             this.bossControls.Update(this.bosses, this.player.Position);
@@ -456,7 +456,7 @@
 
 
 
-#region 334
+
             for (var i = 32; i > 15; i -= 8)
             {
                 this.LevelObjects(i, 60, -1, GameConstants.EnvObjects.chairDown);
@@ -465,7 +465,7 @@
                 this.LevelObjects(i, 74, -1, GameConstants.EnvObjects.deskDown);
             }
 
-#endregion
+
 
 #region 333
             for (var i = 25.1f; i < 34; i += 4)

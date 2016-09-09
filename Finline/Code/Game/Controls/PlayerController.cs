@@ -11,9 +11,11 @@ using Timer = System.Timers.Timer;
 
 namespace Finline.Code.Game.Controls
 {
+    using Finline.Code.Game.Entities;
+
     public class PlayerController
     {
-        public delegate void Shot(Vector3 position, Vector2 direction, int index);
+        public delegate void Shot(Entity firedFrom, Vector2 direction, int index);
         public event Shot Shoot;
 
         private readonly Timer aTimer;
@@ -39,7 +41,7 @@ namespace Finline.Code.Game.Controls
         public void Update(GraphicsDevice device, 
             out Vector2 moveDirection, 
             ref Vector2 shootDirection, 
-            Vector3 playerPosition, 
+            Player player, 
             Matrix projectionMatrix, 
             Matrix viewMatrix)
         {
@@ -53,7 +55,7 @@ namespace Finline.Code.Game.Controls
                     shootDirection = inputstate.ThumbSticks.Right.AddPerspective();
                 }
 
-                this.Shootroutine(inputstate.Triggers.Right > Trigger, shootDirection, playerPosition, 0);
+                this.Shootroutine(inputstate.Triggers.Right > Trigger, shootDirection, player, 0);
             }
             else
             {
@@ -70,14 +72,14 @@ namespace Finline.Code.Game.Controls
                 moveDirection = moveDir.AddPerspective();
                 
                 var shootDir = MousePosition(device, projectionMatrix, viewMatrix).Get2D()
-                    - playerPosition.Get2D();
+                    - player.Position.Get2D();
                 if (shootDir.Length() > 0)
                 {
                     shootDir.Normalize();
                     shootDirection = shootDir;
                 }
 
-                this.Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed, shootDirection, playerPosition, 0);
+                this.Shootroutine(Mouse.GetState().LeftButton == ButtonState.Pressed, shootDirection, player, 0);
             }
         }
 
@@ -111,14 +113,14 @@ namespace Finline.Code.Game.Controls
             return nearWorldPoint + direction * ((plane.D - v1D) / angle);
         }
 
-        private void Shootroutine(bool shootPressed, Vector2 shootDirection, Vector3 playerPosition, int index)
+        private void Shootroutine(bool shootPressed, Vector2 shootDirection, Player player, int index)
         {
             Action beforeShoot = () =>
             {
                 if (!shootPressed) return;
                 this.alreadyShot = true;
                 this.shootable = false;
-                this.Shoot?.Invoke(playerPosition, shootDirection, index);
+                this.Shoot?.Invoke(player, shootDirection, index);
             };
 
             if (!this.shootable) return;
