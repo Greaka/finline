@@ -58,7 +58,7 @@ namespace Finline.Code.DebugUtils
 
         public void Draw(GameTime gameTime, Matrix projectionMatrix, Matrix viewMatrix)
         {
-            this.spriteBatch.Begin();
+            /*this.spriteBatch.Begin();
 
             const float Multiplikator = 7;
 
@@ -91,7 +91,7 @@ namespace Finline.Code.DebugUtils
                 this.DrawLine(this.spriteBatch, p1, p2, Color.LimeGreen);
             }
 
-            this.spriteBatch.End();
+            this.spriteBatch.End();*/
             var pbound = this.player.GetBound;
 
             // Initialize an array of indices of type short.
