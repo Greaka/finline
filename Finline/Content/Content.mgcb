@@ -651,7 +651,7 @@
 /processorParam:RotationX=270
 /processorParam:RotationY=270
 /processorParam:RotationZ=270
-/processorParam:Scale=2.5
+/processorParam:Scale=2.27
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:student.fbx
@@ -1188,7 +1188,7 @@
 /processorParam:RotationX=270
 /processorParam:RotationY=270
 /processorParam:RotationZ=270
-/processorParam:Scale=2.5
+/processorParam:Scale=2.27
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:student_linkesBein.fbx
@@ -1207,7 +1207,7 @@
 /processorParam:RotationX=270
 /processorParam:RotationY=270
 /processorParam:RotationZ=270
-/processorParam:Scale=2.5
+/processorParam:Scale=2.27
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:student_stand.fbx
@@ -1399,10 +1399,10 @@
 /processorParam:PremultiplyTextureAlpha=True
 /processorParam:PremultiplyVertexColors=True
 /processorParam:ResizeTexturesToPowerOfTwo=False
-/processorParam:RotationX=0
-/processorParam:RotationY=0
-/processorParam:RotationZ=0
-/processorParam:Scale=1
+/processorParam:RotationX=270
+/processorParam:RotationY=90
+/processorParam:RotationZ=90
+/processorParam:Scale=0.25
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:podest.fbx
@@ -1516,7 +1516,7 @@
 /processorParam:RotationX=270
 /processorParam:RotationY=270
 /processorParam:RotationZ=270
-/processorParam:Scale=2.5
+/processorParam:Scale=2.27
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:student_Death1.fbx
@@ -1535,7 +1535,7 @@
 /processorParam:RotationX=270
 /processorParam:RotationY=270
 /processorParam:RotationZ=270
-/processorParam:Scale=2.5
+/processorParam:Scale=2.27
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:student_Death2.fbx
@@ -1554,7 +1554,7 @@
 /processorParam:RotationX=270
 /processorParam:RotationY=270
 /processorParam:RotationZ=270
-/processorParam:Scale=2.5
+/processorParam:Scale=2.27
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:student_Death3.fbx
@@ -1573,7 +1573,7 @@
 /processorParam:RotationX=270
 /processorParam:RotationY=270
 /processorParam:RotationZ=270
-/processorParam:Scale=2.5
+/processorParam:Scale=2.27
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:student_Death4.fbx

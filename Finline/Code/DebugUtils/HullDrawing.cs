@@ -58,40 +58,40 @@ namespace Finline.Code.DebugUtils
 
         public void Draw(GameTime gameTime, Matrix projectionMatrix, Matrix viewMatrix)
         {
-            this.spriteBatch.Begin();
+            //this.spriteBatch.Begin();
 
-            const float Multiplikator = 7;
+            //const float Multiplikator = 7;
 
-            foreach (var entity in this.enemies)
-            {
-                for (var i = 0; i < entity.GetBound.Length; i++)
-                {
-                    var p1 = entity.GetBound[i].Position.Get2D() * Multiplikator;
-                    var p2 = (i + 1 >= entity.GetBound.Length ? entity.GetBound[0] : entity.GetBound[i + 1]).Position.Get2D() * Multiplikator;
-                    this.DrawLine(this.spriteBatch, p1, p2, Color.Red);
-                }
-            }
+            //foreach (var entity in this.enemies)
+            //{
+            //    for (var i = 0; i < entity.GetBound.Length; i++)
+            //    {
+            //        var p1 = entity.GetBound[i].Position.Get2D() * Multiplikator;
+            //        var p2 = (i + 1 >= entity.GetBound.Length ? entity.GetBound[0] : entity.GetBound[i + 1]).Position.Get2D() * Multiplikator;
+            //        this.DrawLine(this.spriteBatch, p1, p2, Color.Red);
+            //    }
+            //}
 
-            foreach (var entity in this.env)
-            {
-                for (var i = 0; i < entity.GetBound.Length; i++)
-                {
-                    var p1 = entity.GetBound[i].Position.Get2D() * Multiplikator;
-                    var p2 = (i + 1 >= entity.GetBound.Length ? entity.GetBound[0] : entity.GetBound[i + 1]).Position.Get2D() * Multiplikator;
-                    this.DrawLine(this.spriteBatch, p1, p2, Color.White);
-                }
-            }
+            //foreach (var entity in this.env)
+            //{
+            //    for (var i = 0; i < entity.GetBound.Length; i++)
+            //    {
+            //        var p1 = entity.GetBound[i].Position.Get2D() * Multiplikator;
+            //        var p2 = (i + 1 >= entity.GetBound.Length ? entity.GetBound[0] : entity.GetBound[i + 1]).Position.Get2D() * Multiplikator;
+            //        this.DrawLine(this.spriteBatch, p1, p2, Color.White);
+            //    }
+            //}
 
-            for (var i = 0; i < this.player.GetBound.Length; i++)
-            {
-                var p1 = this.player.GetBound[i].Position.Get2D() * Multiplikator;
-                var p2 =
-                    (i + 1 >= this.player.GetBound.Length ? this.player.GetBound[0] : this.player.GetBound[i + 1])
-                        .Position.Get2D() * Multiplikator;
-                this.DrawLine(this.spriteBatch, p1, p2, Color.LimeGreen);
-            }
+            //for (var i = 0; i < this.player.GetBound.Length; i++)
+            //{
+            //    var p1 = this.player.GetBound[i].Position.Get2D() * Multiplikator;
+            //    var p2 =
+            //        (i + 1 >= this.player.GetBound.Length ? this.player.GetBound[0] : this.player.GetBound[i + 1])
+            //            .Position.Get2D() * Multiplikator;
+            //    this.DrawLine(this.spriteBatch, p1, p2, Color.LimeGreen);
+            //}
 
-            this.spriteBatch.End();
+            //this.spriteBatch.End();
             var pbound = this.player.GetBound;
 
             // Initialize an array of indices of type short.
