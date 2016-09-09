@@ -20,6 +20,7 @@ namespace Finline.Code.Game.Entities
             {
                 return base.Model;
             }
+
             set
             {
                 this.model = value;
