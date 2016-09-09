@@ -23,6 +23,13 @@ namespace Finline.Code.Utility
     /// </summary>
     public static class Collision
     {
+        public class CollisionResult
+        {
+            public Vector2? Translation = null;
+
+            public List<Entity> HitEntities = new List<Entity>();
+        }
+
         private const double Tolerance = 1e-10;
 
         /// <summary>
@@ -40,9 +47,9 @@ namespace Finline.Code.Utility
         /// <returns>
         /// true or false for colliding.
         /// </returns>
-        public static Vector2? IsColliding(this Entity entity, List<Entity> environmentObjects, Vector2 direction)
+        private static CollisionResult IsColliding(this Entity entity, List<Entity> environmentObjects, Vector2 direction)
         {
-            Vector2? colliding = null;
+            var colliding = new CollisionResult();
             foreach (var obj in environmentObjects)
             {
                 if (!((entity.Position - obj.Position).LengthSquared() < 64))
@@ -56,20 +63,26 @@ namespace Finline.Code.Utility
                     continue;
                 }
 
-                colliding = colliding != null ? colliding + collision.MinimumTranslationVector : collision.MinimumTranslationVector;
+                colliding.HitEntities.Add(obj);
+                colliding.Translation = colliding.Translation != null ? colliding.Translation + collision.MinimumTranslationVector : collision.MinimumTranslationVector;
             }
 
             return colliding;
         }
 
-        public static Vector2? IsColliding(this Entity entity, List<EnvironmentObject> environmentObjects, Vector2 direction)
+        public static CollisionResult IsColliding(this Entity entity, List<EnvironmentObject> environmentObjects, Vector2 direction)
         {
             return entity.IsColliding(environmentObjects.Select(obj => (Entity)obj).ToList(), direction);
         }
 
-        public static Vector2? IsColliding(this Entity entity, List<Enemy> environmentObjects, Vector2 direction)
+        public static CollisionResult IsColliding(this Entity entity, List<Boss> bosses, Vector2 direction)
         {
-            return entity.IsColliding(environmentObjects.Select(obj => (Entity)obj).ToList(), direction);
+            return entity.IsColliding(bosses.Select(obj => (Entity)obj).ToList(), direction);
+        }
+
+        public static CollisionResult IsColliding(this Entity entity, List<Enemy> enemies, Vector2 direction)
+        {
+            return entity.IsColliding(enemies.Select(obj => (Entity)obj).ToList(), direction);
         }
 
         public static bool IsColliding(this Entity entity, Player player, Vector2 direction)

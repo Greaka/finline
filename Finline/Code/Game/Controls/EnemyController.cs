@@ -12,7 +12,7 @@ namespace Finline.Code.Game.Controls
 
     public class EnemyController
     {
-        public delegate void Shot(Vector3 position, Vector2 direction, int index);
+        public delegate void Shot(Entity firedFrom, Vector2 direction, int index);
         public event Shot Shoot;
 
         private readonly Timer aTimer;
@@ -36,15 +36,15 @@ namespace Finline.Code.Game.Controls
             if (this.shootable != true) return;
             foreach (var enemy in enemies)
             {
-                if (enemy.Shoot) this.Shootroutine(enemy.Position, playerPosition, 1);
+                if (enemy.Shoot) this.Shootroutine(enemy, playerPosition, 1);
             }
 
             this.shootable = false;
         }
 
-        private void Shootroutine(Vector3 enemypos, Vector3 playerPosition, int index)
+        private void Shootroutine(Entity firedFrom, Vector3 playerPosition, int index)
         {
-            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos).Get2D(), index);
+            this.Shoot?.Invoke(firedFrom, (playerPosition - firedFrom.Position).Get2D(), index);
         }
     }
 }

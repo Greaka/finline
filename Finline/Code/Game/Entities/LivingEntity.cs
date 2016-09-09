@@ -10,6 +10,8 @@ namespace Finline.Code.Game.Entities
 
     public class LivingEntity : Entity
     {
+        public bool Dead { protected get; set; }
+
         protected Animation ModelAnimation;
 
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)

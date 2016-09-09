@@ -56,9 +56,9 @@ namespace Finline.Code.Game.Controls
         /// <summary>
         /// Creates new <see cref="Projectile"/>, adds it to the Projectile list and binds his destructor.
         /// </summary>
-        public void Shoot(Vector3 position, Vector2 direction, int index)
+        public void Shoot(Entity firedFrom, Vector2 direction, int index)
         {
-            var projectile = new Projectile(this.stopwatch.Elapsed, this.content, position, direction);
+            var projectile = new Projectile(this.stopwatch.Elapsed, this.content, firedFrom, direction);
             this.projectiles.Add(projectile);
             this.sounds.SoundEffectPlay(index);
 
@@ -67,12 +67,12 @@ namespace Finline.Code.Game.Controls
         /// <summary>
         /// Update for Projectiles.
         /// </summary>
-        public void Update(Player player, List<Enemy> enemies, List<EnvironmentObject> environmentObjects)
+        public void Update(Player player, List<Boss> bosses, List<Enemy> enemies, List<EnvironmentObject> environmentObjects)
         {
             var remove = new List<Projectile>();
             foreach (var outch in this.projectiles)
             {
-                outch.Update(this.stopwatch.Elapsed, player, enemies, environmentObjects, remove);
+                outch.Update(this.stopwatch.Elapsed, player, bosses, enemies, environmentObjects, remove);
             }
 
             foreach (var index in remove)

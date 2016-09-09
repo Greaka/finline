@@ -29,10 +29,10 @@ namespace Finline.Code.Game.Entities
                 switch (this.Type)
                 {
                         case GameConstants.EnvObjects.wallV:
-                        sphere = EnvironmentObject.VerschiebeBound(sphere, new Vector2(-1.6f, 0.2f));
+                        sphere = VerschiebeBound(sphere, new Vector2(-1.6f, 0.2f));
                         break;
                         case GameConstants.EnvObjects.wallH:
-                        sphere = EnvironmentObject.VerschiebeBound(sphere, new Vector2(0, -2f));
+                        sphere = VerschiebeBound(sphere, new Vector2(0, -2f));
                         break;
                 }
 
