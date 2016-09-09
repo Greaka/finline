@@ -19,7 +19,7 @@ namespace Finline.Code.Game.Controls
 
         private bool shootable;
 
-        private const float ShotsPerSecond = 1;
+        private const float ShotsPerSecond = 2;
 
         public EnemyController()
         {
