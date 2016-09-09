@@ -106,7 +106,7 @@ namespace Finline.Code.Game.Entities
 
             this.isMoving = !moveDirection.Equals(Vector2.Zero);
 
-            pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond;
+            var pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond;
             var collisionResult = this.IsColliding(environmentObjects, pos);
             this.position += new Vector3(pos, 0);
             if (collisionResult.Translation.HasValue)
