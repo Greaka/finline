@@ -149,7 +149,7 @@
                 this.player.Position, 
                 this.projectionMatrix, 
                 this.viewMatrix);
-            this.projectileHandler.Update(this.environmentObjects);
+            this.projectileHandler.Update(this.player, this.enemies, this.environmentObjects);
 
             this.enemyControls.Update(this.enemies, this.player.Position);
             this.bossControls.Update(this.bosses, this.player.Position);

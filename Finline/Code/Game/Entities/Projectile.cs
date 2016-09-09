@@ -40,10 +40,21 @@ namespace Finline.Code.Game.Entities
             this.unitsPerSecond = 60;
         }
 
-        public void Update(TimeSpan actualTime, List<EnvironmentObject> environmentObjects, List<Projectile> remove)
+        public void Update(TimeSpan actualTime, Player player, List<Enemy> enemies, List<EnvironmentObject> environmentObjects, List<Projectile> remove)
         {
             var elapsedTime = (actualTime - this.timeStamp).TotalSeconds;
             var direction = this.GetViewDirection() * this.unitsPerSecond * (float)elapsedTime;
+
+            if (this.IsColliding(player, direction))
+            {
+                // TODO: Player töten
+            }
+
+            if (this.IsColliding(enemies, direction).HasValue)
+            {
+                // TODO: Enemy töten
+            }
+
             if (this.IsColliding(environmentObjects, direction).HasValue)
             {
                 remove.Add(this);
@@ -56,7 +67,7 @@ namespace Finline.Code.Game.Entities
             this.timeStamp = actualTime;
         }
 
-        private Vector2? IsColliding(List<EnvironmentObject> environmentObjects, Vector2 direction)
+        private Vector2? IsColliding(List<Entity> environmentObjects, Vector2 direction)
         {
             Vector2? colliding = null;
             var bound = new VertexPositionColor[1]

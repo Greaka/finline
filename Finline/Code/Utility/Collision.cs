@@ -40,7 +40,7 @@ namespace Finline.Code.Utility
         /// <returns>
         /// true or false for colliding.
         /// </returns>
-        public static Vector2? IsColliding(this Entity entity, List<EnvironmentObject> environmentObjects, Vector2 direction)
+        public static Vector2? IsColliding(this Entity entity, List<Entity> environmentObjects, Vector2 direction)
         {
             Vector2? colliding = null;
             foreach (var obj in environmentObjects)
@@ -60,6 +60,21 @@ namespace Finline.Code.Utility
             }
 
             return colliding;
+        }
+
+        public static Vector2? IsColliding(this Entity entity, List<EnvironmentObject> environmentObjects, Vector2 direction)
+        {
+            return entity.IsColliding(environmentObjects.Select(obj => (Entity)obj).ToList(), direction);
+        }
+
+        public static Vector2? IsColliding(this Entity entity, List<Enemy> environmentObjects, Vector2 direction)
+        {
+            return entity.IsColliding(environmentObjects.Select(obj => (Entity)obj).ToList(), direction);
+        }
+
+        public static bool IsColliding(this Entity entity, Player player, Vector2 direction)
+        {
+            return entity.GetBound.PolygonCollision(player.GetBound, direction).WillIntersect;
         }
 
         public static List<Vector3> GetVerticies(this Model modModel)
