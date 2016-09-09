@@ -10,7 +10,7 @@ namespace Finline.Code.Game.Entities
 {
     using System.Collections.Generic;
 
-    public class Projectile : Entity
+    public sealed class Projectile : Entity
     {
         private TimeSpan timeStamp;
         private readonly float unitsPerSecond;
@@ -38,6 +38,7 @@ namespace Finline.Code.Game.Entities
             this.Angle = direction.GetAngle();
             this.timeStamp = actualTime;
             this.unitsPerSecond = 60;
+            this.Bound = new List<Vector3>() { Vector3.Zero };
         }
 
         public void Update(TimeSpan actualTime, Player player, List<Enemy> enemies, List<EnvironmentObject> environmentObjects, List<Projectile> remove)
@@ -65,32 +66,6 @@ namespace Finline.Code.Game.Entities
             }
 
             this.timeStamp = actualTime;
-        }
-
-        private Vector2? IsColliding(List<Entity> environmentObjects, Vector2 direction)
-        {
-            Vector2? colliding = null;
-            var bound = new VertexPositionColor[1]
-                            {
-                                new VertexPositionColor(this.Position, Color.Blue)
-                            };
-            foreach (var obj in environmentObjects)
-            {
-                if (!((this.Position - obj.Position).LengthSquared() < 256))
-                {
-                    continue;
-                }
-
-                var collision = bound.PolygonCollision(obj.GetBound, direction);
-                if (!collision.WillIntersect)
-                {
-                    continue;
-                }
-
-                colliding = collision.MinimumTranslationVector;
-            }
-
-            return colliding;
         }
     }
 }
