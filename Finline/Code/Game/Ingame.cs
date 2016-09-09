@@ -113,9 +113,8 @@
         {
             this.ground.LoadContent(this.Game.GraphicsDevice, this.Game.Content);
 
-            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(8, -15, 0)));
-            //this.bosses.Add(new Boss(this.Game.Content, new Vector3(12, -10, 0)));
-
+            // this.enemies.Add(new Enemy(this.Game.Content, new Vector3(8, -15, 0)));
+            // this.bosses.Add(new Boss(this.Game.Content, new Vector3(12, -10, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(25, 5, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 27, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 27, 0)));
@@ -434,7 +433,7 @@
             
 
 
-#region 335
+
             for (var i = 32; i > 15; i -= 4)
             {
                 this.LevelObjects(i, 33, -1, GameConstants.EnvObjects.deskRight);
@@ -449,7 +448,7 @@
                 this.LevelObjects(i, 47, -1, GameConstants.EnvObjects.chairRight);
             }
 
-#endregion
+
 
 #region 334
             for (var i = 32; i > 15; i -= 8)
@@ -738,8 +737,8 @@
         {
             this.nonenvironmentObjects.Add(
                     new NonEnvironmentObject(
-                    this.Game.Content,
-                    new Vector3(x, y, z),
+                    this.Game.Content, 
+                    new Vector3(x, y, z), 
                     model));
         }
 

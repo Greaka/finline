@@ -99,7 +99,7 @@ namespace Finline.Code.GameState
         /// </summary>
         protected override void Initialize()
         {
-            this.nextGameState = EGameState.MainMenu;
+            this.nextGameState = EGameState.InGame;
             base.Initialize();
         }
 
@@ -143,10 +143,10 @@ namespace Finline.Code.GameState
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 40);
             
 
-#region LoadingMusic
+
 
             this.sounds.LoadContent(this.Content);
-#endregion
+
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Finline.Code.Game.Entities
     {
         protected Model model;
         protected Vector3 position;
-        protected float Angle;
+        protected float Angle { get; set; }
 
         protected virtual Model Model
         {
@@ -29,13 +29,20 @@ namespace Finline.Code.Game.Entities
             }
         }
 
-        protected IList<Vector3> Bound { private get; set; }
+        protected static IList<Vector3> VerschiebeBound(IList<Vector3> list, Vector2 schiebung)
+        {
+            list = list.Select(vec => vec + new Vector3(schiebung, 0)).ToList();
+
+            return list;
+        }
+
+        protected IList<Vector3> Bound { get; set; }
 
         public Vector3 Position => this.position;
 
         public Model GetModel => this.Model;
 
-        public VertexPositionColor[] GetBound
+        public virtual VertexPositionColor[] GetBound
         {
             get
             {
@@ -74,6 +81,7 @@ namespace Finline.Code.Game.Entities
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
+
                     // effect.FogEnabled = true;                            //Nebel
                     // effect.FogColor = Color.Gray.ToVector3();
                     // effect.FogStart = 15;

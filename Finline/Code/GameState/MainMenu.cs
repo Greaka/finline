@@ -64,11 +64,11 @@ namespace Finline.Code.GameState
 
             
 
-#region Controls           // here are the elements in the state Option
+
             this.guiElements[EMenuState.Controls].Add(new GuiElement("ControlScreen"));
             this.guiElements[EMenuState.Controls].Add(new GuiElement("Back2MainMenu"));
             this.guiElements[EMenuState.Controls].Add(new GuiElement("LogoTransparent"));
-            #endregion
+            
 
 #region Records            // here are the elements in the state Records
             this.guiElements[EMenuState.Records].Add(new GuiElement("RecordTexture"));
@@ -118,10 +118,10 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "ControlsButton").MoveElement(-70, 80);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back2MainMenu").MoveElement(130, 80); // move the "Back_to_MainMenu" button down in y-direction
             
-#region Moved Elements From Controls
+
             this.guiElements[EMenuState.Controls].Find(x => x.AssetName == "ControlScreen").MoveElement(50, -150);
             this.guiElements[EMenuState.Controls].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 80); // move the "Back_to_MainMenu" button down in y-direction
-            #endregion
+            
 #region Moved Elements From Records
             this.guiElements[EMenuState.Records].Find(x => x.AssetName == "RecordTexture").MoveElement(0, -265); // move the recordtexture up in y-direction
             this.guiElements[EMenuState.Records].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 70); // move the button down in y-direction
@@ -193,7 +193,7 @@ namespace Finline.Code.GameState
             {
                 this.menuState = EMenuState.MainMenu;
             }
-#region clickable Buttons
+
             switch (element)
            {
                case "NewGame":
@@ -224,7 +224,7 @@ namespace Finline.Code.GameState
                    this.menuState = EMenuState.CharacterScreen;
                    break;
             }
-#endregion
+
         }
 
         public event GetIngame GoIngame;
@@ -246,9 +246,9 @@ namespace Finline.Code.GameState
 
             Records, 
 
-            Credits,
+            Credits, 
 
-            GameOver,
+            GameOver, 
 
 
         }

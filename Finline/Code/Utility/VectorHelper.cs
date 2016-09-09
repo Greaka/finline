@@ -41,6 +41,30 @@ namespace Finline.Code.Utility
             return me;
         }
 
+        public static Vector2 RotateOrigin(this Vector2 vec, Vector2 origin, float angle)
+        {
+            var s = (float)Math.Sin(angle);
+            var c = (float)Math.Cos(angle);
+
+            // translate point back to origin:
+            vec.X -= origin.X;
+            vec.Y -= origin.Y;
+            
+            var xnew = vec.X * c - vec.Y * s;
+            var ynew = vec.X * s + vec.Y * c;
+
+            // translate point back:
+            vec.X = xnew + origin.X;
+            vec.Y = ynew + origin.Y;
+
+            return vec;
+        }
+
+        public static Vector3 RotateOrigin(this Vector3 vec, Vector3 origin, float angle)
+        {
+            return new Vector3(vec.Get2D().RotateOrigin(origin.Get2D(), angle), vec.Z);
+        }
+
         public static float GetAngle(this Vector2 me)
         {
             if (!(me.Length() > 0)) return 0;

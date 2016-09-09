@@ -7,16 +7,15 @@ namespace Finline.Code.Game.Entities
 {
     public class NonEnvironmentObject : Entity
     {
-        private readonly GameConstants.NonEnvObjects type;
         private readonly bool orbit = false;
         public bool Visible { get; set; }
 
-        public GameConstants.NonEnvObjects Type => this.type;
+        public GameConstants.NonEnvObjects Type { get; }
 
         public NonEnvironmentObject(ContentManager contentManager, Vector3 position, GameConstants.NonEnvObjects model)
         {
             this.Visible = true;
-            this.type = model;
+            this.Type = model;
 
             this.Model = contentManager.Load<Model>(model.ToString());
             this.position = position;

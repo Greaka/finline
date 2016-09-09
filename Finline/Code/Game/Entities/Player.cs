@@ -34,11 +34,27 @@ namespace Finline.Code.Game.Entities
             {
                 return base.Model;
             }
+
             set
             {
                 this.model = value;
                 var sphere = this.Model.GetVerticies().Select(vec => vec * 0.14f).ToList().GetHull();
                 this.Bound = sphere;
+            }
+        }
+
+        public override VertexPositionColor[] GetBound
+        {
+            get
+            {
+                var list = new VertexPositionColor[this.Bound.Count];
+                for (var i = 0; i < list.Length; ++i)
+                {
+                    list[i].Position = (this.Bound[i] + this.Position).RotateOrigin(this.Position, this.Angle);
+                    list[i].Color = Color.GreenYellow;
+                }
+
+                return list;
             }
         }
 
@@ -53,8 +69,8 @@ namespace Finline.Code.Game.Entities
         {
             this.ModelAnimation = new Animation(4);
             this.position = new Vector3(4, 4, -0.5f); // Standard
-           // Animation DeathAnimation = new Animation(4);
-            
+
+            // Animation DeathAnimation = new Animation(4);
 
             // this.position = new Vector3(90, 240, 0);   // Hörsaal
             // this.position = new Vector3(26, 90, 0);      // 333
@@ -78,7 +94,6 @@ namespace Finline.Code.Game.Entities
             this.ModelAnimation.Add(modelStand);
 
             this.Model = modelStand;
-
         }
 
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection, List<EnvironmentObject> environmentObjects)
@@ -94,6 +109,7 @@ namespace Finline.Code.Game.Entities
             {
                 this.position += new Vector3(collisionResult.Value, 0);
             }
+
             if (Keyboard.GetState().IsKeyDown(Keys.N)) dead = true;
             if (Keyboard.GetState().IsKeyDown(Keys.M)) dead = false;
         }

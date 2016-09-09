@@ -25,7 +25,7 @@ namespace Finline.Code.Game.Controls
         {
             this.aTimer = new Timer
             {
-                Interval = 1000 / ShotsPerSecond,
+                Interval = 1000 / ShotsPerSecond, 
                 Enabled = true
             };
             this.aTimer.Elapsed += (sender, args) => { this.shootable = true; };
@@ -45,7 +45,7 @@ namespace Finline.Code.Game.Controls
         private void Shootroutine(Vector3 enemypos, Vector3 playerPosition, int index)
         {
             this.Shoot?.Invoke(enemypos, (playerPosition - enemypos).Get2D(), index);
-            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos + new Vector3(2 ,2 ,0)).Get2D(), index);
+            this.Shoot?.Invoke(enemypos, (playerPosition - enemypos + new Vector3(2 , 2 , 0)).Get2D(), index);
             this.Shoot?.Invoke(enemypos, (playerPosition - enemypos - new Vector3(2, 2, 0)).Get2D(), index);
         }
     }
