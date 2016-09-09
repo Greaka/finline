@@ -88,9 +88,9 @@ namespace Finline.Code.Game.Entities
                     effect.FogEnd = 30;
 
                     // effect.LightingEnabled = true;  //Turn on the lighting subsystem.
-                    // effect.DirectionalLight0.DiffuseColor = new Vector3(0.5f, 0, 0);  // a red light
-                    // effect.DirectionalLight0.Direction = new Vector3(1, 0, 0);     // coming along the x-axis
-                    // effect.DirectionalLight0.SpecularColor = new Vector3(0, 1, 0);   // with green highlights
+                     effect.DirectionalLight0.DiffuseColor = new Vector3(0.3f, 0, 0);  // a red light
+                     effect.DirectionalLight0.Direction = new Vector3(1, 1, 1);     // coming along the x-axis
+                     effect.DirectionalLight0.SpecularColor = new Vector3(0, 0.3f, 0);   // with green highlights
                     // effect.AmbientLightColor = new Vector3(0.2f, 0.2f, 0.2f);    // Add some overall ambient light.
                     effect.PreferPerPixelLighting = true;
                     effect.World = worldMatrix;

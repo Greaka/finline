@@ -34,13 +34,13 @@
 
         public void Initialize(ContentManager contentManager)
         {
-            this.Model = contentManager.Load<Model>("weapon");
+            this.Model = contentManager.Load<Model>("gun");
         }
 
         public void Update()
         {
             this.SetViewDirection(this.player.GetViewDirection());
-            var offset = new Vector3(0.5f, 1, 2);
+            var offset = new Vector3(0.5f, 1, 2.3f);
             this.position = this.player.Position + offset.Rotate2D(this.Angle);
         }
 

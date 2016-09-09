@@ -17,6 +17,8 @@ namespace Finline.Code.Game.Entities
 
         private Entity firingEntity;
 
+        Sounds sounds = new Sounds();
+
         /// <summary>
         /// Gets or sets the model.
         /// </summary>
@@ -33,15 +35,17 @@ namespace Finline.Code.Game.Entities
             }
         }
 
-        public Projectile(TimeSpan actualTime, ContentManager content, Entity firedFrom, Vector2 direction)
+        public Projectile(TimeSpan actualTime, ContentManager content, Entity firedFrom, Vector2 direction, int index)
         {
             this.firingEntity = firedFrom;
-            this.Model = content.Load<Model>("ball");
+            if (index == 0) this.Model = content.Load<Model>("ball");
+            else this.Model = content.Load<Model>("blobball");
             this.position = new Vector3(firedFrom.Position.X, firedFrom.Position.Y, 3f);
             this.Angle = direction.GetAngle();
             this.timeStamp = actualTime;
             this.unitsPerSecond = 60;
             this.Bound = new List<Vector3>() { Vector3.Zero };
+            this.sounds.LoadContent(content);
         }
 
         public void Update(TimeSpan actualTime, Player player, List<Boss> bosses, List<Enemy> enemies, List<EnvironmentObject> environmentObjects, List<Projectile> remove)
@@ -60,6 +64,7 @@ namespace Finline.Code.Game.Entities
 
                 remove.Add(this);
                 player.Dead = true;
+                this.sounds.SoundEffectPlay(2);
                 return;
             }
 
@@ -75,6 +80,7 @@ namespace Finline.Code.Game.Entities
 
                 remove.Add(this);
                 hitEntity.Dead = true;
+                this.sounds.SoundEffectPlay(3);
                 return;
             }
 
@@ -90,6 +96,7 @@ namespace Finline.Code.Game.Entities
 
                 remove.Add(this);
                 hitEntity.Dead = true;
+                this.sounds.SoundEffectPlay(3); this.sounds.SoundEffectPlay(3);
                 return;
             }
 

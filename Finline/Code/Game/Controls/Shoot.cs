@@ -58,7 +58,7 @@ namespace Finline.Code.Game.Controls
         /// </summary>
         public void Shoot(Entity firedFrom, Vector2 direction, int index)
         {
-            var projectile = new Projectile(this.stopwatch.Elapsed, this.content, firedFrom, direction);
+            var projectile = new Projectile(this.stopwatch.Elapsed, this.content, firedFrom, direction, index);
             this.projectiles.Add(projectile);
             this.sounds.SoundEffectPlay(index);
         }
