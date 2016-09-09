@@ -12,8 +12,8 @@
 
     public class Weapon : Entity
     {
-        private readonly float unitsPerSecond = 15;
-        Player player = new Player();
+        private readonly Player player;
+
         protected override Model Model
         {
             get
@@ -27,27 +27,26 @@
             }
         }
 
+        public Weapon(Player player)
+        {
+            this.player = player;
+        }
+
         public void Initialize(ContentManager contentManager)
         {
             this.Model = contentManager.Load<Model>("weapon");
-            this.position = new Vector3(4, 4, -0.5f);
         }
 
-        public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection)
+        public void Update(Vector2 shootDirection)
         {
+            var offset = new Vector3(0.5f, 1, 2);
+            this.position = this.player.Position + offset.Rotate2D(shootDirection.GetAngle());
             this.SetViewDirection(shootDirection);
-            var pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond;
-            this.position += player.getPlayerPosition(); //new Vector3(pos, 0);
-
-                    //bekomme nur (0,0,0) von getPlayerPosition zurück
-
-
         }
 
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
           base.Draw(viewMatrix, projectionMatrix, this.Model);
         }
-
     }
 }
