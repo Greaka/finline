@@ -694,13 +694,17 @@
 #region Loading Poster
 
             this.LevelObjects(6.99f, 5, 2, GameConstants.EnvObjects.mirkopir);
-            this.LevelObjects2(6.7f, 10, 2, GameConstants.NonEnvObjects.poster_cat);
+            this.LevelObjects2(6.7f, 10, 2, GameConstants.NonEnvObjects.poster_vader);
             this.LevelObjects2(6.7f, 25, 2, GameConstants.NonEnvObjects.poster_deadpool);
             this.LevelObjects2(6.7f, 32, 2, GameConstants.NonEnvObjects.poster_zombie);
             this.LevelObjects2(6.7f, 40, 2, GameConstants.NonEnvObjects.poster_cat);
-#endregion
+            this.LevelObjects2(6.7f, 52, 2, GameConstants.NonEnvObjects.poster_dragonball);
+            this.LevelObjects2(6.7f, 58, 2, GameConstants.NonEnvObjects.poster_obama);
+            this.LevelObjects2(6.7f, 64, 2, GameConstants.NonEnvObjects.poster_totoro);
+            this.LevelObjects2(6.7f, 69.5f, 2, GameConstants.NonEnvObjects.poster_godzilla);
+            #endregion
 
-#region Loading Whiteboards
+            #region Loading Whiteboards
 
             this.LevelObjects(29, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
             this.LevelObjects(16, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
