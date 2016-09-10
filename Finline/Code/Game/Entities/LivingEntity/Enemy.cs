@@ -34,27 +34,24 @@ namespace Finline.Code.Game.Entities
             this.DeathAnimation.Add(enemyUnten);
         }
 
+        /// <summary>
+        /// The update.
+        /// </summary>
+        /// <param name="playerPosition">
+        /// The player position.
+        /// </param>
         public void Update(Vector3 playerPosition)
         {
             base.Update();
 
-            var distance = this.position - playerPosition;
-            var view = new Ray(this.position, distance);
-
-            var any = this.EnvironmentObjects.Any(
-                    obj =>
-                    view.Intersects(new BoundingSphere(obj.Position, obj.GetBound[0].Position.Length())) != null
-                    && (obj.Position - this.position).Length() < 0.4f * distance.Length());
-
-            // var any = environmentObjects.Any(obj => new BoundingSphere(obj.Position, obj.GetBound[2].Position.Length()).Intersects(view)
-            // == null && (obj.Type == Constants.GameConstants.EnvObjects.wallV));
-            if (any)
+            var canSee = this.Position.CanSee(playerPosition, this.EnvironmentObjects);
+            if (!canSee)
             {
                 this.Shoot = false;
             }
             else
             {
-                this.SetViewDirection(distance.Get2D());
+                this.SetViewDirection((this.position - playerPosition).Get2D());
                 this.Shoot = true;
             }
         }

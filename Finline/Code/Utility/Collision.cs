@@ -23,14 +23,149 @@ namespace Finline.Code.Utility
     /// </summary>
     public static class Collision
     {
+        /// <summary>
+        /// The collision result.
+        /// </summary>
         public class CollisionResult
         {
-            public Vector2? Translation = null;
+            /// <summary>
+            /// The hit entities.
+            /// </summary>
+            public readonly List<Entity> HitEntities = new List<Entity>();
 
-            public List<Entity> HitEntities = new List<Entity>();
+            /// <summary>
+            /// Initializes a new instance of the <see cref="CollisionResult" /> class.
+            /// </summary>
+            public CollisionResult()
+            {
+                this.Translation = null;
+            }
+
+            /// <summary>
+            /// Gets or sets the translation.
+            /// </summary>
+            public Vector2? Translation { get; set; }
         }
 
+        /// <summary>
+        /// The tolerance.
+        /// </summary>
         private const double Tolerance = 1e-10;
+
+        /// <summary>
+        /// The is colliding.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        /// <param name="environmentObjects">
+        /// The environment objects.
+        /// </param>
+        /// <param name="direction">
+        /// The direction.
+        /// </param>
+        /// <returns>
+        /// The <see cref="CollisionResult"/>.
+        /// </returns>
+        public static CollisionResult IsColliding(this Entity entity, IEnumerable<EnvironmentObject> environmentObjects, Vector2 direction)
+        {
+            return entity.IsColliding(environmentObjects.Select(obj => (Entity)obj).ToList(), direction);
+        }
+
+        /// <summary>
+        /// The is colliding.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        /// <param name="bosses">
+        /// The bosses.
+        /// </param>
+        /// <param name="direction">
+        /// The direction.
+        /// </param>
+        /// <returns>
+        /// The <see cref="CollisionResult"/>.
+        /// </returns>
+        public static CollisionResult IsColliding(this Entity entity, IEnumerable<Boss> bosses, Vector2 direction)
+        {
+            return entity.IsColliding(bosses.Select(obj => (Entity)obj).ToList(), direction);
+        }
+
+        /// <summary>
+        /// The is colliding.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        /// <param name="enemies">
+        /// The enemies.
+        /// </param>
+        /// <param name="direction">
+        /// The direction.
+        /// </param>
+        /// <returns>
+        /// The <see cref="CollisionResult"/>.
+        /// </returns>
+        public static CollisionResult IsColliding(this Entity entity, IEnumerable<Enemy> enemies, Vector2 direction)
+        {
+            return entity.IsColliding(enemies.Select(obj => (Entity)obj).ToList(), direction);
+        }
+
+        /// <summary>
+        /// The is colliding.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        /// <param name="player">
+        /// The player.
+        /// </param>
+        /// <param name="direction">
+        /// The direction.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public static bool IsColliding(this Entity entity, Player player, Vector2 direction)
+        {
+            return entity.GetBound.PolygonCollision(player.GetBound, direction).WillIntersect;
+        }
+
+        /// <summary>
+        /// The can see.
+        /// </summary>
+        /// <param name="ownPosition">
+        /// The own position.
+        /// </param>
+        /// <param name="wantToSee">
+        /// The want to see.
+        /// </param>
+        /// <param name="objectsThatHide">
+        /// The objects that hide.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public static bool CanSee(this Vector3 ownPosition, Vector3 wantToSee, IEnumerable<Entity> objectsThatHide)
+        {
+            var direction = wantToSee - ownPosition;
+            if (direction.LengthSquared() > 800)
+            {
+                return false;
+            }
+            
+            var bound = new VertexPositionColor[2]
+                            {
+                                new VertexPositionColor(ownPosition, Color.White),
+                                new VertexPositionColor(ownPosition + direction, Color.White)
+                            };
+            direction.Normalize();
+            var cannotSee = objectsThatHide.Any(obj => (ownPosition - obj.Position).LengthSquared() < 800 && 
+                                                        bound.PolygonCollision(obj.GetBound, direction.Get2D() * 0.01f).WillIntersect);
+
+            return !cannotSee;
+        }
 
         /// <summary>
         /// Detecting collisions with <paramref name="environmentObjects"/>.
@@ -41,13 +176,13 @@ namespace Finline.Code.Utility
         /// <param name="environmentObjects">
         /// The environment objects that can collide with the <paramref name="entity"/>.
         /// </param>
-        /// <param name="distance">
-        /// The distance until the closest object. Can be lesser than zero.
+        /// <param name="direction">
+        /// The direction.
         /// </param>
         /// <returns>
         /// true or false for colliding.
         /// </returns>
-        private static CollisionResult IsColliding(this Entity entity, List<Entity> environmentObjects, Vector2 direction)
+        private static CollisionResult IsColliding(this Entity entity, IEnumerable<Entity> environmentObjects, Vector2 direction)
         {
             var colliding = new CollisionResult();
             foreach (var obj in environmentObjects)
@@ -70,26 +205,15 @@ namespace Finline.Code.Utility
             return colliding;
         }
 
-        public static CollisionResult IsColliding(this Entity entity, List<EnvironmentObject> environmentObjects, Vector2 direction)
-        {
-            return entity.IsColliding(environmentObjects.Select(obj => (Entity)obj).ToList(), direction);
-        }
-
-        public static CollisionResult IsColliding(this Entity entity, List<Boss> bosses, Vector2 direction)
-        {
-            return entity.IsColliding(bosses.Select(obj => (Entity)obj).ToList(), direction);
-        }
-
-        public static CollisionResult IsColliding(this Entity entity, List<Enemy> enemies, Vector2 direction)
-        {
-            return entity.IsColliding(enemies.Select(obj => (Entity)obj).ToList(), direction);
-        }
-
-        public static bool IsColliding(this Entity entity, Player player, Vector2 direction)
-        {
-            return entity.GetBound.PolygonCollision(player.GetBound, direction).WillIntersect;
-        }
-
+        /// <summary>
+        /// The get verticies.
+        /// </summary>
+        /// <param name="modModel">
+        /// The mod model.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         public static List<Vector3> GetVerticies(this Model modModel)
         {
             var verticies = new List<Vector3>();
@@ -317,9 +441,7 @@ namespace Finline.Code.Utility
             var edgesA = polygonA.BuildEdges();
             var edgesB = polygonB.BuildEdges();
 
-            var result = new PolygonCollisionResult();
-            result.Intersect = true;
-            result.WillIntersect = true;
+            var result = new PolygonCollisionResult { Intersect = true, WillIntersect = true };
 
             var edgeCountA = edgesA.Count;
             var edgeCountB = edgesB.Count;

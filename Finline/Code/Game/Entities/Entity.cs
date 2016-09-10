@@ -40,8 +40,6 @@ namespace Finline.Code.Game.Entities
 
         public Vector3 Position => this.position;
 
-        public Model GetModel => this.Model;
-
         public virtual VertexPositionColor[] GetBound
         {
             get
