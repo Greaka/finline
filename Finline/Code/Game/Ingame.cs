@@ -53,6 +53,7 @@
         /// </summary>
         private Player player;
         private Weapon weapon;
+        private HealthSystem healthSystem = new HealthSystem();
 
         /// <summary>
         /// The ground.
@@ -103,6 +104,7 @@
             this.weapon = new Weapon(this.player);
             this.player.Initialize(this.Game.Content);
             this.weapon.Initialize(this.Game.Content);
+            
 
             this.enemyControls = new EnemyController();
             this.bossControls = new BossController();
@@ -136,13 +138,13 @@
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(4, 233, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 246, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 259, 0)));
-            this.bosses.Add(new Boss(this.Game.Content, new Vector3(100, 228, 0)));
-            this.bosses.Add(new Boss(this.Game.Content, new Vector3(100, 252, 0)));
+            this.bosses.Add(new Boss(this.Game.Content, new Vector3(100, 240, 0)));
 
 #if DEBUG
             this.hullDrawing.LoadEntities(this.environmentObjects, this.enemies, this.projectiles, this.player);
 #endif
             this.LoadEnvironment();
+            this.healthSystem.Initialize(this.bosses, this.enemies);
         }
 
         public override void Update(GameTime gameTime)
