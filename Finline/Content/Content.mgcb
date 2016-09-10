@@ -1853,3 +1853,9 @@
 /processorParam:TextureFormat=Color
 /build:GuiElements/TitleScreen.png
 
+#begin hotline.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:hotline.spritefont
+
