@@ -34,7 +34,7 @@ namespace Finline.Code.GameState
         /// <summary>
         /// newRes puts an EGameState to null
         /// </summary>
-        private EGameState? newRes = null;
+        //private EGameState? newRes = null;
 
         /// <summary>
         /// The current game state.
@@ -178,17 +178,18 @@ namespace Finline.Code.GameState
         {
             this.sounds.Update(gameTime);
 
-            if (this.currentGameState == EGameState.None || this.newRes.HasValue) this.sounds.PlayMainMenuMusic();
+            if (this.currentGameState == EGameState.None ||
+                (this.currentGameState == EGameState.InGame && this.nextGameState == EGameState.MainMenu)) this.sounds.PlayMainMenuMusic();
 
             if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame) this.sounds.PlayIngameMusic();
 
             if (this.currentGameState == EGameState.InGame) this.sounds.PlayIngameSongChange();
 
-            if (this.newRes.HasValue)
-            {
-                this.nextGameState = this.newRes.Value;
-                this.newRes = null;
-            }
+            //if (this.newRes.HasValue)
+            //{
+            //    this.nextGameState = this.newRes.Value;
+            //    this.newRes = null;
+            //}
 
             if (this.nextGameState != this.currentGameState)
             {
@@ -307,7 +308,7 @@ namespace Finline.Code.GameState
             }
 
             if (element != "Back2MainMenu") return;
-            this.newRes = EGameState.MainMenu;
+            this.nextGameState = EGameState.MainMenu;
             this.paused = false;
             this.main.MakeHeile();
         }
