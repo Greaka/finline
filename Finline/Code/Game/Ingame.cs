@@ -68,7 +68,7 @@
         private readonly List<Projectile> projectiles = new List<Projectile>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Ingame"/> class. 
+        /// Initializes a new instance of the <see cref="Ingame"/> class.
         /// </summary>
         /// <param name="game">
         /// </param>
@@ -741,7 +741,7 @@
             this.environmentObjects.Add(
                     new EnvironmentObject(
                     this.Game.Content, 
-                    new Vector3(x, y, z ), 
+                    new Vector3(x, y, z), 
                     model));
         }
 
