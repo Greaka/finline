@@ -31,22 +31,24 @@ namespace Finline.Code.Game.Controls
             this.aTimer.Elapsed += (sender, args) => { this.shootable = true; };
         }
 
-        public void Update(IEnumerable<Boss> bosses, Vector3 playerPosition)
+        public void Update(IEnumerable<Boss> bosses, Player player)
         {
             if (this.shootable != true) return;
             foreach (var boss in bosses)
             {
-                if (boss.Shoot) this.Shootroutine(boss, playerPosition, 1);
+                if (boss.Shoot) this.Shootroutine(boss, player, 1);
             }
 
             this.shootable = false;
         }
 
-        private void Shootroutine(Entity firedFrom, Vector3 playerPosition, int index)
+        private void Shootroutine(Entity firedFrom, Player player, int index)
         {
-            this.Shoot?.Invoke(firedFrom, (playerPosition - firedFrom.Position).Get2D(), index);
-            this.Shoot?.Invoke(firedFrom, (playerPosition - firedFrom.Position + new Vector3(2 , 2 , 0)).Get2D(), index);
-            this.Shoot?.Invoke(firedFrom, (playerPosition - firedFrom.Position - new Vector3(2, 2, 0)).Get2D(), index);
+            var direction = (player.Position - firedFrom.Position).Get2D();
+            direction += player.MoveDirection * direction.Length() / Projectile.UnitsPerSecond;
+            this.Shoot?.Invoke(firedFrom, direction, index);
+            this.Shoot?.Invoke(firedFrom, direction + new Vector2(2), index);
+            this.Shoot?.Invoke(firedFrom, direction - new Vector2(2), index);
         }
     }
 }

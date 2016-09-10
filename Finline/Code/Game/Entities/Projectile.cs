@@ -13,7 +13,11 @@ namespace Finline.Code.Game.Entities
     public sealed class Projectile : Entity
     {
         private TimeSpan timeStamp;
-        private readonly float unitsPerSecond;
+
+        /// <summary>
+        /// The units per second.
+        /// </summary>
+        public const float UnitsPerSecond = 60;
 
         private Entity firingEntity;
 
@@ -41,7 +45,6 @@ namespace Finline.Code.Game.Entities
             this.position = new Vector3(firedFrom.Position.X, firedFrom.Position.Y, 3f);
             this.Angle = direction.GetAngle();
             this.timeStamp = actualTime;
-            this.unitsPerSecond = 60;
             this.Bound = new List<Vector3>() { Vector3.Zero };
         }
 
@@ -83,7 +86,7 @@ namespace Finline.Code.Game.Entities
             Sounds sounds)
         {
             var elapsedTime = (actualTime - this.timeStamp).TotalSeconds;
-            var direction = this.GetViewDirection() * this.unitsPerSecond * (float)elapsedTime;
+            var direction = this.GetViewDirection() * UnitsPerSecond * (float)elapsedTime;
             this.timeStamp = actualTime;
 
             if (this.IsColliding(player, direction))

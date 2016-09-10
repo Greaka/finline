@@ -37,6 +37,11 @@ namespace Finline.Code.Game.Entities
         /// </summary>
         private bool isMoving;
 
+        /// <summary>
+        /// Gets the move direction.
+        /// </summary>
+        public Vector2 MoveDirection { get; private set; }
+
         protected override Model Model
         {
             get
@@ -113,6 +118,7 @@ namespace Finline.Code.Game.Entities
             this.Update();
 
             this.SetViewDirection(shootDirection);
+            this.MoveDirection = moveDirection;
 
             this.isMoving = !moveDirection.Equals(Vector2.Zero);
 
