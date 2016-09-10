@@ -48,7 +48,7 @@ namespace Finline.Code.Game
         public void PlayMainMenuMusic()
         {
             MediaPlayer.Play(this.musicMainMenu);
-            MediaPlayer.Volume = 1.0f;
+            if (MediaPlayer.Volume != 1.0f) MediaPlayer.Volume = 1.0f;
             MediaPlayer.IsRepeating = true;
             this.currentSong = (this.currentSong + 1) % 2;
         }
