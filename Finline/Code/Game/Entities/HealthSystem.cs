@@ -9,7 +9,7 @@ namespace Finline.Code.Game.Entities
 {
     using Finline.Code.Game;
 
-    public class HealthSystem : LivingEntity
+    public class HealthSystem
     {
         private static int enemiesRemaining;
         private static int bossHealth;

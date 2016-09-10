@@ -33,24 +33,9 @@ namespace Finline.Code.Game.Entities
         private readonly float unitsPerSecond = 15;
 
         /// <summary>
-        /// The death animation.
-        /// </summary>
-        private readonly Animation deathAnimation = new Animation(4, false);
-
-        /// <summary>
         /// The is moving.
         /// </summary>
         private bool isMoving;
-
-        /// <summary>
-        /// The game over.
-        /// </summary>
-        public delegate void GameOver();
-
-        /// <summary>
-        /// The death.
-        /// </summary>
-        public event GameOver Death;
 
         protected override Model Model
         {
@@ -92,6 +77,8 @@ namespace Finline.Code.Game.Entities
         public void Initialize(ContentManager contentManager)
         {
             this.ModelAnimation = new Animation(4);
+            this.DeathAnimation = new Animation(4, false);
+
             this.position = new Vector3(4, 4, -0.5f); // Standard
 
             // Animation DeathAnimation = new Animation(4);
@@ -107,10 +94,10 @@ namespace Finline.Code.Game.Entities
             var death3 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death3");
             var death4 = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_Death4");
 
-            this.deathAnimation.Add(death1);
-            this.deathAnimation.Add(death2);
-            this.deathAnimation.Add(death3);
-            this.deathAnimation.Add(death4);
+            this.DeathAnimation.Add(death1);
+            this.DeathAnimation.Add(death2);
+            this.DeathAnimation.Add(death3);
+            this.DeathAnimation.Add(death4);
 
             this.ModelAnimation.Add(modelRechts);
             this.ModelAnimation.Add(modelStand);
@@ -122,19 +109,7 @@ namespace Finline.Code.Game.Entities
 
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection, List<EnvironmentObject> environmentObjects)
         {
-            if (this.Dead)
-            {
-                this.deathAnimation.active = true;
-
-                if (!this.deathAnimation.LastModel)
-                {
-                    return;
-                }
-
-                this.Death?.Invoke();
-
-                return;
-            }
+            base.Update();
 
             this.SetViewDirection(shootDirection);
 
@@ -157,7 +132,7 @@ namespace Finline.Code.Game.Entities
             }
             else
             {
-                base.Draw(viewMatrix, projectionMatrix, this.deathAnimation.CurrentModel);
+                base.Draw(viewMatrix, projectionMatrix, this.DeathAnimation.CurrentModel);
             }
         }
     }

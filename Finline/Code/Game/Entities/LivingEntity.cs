@@ -17,6 +17,16 @@ namespace Finline.Code.Game.Entities
     public class LivingEntity : Entity
     {
         /// <summary>
+        /// The game over.
+        /// </summary>
+        public delegate void GameOver();
+
+        /// <summary>
+        /// The death.
+        /// </summary>
+        public event GameOver Death;
+
+        /// <summary>
         /// Gets or sets a value indicating whether dead.
         /// </summary>
         public bool Dead { get; set; }
@@ -25,6 +35,30 @@ namespace Finline.Code.Game.Entities
         /// Gets or sets the model animation.
         /// </summary>
         protected Animation ModelAnimation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the death animation.
+        /// </summary>
+        protected Animation DeathAnimation { get; set; }
+
+        protected void Update()
+        {
+            if (!this.Dead)
+            {
+                return;
+            }
+
+            this.DeathAnimation.active = true;
+
+            if (!this.DeathAnimation.LastModel)
+            {
+                return;
+            }
+
+            this.Death?.Invoke();
+
+            return;
+        }
 
         /// <summary>
         /// The draw.
