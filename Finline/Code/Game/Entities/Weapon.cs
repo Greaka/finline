@@ -33,7 +33,7 @@
 
         public void Initialize(ContentManager contentManager)
         {
-            this.Model = contentManager.Load<Model>("gun");
+            this.Model = contentManager.Load<Model>("weapon");
         }
 
         public void Update()
