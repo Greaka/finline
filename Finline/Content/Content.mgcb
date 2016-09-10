@@ -1853,3 +1853,9 @@
 /processorParam:TextureFormat=Compressed
 /build:font.spritefont
 
+#begin FancyFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:FancyFont.spritefont
+
