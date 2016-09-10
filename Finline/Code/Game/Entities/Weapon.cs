@@ -1,8 +1,6 @@
 ﻿namespace Finline.Code.Game.Entities
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
+    using Finline.Code.Game.Entities.LivingEntity;
     using Finline.Code.Utility;
 
     using Microsoft.Xna.Framework;

@@ -6,7 +6,7 @@
 //   The living entity.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Finline.Code.Game.Entities
+namespace Finline.Code.Game.Entities.LivingEntity
 {
     using System.Collections.Generic;
 
@@ -51,7 +51,7 @@ namespace Finline.Code.Game.Entities
                 return;
             }
 
-            this.DeathAnimation.active = true;
+            this.DeathAnimation.Active = true;
 
             if (!this.DeathAnimation.LastModel)
             {

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Finline.Code.GameState
 {
-    using Finline.Code.Game.Entities;
+    using Finline.Code.Game.Entities.LivingEntity;
 
     using Game = Microsoft.Xna.Framework.Game;
 
@@ -63,13 +63,13 @@ namespace Finline.Code.GameState
 
             
 
-            #region Controls
+            
 
             this.guiElements[EMenuState.Controls].Add(new GuiElement("ControlScreen"));
             this.guiElements[EMenuState.Controls].Add(new GuiElement("Back2MainMenu"));
             this.guiElements[EMenuState.Controls].Add(new GuiElement("LogoTransparent"));
 
-            #endregion
+            
 
             #region Records
 
@@ -146,13 +146,13 @@ namespace Finline.Code.GameState
                 // move the "Back_to_MainMenu" button down in y-direction
             
 
-            #region Controls Moved Elements
+            
 
             this.guiElements[EMenuState.Controls].Find(x => x.AssetName == "ControlScreen").MoveElement(50, -150);
             this.guiElements[EMenuState.Controls].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 80);
 
                 // move the "Back_to_MainMenu" button down in y-direction
-            #endregion
+            
 
             #region RecordState
 

@@ -1,9 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace Finline.Code.Game
+﻿namespace Finline.Code.Game
 {
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
 
     internal class Ground
     {
