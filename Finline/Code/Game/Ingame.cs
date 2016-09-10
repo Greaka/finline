@@ -325,7 +325,7 @@
             this.hullDrawing.Draw(gameTime, this.projectionMatrix, this.viewMatrix);
 #endif
             this.spriteBatch.Begin();
-            this.spriteBatch.DrawString(this.font, "Kill All Enemies!", new Vector2(320, 10), this.timer < 5f ? Color.White : Color.Transparent);
+            this.spriteBatch.DrawString(this.font, "Kill All Enemies!", new Vector2(320, 10), this.timer < 3f ? Color.White : Color.Transparent);
             this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0") + "s", new Vector2(440, 440), Color.WhiteSmoke);
             this.spriteBatch.DrawString(this.font, "Enemies remaining: " + this.healthSystem.GetEnemiesRemaining(), new Vector2(10, 440), Color.DarkRed);
             this.spriteBatch.DrawString(this.font, "Boss Health: " + this.healthSystem.GetBossHealth(), new Vector2(10, 410), Color.DarkRed);
