@@ -23,6 +23,10 @@ namespace Finline.Code.Game.Entities
             this.Angle = 0;
             var enemy = contentManager.Load<Model>("enemy");
             var enemyUnten = contentManager.Load<Model>("enemy_unten");
+            var enemyUnten2 = contentManager.Load<Model>("enemy_unten2");
+            var enemyUnten3 = contentManager.Load<Model>("enemy_unten3");
+            var enemyUnten4 = contentManager.Load<Model>("enemy_unten4");
+            var enemyUnten5 = contentManager.Load<Model>("enemy_unten5");
 
             this.Model = enemy;
 
@@ -32,6 +36,10 @@ namespace Finline.Code.Game.Entities
 
             this.DeathAnimation.Add(enemy);
             this.DeathAnimation.Add(enemyUnten);
+            this.DeathAnimation.Add(enemyUnten2);
+            this.DeathAnimation.Add(enemyUnten3);
+            this.DeathAnimation.Add(enemyUnten4);
+            this.DeathAnimation.Add(enemyUnten5);
         }
 
         /// <summary>
