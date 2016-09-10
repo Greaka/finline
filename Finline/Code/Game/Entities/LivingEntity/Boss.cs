@@ -24,6 +24,9 @@ namespace Finline.Code.Game.Entities
             var boss = contentManager.Load<Model>("boss");
             var bossVorn = contentManager.Load<Model>("boss_vorn");
             var bossHinten = contentManager.Load<Model>("boss_hinten");
+            var bossHinten2 = contentManager.Load<Model>("boss_hinten2");
+            var bossHinten3 = contentManager.Load<Model>("boss_hinten3");
+            var bossHinten4 = contentManager.Load<Model>("boss_hinten4");
 
             this.Model = boss;
 
@@ -32,10 +35,11 @@ namespace Finline.Code.Game.Entities
             this.ModelAnimation.Add(bossHinten);
             this.ModelAnimation.Add(boss);
 
-            this.DeathAnimation.Add(bossVorn);
             this.DeathAnimation.Add(boss);
             this.DeathAnimation.Add(bossHinten);
-            this.DeathAnimation.Add(boss);
+            this.DeathAnimation.Add(bossHinten2);
+            this.DeathAnimation.Add(bossHinten3);
+            this.DeathAnimation.Add(bossHinten4);
         }
 
         public void Update(Vector3 playerPosition)
