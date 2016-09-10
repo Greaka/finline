@@ -10,6 +10,8 @@ namespace Finline.Code.Game.Entities
 {
     using System.Collections.Generic;
 
+    using Finline.Code.Game.Entities.LivingEntity;
+
     public sealed class Projectile : Entity
     {
         private TimeSpan timeStamp;
@@ -19,7 +21,7 @@ namespace Finline.Code.Game.Entities
         /// </summary>
         public const float UnitsPerSecond = 60;
 
-        private Entity firingEntity;
+        private readonly Entity firingEntity;
 
         /// <summary>
         /// Gets or sets the model.
@@ -76,13 +78,13 @@ namespace Finline.Code.Game.Entities
         /// The sounds.
         /// </param>
         public void Update(
-            TimeSpan actualTime,
-            Player player,
-            List<Boss> bosses,
-            List<Enemy> enemies,
-            IEnumerable<EnvironmentObject> environmentObjects,
-            List<Projectile> remove,
-            HealthSystem healthSystem,
+            TimeSpan actualTime, 
+            Player player, 
+            List<Boss> bosses, 
+            List<Enemy> enemies, 
+            IEnumerable<EnvironmentObject> environmentObjects, 
+            List<Projectile> remove, 
+            HealthSystem healthSystem, 
             Sounds sounds)
         {
             var elapsedTime = (actualTime - this.timeStamp).TotalSeconds;

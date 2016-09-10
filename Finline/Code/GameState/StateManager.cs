@@ -7,13 +7,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-using Microsoft.Xna.Framework.Content;
 
 namespace Finline.Code.GameState
 {
     using System;
 
-    using Finline.Code.Game.Entities;
+    using Finline.Code.Game.Entities.LivingEntity;
 
     using Game;
 
@@ -44,7 +43,7 @@ namespace Finline.Code.GameState
         /// <summary>
         /// The main menu.
         /// </summary>
-        public MainMenu main;
+        public MainMenu Main;
 
         /// <summary>
         /// The next game state.
@@ -121,10 +120,10 @@ namespace Finline.Code.GameState
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
             this.Content.RootDirectory = "Content";
-            this.main = new MainMenu(this, this.spriteBatch);
-            this.main.GoIngame += this.StartNewGame;
+            this.Main = new MainMenu(this, this.spriteBatch);
+            this.Main.GoIngame += this.StartNewGame;
 
-            this.main.Initialize();
+            this.Main.Initialize();
 
             this.pausedTexture2D = this.Content.Load<Texture2D>("Icons/PauseIcon");
             this.pausedRectangle = new Rectangle(320, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
@@ -226,10 +225,10 @@ namespace Finline.Code.GameState
                 if (this.currentGameState == EGameState.InGame)
                 {
                     var game = (Ingame)this.gameState;
-                    if (game.won)
+                    if (game.Won)
                     {
                         this.nextGameState = EGameState.MainMenu;
-                        this.main.MenuState = MainMenu.EMenuState.WinningScreen;
+                        this.Main.MenuState = MainMenu.EMenuState.WinningScreen;
                     }
                 }
             }
@@ -266,8 +265,8 @@ namespace Finline.Code.GameState
                 {
                     this.deltaTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                     this.spriteBatch.Draw(
-                        this.soundOnTexture2D,
-                        this.soundOnRectangle,
+                        this.soundOnTexture2D, 
+                        this.soundOnRectangle, 
                         this.deltaTime < 1.5f ? Color.White : Color.Transparent);
                 }
             }
@@ -310,7 +309,7 @@ namespace Finline.Code.GameState
             if (element != "Back2MainMenu") return;
             this.nextGameState = EGameState.MainMenu;
             this.paused = false;
-            this.main.MakeHeile();
+            this.Main.MakeHeile();
         }
 
         /// <summary>
@@ -321,7 +320,7 @@ namespace Finline.Code.GameState
             switch (this.nextGameState)
             {
                 case EGameState.MainMenu:
-                    this.gameState = this.main;
+                    this.gameState = this.Main;
                     break;
 
                 case EGameState.InGame:

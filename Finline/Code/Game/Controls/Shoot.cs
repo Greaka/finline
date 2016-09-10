@@ -12,6 +12,7 @@ namespace Finline.Code.Game.Controls
 
     using Finline.Code.Game;
     using Finline.Code.Game.Entities;
+    using Finline.Code.Game.Entities.LivingEntity;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
@@ -91,10 +92,10 @@ namespace Finline.Code.Game.Controls
         /// The health System.
         /// </param>
         public void Update(
-            Player player,
-            List<Boss> bosses,
-            List<Enemy> enemies,
-            List<EnvironmentObject> environmentObjects,
+            Player player, 
+            List<Boss> bosses, 
+            List<Enemy> enemies, 
+            List<EnvironmentObject> environmentObjects, 
             HealthSystem healthSystem)
         {
             var remove = new List<Projectile>();

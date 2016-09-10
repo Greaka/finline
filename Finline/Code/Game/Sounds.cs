@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Finline.Code.Game
+﻿namespace Finline.Code.Game
 {
+    using System.Collections.Generic;
+
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Audio;
     using Microsoft.Xna.Framework.Content;
@@ -13,8 +13,8 @@ namespace Finline.Code.Game
         private int currentSong = 1;
         private bool soundOn = true;
         private Song musicMainMenu;
-        private List<Song> musicIngame = new List<Song>();
-        private List<SoundEffect> soundeffectList = new List<SoundEffect>();
+        private readonly List<Song> musicIngame = new List<Song>();
+        private readonly List<SoundEffect> soundeffectList = new List<SoundEffect>();
         private SoundEffectInstance soundInstance;
 
         private KeyboardState oldKeyState;

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Finline.Code.GameState
 {
-    using Finline.Code.Game.Entities;
+    using Finline.Code.Game.Entities.LivingEntity;
 
     internal class GuiElement
     {

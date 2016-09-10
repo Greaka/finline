@@ -1,26 +1,30 @@
 ﻿namespace Finline.Code.Game
 {
+    #if DEBUG
+#endif
     using System.Collections.Generic;
     using System.Linq;
 
     using Constants;
+
     using Controls;
+
     using Entities;
-#if DEBUG
+
     using Finline.Code.DebugUtils;
-#endif
+    using Finline.Code.Game.Entities.LivingEntity;
+
     using GameState;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
 
     /// <summary>
     /// The ingame.
     /// </summary>
     public class Ingame : DrawableGameComponent
     {
-        public bool won;
+        public bool Won;
 
         /// <summary>
         /// The Input Parser.
@@ -160,7 +164,7 @@
             this.spriteBatch = sb;
             this.sounds = sounds;
             this.player = new Player();
-            this.player.Death += game.main.GameOver;
+            this.player.Death += game.Main.GameOver;
             this.player.Death += game.GoMenu;
             this.graphics = game.Graphics;
             this.Game.Content.RootDirectory = "Content";
@@ -269,7 +273,7 @@
 
             base.Update(gameTime);
 
-            this.won = !(this.enemies.Count > 0 || this.bosses.Count > 0);
+            this.Won = !(this.enemies.Count > 0 || this.bosses.Count > 0);
         }
 
         /// <summary>
@@ -335,7 +339,7 @@
         /// </summary>
         protected override void LoadContent()
         {
-            //this.font = this.Game.Content.Load<SpriteFont>("font");
+            // this.font = this.Game.Content.Load<SpriteFont>("font");
             this.font = this.Game.Content.Load<SpriteFont>("FancyFont");
             this.ground.LoadContent(this.Game.GraphicsDevice, this.Game.Content);
 
@@ -688,10 +692,10 @@
 
 
 
-#region Erster Raum oben
+
 
             this.LevelObjects(36.5f, 183.5f, -1, GameConstants.EnvObjects.deskUp);
-#endregion
+
 
 #region Erster Raum unten
 

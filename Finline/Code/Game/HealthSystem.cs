@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace Finline.Code.Game.Entities
+﻿namespace Finline.Code.Game
 {
+    using System.Collections.Generic;
     using System.Linq;
 
-    using Finline.Code.Game;
+    using Finline.Code.Game.Entities.LivingEntity;
 
     public class HealthSystem
     {

@@ -8,11 +8,11 @@
 namespace Finline.Code.Utility
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Finline.Code.Constants;
+    using Finline.Code.Game.Entities.LivingEntity;
+
     using Game.Entities;
 
     using Microsoft.Xna.Framework;
