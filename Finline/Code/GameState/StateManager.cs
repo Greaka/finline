@@ -228,6 +228,7 @@ namespace Finline.Code.GameState
                 }
                 
                 this.gameState.Update(gameTime);
+
                 if (currentGameState == EGameState.InGame)
                 {
                     Ingame game = (Ingame)gameState;
@@ -260,8 +261,6 @@ namespace Finline.Code.GameState
 
             this.spriteBatch.Begin();
 
-
-
             if (this.currentGameState == EGameState.InGame)
             {
                 if (this.sounds.GetSoundOn() == false)
@@ -273,10 +272,14 @@ namespace Finline.Code.GameState
                 {
                     this.deltaTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                     this.spriteBatch.Draw(
-                        this.soundOnTexture2D, 
-                        this.soundOnRectangle, 
+                        this.soundOnTexture2D,
+                        this.soundOnRectangle,
                         this.deltaTime < 1.5f ? Color.White : Color.Transparent);
                 }
+                this.spriteBatch.DrawString(this.font, "Kill All Enemies!", new Vector2(260, 10), timer < 5f ? Color.Black : Color.Transparent);
+                this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0") + "s", new Vector2(500, 440), Color.WhiteSmoke);
+                this.spriteBatch.DrawString(this.font, "Enemies remaining: " + this.healthSystem.GetEnemiesRemaining(), new Vector2(10, 440), Color.DarkRed);
+                this.spriteBatch.DrawString(this.font, "Boss Health: " + this.healthSystem.GetBossHealth(), new Vector2(10, 410), Color.DarkRed);
             }
 
             if (this.paused)
@@ -291,12 +294,7 @@ namespace Finline.Code.GameState
                 }
             }
 
-            if (this.currentGameState == EGameState.InGame)
-            {
-                this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0") + "s", new Vector2(500, 440), Color.WhiteSmoke);
-                this.spriteBatch.DrawString(this.font, "Enemies remaining: " + this.healthSystem.GetEnemiesRemaining(), new Vector2(10, 440), Color.DarkRed);
-                this.spriteBatch.DrawString(this.font, "Boss Health: " + this.healthSystem.GetBossHealth(), new Vector2(10, 410), Color.DarkRed);
-            }
+            
 
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
