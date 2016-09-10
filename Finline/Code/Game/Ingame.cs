@@ -335,8 +335,7 @@
         /// </summary>
         protected override void LoadContent()
         {
-        //  this.font = this.Game.Content.Load<SpriteFont>("font");    // alte Schriftart
-            this.font = this.Game.Content.Load<SpriteFont>("hotline");  //fancy neue Schriftart
+            this.font = this.Game.Content.Load<SpriteFont>("font");
             this.ground.LoadContent(this.Game.GraphicsDevice, this.Game.Content);
 
             // this.enemies.Add(new Enemy(this.Game.Content, new Vector3(8, -15, 0)));
