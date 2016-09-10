@@ -68,19 +68,14 @@ namespace Finline.Code.Game.Entities
         {
             this.Update();
 
-            var distance = this.position - playerPosition;
-            var view = new Ray(this.position, distance);
-
-            var any = this.EnvironmentObjects.Any(obj => view.Intersects(new BoundingSphere(obj.Position, obj.GetBound[0].Position.Length()))
-                        != null && (obj.Position - this.position).Length() < 0.4f*distance.Length());
-
-            if (any)
+            var canSee = this.Position.CanSee(playerPosition, this.EnvironmentObjects, 1600);
+            if (!canSee)
             {
                 this.Shoot = false;
             }
             else
             {
-                this.SetViewDirection(distance.Get2D());
+                this.SetViewDirection((this.position - playerPosition).Get2D());
                 this.Shoot = true;
             }
         }

@@ -147,10 +147,10 @@ namespace Finline.Code.Utility
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public static bool CanSee(this Vector3 ownPosition, Vector3 wantToSee, IEnumerable<Entity> objectsThatHide)
+        public static bool CanSee(this Vector3 ownPosition, Vector3 wantToSee, IEnumerable<Entity> objectsThatHide, float range = 800)
         {
             var direction = wantToSee - ownPosition;
-            if (direction.LengthSquared() > 800)
+            if (direction.LengthSquared() > range)
             {
                 return false;
             }
@@ -161,7 +161,7 @@ namespace Finline.Code.Utility
                                 new VertexPositionColor(ownPosition + direction, Color.White)
                             };
             direction.Normalize();
-            var cannotSee = objectsThatHide.Any(obj => (ownPosition - obj.Position).LengthSquared() < 800 && 
+            var cannotSee = objectsThatHide.Any(obj => (ownPosition - obj.Position).LengthSquared() < range && 
                                                         bound.PolygonCollision(obj.GetBound, direction.Get2D() * 0.01f).WillIntersect);
 
             return !cannotSee;

@@ -221,7 +221,7 @@
             this.projectileHandler.Update(this.player, this.bosses, this.enemies, this.environmentObjects, this.healthSystem);
 
             this.enemyControls.Update(this.enemies, this.player.Position);
-            this.bossControls.Update(this.bosses, this.player.Position);
+            this.bossControls.Update(this.bosses, this.player);
 
             // if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
             // || Keyboard.GetState().IsKeyDown(Keys.Escape))
