@@ -17,7 +17,7 @@ namespace Finline.Code.Game.Entities
 
         private Entity firingEntity;
 
-        Sounds sounds = new Sounds();
+        HealthSystem healthSystem = new HealthSystem();
 
         /// <summary>
         /// Gets or sets the model.
@@ -45,7 +45,7 @@ namespace Finline.Code.Game.Entities
             this.timeStamp = actualTime;
             this.unitsPerSecond = 60;
             this.Bound = new List<Vector3>() { Vector3.Zero };
-            this.sounds.LoadContent(content);
+            this.healthSystem.LoadContent(content);
         }
 
         public void Update(TimeSpan actualTime, Player player, List<Boss> bosses, List<Enemy> enemies, List<EnvironmentObject> environmentObjects, List<Projectile> remove)
@@ -63,8 +63,11 @@ namespace Finline.Code.Game.Entities
                 }
 
                 remove.Add(this);
+                if (player.Dead == false)
+                {
+                    this.healthSystem.Update(2);
+                }
                 player.Dead = true;
-                this.sounds.SoundEffectPlay(2);
                 return;
             }
 
@@ -79,8 +82,11 @@ namespace Finline.Code.Game.Entities
                 }
 
                 remove.Add(this);
+                if (hitEntity.Dead == false)
+                {
+                    this.healthSystem.Update(3);
+                }
                 hitEntity.Dead = true;
-                this.sounds.SoundEffectPlay(3);
                 return;
             }
 
@@ -95,8 +101,11 @@ namespace Finline.Code.Game.Entities
                 }
 
                 remove.Add(this);
+                if (this.healthSystem.GetBossHealth() != 0)
+                {
+                    this.healthSystem.Update(4);
+                }
                 hitEntity.Dead = true;
-                this.sounds.SoundEffectPlay(3); this.sounds.SoundEffectPlay(3);
                 return;
             }
 

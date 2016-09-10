@@ -14,6 +14,7 @@ namespace Finline.Code.GameState
     using System;
 
     using Game;
+    using Finline.Code.Game.Entities;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -73,6 +74,7 @@ namespace Finline.Code.GameState
 
 #region MusicStuff
         Sounds sounds = new Sounds();
+        HealthSystem healthSystem = new HealthSystem();
 #endregion
 
         /// <summary>
@@ -147,7 +149,6 @@ namespace Finline.Code.GameState
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -40);
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 40);
             
-
 
 
             this.sounds.LoadContent(this.Content);
@@ -284,6 +285,8 @@ namespace Finline.Code.GameState
             if (this.currentGameState == EGameState.InGame)
             {
                 this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0") + "s", new Vector2(500, 440), Color.WhiteSmoke);
+                this.spriteBatch.DrawString(this.font, "Enemies remaining: " + this.healthSystem.GetEnemiesRemaining(), new Vector2(10, 440), Color.DarkRed);
+                this.spriteBatch.DrawString(this.font, "Boss Health: " + this.healthSystem.GetBossHealth(), new Vector2(10, 410), Color.DarkRed);
             }
 
             this.spriteBatch.End();

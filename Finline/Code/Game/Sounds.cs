@@ -2,8 +2,6 @@
 
 namespace Finline.Code.Game
 {
-    using GameState;
-
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Audio;
     using Microsoft.Xna.Framework.Content;
@@ -30,6 +28,7 @@ namespace Finline.Code.Game
             this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemyshot"));        //position [1]
             this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/playerdeath"));      //position [2]
             this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemydeath"));       //position [3]
+            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemydeath"));       //position [4]
         }
 
         public bool GetSoundOn()
@@ -42,7 +41,6 @@ namespace Finline.Code.Game
             soundInstance = this.soundeffectList[index].CreateInstance();
 
             if (this.GetSoundOn() == true) soundInstance.Play();
-
             // else soundInstance.Stop();
         }
 
