@@ -166,7 +166,7 @@ namespace Finline.Code.GameState
             #endregion
         }
 
-        public void GameOver()
+        public void GameOver(LivingEntity me)
         {
             this.MenuState = EMenuState.GameOver;
         }

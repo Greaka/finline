@@ -30,7 +30,7 @@ namespace Finline.Code.Game.Entities
         /// <summary>
         /// The units per second.
         /// </summary>
-        private readonly float unitsPerSecond = 15;
+        private const float UnitsPerSecond = 15;
 
         /// <summary>
         /// The is moving.
@@ -74,8 +74,9 @@ namespace Finline.Code.Game.Entities
             prof
         }
 
-        public void Initialize(ContentManager contentManager)
+        public void Initialize(ContentManager contentManager, List<EnvironmentObject> environmentObjects)
         {
+            this.EnvironmentObjects = environmentObjects;
             this.ModelAnimation = new Animation(4);
             this.DeathAnimation = new Animation(4, false);
 
@@ -107,7 +108,7 @@ namespace Finline.Code.Game.Entities
             this.Model = modelStand;
         }
 
-        public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection, List<EnvironmentObject> environmentObjects)
+        public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection)
         {
             base.Update();
 
@@ -115,8 +116,8 @@ namespace Finline.Code.Game.Entities
 
             this.isMoving = !moveDirection.Equals(Vector2.Zero);
 
-            var pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * this.unitsPerSecond;
-            var collisionResult = this.IsColliding(environmentObjects, pos);
+            var pos = moveDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * UnitsPerSecond;
+            var collisionResult = this.IsColliding(this.EnvironmentObjects, pos);
             this.position += new Vector3(pos, 0);
             if (collisionResult.Translation.HasValue)
             {

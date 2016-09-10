@@ -9,22 +9,24 @@
 
 namespace Finline.Code.Game.Entities
 {
+    using System.Collections.Generic;
+
     using Microsoft.Xna.Framework;
 
     /// <summary>
     /// The living entity.
     /// </summary>
-    public class LivingEntity : Entity
+    public abstract class LivingEntity : Entity
     {
         /// <summary>
         /// The game over.
         /// </summary>
-        public delegate void GameOver();
+        public delegate void DeathDelegate(LivingEntity me);
 
         /// <summary>
         /// The death.
         /// </summary>
-        public event GameOver Death;
+        public event DeathDelegate Death;
 
         /// <summary>
         /// Gets or sets a value indicating whether dead.
@@ -41,6 +43,8 @@ namespace Finline.Code.Game.Entities
         /// </summary>
         protected Animation DeathAnimation { get; set; }
 
+        protected List<EnvironmentObject> EnvironmentObjects;
+
         protected void Update()
         {
             if (!this.Dead)
@@ -55,7 +59,7 @@ namespace Finline.Code.Game.Entities
                 return;
             }
 
-            this.Death?.Invoke();
+            this.Death?.Invoke(this);
 
             return;
         }

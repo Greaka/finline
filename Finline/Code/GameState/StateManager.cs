@@ -105,7 +105,7 @@ namespace Finline.Code.GameState
             base.Initialize();
         }
 
-        public void GoMenu()
+        public void GoMenu(LivingEntity me)
         {
             this.nextGameState = EGameState.MainMenu;
         }

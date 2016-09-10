@@ -27,51 +27,105 @@
         /// <summary>
         /// The Input Parser.
         /// </summary>
-        public readonly PlayerController PlayerControls = new PlayerController();
+        private readonly PlayerController playerControls = new PlayerController();
 
         /// <summary>
         /// The graphics.
         /// </summary>
         private readonly GraphicsDeviceManager graphics;
 
-        private EnemyController enemyControls;
+        /// <summary>
+        /// The enemies.
+        /// </summary>
+        private readonly List<Enemy> enemies = new List<Enemy>();
 
-        private BossController bossControls;
+        /// <summary>
+        /// The bosses.
+        /// </summary>
+        private readonly List<Boss> bosses = new List<Boss>();
 
-        private Shooting projectileHandler;
+        /// <summary>
+        /// The environment objects.
+        /// </summary>
+        private readonly List<EnvironmentObject> environmentObjects = new List<EnvironmentObject>();
 
-        private Matrix projectionMatrix;
+        /// <summary>
+        /// The non environment objects.
+        /// </summary>
+        private readonly List<NonEnvironmentObject> nonEnvironmentObjects = new List<NonEnvironmentObject>();
 
-        private Matrix viewMatrix;
+        /// <summary>
+        /// The projectiles.
+        /// </summary>
+        private readonly List<Projectile> projectiles = new List<Projectile>();
 
-        private Vector2 moveDirection;
+        /// <summary>
+        /// The health system.
+        /// </summary>
+        private readonly HealthSystem healthSystem = new HealthSystem();
 
-        private Vector2 shootDirection;
+        /// <summary>
+        /// The remove entities.
+        /// </summary>
+        private readonly List<LivingEntity> removeEntities = new List<LivingEntity>();
 
         /// <summary>
         /// The player.
         /// </summary>
-        private Player player;
+        private readonly Player player;
+
+        /// <summary>
+        /// The enemy controls.
+        /// </summary>
+        private EnemyController enemyControls;
+
+        /// <summary>
+        /// The boss controls.
+        /// </summary>
+        private BossController bossControls;
+
+        /// <summary>
+        /// The projectile handler.
+        /// </summary>
+        private Shooting projectileHandler;
+
+        /// <summary>
+        /// The projection matrix.
+        /// </summary>
+        private Matrix projectionMatrix;
+
+        /// <summary>
+        /// The view matrix.
+        /// </summary>
+        private Matrix viewMatrix;
+
+        /// <summary>
+        /// The move direction.
+        /// </summary>
+        private Vector2 moveDirection;
+
+        /// <summary>
+        /// The shoot direction.
+        /// </summary>
+        private Vector2 shootDirection;
+
+        /// <summary>
+        /// The weapon.
+        /// </summary>
         private Weapon weapon;
-        private HealthSystem healthSystem = new HealthSystem();
 
         /// <summary>
         /// The ground.
         /// </summary>
         private Ground ground;
 
-        private readonly List<Enemy> enemies = new List<Enemy>();
-        private readonly List<Boss> bosses = new List<Boss>();
-
-        private readonly List<EnvironmentObject> environmentObjects = new List<EnvironmentObject>();
-        private readonly List<NonEnvironmentObject> nonenvironmentObjects = new List<NonEnvironmentObject>();
-
-        private readonly List<Projectile> projectiles = new List<Projectile>();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Ingame"/> class.
         /// </summary>
-        /// <param name="game">
+        /// <param name="game"> the game.
+        /// </param>
+        /// <param name="sb">
+        /// The sprite batch.
         /// </param>
         public Ingame(StateManager game, SpriteBatch sb)
             : base(game)
@@ -86,6 +140,9 @@
 #endif
         }
 
+        /// <summary>
+        /// The initialize.
+        /// </summary>
         public override void Initialize()
         {
             this.Game.IsMouseVisible = true;
@@ -102,54 +159,29 @@
             this.ground.Initialize();
 
             this.weapon = new Weapon(this.player);
-            this.player.Initialize(this.Game.Content);
+            this.player.Initialize(this.Game.Content, this.environmentObjects);
             this.weapon.Initialize(this.Game.Content);
             
 
             this.enemyControls = new EnemyController();
             this.bossControls = new BossController();
             this.projectileHandler = new Shooting(this.Game.Content, this.projectiles);
-            this.PlayerControls.Shoot += this.projectileHandler.Shoot;
+            this.playerControls.Shoot += this.projectileHandler.Shoot;
             this.enemyControls.Shoot += this.projectileHandler.Shoot;
             this.bossControls.Shoot += this.projectileHandler.Shoot;
 
             base.Initialize();
         }
 
-        protected override void LoadContent()
-        {
-            this.ground.LoadContent(this.Game.GraphicsDevice, this.Game.Content);
-
-            // this.enemies.Add(new Enemy(this.Game.Content, new Vector3(8, -15, 0)));
-            // this.bosses.Add(new Boss(this.Game.Content, new Vector3(12, -10, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(25, 5, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 27, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 27, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(30, 65, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(27, 105, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 90, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(43, 121, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(14, 147, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(38, 148, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(5, 182, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 187, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(34, 197, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(7, 228, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(4, 233, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 246, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 259, 0)));
-            this.bosses.Add(new Boss(this.Game.Content, new Vector3(100, 240, 0)));
-
-#if DEBUG
-            this.hullDrawing.LoadEntities(this.environmentObjects, this.enemies, this.projectiles, this.player);
-#endif
-            this.LoadEnvironment();
-            this.healthSystem.Initialize(this.bosses, this.enemies);
-        }
-
+        /// <summary>
+        /// The update.
+        /// </summary>
+        /// <param name="gameTime">
+        /// The game time.
+        /// </param>
         public override void Update(GameTime gameTime)
         {
-            this.PlayerControls.Update(
+            this.playerControls.Update(
                 this.GraphicsDevice, 
                 out this.moveDirection, 
                 ref this.shootDirection, 
@@ -166,7 +198,7 @@
             // {
             // this.Game.Exit();
             // }
-            this.player.Update(gameTime, this.moveDirection, this.shootDirection, this.environmentObjects);
+            this.player.Update(gameTime, this.moveDirection, this.shootDirection);
             this.weapon.Update();
             
 
@@ -175,24 +207,45 @@
                 obj.Update(gameTime);
             }
 
-            foreach (var obj in this.nonenvironmentObjects)
+            foreach (var obj in this.nonEnvironmentObjects)
             {
                 obj.Update(gameTime);
             }
 
             foreach (var enemy in this.enemies)
             {
-                enemy.Update(this.player.Position, this.environmentObjects, gameTime);
+                enemy.Update(this.player.Position);
             }
 
             foreach (var boss in this.bosses)
             {
-                boss.Update(this.player.Position, this.environmentObjects, gameTime);
+                boss.Update(this.player.Position);
+            }
+
+            foreach (var enemy in this.removeEntities)
+            {
+                if (this.enemies.Contains(enemy))
+                {
+                    this.enemies.Remove((Enemy)enemy);
+                }
+                else
+                {
+                    if (this.bosses.Contains(enemy))
+                    {
+                        this.bosses.Remove((Boss)enemy);
+                    }
+                }
             }
 
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// The draw.
+        /// </summary>
+        /// <param name="gameTime">
+        /// The game time.
+        /// </param>
         public override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.Black);
@@ -212,7 +265,7 @@
                 obj.Draw(this.viewMatrix, this.projectionMatrix);
             }
 
-            foreach (var obj in this.nonenvironmentObjects)
+            foreach (var obj in this.nonEnvironmentObjects)
             {
                 obj.Draw(this.viewMatrix, this.projectionMatrix);
             }
@@ -239,6 +292,52 @@
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// The load content.
+        /// </summary>
+        protected override void LoadContent()
+        {
+            this.ground.LoadContent(this.Game.GraphicsDevice, this.Game.Content);
+
+            // this.enemies.Add(new Enemy(this.Game.Content, new Vector3(8, -15, 0)));
+            // this.bosses.Add(new Boss(this.Game.Content, new Vector3(12, -10, 0)));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(25, 5, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 27, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 27, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(30, 65, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(27, 105, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 90, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(43, 121, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(14, 147, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(38, 148, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(5, 182, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 187, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(34, 197, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(7, 228, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(4, 233, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 246, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 259, 0), this.environmentObjects));
+            this.bosses.Add(new Boss(this.Game.Content, new Vector3(100, 240, 0), this.environmentObjects));
+
+#if DEBUG
+            this.hullDrawing.LoadEntities(this.environmentObjects, this.enemies, this.projectiles, this.player);
+#endif
+            this.LoadEnvironment();
+            this.healthSystem.Initialize(this.bosses, this.enemies);
+            foreach (var enemy in this.enemies)
+            {
+                enemy.Death += this.EnemyDeath;
+            }
+
+            foreach (var boss in this.bosses)
+            {
+                boss.Death += this.EnemyDeath;
+            }
+        }
+
+        /// <summary>
+        /// The load environment.
+        /// </summary>
         private void LoadEnvironment()
         {
             
@@ -738,6 +837,21 @@
 #endregion
         }
 
+        /// <summary>
+        /// The level objects.
+        /// </summary>
+        /// <param name="x">
+        /// The x.
+        /// </param>
+        /// <param name="y">
+        /// The y.
+        /// </param>
+        /// <param name="z">
+        /// The z.
+        /// </param>
+        /// <param name="model">
+        /// The model.
+        /// </param>
         private void LevelObjects(float x, float y, float z, GameConstants.EnvObjects model)
         {
             this.environmentObjects.Add(
@@ -747,14 +861,33 @@
                     model));
         }
 
+        /// <summary>
+        /// The level objects 2.
+        /// </summary>
+        /// <param name="x">
+        /// The x.
+        /// </param>
+        /// <param name="y">
+        /// The y.
+        /// </param>
+        /// <param name="z">
+        /// The z.
+        /// </param>
+        /// <param name="model">
+        /// The model.
+        /// </param>
         private void LevelObjects2(float x, float y, float z, GameConstants.NonEnvObjects model)
         {
-            this.nonenvironmentObjects.Add(
+            this.nonEnvironmentObjects.Add(
                     new NonEnvironmentObject(
                     this.Game.Content, 
                     new Vector3(x, y, z), 
                     model));
         }
 
+        private void EnemyDeath(LivingEntity enemy)
+        {
+            this.removeEntities.Add(enemy);
+        }
     }
 }
