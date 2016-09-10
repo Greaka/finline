@@ -20,6 +20,8 @@
     /// </summary>
     public class Ingame : DrawableGameComponent
     {
+        public bool won;
+
 #if DEBUG
         private HullDrawing hullDrawing;
 #endif
@@ -238,6 +240,8 @@
             }
 
             base.Update(gameTime);
+
+            won = !(enemies.Count > 0 || bosses.Count > 0);
         }
 
         /// <summary>
@@ -302,21 +306,21 @@
             // this.enemies.Add(new Enemy(this.Game.Content, new Vector3(8, -15, 0)));
             // this.bosses.Add(new Boss(this.Game.Content, new Vector3(12, -10, 0)));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(25, 5, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 27, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 27, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(30, 65, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(27, 105, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 90, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(43, 121, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(14, 147, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(38, 148, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(5, 182, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 187, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(34, 197, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(7, 228, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(4, 233, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 246, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 259, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 27, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 27, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(30, 65, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(27, 105, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 90, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(43, 121, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(14, 147, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(38, 148, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(5, 182, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 187, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(34, 197, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(7, 228, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(4, 233, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 246, 0), this.environmentObjects));
+            //this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 259, 0), this.environmentObjects));
             this.bosses.Add(new Boss(this.Game.Content, new Vector3(100, 240, 0), this.environmentObjects));
 
 #if DEBUG

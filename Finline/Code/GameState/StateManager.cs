@@ -228,6 +228,15 @@ namespace Finline.Code.GameState
                 }
                 
                 this.gameState.Update(gameTime);
+                if (currentGameState == EGameState.InGame)
+                {
+                    Ingame game = (Ingame)gameState;
+                    if (game.won)
+                    {
+                        nextGameState = EGameState.MainMenu;
+                        main.MenuState = MainMenu.EMenuState.WinningScreen;
+                    }
+                }
             }
             
             base.Update(gameTime);
