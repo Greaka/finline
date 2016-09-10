@@ -5,25 +5,18 @@
 //   Defines the Player type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Finline.Code.Game.Entities
+namespace Finline.Code.Game.Entities.LivingEntity
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using System.Net;
-    using System.Net.Mime;
-    using System.Threading;
-    using System.Threading.Tasks;
 
+    using Finline.Code.GameState;
     using Finline.Code.Utility;
-
-    using GameState;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
 
     public class Player : LivingEntity
     {

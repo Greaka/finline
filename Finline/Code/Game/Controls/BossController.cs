@@ -7,6 +7,7 @@ namespace Finline.Code.Game.Controls
     using System.Collections.Generic;
 
     using Finline.Code.Game.Entities;
+    using Finline.Code.Game.Entities.LivingEntity;
 
     using Timer = System.Timers.Timer;
 

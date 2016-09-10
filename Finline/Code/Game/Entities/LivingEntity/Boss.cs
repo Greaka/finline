@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Finline.Code.Game.Entities
+﻿namespace Finline.Code.Game.Entities.LivingEntity
 {
-    using System.Linq;
+    using System.Collections.Generic;
 
     using Finline.Code.Utility;
 

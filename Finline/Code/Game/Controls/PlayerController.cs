@@ -12,6 +12,7 @@ using Timer = System.Timers.Timer;
 namespace Finline.Code.Game.Controls
 {
     using Finline.Code.Game.Entities;
+    using Finline.Code.Game.Entities.LivingEntity;
 
     public class PlayerController
     {
@@ -22,7 +23,7 @@ namespace Finline.Code.Game.Controls
         private bool shootable = true;
         private bool alreadyShot = false;
 
-        private GameConstants.EWeaponShootMode actualShootMode = GameConstants.EWeaponShootMode.Automatic;
+        private readonly GameConstants.EWeaponShootMode actualShootMode = GameConstants.EWeaponShootMode.Automatic;
 
         private const float ShotsPerSecond = 4;
 

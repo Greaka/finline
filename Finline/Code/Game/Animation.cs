@@ -1,35 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Finline.Code.Game
+﻿namespace Finline.Code.Game
 {
-    using System.Runtime.CompilerServices;
     using System.Timers;
 
-    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
     public class Animation
     {
-        private Model[] animationList;
+        private readonly Model[] animationList;
         private byte index;
 
-        public bool active;
+        public bool Active;
 
         private readonly Timer timer = new Timer();
         
         public Animation(int anzahl, bool aktiv = true)
         {
-            this.active = aktiv;
+            this.Active = aktiv;
             this.animationList = new Model[anzahl];
             this.timer.Interval = 100f;
             this.timer.Enabled = false;
             this.timer.Elapsed += (sender, args) =>
                 {
-                    if (!this.active) return;
+                    if (!this.Active) return;
                     if (this.index == this.animationList.Length - 1)
                     {
                         this.index = 0;
