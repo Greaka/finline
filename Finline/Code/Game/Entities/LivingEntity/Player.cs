@@ -116,8 +116,11 @@ namespace Finline.Code.Game.Entities
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection)
         {
             this.Update();
+            if (!this.Dead)
+            {
+                this.SetViewDirection(shootDirection);
+            }
 
-            this.SetViewDirection(shootDirection);
             this.MoveDirection = moveDirection;
 
             this.isMoving = !moveDirection.Equals(Vector2.Zero);
