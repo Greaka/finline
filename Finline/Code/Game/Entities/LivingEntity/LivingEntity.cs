@@ -6,7 +6,6 @@
 //   The living entity.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Finline.Code.Game.Entities
 {
     using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace Finline.Code.Game.Entities
         /// <summary>
         /// Gets or sets a value indicating whether dead.
         /// </summary>
-        public bool Dead { get; set; }
+        public virtual bool Dead { get; set; }
 
         /// <summary>
         /// Gets or sets the model animation.

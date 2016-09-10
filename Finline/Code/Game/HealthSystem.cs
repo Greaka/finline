@@ -7,54 +7,41 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Finline.Code.Game.Entities
 {
+    using System.Linq;
+
     using Finline.Code.Game;
 
     public class HealthSystem
     {
-        private static int enemiesRemaining;
-        private static int bossHealth;
-
-        Sounds sounds = new Sounds();
-
-
-        public void LoadContent(ContentManager content)
+        public HealthSystem(List<Enemy> enemies, List<Boss> bosses)
         {
-            this.sounds.LoadContent(content);
+            this.enemies = enemies;
+            this.bosses = bosses;
         }
+
+        /// <summary>
+        /// The enemies.
+        /// </summary>
+        private readonly List<Enemy> enemies;
+
+        /// <summary>
+        /// The bosses.
+        /// </summary>
+        private readonly List<Boss> bosses;
 
         public int GetEnemiesRemaining()
         {
-            return enemiesRemaining;
+            return this.enemies.Count;
         }
+
         public int GetBossHealth()
         {
-            return bossHealth;
+            return this.bosses.Sum(boss => boss.Life);
         }
 
-        public void Initialize(List<Boss> bosses, List<Enemy> enemies)
+        public void Update(int index, Sounds sounds)
         {
-            enemiesRemaining = 0;
-            bossHealth = 10;
-
-            foreach (var nme in enemies)
-            {
-                enemiesRemaining++;
-            }
-            foreach (var nme in bosses)
-            {
-                enemiesRemaining++;
-            }
-        }
-
-        public void Update(int index)
-        {
-            if (index == 4) bossHealth--;
-
-            if (bossHealth == 0 || index == 3)
-            {
-                enemiesRemaining--;
-            }
-            this.sounds.SoundEffectPlay(index);
+            sounds.SoundEffectPlay(index);
         }
     }
 }

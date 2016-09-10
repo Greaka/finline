@@ -17,8 +17,6 @@ namespace Finline.Code.Game.Entities
 
         private Entity firingEntity;
 
-        HealthSystem healthSystem = new HealthSystem();
-
         /// <summary>
         /// Gets or sets the model.
         /// </summary>
@@ -45,10 +43,44 @@ namespace Finline.Code.Game.Entities
             this.timeStamp = actualTime;
             this.unitsPerSecond = 60;
             this.Bound = new List<Vector3>() { Vector3.Zero };
-            this.healthSystem.LoadContent(content);
         }
 
-        public void Update(TimeSpan actualTime, Player player, List<Boss> bosses, List<Enemy> enemies, List<EnvironmentObject> environmentObjects, List<Projectile> remove)
+        /// <summary>
+        /// The update.
+        /// </summary>
+        /// <param name="actualTime">
+        /// The actual time.
+        /// </param>
+        /// <param name="player">
+        /// The player.
+        /// </param>
+        /// <param name="bosses">
+        /// The bosses.
+        /// </param>
+        /// <param name="enemies">
+        /// The enemies.
+        /// </param>
+        /// <param name="environmentObjects">
+        /// The environment objects.
+        /// </param>
+        /// <param name="remove">
+        /// The remove.
+        /// </param>
+        /// <param name="healthSystem">
+        /// The health system.
+        /// </param>
+        /// <param name="sounds">
+        /// The sounds.
+        /// </param>
+        public void Update(
+            TimeSpan actualTime,
+            Player player,
+            List<Boss> bosses,
+            List<Enemy> enemies,
+            IEnumerable<EnvironmentObject> environmentObjects,
+            List<Projectile> remove,
+            HealthSystem healthSystem,
+            Sounds sounds)
         {
             var elapsedTime = (actualTime - this.timeStamp).TotalSeconds;
             var direction = this.GetViewDirection() * this.unitsPerSecond * (float)elapsedTime;
@@ -65,8 +97,9 @@ namespace Finline.Code.Game.Entities
                 remove.Add(this);
                 if (player.Dead == false)
                 {
-                    this.healthSystem.Update(2);
+                    healthSystem.Update(2, sounds);
                 }
+
                 player.Dead = true;
                 return;
             }
@@ -84,8 +117,9 @@ namespace Finline.Code.Game.Entities
                 remove.Add(this);
                 if (hitEntity.Dead == false)
                 {
-                    this.healthSystem.Update(3);
+                    healthSystem.Update(3, sounds);
                 }
+
                 hitEntity.Dead = true;
                 return;
             }
@@ -101,10 +135,11 @@ namespace Finline.Code.Game.Entities
                 }
 
                 remove.Add(this);
-                if (this.healthSystem.GetBossHealth() != 0)
+                if (healthSystem.GetBossHealth() != 0)
                 {
-                    this.healthSystem.Update(4);
+                    healthSystem.Update(4, sounds);
                 }
+
                 hitEntity.Dead = true;
                 return;
             }

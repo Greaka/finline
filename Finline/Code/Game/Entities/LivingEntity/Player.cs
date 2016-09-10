@@ -110,7 +110,7 @@ namespace Finline.Code.Game.Entities
 
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection)
         {
-            base.Update();
+            this.Update();
 
             this.SetViewDirection(shootDirection);
 

@@ -11,11 +11,11 @@ namespace Finline.Code.Game
     public class Sounds
     {
         private int currentSong = 1;
-        private static bool soundOn = true;
+        private bool soundOn = true;
         private Song musicMainMenu;
         private List<Song> musicIngame = new List<Song>();
         private List<SoundEffect> soundeffectList = new List<SoundEffect>();
-        private static SoundEffectInstance soundInstance;
+        private SoundEffectInstance soundInstance;
 
         private KeyboardState oldKeyState;
 
@@ -24,23 +24,24 @@ namespace Finline.Code.Game
             this.musicMainMenu = content.Load<Song>("Sounds/musicMainMenu");
             this.musicIngame.Add(content.Load<Song>("Sounds/musicIngame1"));
             this.musicIngame.Add(content.Load<Song>("Sounds/musicIngame2"));
-            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/gunshot"));          //position [0]
-            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemyshot"));        //position [1]
-            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/playerdeath"));      //position [2]
-            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemydeath"));       //position [3]
-            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemydeath"));       //position [4]
+            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/gunshot"));          // position [0]
+            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemyshot"));        // position [1]
+            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/playerdeath"));      // position [2]
+            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemydeath"));       // position [3]
+            this.soundeffectList.Add(content.Load<SoundEffect>("Sounds/enemydeath"));       // position [4]
         }
 
         public bool GetSoundOn()
         {
-            return soundOn;
+            return this.soundOn;
         }
 
         public void SoundEffectPlay(int index)
         {
-            soundInstance = this.soundeffectList[index].CreateInstance();
+            this.soundInstance = this.soundeffectList[index].CreateInstance();
 
-            if (this.GetSoundOn() == true) soundInstance.Play();
+            if (this.GetSoundOn() == true) this.soundInstance.Play();
+
             // else soundInstance.Stop();
         }
 
@@ -76,27 +77,27 @@ namespace Finline.Code.Game
 
         public void Update(GameTime gameTime)
         {
-            KeyboardState newKeyState = Keyboard.GetState();
+            var newKeyState = Keyboard.GetState();
             if (newKeyState.IsKeyDown(Keys.O) && this.oldKeyState.IsKeyUp(Keys.O))
             {
-                soundOn = !soundOn;
+                this.soundOn = !this.soundOn;
             }
 
             if (this.GetSoundOn() == true)
             {
                 MediaPlayer.Resume();
-                if (soundInstance != null)
+                if (this.soundInstance != null)
                 {
-                    soundInstance.Volume = 1.0f;
+                    this.soundInstance.Volume = 1.0f;
                 }
             }
             else
             {
                 MediaPlayer.Pause();
-                if (soundInstance != null)
+                if (this.soundInstance != null)
                 {
-                    soundInstance.Stop();
-                    soundInstance.Volume = 0.0f;
+                    this.soundInstance.Stop();
+                    this.soundInstance.Volume = 0.0f;
                 }
             }
 

@@ -59,6 +59,7 @@ namespace Finline.Code.DebugUtils
         public void Draw(GameTime gameTime, Matrix projectionMatrix, Matrix viewMatrix)
         {
             return;
+
             // this.spriteBatch.Begin();
 
             // const float Multiplikator = 7;

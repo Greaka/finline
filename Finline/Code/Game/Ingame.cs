@@ -22,10 +22,6 @@
     {
         public bool won;
 
-#if DEBUG
-        private HullDrawing hullDrawing;
-#endif
-
         /// <summary>
         /// The Input Parser.
         /// </summary>
@@ -62,11 +58,6 @@
         private readonly List<Projectile> projectiles = new List<Projectile>();
 
         /// <summary>
-        /// The health system.
-        /// </summary>
-        private readonly HealthSystem healthSystem = new HealthSystem();
-
-        /// <summary>
         /// The remove entities.
         /// </summary>
         private readonly List<LivingEntity> removeEntities = new List<LivingEntity>();
@@ -75,6 +66,29 @@
         /// The player.
         /// </summary>
         private readonly Player player;
+
+        /// <summary>
+        /// The sprite batch.
+        /// </summary>
+        private readonly SpriteBatch spriteBatch;
+
+#if DEBUG
+
+        /// <summary>
+        /// The hull drawing.
+        /// </summary>
+        private readonly HullDrawing hullDrawing;
+#endif
+
+        /// <summary>
+        /// The health system.
+        /// </summary>
+        private readonly HealthSystem healthSystem;
+
+        /// <summary>
+        /// The sounds.
+        /// </summary>
+        private readonly Sounds sounds;
 
         /// <summary>
         /// The enemy controls.
@@ -122,6 +136,16 @@
         private Ground ground;
 
         /// <summary>
+        /// The font.
+        /// </summary>
+        private SpriteFont font;
+
+        /// <summary>
+        /// The timer.
+        /// </summary>
+        private double timer;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Ingame"/> class.
         /// </summary>
         /// <param name="game"> the game.
@@ -129,9 +153,12 @@
         /// <param name="sb">
         /// The sprite batch.
         /// </param>
-        public Ingame(StateManager game, SpriteBatch sb)
+        public Ingame(StateManager game, SpriteBatch sb, Sounds sounds)
             : base(game)
         {
+            this.healthSystem = new HealthSystem(this.enemies, this.bosses);
+            this.spriteBatch = sb;
+            this.sounds = sounds;
             this.player = new Player();
             this.player.Death += game.main.GameOver;
             this.player.Death += game.GoMenu;
@@ -167,7 +194,7 @@
 
             this.enemyControls = new EnemyController();
             this.bossControls = new BossController();
-            this.projectileHandler = new Shooting(this.Game.Content, this.projectiles);
+            this.projectileHandler = new Shooting(this.Game.Content, this.projectiles, this.sounds);
             this.playerControls.Shoot += this.projectileHandler.Shoot;
             this.enemyControls.Shoot += this.projectileHandler.Shoot;
             this.bossControls.Shoot += this.projectileHandler.Shoot;
@@ -183,6 +210,7 @@
         /// </param>
         public override void Update(GameTime gameTime)
         {
+            this.timer += gameTime.ElapsedGameTime.TotalSeconds;
             this.playerControls.Update(
                 this.GraphicsDevice, 
                 out this.moveDirection, 
@@ -190,7 +218,7 @@
                 this.player, 
                 this.projectionMatrix, 
                 this.viewMatrix);
-            this.projectileHandler.Update(this.player, this.bosses, this.enemies, this.environmentObjects);
+            this.projectileHandler.Update(this.player, this.bosses, this.enemies, this.environmentObjects, this.healthSystem);
 
             this.enemyControls.Update(this.enemies, this.player.Position);
             this.bossControls.Update(this.bosses, this.player.Position);
@@ -241,7 +269,7 @@
 
             base.Update(gameTime);
 
-            won = !(enemies.Count > 0 || bosses.Count > 0);
+            this.won = !(this.enemies.Count > 0 || this.bosses.Count > 0);
         }
 
         /// <summary>
@@ -292,6 +320,11 @@
 #if DEBUG
             this.hullDrawing.Draw(gameTime, this.projectionMatrix, this.viewMatrix);
 #endif
+            this.spriteBatch.Begin();
+            this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0") + "s", new Vector2(500, 440), Color.WhiteSmoke);
+            this.spriteBatch.DrawString(this.font, "Enemies remaining: " + this.healthSystem.GetEnemiesRemaining(), new Vector2(10, 440), Color.DarkRed);
+            this.spriteBatch.DrawString(this.font, "Boss Health: " + this.healthSystem.GetBossHealth(), new Vector2(10, 410), Color.DarkRed);
+            this.spriteBatch.End();
 
             base.Draw(gameTime);
         }
@@ -301,6 +334,7 @@
         /// </summary>
         protected override void LoadContent()
         {
+            this.font = this.Game.Content.Load<SpriteFont>("font");
             this.ground.LoadContent(this.Game.GraphicsDevice, this.Game.Content);
 
             // this.enemies.Add(new Enemy(this.Game.Content, new Vector3(8, -15, 0)));
@@ -321,13 +355,13 @@
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(4, 233, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 246, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 259, 0), this.environmentObjects));
-            this.bosses.Add(new Boss(this.Game.Content, new Vector3(100, 240, 0), this.environmentObjects));
+            this.bosses.Add(new Boss(this.Game.Content, new Vector3(100, 240, 0), this.environmentObjects, 10));
 
 #if DEBUG
             this.hullDrawing.LoadEntities(this.environmentObjects, this.enemies, this.projectiles, this.player);
 #endif
             this.LoadEnvironment();
-            this.healthSystem.Initialize(this.bosses, this.enemies);
+
             foreach (var enemy in this.enemies)
             {
                 enemy.Death += this.EnemyDeath;
@@ -574,7 +608,7 @@
 
 
 
-#region 333
+
             for (var i = 25.1f; i < 34; i += 4)
             {
                 this.LevelObjects(i, 91, -1, GameConstants.EnvObjects.deskRight);
@@ -627,9 +661,9 @@
                 this.LevelObjects(i, 108, -1, GameConstants.EnvObjects.chairLeft);
             }
 
-#endregion
 
-#region Treppenhaus
+
+
             for (var i = 30.1f; i < 39; i += 4)
             {
                 this.LevelObjects(i, 124.5f, -1, GameConstants.EnvObjects.deskRight);
@@ -650,7 +684,7 @@
                 this.LevelObjects(i, 121.5f, -1, GameConstants.EnvObjects.chairLeft);
             }
 
-#endregion
+
 
 #region Erster Raum oben
 

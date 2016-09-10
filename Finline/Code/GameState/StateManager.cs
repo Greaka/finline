@@ -13,8 +13,9 @@ namespace Finline.Code.GameState
 {
     using System;
 
-    using Game;
     using Finline.Code.Game.Entities;
+
+    using Game;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -54,8 +55,6 @@ namespace Finline.Code.GameState
         /// The <see cref="SpriteBatch"/>.
         /// </summary>
         private SpriteBatch spriteBatch;
-
-        private SpriteFont font;
 #region PauseStuff
         private bool isPressed = false;
         private bool paused = false;
@@ -73,8 +72,11 @@ namespace Finline.Code.GameState
         private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
 
 #region MusicStuff
-        Sounds sounds = new Sounds();
-        HealthSystem healthSystem = new HealthSystem();
+
+        /// <summary>
+        /// The sounds.
+        /// </summary>
+        private readonly Sounds sounds = new Sounds();
 #endregion
 
         /// <summary>
@@ -123,7 +125,6 @@ namespace Finline.Code.GameState
             this.main.GoIngame += this.StartNewGame;
 
             this.main.Initialize();
-            this.font = this.Content.Load<SpriteFont>("font");
 
             this.pausedTexture2D = this.Content.Load<Texture2D>("Icons/PauseIcon");
             this.pausedRectangle = new Rectangle(320, 30, this.pausedTexture2D.Width, this.pausedTexture2D.Height);
@@ -163,7 +164,6 @@ namespace Finline.Code.GameState
             // TODO: Unload any non ContentManager content here
         }
         
-        private float timer = 0;
         private float deltaTime;
         private bool timePaused = false;
         private bool mouseIsPressed = false;
@@ -196,7 +196,7 @@ namespace Finline.Code.GameState
             }
             
             // MouseState mouse = Mouse.GetState();
-            KeyboardState k = Keyboard.GetState();
+            var k = Keyboard.GetState();
             if (this.currentGameState == EGameState.InGame && this.paused)
 
                 foreach (var element in this.guiElements[this.currentGameState])
@@ -221,20 +221,14 @@ namespace Finline.Code.GameState
 
             if (!this.paused)
             {
-                this.timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (this.currentGameState == EGameState.MainMenu)
-                {
-                    this.timer = 0;
-                }
-                
                 this.gameState.Update(gameTime);
-                if (currentGameState == EGameState.InGame)
+                if (this.currentGameState == EGameState.InGame)
                 {
-                    Ingame game = (Ingame)gameState;
+                    var game = (Ingame)this.gameState;
                     if (game.won)
                     {
-                        nextGameState = EGameState.MainMenu;
-                        main.MenuState = MainMenu.EMenuState.WinningScreen;
+                        this.nextGameState = EGameState.MainMenu;
+                        this.main.MenuState = MainMenu.EMenuState.WinningScreen;
                     }
                 }
             }
@@ -290,14 +284,7 @@ namespace Finline.Code.GameState
                     }
                 }
             }
-
-            if (this.currentGameState == EGameState.InGame)
-            {
-                this.spriteBatch.DrawString(this.font, "Your current time is: " + this.timer.ToString("00.0") + "s", new Vector2(500, 440), Color.WhiteSmoke);
-                this.spriteBatch.DrawString(this.font, "Enemies remaining: " + this.healthSystem.GetEnemiesRemaining(), new Vector2(10, 440), Color.DarkRed);
-                this.spriteBatch.DrawString(this.font, "Boss Health: " + this.healthSystem.GetBossHealth(), new Vector2(10, 410), Color.DarkRed);
-            }
-
+            
             this.spriteBatch.End();
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
@@ -339,7 +326,7 @@ namespace Finline.Code.GameState
                     break;
 
                 case EGameState.InGame:
-                    this.gameState = new Ingame(this, this.spriteBatch);
+                    this.gameState = new Ingame(this, this.spriteBatch, this.sounds);
                     break;
                 case EGameState.None:
                     break;

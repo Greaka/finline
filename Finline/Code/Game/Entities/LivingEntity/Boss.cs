@@ -14,8 +14,30 @@ namespace Finline.Code.Game.Entities
     {
         public bool Shoot = false;
 
-        public Boss(ContentManager contentManager, Vector3 position, List<EnvironmentObject> environmentObjects)
+        /// <summary>
+        /// Gets the life.
+        /// </summary>
+        public ushort Life { get; private set; }
+
+        public override bool Dead
         {
+            get
+            {
+                return this.Life == 0;
+            }
+
+            set
+            {
+                if (value)
+                {
+                    --this.Life;
+                }
+            }
+        }
+
+        public Boss(ContentManager contentManager, Vector3 position, List<EnvironmentObject> environmentObjects, ushort life)
+        {
+            this.Life = life;
             this.EnvironmentObjects = environmentObjects;
             this.ModelAnimation = new Animation(4);
             this.DeathAnimation = new Animation(4, false);
@@ -44,7 +66,7 @@ namespace Finline.Code.Game.Entities
 
         public void Update(Vector3 playerPosition)
         {
-            base.Update();
+            this.Update();
 
             var distance = this.position - playerPosition;
             var view = new Ray(this.position, distance);

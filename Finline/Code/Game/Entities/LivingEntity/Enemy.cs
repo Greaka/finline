@@ -50,7 +50,7 @@ namespace Finline.Code.Game.Entities
         /// </param>
         public void Update(Vector3 playerPosition)
         {
-            base.Update();
+            this.Update();
 
             var canSee = this.Position.CanSee(playerPosition, this.EnvironmentObjects);
             if (!canSee)

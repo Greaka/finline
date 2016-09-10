@@ -21,8 +21,6 @@ namespace Finline.Code.Game.Controls
     /// </summary>
     public class Shooting
     {
-        Sounds sounds = new Sounds();
-
         /// <summary>
         /// The stopwatch.
         /// </summary>
@@ -35,6 +33,8 @@ namespace Finline.Code.Game.Controls
         
         private readonly List<Projectile> projectiles;
 
+        private readonly Sounds sounds;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Shooting"/> class. 
         /// Instantiates indices pool.
@@ -45,17 +45,26 @@ namespace Finline.Code.Game.Controls
         /// <param name="projectiles">
         /// <see cref="List{Projectile}"/> to have a reference on it in this class.
         /// </param>
-        public Shooting(ContentManager shiny, List<Projectile> projectiles)
+        public Shooting(ContentManager shiny, List<Projectile> projectiles, Sounds sounds)
         {
             this.content = shiny;
             this.stopwatch.Restart();
             this.projectiles = projectiles;
-            this.sounds.LoadContent(shiny);
+            this.sounds = sounds;
         }
 
         /// <summary>
         /// Creates new <see cref="Projectile"/>, adds it to the Projectile list and binds his destructor.
         /// </summary>
+        /// <param name="firedFrom">
+        /// The fired From.
+        /// </param>
+        /// <param name="direction">
+        /// The direction.
+        /// </param>
+        /// <param name="index">
+        /// The index.
+        /// </param>
         public void Shoot(Entity firedFrom, Vector2 direction, int index)
         {
             var projectile = new Projectile(this.stopwatch.Elapsed, this.content, firedFrom, direction, index);
@@ -78,12 +87,20 @@ namespace Finline.Code.Game.Controls
         /// <param name="environmentObjects">
         /// The environment Objects.
         /// </param>
-        public void Update(Player player, List<Boss> bosses, List<Enemy> enemies, List<EnvironmentObject> environmentObjects)
+        /// <param name="healthSystem">
+        /// The health System.
+        /// </param>
+        public void Update(
+            Player player,
+            List<Boss> bosses,
+            List<Enemy> enemies,
+            List<EnvironmentObject> environmentObjects,
+            HealthSystem healthSystem)
         {
             var remove = new List<Projectile>();
             foreach (var outch in this.projectiles)
             {
-                outch.Update(this.stopwatch.Elapsed, player, bosses, enemies, environmentObjects, remove);
+                outch.Update(this.stopwatch.Elapsed, player, bosses, enemies, environmentObjects, remove, healthSystem, this.sounds);
             }
 
             foreach (var index in remove)
