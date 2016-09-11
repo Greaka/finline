@@ -17,6 +17,7 @@ namespace Finline.Code.Game.Entities.LivingEntity
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
 
     public class Player : LivingEntity
     {
@@ -106,8 +107,39 @@ namespace Finline.Code.Game.Entities.LivingEntity
             this.Model = modelStand;
         }
 
+#if DEBUG
+        private bool godMode = false;
+        private bool alreadyPressed;
+
+        private bool dead = false;
+
+        public override bool Dead
+        {
+            get
+            {
+                return this.dead;
+            }
+
+            set
+            {
+                if (!this.godMode)
+                {
+                    this.dead = value;
+                }
+            }
+        }
+#endif
+
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection)
         {
+#if DEBUG
+            if (!this.alreadyPressed && Keyboard.GetState().IsKeyDown(Keys.G))
+            {
+                this.godMode = !this.godMode;
+                this.alreadyPressed = true;
+            }
+            else if (this.alreadyPressed && Keyboard.GetState().IsKeyUp(Keys.G)) this.alreadyPressed = false;
+#endif
             this.Update();
             if (!this.Dead)
             {
