@@ -50,6 +50,7 @@
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("CreditsButton"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("EndButton"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("EnemySmaller"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("MainMenu"));
 
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("ChooseText"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("StartGame"));
@@ -116,6 +117,8 @@
 
                 // move the "end" button down in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "EnemySmaller").MoveElement(150, -20);
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "MainMenu").MoveElement(0,-265);
+
 
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "ChooseText").MoveElement(0, -265);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "studentprofile")
