@@ -14,7 +14,9 @@ namespace Finline.Code.Game
     using System.Linq;
 
     using Finline.Code.Constants;
+#if DEBUG
     using Finline.Code.DebugUtils;
+#endif
     using Finline.Code.Game.Controls;
     using Finline.Code.Game.Entities;
     using Finline.Code.Game.Entities.LivingEntity;
@@ -709,7 +711,7 @@ namespace Finline.Code.Game
                 this.LevelObjects(i - 2, 217, -1, GameConstants.EnvObjects.chairRight);
             }
 
-            #endregion
+#endregion
 
 #region Dritter Raum unten
 
@@ -789,9 +791,9 @@ namespace Finline.Code.Game
                 this.LevelObjects(1.8f, i, -1, GameConstants.EnvObjects.deskDown);
             }
 
-            #endregion
+#endregion
 
-            #region Hoersaal
+#region Hoersaal
             for (var i = 213; i<=229; i += 4)
             {
                 this.LevelObjects(65, i, -1, GameConstants.EnvObjects.deskUp);
@@ -819,7 +821,7 @@ namespace Finline.Code.Game
             this.LevelObjects(77, 213, -1, GameConstants.EnvObjects.chairLeft);
             this.LevelObjects(77.5f, 238.5f, -1, GameConstants.EnvObjects.deskLeft);
             this.LevelObjects(89, 221, -1, GameConstants.EnvObjects.deskLeft);
-            #endregion
+#endregion
 
 
 
@@ -874,7 +876,7 @@ namespace Finline.Code.Game
             this.LevelObjects2(37.9f, 198, 2, GameConstants.NonEnvObjects.poster_dragonball);
             #endregion
 
-            #region Loading Whiteboards
+#region Loading Whiteboards
 
             this.LevelObjects(29, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
             this.LevelObjects(16, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
