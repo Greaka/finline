@@ -80,7 +80,8 @@ namespace Finline.Code.Game.Entities.LivingEntity
             this.DeathAnimation = new Animation(4, false);
 
             this.position = new Vector3(4, 4, -0.5f); // Standard
-
+            // this.position = new Vector3(100, 240, -0.5f); // BossRaum
+            
             // Animation DeathAnimation = new Animation(4);
 
             // this.position = new Vector3(90, 240, 0);   // Hörsaal
