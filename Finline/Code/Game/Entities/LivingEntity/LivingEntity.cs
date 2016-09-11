@@ -11,6 +11,7 @@ namespace Finline.Code.Game.Entities.LivingEntity
     using System.Collections.Generic;
 
     using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Input;
 
     /// <summary>
     /// The living entity.

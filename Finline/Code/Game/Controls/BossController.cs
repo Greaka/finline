@@ -46,7 +46,7 @@ namespace Finline.Code.Game.Controls
         private void Shootroutine(Entity firedFrom, Player player, int index)
         {
             var direction = (player.Position - firedFrom.Position).Get2D();
-            direction += player.MoveDirection * direction.Length() / Projectile.UnitsPerSecond;
+            direction += player.MoveDirection * Projectile.UnitsPerSecond / direction.Length();
             this.Shoot?.Invoke(firedFrom, direction, index);
             this.Shoot?.Invoke(firedFrom, direction + new Vector2(2), index);
             this.Shoot?.Invoke(firedFrom, direction - new Vector2(2), index);
