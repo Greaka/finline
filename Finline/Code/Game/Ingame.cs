@@ -873,7 +873,8 @@ namespace Finline.Code.Game
             this.LevelObjects2(18.2f, 181, 2, GameConstants.NonEnvObjects.poster_zombie);
             this.LevelObjects2(24.2f, 160, 2, GameConstants.NonEnvObjects.poster_cat);
             this.LevelObjects2(21.9f, 245, 2, GameConstants.NonEnvObjects.poster_totoro);
-#endregion
+            this.LevelObjects2(37.9f, 198, 2, GameConstants.NonEnvObjects.poster_dragonball);
+            #endregion
 
 #region Loading Whiteboards
 
@@ -903,7 +904,38 @@ namespace Finline.Code.Game
             this.LevelObjects(2, 140, 0, GameConstants.EnvObjects.plant);
             this.LevelObjects(2, 145, 0, GameConstants.EnvObjects.plant);
             this.LevelObjects(1.5f, 180, 0, GameConstants.EnvObjects.plant);
-#endregion
+            this.LevelObjects(2, 226, 0, GameConstants.EnvObjects.plant);
+
+            this.LevelObjects(131, 213, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(121, 213, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(111, 213, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(101, 213, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(91, 213, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(81, 213, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(59.5f, 213, -1, GameConstants.EnvObjects.plant);
+
+
+            this.LevelObjects(131, 213, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(131, 227, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(131, 240, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(131, 260, -1, GameConstants.EnvObjects.plant);
+
+            this.LevelObjects(121, 262, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(111, 262, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(101, 262, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(91, 262, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(81, 262, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(59.5f, 262, -1, GameConstants.EnvObjects.plant);
+
+            this.LevelObjects(56.5f, 244, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(56.5f, 231, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(48.5f, 244, -1, GameConstants.EnvObjects.plant);
+            this.LevelObjects(48.5f, 231, -1, GameConstants.EnvObjects.plant);
+       
+
+
+
+            #endregion
         }
 
         /// <summary>
