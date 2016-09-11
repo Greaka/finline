@@ -1,4 +1,13 @@
-﻿namespace Finline.Code.Game.Entities
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Weapon.cs" company="Acagamics e.V.">
+//   APGL
+// </copyright>
+// <summary>
+//   Defines the Weapon type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Finline.Code.Game.Entities
 {
     using System;
 
@@ -9,10 +18,35 @@
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
+    /// <summary>
+    /// The weapon.
+    /// </summary>
     public class Weapon : Entity
     {
+        /// <summary>
+        /// The player.
+        /// </summary>
         private readonly Player player;
 
+        /// <summary>
+        /// The death time.
+        /// </summary>
+        private double deathTime;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Weapon"/> class.
+        /// </summary>
+        /// <param name="player">
+        /// The player.
+        /// </param>
+        public Weapon(Player player)
+        {
+            this.player = player;
+        }
+
+        /// <summary>
+        /// Gets or sets the model.
+        /// </summary>
         protected override Model Model
         {
             get
@@ -26,21 +60,23 @@
             }
         }
 
-        public Weapon(Player player)
-        {
-            this.player = player;
-        }
-
+        /// <summary>
+        /// The initialize.
+        /// </summary>
+        /// <param name="contentManager">
+        /// The content manager.
+        /// </param>
         public void Initialize(ContentManager contentManager)
         {
             this.Model = contentManager.Load<Model>("weapon");
         }
 
         /// <summary>
-        /// The death time.
+        /// The update.
         /// </summary>
-        private double deathTime;
-
+        /// <param name="gameTime">
+        /// The game time.
+        /// </param>
         public void Update(GameTime gameTime)
         {
             this.SetViewDirection(this.player.GetViewDirection());
@@ -52,7 +88,7 @@
                 return;
             }
 
-            if (this.deathTime == 0)
+            if (Math.Abs(this.deathTime) < 1e-10)
             {
                 this.deathTime = gameTime.TotalGameTime.TotalSeconds;
             }
@@ -64,6 +100,15 @@
             }
         }
 
+        /// <summary>
+        /// The draw.
+        /// </summary>
+        /// <param name="viewMatrix">
+        /// The view matrix.
+        /// </param>
+        /// <param name="projectionMatrix">
+        /// The projection matrix.
+        /// </param>
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
           base.Draw(viewMatrix, projectionMatrix, this.Model);

@@ -1,4 +1,12 @@
-﻿namespace Finline.Code.Game.Entities
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="EnvironmentObject.cs" company="Acagamics e.V.">
+//   APGL
+// </copyright>
+// <summary>
+//   Defines the EnvironmentObject type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Finline.Code.Game.Entities
 {
     using Finline.Code.Constants;
     using Finline.Code.Utility;
@@ -7,14 +15,37 @@
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
+    /// <summary>
+    /// The environment object.
+    /// </summary>
     public class EnvironmentObject : Entity
     {
-        private readonly bool orbit = false;
-        public bool Visible { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EnvironmentObject"/> class.
+        /// </summary>
+        /// <param name="contentManager">
+        /// The content manager.
+        /// </param>
+        /// <param name="position">
+        /// The position.
+        /// </param>
+        /// <param name="model">
+        /// The model.
+        /// </param>
+        public EnvironmentObject(ContentManager contentManager, Vector3 position, GameConstants.EnvObjects model)
+        {
+            this.Visible = true;
+            this.Type = model;
 
-        public GameConstants.EnvObjects Type { get; }
+            this.Model = contentManager.Load<Model>(model.ToString());
+            this.position = position;
+            this.Angle = 0;
+        }
 
-        protected override Model Model
+        /// <summary>
+        /// Gets or sets the model.
+        /// </summary>
+        protected override sealed Model Model
         {
             get
             {
@@ -28,11 +59,11 @@
 
                 switch (this.Type)
                 {
-                        case GameConstants.EnvObjects.wallV:
-                        sphere = VerschiebeBound(sphere, new Vector2(-1.6f, 0.2f));
+                    case GameConstants.EnvObjects.wallV:
+                        sphere = EnvironmentObject.VerschiebeBound(sphere, new Vector2(-1.6f, 0.2f));
                         break;
-                        case GameConstants.EnvObjects.wallH:
-                        sphere = VerschiebeBound(sphere, new Vector2(0, -2f));
+                    case GameConstants.EnvObjects.wallH:
+                        sphere = EnvironmentObject.VerschiebeBound(sphere, new Vector2(0, -2f));
                         break;
                 }
 
@@ -40,29 +71,31 @@
             }
         }
 
-        public EnvironmentObject(ContentManager contentManager, Vector3 position, GameConstants.EnvObjects model)
-        {
-            this.Visible = true;
-            this.Type = model;
+        /// <summary>
+        /// Gets a value indicating whether visible.
+        /// </summary>
+        private bool Visible { get; }
 
-            this.Model = contentManager.Load<Model>(model.ToString());
-            this.position = position;
-            this.Angle = 0;
-        }
+        /// <summary>
+        /// Gets the type.
+        /// </summary>
+        private GameConstants.EnvObjects Type { get; }
 
-        public void Update(GameTime gameTime)
-        {
-            if (this.orbit)
-            {
-                this.Angle += 0.1f;
-            }
-        }
-
+        /// <summary>
+        /// The draw.
+        /// </summary>
+        /// <param name="viewMatrix">
+        /// The view matrix.
+        /// </param>
+        /// <param name="projectionMatrix">
+        /// The projection matrix.
+        /// </param>
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
             if (this.Visible)
+            {
                 base.Draw(viewMatrix, projectionMatrix);
+            }
         }
     }
-
 }

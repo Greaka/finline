@@ -1,5 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Player.cs" company="">
+// <copyright file="Player.cs" company="Acagamics e.V.">
+//   APGL
 // </copyright>
 // <summary>
 //   Defines the Player type.
@@ -19,6 +20,9 @@ namespace Finline.Code.Game.Entities.LivingEntity
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
 
+    /// <summary>
+    /// The player.
+    /// </summary>
     public class Player : LivingEntity
     {
         /// <summary>
@@ -31,26 +35,69 @@ namespace Finline.Code.Game.Entities.LivingEntity
         /// </summary>
         private bool isMoving;
 
+#if DEBUG
+        /// <summary>
+        /// The god mode.
+        /// </summary>
+        private bool godMode;
+
+        /// <summary>
+        /// The already pressed.
+        /// </summary>
+        private bool alreadyPressed;
+
+        /// <summary>
+        /// The dead.
+        /// </summary>
+        private bool dead;
+#endif
+
+        /// <summary>
+        /// The player selection.
+        /// </summary>
+        [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "is later used as string for content loading")]
+        public enum PlayerSelection
+        {
+            /// <summary>
+            /// The student.
+            /// </summary>
+            student,
+
+            /// <summary>
+            /// The prof.
+            /// </summary>
+            prof
+        }
+
         /// <summary>
         /// Gets the move direction.
         /// </summary>
         public Vector2 MoveDirection { get; private set; }
 
-        protected override Model Model
+#if DEBUG
+        /// <summary>
+        /// Gets or sets a value indicating whether dead.
+        /// </summary>
+        public override bool Dead
         {
             get
             {
-                return base.Model;
+                return this.dead;
             }
 
             set
             {
-                this.model = value;
-                var sphere = this.Model.GetVertices().Select(vec => vec * 0.14f).ToList().GetHull();
-                this.Bound = sphere;
+                if (!this.godMode)
+                {
+                    this.dead = value;
+                }
             }
         }
+#endif
 
+        /// <summary>
+        /// Gets the get bound.
+        /// </summary>
         public override VertexPositionColor[] GetBound
         {
             get
@@ -66,13 +113,33 @@ namespace Finline.Code.Game.Entities.LivingEntity
             }
         }
 
-        [SuppressMessage("ReSharper", "InconsistentNaming")]
-        public enum PlayerSelection
+        /// <summary>
+        /// Gets or sets the model.
+        /// </summary>
+        protected override Model Model
         {
-            student, 
-            prof
+            get
+            {
+                return base.Model;
+            }
+
+            set
+            {
+                this.model = value;
+                var sphere = this.Model.GetVertices().Select(vec => vec * 0.14f).ToList().GetHull();
+                this.Bound = sphere;
+            }
         }
 
+        /// <summary>
+        /// The initialize.
+        /// </summary>
+        /// <param name="contentManager">
+        /// The content manager.
+        /// </param>
+        /// <param name="environmentObjects">
+        /// The environment objects.
+        /// </param>
         public void Initialize(ContentManager contentManager, List<EnvironmentObject> environmentObjects)
         {
             this.EnvironmentObjects = environmentObjects;
@@ -109,29 +176,18 @@ namespace Finline.Code.Game.Entities.LivingEntity
             this.Model = modelStand;
         }
 
-#if DEBUG
-        private bool godMode;
-        private bool alreadyPressed;
-
-        private bool dead;
-
-        public override bool Dead
-        {
-            get
-            {
-                return this.dead;
-            }
-
-            set
-            {
-                if (!this.godMode)
-                {
-                    this.dead = value;
-                }
-            }
-        }
-#endif
-
+        /// <summary>
+        /// The update.
+        /// </summary>
+        /// <param name="gameTime">
+        /// The game time.
+        /// </param>
+        /// <param name="moveDirection">
+        /// The move direction.
+        /// </param>
+        /// <param name="shootDirection">
+        /// The shoot direction.
+        /// </param>
         public void Update(GameTime gameTime, Vector2 moveDirection, Vector2 shootDirection)
         {
 #if DEBUG
@@ -140,7 +196,10 @@ namespace Finline.Code.Game.Entities.LivingEntity
                 this.godMode = !this.godMode;
                 this.alreadyPressed = true;
             }
-            else if (this.alreadyPressed && Keyboard.GetState().IsKeyUp(Keys.G)) this.alreadyPressed = false;
+            else if (this.alreadyPressed && Keyboard.GetState().IsKeyUp(Keys.G))
+            {
+                this.alreadyPressed = false;
+            }
 #endif
             this.Update(gameTime);
             if (!this.Dead)
@@ -161,6 +220,15 @@ namespace Finline.Code.Game.Entities.LivingEntity
             }
         }
 
+        /// <summary>
+        /// The draw.
+        /// </summary>
+        /// <param name="viewMatrix">
+        /// The view matrix.
+        /// </param>
+        /// <param name="projectionMatrix">
+        /// The projection matrix.
+        /// </param>
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
             if (this.Dead == false)

@@ -14,7 +14,7 @@
         private Rectangle guiRect;
         private Texture2D guiTexture;
 
-        MouseState oldMouseState;
+        private MouseState oldMouseState;
         public static Player.PlayerSelection Ausgewaehlt = Player.PlayerSelection.student;
 
 

@@ -9,8 +9,6 @@
 namespace Finline.Code.Utility
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using Finline.Code.Constants;
 
@@ -21,6 +19,7 @@ namespace Finline.Code.Utility
     /// </summary>
     internal static class VectorHelper
     {
+/*
         /// <summary>
         /// The lerp.
         /// </summary>
@@ -40,7 +39,9 @@ namespace Finline.Code.Utility
         {
             return ((1f - interval) * from) + (interval * target);
         }
+*/
 
+/*
         /// <summary>
         /// The lerp 2 d.
         /// </summary>
@@ -61,6 +62,7 @@ namespace Finline.Code.Utility
             target.Z = from.Z;
             return ((1f - interval) * from) + (interval * target);
         }
+*/
 
         /// <summary>
         /// The rotate 2 d.
@@ -182,6 +184,7 @@ namespace Finline.Code.Utility
             return new Vector2(me.X, me.Y);
         }
 
+/*
         /// <summary>
         /// The get 2 d.
         /// </summary>
@@ -195,6 +198,7 @@ namespace Finline.Code.Utility
         {
             return me.Select(vec => vec.Get2D()).ToList();
         }
+*/
 
         /// <summary>
         /// The rotate origin.
