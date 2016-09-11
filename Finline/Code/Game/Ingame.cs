@@ -243,16 +243,6 @@ namespace Finline.Code.Game
             // }
             this.player.Update(gameTime, this.moveDirection, this.shootDirection);
             this.weapon.Update(gameTime);
-            
-            foreach (var obj in this.environmentObjects)
-            {
-                obj.Update(gameTime);
-            }
-
-            foreach (var obj in this.nonEnvironmentObjects)
-            {
-                obj.Update(gameTime);
-            }
 
             foreach (var enemy in this.enemies)
             {

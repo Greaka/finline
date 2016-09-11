@@ -42,7 +42,7 @@
     <Compile Include="Code\Constants\GraphicConstants.cs" />
     <Compile Include="Code\DebugUtils\HullDrawing.cs" />
     <Compile Include="Code\GameState\StateManager.cs" />
-    <Compile Include="Code\GameState\GameState.cs" />
+    <Compile Include="Code\GameState\EGameState.cs" />
     <Compile Include="Code\GameState\GuiElement.cs" />
     <Compile Include="Code\GameState\MainMenu.cs" />
     <Compile Include="Code\Game\Animation.cs" />

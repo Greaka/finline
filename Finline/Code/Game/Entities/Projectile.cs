@@ -1,4 +1,13 @@
-﻿namespace Finline.Code.Game.Entities
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Projectile.cs" company="Acagamics e.V.">
+//   APGL
+// </copyright>
+// <summary>
+//   Defines the Projectile type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Finline.Code.Game.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -10,16 +19,53 @@
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
+    /// <summary>
+    /// The projectile.
+    /// </summary>
     public sealed class Projectile : Entity
     {
-        private TimeSpan timeStamp;
-
         /// <summary>
         /// The units per second.
         /// </summary>
         public const float UnitsPerSecond = 60;
 
+        /// <summary>
+        /// The firing entity.
+        /// </summary>
         private readonly Entity firingEntity;
+
+        /// <summary>
+        /// The time stamp.
+        /// </summary>
+        private TimeSpan timeStamp;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Projectile"/> class.
+        /// </summary>
+        /// <param name="actualTime">
+        /// The actual time.
+        /// </param>
+        /// <param name="content">
+        /// The content.
+        /// </param>
+        /// <param name="firedFrom">
+        /// The fired from.
+        /// </param>
+        /// <param name="direction">
+        /// The direction.
+        /// </param>
+        /// <param name="index">
+        /// The index.
+        /// </param>
+        public Projectile(TimeSpan actualTime, ContentManager content, Entity firedFrom, Vector2 direction, int index)
+        {
+            this.firingEntity = firedFrom;
+            this.Model = content.Load<Model>(index == 0 ? "ball" : "blobball");
+            this.position = new Vector3(firedFrom.Position.X, firedFrom.Position.Y, 3f);
+            this.Angle = direction.GetAngle();
+            this.timeStamp = actualTime;
+            this.Bound = new List<Vector3> { Vector3.Zero };
+        }
 
         /// <summary>
         /// Gets or sets the model.
@@ -35,17 +81,6 @@
             {
                 this.model = value;
             }
-        }
-
-        public Projectile(TimeSpan actualTime, ContentManager content, Entity firedFrom, Vector2 direction, int index)
-        {
-            this.firingEntity = firedFrom;
-            if (index == 0) this.Model = content.Load<Model>("ball");
-            else this.Model = content.Load<Model>("blobball");
-            this.position = new Vector3(firedFrom.Position.X, firedFrom.Position.Y, 3f);
-            this.Angle = direction.GetAngle();
-            this.timeStamp = actualTime;
-            this.Bound = new List<Vector3> { Vector3.Zero };
         }
 
         /// <summary>

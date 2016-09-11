@@ -1,17 +1,41 @@
-﻿namespace Finline.Code.Game
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Ground.cs" company="Acagamics e.V.">
+//   APGL
+// </copyright>
+// <summary>
+//   Defines the Ground type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Finline.Code.Game
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
+    /// <summary>
+    /// The ground.
+    /// </summary>
     internal class Ground
     {
+        /// <summary>
+        /// The checkerboard texture.
+        /// </summary>
         private Texture2D checkerboardTexture;
 
+        /// <summary>
+        /// The floor vertices.
+        /// </summary>
         private VertexPositionNormalTexture[] floorVerts;
 
+        /// <summary>
+        /// The effect.
+        /// </summary>
         private BasicEffect effect;
 
+        /// <summary>
+        /// The initialize.
+        /// </summary>
         public void Initialize()
         {
             const float X = 66;
@@ -39,6 +63,15 @@
             this.floorVerts[5].TextureCoordinate = this.floorVerts[2].TextureCoordinate;
         }
 
+        /// <summary>
+        /// The load content.
+        /// </summary>
+        /// <param name="gdevice">
+        /// The graphics device.
+        /// </param>
+        /// <param name="content">
+        /// The content.
+        /// </param>
         public void LoadContent(GraphicsDevice gdevice, ContentManager content)
         {
             this.effect = new BasicEffect(gdevice);
@@ -46,6 +79,18 @@
             this.checkerboardTexture = (Texture2D)content.Load<Texture>("MapV7a");
         }
 
+        /// <summary>
+        /// The draw.
+        /// </summary>
+        /// <param name="gdevice">
+        /// The graphics device.
+        /// </param>
+        /// <param name="viewMatrix">
+        /// The view matrix.
+        /// </param>
+        /// <param name="projectionMatrix">
+        /// The projection matrix.
+        /// </param>
         public void Draw(GraphicsDevice gdevice, Matrix viewMatrix, Matrix projectionMatrix)
         {
             this.effect.View = viewMatrix;

@@ -23,25 +23,27 @@ namespace Finline.Code.GameState
     /// </summary>
     public class StateManager : Game
     {
+        #region MusicStuff
+        /// <summary>
+        /// The sounds.
+        /// </summary>
+        private readonly Sounds sounds = new Sounds();
+        #endregion
+
+        /// <summary>
+        /// The GUI elements.
+        /// </summary>
+        private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
+
         /// <summary>
         /// The actual game state object.
         /// </summary>
         private DrawableGameComponent gameState;
-
-        /// <summary>
-        /// newRes puts an EGameState to null
-        /// </summary>
-        // private EGameState? newRes = null;
-
+        
         /// <summary>
         /// The current game state.
         /// </summary>
         private EGameState currentGameState;
-
-        /// <summary>
-        /// The main menu.
-        /// </summary>
-        public MainMenu Main;
 
         /// <summary>
         /// The next game state.
@@ -52,28 +54,60 @@ namespace Finline.Code.GameState
         /// The <see cref="SpriteBatch"/>.
         /// </summary>
         private SpriteBatch spriteBatch;
-#region PauseStuff
+
+        /// <summary>
+        /// The delta time.
+        /// </summary>
+        private float deltaTime;
+
+        /// <summary>
+        /// The mouse is pressed.
+        /// </summary>
+        private bool mouseIsPressed;
+        #region PauseStuff
+
+        /// <summary>
+        /// The is pressed.
+        /// </summary>
         private bool isPressed;
+
+        /// <summary>
+        /// The paused.
+        /// </summary>
         private bool paused;
+
+        /// <summary>
+        /// The paused texture 2 d.
+        /// </summary>
         private Texture2D pausedTexture2D;
+
+        /// <summary>
+        /// The paused rectangle.
+        /// </summary>
         private Rectangle pausedRectangle;
         #endregion
 
 #region SoundIcons
-        private Texture2D soundOnTexture2D;
-        private Rectangle soundOnRectangle;
-        private Texture2D soundOffTexture2D;
-        private Rectangle soundOffRectangle;
-#endregion
-
-        private readonly Dictionary<EGameState, List<GuiElement>> guiElements = new Dictionary<EGameState, List<GuiElement>>();
-
-#region MusicStuff
 
         /// <summary>
-        /// The sounds.
+        /// The sound on texture 2 d.
         /// </summary>
-        private readonly Sounds sounds = new Sounds();
+        private Texture2D soundOnTexture2D;
+
+        /// <summary>
+        /// The sound on rectangle.
+        /// </summary>
+        private Rectangle soundOnRectangle;
+
+        /// <summary>
+        /// The sound off texture 2 d.
+        /// </summary>
+        private Texture2D soundOffTexture2D;
+
+        /// <summary>
+        /// The sound off rectangle.
+        /// </summary>
+        private Rectangle soundOffRectangle;
 #endregion
 
         /// <summary>
@@ -87,13 +121,28 @@ namespace Finline.Code.GameState
 
             this.guiElements[EGameState.InGame].Add(new GuiElement("Play"));
             this.guiElements[EGameState.InGame].Add(new GuiElement("Back2MainMenu"));
-
         }
+
+        /// <summary>
+        /// Gets the main.
+        /// </summary>
+        public MainMenu Main { get; private set; }
 
         /// <summary>
         /// Gets the <see cref="GraphicsDeviceManager"/>.
         /// </summary>
         public GraphicsDeviceManager Graphics { get; private set; }
+
+        /// <summary>
+        /// The go menu.
+        /// </summary>
+        /// <param name="me">
+        /// The me.
+        /// </param>
+        public void GoMenu(LivingEntity me)
+        {
+            this.nextGameState = EGameState.MainMenu;
+        }
 
         /// <summary>
         /// Initializes the <see cref="StateManager"/>.
@@ -102,11 +151,6 @@ namespace Finline.Code.GameState
         {
             this.nextGameState = EGameState.MainMenu;
             base.Initialize();
-        }
-
-        public void GoMenu(LivingEntity me)
-        {
-            this.nextGameState = EGameState.MainMenu;
         }
 
         /// <summary>
@@ -131,8 +175,6 @@ namespace Finline.Code.GameState
             this.soundOffTexture2D = this.Content.Load<Texture2D>("Icons/SoundOff");
             this.soundOffRectangle = new Rectangle(700, 30, this.soundOffTexture2D.Width, this.soundOffTexture2D.Height);
             
-
-
             foreach (var elementList in this.guiElements.Values)
             {
                 foreach (var element in elementList)
@@ -147,10 +189,7 @@ namespace Finline.Code.GameState
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Play").MoveElement(0, -40);
             this.guiElements[EGameState.InGame].Find(x => x.AssetName == "Back2MainMenu").MoveElement(0, 40);
             
-
-
             this.sounds.LoadContent(this.Content);
-
         }
 
         /// <summary>
@@ -160,10 +199,6 @@ namespace Finline.Code.GameState
         {
             // TODO: Unload any non ContentManager content here
         }
-        
-        private float deltaTime;
-        private bool timePaused;
-        private bool mouseIsPressed;
 
         /// <summary>
         /// The update.
@@ -173,14 +208,23 @@ namespace Finline.Code.GameState
         /// </param>
         protected override void Update(GameTime gameTime)
         {
-            this.sounds.Update(gameTime);
+            this.sounds.Update();
 
-            if (this.currentGameState == EGameState.None ||
-                (this.currentGameState == EGameState.InGame && this.nextGameState == EGameState.MainMenu)) this.sounds.PlayMainMenuMusic();
+            if (this.currentGameState == EGameState.None
+                || (this.currentGameState == EGameState.InGame && this.nextGameState == EGameState.MainMenu))
+            {
+                this.sounds.PlayMainMenuMusic();
+            }
 
-            if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame) this.sounds.PlayIngameMusic();
+            if (this.currentGameState == EGameState.MainMenu && this.nextGameState == EGameState.InGame)
+            {
+                this.sounds.PlayIngameMusic();
+            }
 
-            if (this.currentGameState == EGameState.InGame) this.sounds.PlayIngameSongChange();
+            if (this.currentGameState == EGameState.InGame)
+            {
+                this.sounds.PlayIngameSongChange();
+            }
 
             // if (this.newRes.HasValue)
             // {
@@ -195,25 +239,24 @@ namespace Finline.Code.GameState
             // MouseState mouse = Mouse.GetState();
             var k = Keyboard.GetState();
             if (this.currentGameState == EGameState.InGame && this.paused)
-
+            {
                 foreach (var element in this.guiElements[this.currentGameState])
                 {
                     element.Update(ref this.mouseIsPressed);
                 }
+            }
 
             if (this.currentGameState == EGameState.InGame && k.IsKeyDown(Keys.Escape) && !this.isPressed)
             {
                 this.paused = !this.paused;
                 this.isPressed = true;
-                this.timePaused = true;
 
-                this.sounds.PauseMusic();
+                Sounds.PauseMusic();
             }
 
             if (this.isPressed && !k.IsKeyDown(Keys.Escape))
             {
                 this.isPressed = false;
-                this.timePaused = false;
             }
 
             if (!this.paused)
@@ -242,8 +285,7 @@ namespace Finline.Code.GameState
         protected override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.Black);
-            var r = new RasterizerState();
-            r.CullMode = CullMode.None;
+            var r = new RasterizerState { CullMode = CullMode.None };
             this.GraphicsDevice.RasterizerState = r;
             this.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             this.GraphicsDevice.BlendState = BlendState.Opaque;
@@ -290,20 +332,29 @@ namespace Finline.Code.GameState
         /// <summary>
         /// when click on the button, do something
         /// </summary>
-        /// <param name="element"></param>
-
+        /// <param name="element">
+        /// Which element.
+        /// </param>
         private void OnClick(string element)
         {
-            if (this.isPressed) return;
+            if (this.isPressed)
+            {
+                return;
+            }
+
             this.isPressed = true;
 
             if (element == "Play")
             {
                 this.paused = !this.paused;
-                this.sounds.PauseMusic();
+                Sounds.PauseMusic();
             }
 
-            if (element != "Back2MainMenu") return;
+            if (element != "Back2MainMenu")
+            {
+                return;
+            }
+
             this.nextGameState = EGameState.MainMenu;
             this.paused = false;
             this.Main.MakeHeile();

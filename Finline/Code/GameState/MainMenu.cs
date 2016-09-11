@@ -267,7 +267,9 @@
 
             Controls, 
 
+/*
             Records, 
+*/
 
             Credits, 
 
