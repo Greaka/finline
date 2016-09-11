@@ -846,16 +846,19 @@
 
 #region Loading Poster
 
-            this.LevelObjects(6.99f, 5, 2, GameConstants.EnvObjects.mirkopir);
-            this.LevelObjects2(6.7f, 10, 2, GameConstants.NonEnvObjects.poster_vader);
-            this.LevelObjects2(6.7f, 25, 2, GameConstants.NonEnvObjects.poster_deadpool);
-            this.LevelObjects2(6.7f, 32, 2, GameConstants.NonEnvObjects.poster_zombie);
-            this.LevelObjects2(6.7f, 40, 2, GameConstants.NonEnvObjects.poster_cat);
-            this.LevelObjects2(6.7f, 52, 2, GameConstants.NonEnvObjects.poster_dragonball);
-            this.LevelObjects2(6.7f, 58, 2, GameConstants.NonEnvObjects.poster_obama);
+            this.LevelObjects(6.99f, 9, 2, GameConstants.EnvObjects.mirkopir);
+            this.LevelObjects2(35.5f, 19, 2, GameConstants.NonEnvObjects.poster_vader);
+            this.LevelObjects2(6.7f, 30, 2, GameConstants.NonEnvObjects.poster_cat);
+            this.LevelObjects2(35.5f, 66, 2, GameConstants.NonEnvObjects.poster_dragonball);
+            this.LevelObjects2(48, 145, 2, GameConstants.NonEnvObjects.poster_obama);
+            this.LevelObjects2(48, 135, 2, GameConstants.NonEnvObjects.poster_obama);
             this.LevelObjects2(6.7f, 64, 2, GameConstants.NonEnvObjects.poster_totoro);
-            this.LevelObjects2(6.7f, 69.5f, 2, GameConstants.NonEnvObjects.poster_godzilla);
-            this.LevelObjects2(6.7f, 98, 2, GameConstants.NonEnvObjects.poster_hotline);
+            this.LevelObjects2(6.7f, 100, 2, GameConstants.NonEnvObjects.poster_godzilla);
+            this.LevelObjects2(131.9f, 250, 2, GameConstants.NonEnvObjects.poster_hotline);
+            this.LevelObjects2(8, 150.7f, 2, GameConstants.NonEnvObjects.poster_hotline_links);
+            this.LevelObjects2(37.9f, 188.5f, 2.5f, GameConstants.NonEnvObjects.poster_deadpool);
+            this.LevelObjects2(18.2f, 181, 2, GameConstants.NonEnvObjects.poster_zombie);
+            this.LevelObjects2(24.2f, 160, 2, GameConstants.NonEnvObjects.poster_cat);
             #endregion
 
             #region Loading Whiteboards

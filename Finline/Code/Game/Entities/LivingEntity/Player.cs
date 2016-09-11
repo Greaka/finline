@@ -81,11 +81,14 @@ namespace Finline.Code.Game.Entities.LivingEntity
 
             this.position = new Vector3(4, 4, -0.5f); // Standard
             // this.position = new Vector3(100, 240, -0.5f); // BossRaum
-            
+
             // Animation DeathAnimation = new Animation(4);
 
             // this.position = new Vector3(90, 240, 0);   // Hörsaal
             // this.position = new Vector3(26, 90, 0);      // 333
+            // this.position = new Vector3(5, 150 , 0);      // vor klos
+            //this.position = new Vector3(15, 64, 2);
+           // this.position = new Vector3(35.9f, 183, 0); //raum mit 2 monitoren
             var modelStand = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_stand");
             var modelLinks = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_linkesBein");
             var modelRechts = contentManager.Load<Model>(GuiElement.Ausgewaehlt.ToString());
