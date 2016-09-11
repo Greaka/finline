@@ -163,7 +163,7 @@ namespace Finline.Code.Game
 
             if (this.GetSoundOn())
             {
-                MediaPlayer.Resume();
+                MediaPlayer.Volume = 1.0f;
                 if (this.soundInstance != null)
                 {
                     this.soundInstance.Volume = 1.0f;
@@ -171,7 +171,7 @@ namespace Finline.Code.Game
             }
             else
             {
-                MediaPlayer.Pause();
+                MediaPlayer.Volume = 0.0f;
                 if (this.soundInstance != null)
                 {
                     this.soundInstance.Stop();
