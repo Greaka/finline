@@ -295,18 +295,6 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:deskUp.fbx
 
-#begin GuiElements/Back2MainMenu.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:GuiElements/Back2MainMenu.png
-
 #begin GuiElements/ControlsButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1889,4 +1877,16 @@
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=DxtCompressed
 /build:poster_hotline.fbx
+
+#begin GuiElements/Back2MainMenu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GuiElements/Back2MainMenu.png
 
