@@ -44,14 +44,17 @@ namespace Finline.Code.GameState
 
             this.guiElements[EMenuState.TitleScreen].Add(new GuiElement("TitleScreen")); // Texture in the Titlescreen
 
+            
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("NewGame"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("ControlsButton"));
-
             // this.guiElements[EMenuState.MainMenu].Add(new GuiElement("RecordsButton")); siehe oben bei TODO
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("CreditsButton"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("EndButton"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("EnemySmaller"));
 
-            
+
+
+
 
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("ChooseText"));
             this.guiElements[EMenuState.CharacterScreen].Add(new GuiElement("StartGame"));
@@ -114,36 +117,22 @@ namespace Finline.Code.GameState
                 }
             }
 
-            this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "TitleScreen").MoveElement(0, -60);
+            this.guiElements[EMenuState.TitleScreen].Find(x => x.AssetName == "TitleScreen").MoveElement(0, -60);// move the logo up in y-direction
 
-                // move the logo up in y-direction
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(-200, -175);
-
-                // move the "newgame" button up in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "NewGame").MoveElement(-200, -175);// move the "newgame" button up in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "ControlsButton").MoveElement(-200, -100);
-
-                // move the "option" button down in y-direction
-
             // this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "RecordsButton").MoveElement(-200, -50); siehe oben bei TODO 
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "CreditsButton").MoveElement(-200, -25);
-
-                // move the "credits" button 200 in x-direction and 50 down in y-direction
-            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "EndButton").MoveElement(-200, 50);
-
-                // move the "end" button down in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "CreditsButton").MoveElement(-200, -25); // move the "credits" button 200 in x-direction and 50 down in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "EndButton").MoveElement(-200, 50); // move the "end" button down in y-direction
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "EnemySmaller").MoveElement(150, -20);
             
 
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "ChooseText").MoveElement(0, -265);
-            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "studentprofile")
-                .MoveElement(-200, -100);
+            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "studentprofile").MoveElement(-200, -100);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "profprofile").MoveElement(200, -100);
-            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "StartGame").MoveElement(-270, 80);
-
-                // move the "StartGame" button up in y-direction
+            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "StartGame").MoveElement(-270, 80);// move the "StartGame" button up in y-direction
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "ControlsButton").MoveElement(-70, 80);
-            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back2MainMenu").MoveElement(130, 80);
-
-                // move the "Back_to_MainMenu" button down in y-direction
+            this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "Back2MainMenu").MoveElement(130, 80);// move the "Back_to_MainMenu" button down in y-direction
             
 
             
