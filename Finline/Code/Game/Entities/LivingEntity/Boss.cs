@@ -38,7 +38,7 @@
             this.Life = life;
             this.EnvironmentObjects = environmentObjects;
             this.ModelAnimation = new Animation(4);
-            this.DeathAnimation = new Animation(4, false);
+            this.DeathAnimation = new Animation(5, false);
             this.position = position;
             this.Angle = 0;
             var boss = contentManager.Load<Model>("boss");

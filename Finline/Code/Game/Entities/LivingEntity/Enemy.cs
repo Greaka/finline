@@ -16,7 +16,7 @@
         {
             this.EnvironmentObjects = environmentObjects;
             this.ModelAnimation = new Animation(3);
-            this.DeathAnimation = new Animation(2, false);
+            this.DeathAnimation = new Animation(6, false);
             this.position = position;
             this.Angle = 0;
             var enemy = contentManager.Load<Model>("enemy");
