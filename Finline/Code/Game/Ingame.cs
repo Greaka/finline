@@ -5,16 +5,12 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Constants;
-
-    using Controls;
-
-    using Entities;
-
+    using Finline.Code.Constants;
     using Finline.Code.DebugUtils;
+    using Finline.Code.Game.Controls;
+    using Finline.Code.Game.Entities;
     using Finline.Code.Game.Entities.LivingEntity;
-
-    using GameState;
+    using Finline.Code.GameState;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -697,7 +693,7 @@
             this.LevelObjects(36.5f, 183.5f, -1, GameConstants.EnvObjects.deskUp);
 
 
-#region Erster Raum unten
+
 
             this.LevelObjects(10, 188, -1, GameConstants.EnvObjects.chairUp);
             this.LevelObjects(10, 188, -1, GameConstants.EnvObjects.deskUp);
@@ -707,7 +703,7 @@
             }
 
             this.LevelObjects(4.86f, 186.2f, -1, GameConstants.EnvObjects.chairRight);
-#endregion
+
 
 #region Zweiter Raum oben
             for (var i = 31; i <= 39; i += 4)

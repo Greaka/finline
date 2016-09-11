@@ -10,7 +10,7 @@
 
     public class Enemy : LivingEntity
     {
-        public bool Shoot = false;
+        public bool Shoot;
 
         public Enemy(ContentManager contentManager, Vector3 position, List<EnvironmentObject> environmentObjects)
         {

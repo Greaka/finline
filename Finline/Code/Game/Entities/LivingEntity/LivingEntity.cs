@@ -13,7 +13,6 @@ namespace Finline.Code.Game.Entities.LivingEntity
     using System.Threading.Tasks;
 
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Input;
 
     /// <summary>
     /// The living entity.
@@ -67,8 +66,6 @@ namespace Finline.Code.Game.Entities.LivingEntity
                         Thread.Sleep(50);
                         this.Death?.Invoke(this);
                     });
-
-            return;
         }
 
         /// <summary>

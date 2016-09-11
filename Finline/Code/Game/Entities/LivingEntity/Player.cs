@@ -46,7 +46,7 @@ namespace Finline.Code.Game.Entities.LivingEntity
             set
             {
                 this.model = value;
-                var sphere = this.Model.GetVerticies().Select(vec => vec * 0.14f).ToList().GetHull();
+                var sphere = this.Model.GetVertices().Select(vec => vec * 0.14f).ToList().GetHull();
                 this.Bound = sphere;
             }
         }
@@ -80,8 +80,9 @@ namespace Finline.Code.Game.Entities.LivingEntity
             this.DeathAnimation = new Animation(4, false);
 
             this.position = new Vector3(4, 4, -0.5f); // Standard
+
             // this.position = new Vector3(100, 240, -0.5f); // BossRaum
-            
+
             // Animation DeathAnimation = new Animation(4);
 
             // this.position = new Vector3(90, 240, 0);   // Hörsaal
@@ -109,10 +110,10 @@ namespace Finline.Code.Game.Entities.LivingEntity
         }
 
 #if DEBUG
-        private bool godMode = false;
+        private bool godMode;
         private bool alreadyPressed;
 
-        private bool dead = false;
+        private bool dead;
 
         public override bool Dead
         {

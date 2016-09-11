@@ -10,7 +10,7 @@
 
     public class Boss : LivingEntity
     {
-        public bool Shoot = false;
+        public bool Shoot;
 
         /// <summary>
         /// Gets the life.

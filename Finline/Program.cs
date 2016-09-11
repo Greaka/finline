@@ -1,8 +1,17 @@
-﻿namespace Finline
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Program.cs" company="Acagamics e.V.">
+//   APGL
+// </copyright>
+// <summary>
+//   The main class.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Finline
 {
     using System;
 
-    using Code.GameState;
+    using Finline.Code.GameState;
 
 #if WINDOWS || LINUX
 

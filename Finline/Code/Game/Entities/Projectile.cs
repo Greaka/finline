@@ -1,16 +1,14 @@
-﻿using System;
-
-using Finline.Code.Utility;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace Finline.Code.Game.Entities
+﻿namespace Finline.Code.Game.Entities
 {
+    using System;
     using System.Collections.Generic;
 
     using Finline.Code.Game.Entities.LivingEntity;
+    using Finline.Code.Utility;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
 
     public sealed class Projectile : Entity
     {
@@ -47,7 +45,7 @@ namespace Finline.Code.Game.Entities
             this.position = new Vector3(firedFrom.Position.X, firedFrom.Position.Y, 3f);
             this.Angle = direction.GetAngle();
             this.timeStamp = actualTime;
-            this.Bound = new List<Vector3>() { Vector3.Zero };
+            this.Bound = new List<Vector3> { Vector3.Zero };
         }
 
         /// <summary>

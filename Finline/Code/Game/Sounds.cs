@@ -40,7 +40,7 @@
         {
             this.soundInstance = this.soundeffectList[index].CreateInstance();
 
-            if (this.GetSoundOn() == true) this.soundInstance.Play();
+            if (this.GetSoundOn()) this.soundInstance.Play();
 
             // else soundInstance.Stop();
         }
@@ -83,7 +83,7 @@
                 this.soundOn = !this.soundOn;
             }
 
-            if (this.GetSoundOn() == true)
+            if (this.GetSoundOn())
             {
                 MediaPlayer.Resume();
                 if (this.soundInstance != null)

@@ -6,15 +6,13 @@
 //   Defines the StateManager type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-
 namespace Finline.Code.GameState
 {
     using System;
+    using System.Collections.Generic;
 
+    using Finline.Code.Game;
     using Finline.Code.Game.Entities.LivingEntity;
-
-    using Game;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -33,7 +31,7 @@ namespace Finline.Code.GameState
         /// <summary>
         /// newRes puts an EGameState to null
         /// </summary>
-        //private EGameState? newRes = null;
+        // private EGameState? newRes = null;
 
         /// <summary>
         /// The current game state.
@@ -55,8 +53,8 @@ namespace Finline.Code.GameState
         /// </summary>
         private SpriteBatch spriteBatch;
 #region PauseStuff
-        private bool isPressed = false;
-        private bool paused = false;
+        private bool isPressed;
+        private bool paused;
         private Texture2D pausedTexture2D;
         private Rectangle pausedRectangle;
         #endregion
@@ -164,8 +162,8 @@ namespace Finline.Code.GameState
         }
         
         private float deltaTime;
-        private bool timePaused = false;
-        private bool mouseIsPressed = false;
+        private bool timePaused;
+        private bool mouseIsPressed;
 
         /// <summary>
         /// The update.
@@ -184,12 +182,11 @@ namespace Finline.Code.GameState
 
             if (this.currentGameState == EGameState.InGame) this.sounds.PlayIngameSongChange();
 
-            //if (this.newRes.HasValue)
-            //{
-            //    this.nextGameState = this.newRes.Value;
-            //    this.newRes = null;
-            //}
-
+            // if (this.newRes.HasValue)
+            // {
+            // this.nextGameState = this.newRes.Value;
+            // this.newRes = null;
+            // }
             if (this.nextGameState != this.currentGameState)
             {
                 this.HandleGameState();

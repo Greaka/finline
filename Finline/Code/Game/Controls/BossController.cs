@@ -1,15 +1,13 @@
-﻿using Finline.Code.Utility;
-
-using Microsoft.Xna.Framework;
-
-namespace Finline.Code.Game.Controls
+﻿namespace Finline.Code.Game.Controls
 {
     using System.Collections.Generic;
+    using System.Timers;
 
     using Finline.Code.Game.Entities;
     using Finline.Code.Game.Entities.LivingEntity;
+    using Finline.Code.Utility;
 
-    using Timer = System.Timers.Timer;
+    using Microsoft.Xna.Framework;
 
     public class BossController
     {

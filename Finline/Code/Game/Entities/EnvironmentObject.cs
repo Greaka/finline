@@ -1,11 +1,11 @@
-﻿using Finline.Code.Constants;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace Finline.Code.Game.Entities
+﻿namespace Finline.Code.Game.Entities
 {
+    using Finline.Code.Constants;
     using Finline.Code.Utility;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class EnvironmentObject : Entity
     {
@@ -24,7 +24,7 @@ namespace Finline.Code.Game.Entities
             set
             {
                 this.model = value;
-                var sphere = this.Model.GetVerticies().GetHull();
+                var sphere = this.Model.GetVertices().GetHull();
 
                 switch (this.Type)
                 {

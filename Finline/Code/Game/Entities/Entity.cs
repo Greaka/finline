@@ -1,12 +1,12 @@
-﻿using Finline.Code.Utility;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace Finline.Code.Game.Entities
+﻿namespace Finline.Code.Game.Entities
 {
     using System.Collections.Generic;
     using System.Linq;
+
+    using Finline.Code.Utility;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
     public abstract class Entity
     {
@@ -24,7 +24,7 @@ namespace Finline.Code.Game.Entities
             set
             {
                 this.model = value;
-                var sphere = this.Model.GetVerticies().GetHull();
+                var sphere = this.Model.GetVertices().GetHull();
                 this.Bound = sphere;
             }
         }
@@ -78,14 +78,13 @@ namespace Finline.Code.Game.Entities
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    //effect.EnableDefaultLighting();
-
+                    // effect.EnableDefaultLighting();
                     effect.FogEnabled = true; // Nebel
                     effect.FogColor = Color.DarkGray.ToVector3();
                     effect.FogStart = 15;
                     effect.FogEnd = 30;
 
-                    effect.LightingEnabled = true;  //Turn on the lighting subsystem.
+                    effect.LightingEnabled = true;  // Turn on the lighting subsystem.
                     effect.DirectionalLight0.DiffuseColor = Color.Red.ToVector3(); // a red light
                     effect.DirectionalLight0.Direction = Vector3.One; // coming along the x-axis
                     effect.DirectionalLight0.SpecularColor = Color.Green.ToVector3(); // with green highlights
