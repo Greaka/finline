@@ -855,6 +855,7 @@
             this.LevelObjects2(6.7f, 58, 2, GameConstants.NonEnvObjects.poster_obama);
             this.LevelObjects2(6.7f, 64, 2, GameConstants.NonEnvObjects.poster_totoro);
             this.LevelObjects2(6.7f, 69.5f, 2, GameConstants.NonEnvObjects.poster_godzilla);
+            this.LevelObjects2(6.7f, 98, 2, GameConstants.NonEnvObjects.poster_hotline);
             #endregion
 
             #region Loading Whiteboards
