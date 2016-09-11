@@ -369,7 +369,7 @@ namespace Finline.Code.Game
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 196, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 227, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 236, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(21, 245, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(20, 245, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 259, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(69, 214, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(62, 256, 0), this.environmentObjects));
