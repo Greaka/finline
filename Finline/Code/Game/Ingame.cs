@@ -1,7 +1,15 @@
-﻿namespace Finline.Code.Game
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Ingame.cs" company="Acagamics e.V.">
+//   APGL
+// </copyright>
+// <summary>
+//   The ingame.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Finline.Code.Game
 {
-    #if DEBUG
-#endif
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -16,12 +24,10 @@
     using Microsoft.Xna.Framework.Graphics;
 
     /// <summary>
-    /// The ingame.
+    /// The in game.
     /// </summary>
     public class Ingame : DrawableGameComponent
     {
-        public bool Won;
-
         /// <summary>
         /// The Input Parser.
         /// </summary>
@@ -153,6 +159,9 @@
         /// <param name="sb">
         /// The sprite batch.
         /// </param>
+        /// <param name="sounds">
+        /// The sounds.
+        /// </param>
         public Ingame(StateManager game, SpriteBatch sb, Sounds sounds)
             : base(game)
         {
@@ -168,6 +177,11 @@
             this.hullDrawing = new HullDrawing(game, sb);
 #endif
         }
+
+        /// <summary>
+        /// Gets a value indicating whether won.
+        /// </summary>
+        public bool Won { get; private set; }
 
         /// <summary>
         /// The initialize.
@@ -191,7 +205,6 @@
             this.player.Initialize(this.Game.Content, this.environmentObjects);
             this.weapon.Initialize(this.Game.Content);
             
-
             this.enemyControls = new EnemyController();
             this.bossControls = new BossController();
             this.projectileHandler = new Shooting(this.Game.Content, this.projectiles, this.sounds);
@@ -231,7 +244,6 @@
             this.player.Update(gameTime, this.moveDirection, this.shootDirection);
             this.weapon.Update(gameTime);
             
-
             foreach (var obj in this.environmentObjects)
             {
                 obj.Update(gameTime);
@@ -380,7 +392,6 @@
         /// </summary>
         private void LoadEnvironment()
         {
-            
             for (var i = 2; i <= 38; i += 4)
             {
                 var j = i == 38 ? 1.75f : i;
@@ -395,7 +406,7 @@
 
             for (var i = 1.75f; i <= 117.75f; i += 4)
             {
-                var j = i == 117.75f ? 115.25f : i;
+                var j = Math.Abs(i - 117.75f) < 1e-10 ? 115.25f : i;
                 this.LevelObjects(36, j, 2, GameConstants.EnvObjects.wallH);
             }
 
@@ -409,7 +420,7 @@
 
             for (var i = 2.25f; i <= 114.25f; i += 4)
             {
-                var j = i == 86.25 || i == 74.25 || i == 46.25 || i == 18.25 ? 115.25f : i;
+                var j = Math.Abs(i - 86.25) < 1e-10 || Math.Abs(i - 74.25) < 1e-10 || Math.Abs(i - 46.25) < 1e-10 || Math.Abs(i - 18.25) < 1e-10 ? 115.25f : i;
                 this.LevelObjects(7, j, 2, GameConstants.EnvObjects.wallH);
             }
 
@@ -427,7 +438,7 @@
 
             for (var i = 26.25f; i <= 50.25f; i += 4)
             {
-                var j = i == 50.25f ? 46.75f : i;
+                var j = Math.Abs(i - 50.25f) < 1e-10 ? 46.75f : i;
                 this.LevelObjects(j, 129, 2, GameConstants.EnvObjects.wallV);
                 this.LevelObjects(j, 140, 2, GameConstants.EnvObjects.wallV);
                 this.LevelObjects(j, 151, 2, GameConstants.EnvObjects.wallV);
@@ -462,14 +473,13 @@
 
             for (var i = 26.5f; i <= 38.5f; i += 4)
             {
-                var j = i == 38.5f ? 36.75f : i;
+                var j = Math.Abs(i - 38.5f) < 1e-10 ? 36.75f : i;
                 this.LevelObjects(j, 191.75f, 2, GameConstants.EnvObjects.wallV);
             }
 
-
             for (var i = 203.5f; i <= 259.5f; i += 4)
             {
-                var j = i == 219.5f || i == 235.5f ? 262 : i;
+                var j = Math.Abs(i - 219.5f) < 1e-10 || Math.Abs(i - 235.5f) < 1e-10 ? 262 : i;
                 this.LevelObjects(22.25f, j, 2, GameConstants.EnvObjects.wallH);
             }
 
@@ -493,13 +503,13 @@
 
             for (var i = 242.5f; i <= 246.5f; i += 4)
             {
-                var j = i == 246.5f ? 244 : i;
+                var j = Math.Abs(i - 246.5f) < 1e-10 ? 244 : i;
                 this.LevelObjects(47.25f, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 231.5f; i <= 235.5f; i += 4)
             {
-                var j = i == 235.5f ? 233 : i;
+                var j = Math.Abs(i - 235.5f) < 1e-10 ? 233 : i;
                 this.LevelObjects(47.25f, j, 2, GameConstants.EnvObjects.wallH);
             }
 
@@ -512,13 +522,13 @@
 
             for (var i = 231.5f; i >= 211.5f; i -= 4)
             {
-                var j = i == 211.5f ? (i + 1.25f) : i;
+                var j = Math.Abs(i - 211.5f) < 1e-10 ? (i + 1.25f) : i;
                 this.LevelObjects(58, j, 2, GameConstants.EnvObjects.wallH);
             }
 
             for (var i = 243.5f; i <= 263.5f; i += 4)
             {
-                var j = i == 263.5f ? (i - 1.25f) : i;
+                var j = Math.Abs(i - 263.5f) < 1e-10 ? (i - 1.25f) : i;
                 this.LevelObjects(58, j, 2, GameConstants.EnvObjects.wallH);
             }
 
@@ -545,7 +555,7 @@
 
             for (var i = 213.75f; i <= 265.75f; i += 4)
             {
-                var j = i == 265.75f ? 262.25f : i;
+                var j = Math.Abs(i - 265.75f) < 1e-10 ? 262.25f : i;
                 this.LevelObjects(0, j, 2, GameConstants.EnvObjects.wallH);
             }
 
@@ -558,7 +568,7 @@
 
             for (var i = 179.25f; i <= 191.25f; i += 4)
             {
-                var j = i == 191.25f ? 189.25f : i;
+                var j = Math.Abs(i - 191.25f) < 1e-10 ? 189.25f : i;
                 this.LevelObjects(0, j, 2, GameConstants.EnvObjects.wallH);
             }
 
@@ -570,7 +580,7 @@
 
             for (var i = 26.5f; i <= 38.5f; i += 4)
             {
-                var j = i == 38.5f ? 36.75f : i;
+                var j = Math.Abs(i - 38.5f) < 1e-10 ? 36.75f : i;
                 this.LevelObjects(j, 182, 2, GameConstants.EnvObjects.wallV);
             }
 
@@ -579,9 +589,6 @@
                 var j = i == 208 ? 206 : i;
                 this.LevelObjects(38.5f, j, 2, GameConstants.EnvObjects.wallH);
             }
-            
-
-
 
             for (var i = 32; i > 15; i -= 4)
             {
@@ -597,9 +604,6 @@
                 this.LevelObjects(i, 47, -1, GameConstants.EnvObjects.chairRight);
             }
 
-
-
-
             for (var i = 32; i > 15; i -= 8)
             {
                 this.LevelObjects(i, 60, -1, GameConstants.EnvObjects.chairDown);
@@ -607,9 +611,6 @@
                 this.LevelObjects(i, 60, -1, GameConstants.EnvObjects.deskDown);
                 this.LevelObjects(i, 74, -1, GameConstants.EnvObjects.deskDown);
             }
-
-
-
 
             for (var i = 25.1f; i < 34; i += 4)
             {
@@ -663,9 +664,6 @@
                 this.LevelObjects(i, 108, -1, GameConstants.EnvObjects.chairLeft);
             }
 
-
-
-
             for (var i = 30.1f; i < 39; i += 4)
             {
                 this.LevelObjects(i, 124.5f, -1, GameConstants.EnvObjects.deskRight);
@@ -686,14 +684,7 @@
                 this.LevelObjects(i, 121.5f, -1, GameConstants.EnvObjects.chairLeft);
             }
 
-
-
-
-
             this.LevelObjects(36.5f, 183.5f, -1, GameConstants.EnvObjects.deskUp);
-
-
-
 
             this.LevelObjects(10, 188, -1, GameConstants.EnvObjects.chairUp);
             this.LevelObjects(10, 188, -1, GameConstants.EnvObjects.deskUp);
@@ -703,7 +694,6 @@
             }
 
             this.LevelObjects(4.86f, 186.2f, -1, GameConstants.EnvObjects.chairRight);
-
 
 #region Zweiter Raum oben
             for (var i = 31; i <= 39; i += 4)
@@ -718,17 +708,18 @@
 #region Zweiter Raum unten
             for (var i = 7; i <= 15; i += 8)
             {
-                this.LevelObjects(i-3, 213.5f, -1, GameConstants.EnvObjects.deskUp);
-                this.LevelObjects(i-3, 213.5f, -1, GameConstants.EnvObjects.chairUp);
+                this.LevelObjects(i - 3, 213.5f, -1, GameConstants.EnvObjects.deskUp);
+                this.LevelObjects(i - 3, 213.5f, -1, GameConstants.EnvObjects.chairUp);
                 this.LevelObjects(i, 215, -1, GameConstants.EnvObjects.deskDown);
                 this.LevelObjects(i, 215, -1, GameConstants.EnvObjects.chairDown);
-                this.LevelObjects(i-2, 217, -1, GameConstants.EnvObjects.chairRight);
+                this.LevelObjects(i - 2, 217, -1, GameConstants.EnvObjects.chairRight);
             }
 
-#endregion
+            #endregion
 
 #region Dritter Raum unten
-            for (var i = 17; i<=21; i += 4)
+
+            for (var i = 17; i <= 21; i += 4)
             {
                 this.LevelObjects(i, 228, -1, GameConstants.EnvObjects.deskLeft);
                 this.LevelObjects(i, 228, -1, GameConstants.EnvObjects.chairLeft);
@@ -805,9 +796,7 @@
             }
 
 #endregion
-
-
-
+            
             this.LevelObjects(90, 245, 0, GameConstants.EnvObjects.podest);  // podest
 
 #region Loading Schränke
@@ -854,7 +843,7 @@
             this.LevelObjects2(6.7f, 98, 2, GameConstants.NonEnvObjects.poster_hotline);
             #endregion
 
-            #region Loading Whiteboards
+#region Loading Whiteboards
 
             this.LevelObjects(29, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
             this.LevelObjects(16, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
@@ -863,7 +852,8 @@
 #endregion
 
 #region Loading Pissour
-            for (var i = 30; i<=45; i+=5)
+
+            for (var i = 30; i <= 45; i += 5)
             {
                 this.LevelObjects(i, 139.9f, 0, GameConstants.EnvObjects.pissoir);
                 this.LevelObjects(i, 140, 0, GameConstants.EnvObjects.pissoir_gedreht);
@@ -926,6 +916,12 @@
                     model));
         }
 
+        /// <summary>
+        /// The enemy death.
+        /// </summary>
+        /// <param name="enemy">
+        /// The enemy.
+        /// </param>
         private void EnemyDeath(LivingEntity enemy)
         {
             this.removeEntities.Add(enemy);

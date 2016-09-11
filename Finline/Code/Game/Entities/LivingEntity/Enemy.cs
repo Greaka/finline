@@ -1,4 +1,13 @@
-﻿namespace Finline.Code.Game.Entities.LivingEntity
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Enemy.cs" company="Acagamics e.V.">
+//   APGL
+// </copyright>
+// <summary>
+//   Defines the Enemy type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Finline.Code.Game.Entities.LivingEntity
 {
     using System.Collections.Generic;
 
@@ -8,10 +17,23 @@
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
-    public class Enemy : LivingEntity
+    /// <summary>
+    /// The enemy.
+    /// </summary>
+    public sealed class Enemy : LivingEntity
     {
-        public bool Shoot;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Enemy"/> class.
+        /// </summary>
+        /// <param name="contentManager">
+        /// The content manager.
+        /// </param>
+        /// <param name="position">
+        /// The position.
+        /// </param>
+        /// <param name="environmentObjects">
+        /// The environment objects.
+        /// </param>
         public Enemy(ContentManager contentManager, Vector3 position, List<EnvironmentObject> environmentObjects)
         {
             this.EnvironmentObjects = environmentObjects;
@@ -41,8 +63,16 @@
         }
 
         /// <summary>
+        /// Gets a value indicating whether shoot.
+        /// </summary>
+        public bool Shoot { get; private set; }
+
+        /// <summary>
         /// The update.
         /// </summary>
+        /// <param name="gameTime">
+        /// The game time.
+        /// </param>
         /// <param name="playerPosition">
         /// The player position.
         /// </param>

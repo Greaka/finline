@@ -8,9 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Finline.Code.Game.Entities.LivingEntity
 {
+    using System;
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     using Microsoft.Xna.Framework;
 
@@ -64,7 +63,7 @@ namespace Finline.Code.Game.Entities.LivingEntity
                 return;
             }
 
-            if (this.deathTime == 0)
+            if (Math.Abs(this.deathTime) < 1e-10)
             {
                 this.deathTime = gameTime.TotalGameTime.TotalMilliseconds;
             }
