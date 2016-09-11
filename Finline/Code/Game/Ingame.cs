@@ -844,9 +844,10 @@ namespace Finline.Code.Game
             this.LevelObjects2(37.9f, 188.5f, 2.5f, GameConstants.NonEnvObjects.poster_deadpool);
             this.LevelObjects2(18.2f, 181, 2, GameConstants.NonEnvObjects.poster_zombie);
             this.LevelObjects2(24.2f, 160, 2, GameConstants.NonEnvObjects.poster_cat);
+            this.LevelObjects2(21.9f, 245, 2, GameConstants.NonEnvObjects.poster_totoro);
             #endregion
 
-#region Loading Whiteboards
+            #region Loading Whiteboards
 
             this.LevelObjects(29, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
             this.LevelObjects(16, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
@@ -868,7 +869,13 @@ namespace Finline.Code.Game
 
             this.LevelObjects(9, 3, 1, GameConstants.EnvObjects.plant);
             this.LevelObjects(14.5f, 256.5f, 0, GameConstants.EnvObjects.plant);
-#endregion
+            this.LevelObjects(2, 125, 0, GameConstants.EnvObjects.plant);
+            this.LevelObjects(2, 130, 0, GameConstants.EnvObjects.plant);
+            this.LevelObjects(2, 135, 0, GameConstants.EnvObjects.plant);
+            this.LevelObjects(2, 140, 0, GameConstants.EnvObjects.plant);
+            this.LevelObjects(2, 145, 0, GameConstants.EnvObjects.plant);
+            this.LevelObjects(1.5f, 180, 0, GameConstants.EnvObjects.plant);
+            #endregion
         }
 
         /// <summary>
