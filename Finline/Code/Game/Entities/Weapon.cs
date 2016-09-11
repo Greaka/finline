@@ -1,5 +1,7 @@
 ﻿namespace Finline.Code.Game.Entities
 {
+    using System;
+
     using Finline.Code.Game.Entities.LivingEntity;
     using Finline.Code.Utility;
 
@@ -34,11 +36,32 @@
             this.Model = contentManager.Load<Model>("weapon");
         }
 
-        public void Update()
+        /// <summary>
+        /// The death time.
+        /// </summary>
+        private double deathTime = 0;
+
+        public void Update(GameTime gameTime)
         {
             this.SetViewDirection(this.player.GetViewDirection());
             var offset = new Vector3(0.5f, 1, 2.3f);
-            this.position = this.player.Position + offset.Rotate2D(this.Angle);
+            
+            if (!this.player.Dead)
+            {
+                this.position = this.player.Position + offset.Rotate2D(this.Angle);
+                return;
+            }
+
+            if (this.deathTime == 0)
+            {
+                this.deathTime = gameTime.TotalGameTime.TotalSeconds;
+            }
+
+            this.position.Z -= 5 * (float)Math.Pow(gameTime.TotalGameTime.TotalSeconds - this.deathTime, 2) * offset.Z;
+            if (this.position.Z < this.player.Position.Z)
+            {
+                this.position.Z = this.player.Position.Z;
+            }
         }
 
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)

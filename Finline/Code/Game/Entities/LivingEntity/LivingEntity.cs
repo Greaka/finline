@@ -9,6 +9,8 @@
 namespace Finline.Code.Game.Entities.LivingEntity
 {
     using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
@@ -59,7 +61,12 @@ namespace Finline.Code.Game.Entities.LivingEntity
                 return;
             }
 
-            this.Death?.Invoke(this);
+            Task.Factory.StartNew(
+                () =>
+                    {
+                        Thread.Sleep(50);
+                        this.Death?.Invoke(this);
+                    });
 
             return;
         }

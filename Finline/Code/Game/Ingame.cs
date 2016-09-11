@@ -233,7 +233,7 @@
             // this.Game.Exit();
             // }
             this.player.Update(gameTime, this.moveDirection, this.shootDirection);
-            this.weapon.Update();
+            this.weapon.Update(gameTime);
             
 
             foreach (var obj in this.environmentObjects)
