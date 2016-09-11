@@ -343,23 +343,27 @@ namespace Finline.Code.Game
 
             // this.enemies.Add(new Enemy(this.Game.Content, new Vector3(8, -15, 0)));
             // this.bosses.Add(new Boss(this.Game.Content, new Vector3(12, -10, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(25, 5, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(21, 5, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 27, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 27, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(30, 65, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(27, 105, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(30, 36, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 64, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(20, 74, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 90, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(43, 121, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 105, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(10, 115, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(46, 126, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(14, 147, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(38, 148, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(5, 182, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 187, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(34, 197, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(7, 228, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(4, 233, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 246, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 189, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(34, 187, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 196, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 227, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 236, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(21, 245, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 259, 0), this.environmentObjects));
-            this.bosses.Add(new Boss(this.Game.Content, new Vector3(100, 240, 0), this.environmentObjects, 10));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(69, 214, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(62, 256, 0), this.environmentObjects));
+            this.bosses.Add(new Boss(this.Game.Content, new Vector3(112, 242, 0), this.environmentObjects, 10));
 
 #if DEBUG
             this.hullDrawing.LoadEntities(this.environmentObjects, this.enemies, this.projectiles, this.player);
@@ -785,8 +789,40 @@ namespace Finline.Code.Game
                 this.LevelObjects(1.8f, i, -1, GameConstants.EnvObjects.deskDown);
             }
 
-#endregion
-            
+            #endregion
+
+            #region Hoersaal
+            for (var i = 213; i<=229; i += 4)
+            {
+                this.LevelObjects(65, i, -1, GameConstants.EnvObjects.deskUp);
+                this.LevelObjects(65, i, -1, GameConstants.EnvObjects.chairUp);
+                this.LevelObjects(72, i, -1, GameConstants.EnvObjects.deskUp);
+                this.LevelObjects(72, i, -1, GameConstants.EnvObjects.chairUp);
+                
+            }
+            for (var i = 245; i <= 261; i += 4)
+            {
+                this.LevelObjects(65, i, -1, GameConstants.EnvObjects.deskUp);
+                this.LevelObjects(65, i, -1, GameConstants.EnvObjects.chairUp);
+                this.LevelObjects(72, i, -1, GameConstants.EnvObjects.deskUp);
+                this.LevelObjects(72, i, -1, GameConstants.EnvObjects.chairUp);
+            }
+            for (var i = 219; i <= 231; i += 4)
+            {
+                this.LevelObjects(79, i, -1, GameConstants.EnvObjects.deskUp);
+            }
+            this.LevelObjects(77, 254, -1, GameConstants.EnvObjects.chairRight);
+            this.LevelObjects(77.5f, 238.5f, -1, GameConstants.EnvObjects.deskLeft);
+            this.LevelObjects(74.5f, 241.5f, -1, GameConstants.EnvObjects.deskUp);
+            this.LevelObjects(75, 214, -1, GameConstants.EnvObjects.chairUp);
+            this.LevelObjects(74, 217, -1, GameConstants.EnvObjects.chairRight);
+            this.LevelObjects(77, 213, -1, GameConstants.EnvObjects.chairLeft);
+            this.LevelObjects(77.5f, 238.5f, -1, GameConstants.EnvObjects.deskLeft);
+            this.LevelObjects(89, 221, -1, GameConstants.EnvObjects.deskLeft);
+            #endregion
+
+
+
             this.LevelObjects(90, 245, 0, GameConstants.EnvObjects.podest);  // podest
 
 #region Loading Schränke
@@ -821,19 +857,23 @@ namespace Finline.Code.Game
 
 #region Loading Poster
 
-            this.LevelObjects(6.99f, 5, 2, GameConstants.EnvObjects.mirkopir);
-            this.LevelObjects2(6.7f, 10, 2, GameConstants.NonEnvObjects.poster_vader);
-            this.LevelObjects2(6.7f, 25, 2, GameConstants.NonEnvObjects.poster_deadpool);
-            this.LevelObjects2(6.7f, 32, 2, GameConstants.NonEnvObjects.poster_zombie);
-            this.LevelObjects2(6.7f, 40, 2, GameConstants.NonEnvObjects.poster_cat);
-            this.LevelObjects2(6.7f, 52, 2, GameConstants.NonEnvObjects.poster_dragonball);
-            this.LevelObjects2(6.7f, 58, 2, GameConstants.NonEnvObjects.poster_obama);
+            this.LevelObjects(6.99f, 9, 2, GameConstants.EnvObjects.mirkopir);
+            this.LevelObjects2(35.5f, 19, 2, GameConstants.NonEnvObjects.poster_vader);
+            this.LevelObjects2(6.7f, 30, 2, GameConstants.NonEnvObjects.poster_cat);
+            this.LevelObjects2(35.5f, 66, 2, GameConstants.NonEnvObjects.poster_dragonball);
+            this.LevelObjects2(48, 145, 2, GameConstants.NonEnvObjects.poster_obama);
+            this.LevelObjects2(48, 135, 2, GameConstants.NonEnvObjects.poster_obama);
             this.LevelObjects2(6.7f, 64, 2, GameConstants.NonEnvObjects.poster_totoro);
-            this.LevelObjects2(6.7f, 69.5f, 2, GameConstants.NonEnvObjects.poster_godzilla);
-            this.LevelObjects2(6.7f, 98, 2, GameConstants.NonEnvObjects.poster_hotline);
+            this.LevelObjects2(6.7f, 100, 2, GameConstants.NonEnvObjects.poster_godzilla);
+            this.LevelObjects2(131.9f, 250, 2, GameConstants.NonEnvObjects.poster_hotline);
+            this.LevelObjects2(8, 150.7f, 2, GameConstants.NonEnvObjects.poster_hotline_links);
+            this.LevelObjects2(37.9f, 188.5f, 2.5f, GameConstants.NonEnvObjects.poster_deadpool);
+            this.LevelObjects2(18.2f, 181, 2, GameConstants.NonEnvObjects.poster_zombie);
+            this.LevelObjects2(24.2f, 160, 2, GameConstants.NonEnvObjects.poster_cat);
+            this.LevelObjects2(21.9f, 245, 2, GameConstants.NonEnvObjects.poster_totoro);
             #endregion
 
-#region Loading Whiteboards
+            #region Loading Whiteboards
 
             this.LevelObjects(29, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
             this.LevelObjects(16, 23.5f, 2, GameConstants.EnvObjects.whiteboard);
@@ -855,7 +895,13 @@ namespace Finline.Code.Game
 
             this.LevelObjects(9, 3, 1, GameConstants.EnvObjects.plant);
             this.LevelObjects(14.5f, 256.5f, 0, GameConstants.EnvObjects.plant);
-#endregion
+            this.LevelObjects(2, 125, 0, GameConstants.EnvObjects.plant);
+            this.LevelObjects(2, 130, 0, GameConstants.EnvObjects.plant);
+            this.LevelObjects(2, 135, 0, GameConstants.EnvObjects.plant);
+            this.LevelObjects(2, 140, 0, GameConstants.EnvObjects.plant);
+            this.LevelObjects(2, 145, 0, GameConstants.EnvObjects.plant);
+            this.LevelObjects(1.5f, 180, 0, GameConstants.EnvObjects.plant);
+            #endregion
         }
 
         /// <summary>
