@@ -62,9 +62,9 @@
             this.DeathAnimation.Add(bossHinten4);
         }
 
-        public void Update(Vector3 playerPosition)
+        public void Update(GameTime gameTime, Vector3 playerPosition)
         {
-            this.Update();
+            this.Update(gameTime);
 
             var canSee = this.Position.CanSee(playerPosition, this.EnvironmentObjects, 1600);
             if (!canSee)

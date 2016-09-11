@@ -244,12 +244,12 @@
 
             foreach (var enemy in this.enemies)
             {
-                enemy.Update(this.player.Position);
+                enemy.Update(gameTime, this.player.Position);
             }
 
             foreach (var boss in this.bosses)
             {
-                boss.Update(this.player.Position);
+                boss.Update(gameTime, this.player.Position);
             }
 
             foreach (var enemy in this.removeEntities)

@@ -45,8 +45,12 @@ namespace Finline.Code.Game.Entities.LivingEntity
         protected Animation DeathAnimation { get; set; }
 
         protected List<EnvironmentObject> EnvironmentObjects;
+        /// <summary>
+        /// The death time.
+        /// </summary>
+        private double deathTime;
 
-        protected void Update()
+        protected void Update(GameTime gameTime)
         {
             if (!this.Dead)
             {
@@ -60,12 +64,15 @@ namespace Finline.Code.Game.Entities.LivingEntity
                 return;
             }
 
-            Task.Factory.StartNew(
-                () =>
-                    {
-                        Thread.Sleep(50);
-                        this.Death?.Invoke(this);
-                    });
+            if (this.deathTime == 0)
+            {
+                this.deathTime = gameTime.TotalGameTime.TotalMilliseconds;
+            }
+
+            if (gameTime.TotalGameTime.TotalMilliseconds - this.deathTime > 50)
+            {
+                this.Death?.Invoke(this);
+            }
         }
 
         /// <summary>

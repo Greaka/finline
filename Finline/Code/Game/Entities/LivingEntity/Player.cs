@@ -142,7 +142,7 @@ namespace Finline.Code.Game.Entities.LivingEntity
             }
             else if (this.alreadyPressed && Keyboard.GetState().IsKeyUp(Keys.G)) this.alreadyPressed = false;
 #endif
-            this.Update();
+            this.Update(gameTime);
             if (!this.Dead)
             {
                 this.SetViewDirection(shootDirection);

@@ -46,9 +46,9 @@
         /// <param name="playerPosition">
         /// The player position.
         /// </param>
-        public void Update(Vector3 playerPosition)
+        public void Update(GameTime gameTime, Vector3 playerPosition)
         {
-            this.Update();
+            this.Update(gameTime);
 
             var canSee = this.Position.CanSee(playerPosition, this.EnvironmentObjects);
             if (!canSee)
