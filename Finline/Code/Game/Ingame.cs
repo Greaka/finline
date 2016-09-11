@@ -345,23 +345,27 @@
 
             // this.enemies.Add(new Enemy(this.Game.Content, new Vector3(8, -15, 0)));
             // this.bosses.Add(new Boss(this.Game.Content, new Vector3(12, -10, 0)));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(25, 5, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(21, 5, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 27, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 27, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(30, 65, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(27, 105, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(30, 36, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 64, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(20, 74, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 90, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(43, 121, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(32, 105, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(10, 115, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(46, 126, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(14, 147, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(38, 148, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(5, 182, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 187, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(34, 197, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(7, 228, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(4, 233, 0), this.environmentObjects));
-            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(18, 246, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 189, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(34, 187, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(33, 196, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 227, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(11, 236, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(21, 245, 0), this.environmentObjects));
             this.enemies.Add(new Enemy(this.Game.Content, new Vector3(3, 259, 0), this.environmentObjects));
-            this.bosses.Add(new Boss(this.Game.Content, new Vector3(100, 240, 0), this.environmentObjects, 10));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(69, 214, 0), this.environmentObjects));
+            this.enemies.Add(new Enemy(this.Game.Content, new Vector3(62, 256, 0), this.environmentObjects));
+            this.bosses.Add(new Boss(this.Game.Content, new Vector3(112, 242, 0), this.environmentObjects, 10));
 
 #if DEBUG
             this.hullDrawing.LoadEntities(this.environmentObjects, this.enemies, this.projectiles, this.player);
@@ -808,7 +812,37 @@
                 this.LevelObjects(1.8f, i, -1, GameConstants.EnvObjects.deskDown);
             }
 
-#endregion
+            #endregion
+
+            #region Hoersaal
+            for (var i = 213; i<=229; i += 4)
+            {
+                this.LevelObjects(65, i, -1, GameConstants.EnvObjects.deskUp);
+                this.LevelObjects(65, i, -1, GameConstants.EnvObjects.chairUp);
+                this.LevelObjects(72, i, -1, GameConstants.EnvObjects.deskUp);
+                this.LevelObjects(72, i, -1, GameConstants.EnvObjects.chairUp);
+                
+            }
+            for (var i = 245; i <= 261; i += 4)
+            {
+                this.LevelObjects(65, i, -1, GameConstants.EnvObjects.deskUp);
+                this.LevelObjects(65, i, -1, GameConstants.EnvObjects.chairUp);
+                this.LevelObjects(72, i, -1, GameConstants.EnvObjects.deskUp);
+                this.LevelObjects(72, i, -1, GameConstants.EnvObjects.chairUp);
+            }
+            for (var i = 219; i <= 231; i += 4)
+            {
+                this.LevelObjects(79, i, -1, GameConstants.EnvObjects.deskUp);
+            }
+            this.LevelObjects(77, 254, -1, GameConstants.EnvObjects.chairRight);
+            this.LevelObjects(77.5f, 238.5f, -1, GameConstants.EnvObjects.deskLeft);
+            this.LevelObjects(74.5f, 241.5f, -1, GameConstants.EnvObjects.deskUp);
+            this.LevelObjects(75, 214, -1, GameConstants.EnvObjects.chairUp);
+            this.LevelObjects(74, 217, -1, GameConstants.EnvObjects.chairRight);
+            this.LevelObjects(77, 213, -1, GameConstants.EnvObjects.chairLeft);
+            this.LevelObjects(77.5f, 238.5f, -1, GameConstants.EnvObjects.deskLeft);
+            this.LevelObjects(89, 221, -1, GameConstants.EnvObjects.deskLeft);
+            #endregion
 
 
 
