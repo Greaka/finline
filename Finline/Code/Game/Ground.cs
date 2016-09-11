@@ -43,7 +43,7 @@
         {
             this.effect = new BasicEffect(gdevice);
 
-            this.checkerboardTexture = (Texture2D)content.Load<Texture>("MapV6a");
+            this.checkerboardTexture = (Texture2D)content.Load<Texture>("MapV7a");
         }
 
         public void Draw(GraphicsDevice gdevice, Matrix viewMatrix, Matrix projectionMatrix)
