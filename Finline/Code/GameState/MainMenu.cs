@@ -51,6 +51,7 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("CreditsButton"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("EndButton"));
             this.guiElements[EMenuState.MainMenu].Add(new GuiElement("EnemySmaller"));
+            this.guiElements[EMenuState.MainMenu].Add(new GuiElement("MainMenu"));
 
 
 
@@ -125,7 +126,8 @@ namespace Finline.Code.GameState
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "CreditsButton").MoveElement(-200, -25); // move the "credits" button 200 in x-direction and 50 down in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "EndButton").MoveElement(-200, 50); // move the "end" button down in y-direction
             this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "EnemySmaller").MoveElement(150, -20);
-            
+            this.guiElements[EMenuState.MainMenu].Find(x => x.AssetName == "MainMenu").MoveElement(0,-265);
+
 
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "ChooseText").MoveElement(0, -265);
             this.guiElements[EMenuState.CharacterScreen].Find(x => x.AssetName == "studentprofile").MoveElement(-200, -100);
