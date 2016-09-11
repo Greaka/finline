@@ -46,7 +46,7 @@ namespace Finline.Code.Game.Entities.LivingEntity
             set
             {
                 this.model = value;
-                var sphere = this.Model.GetVerticies().Select(vec => vec * 0.14f).ToList().GetHull();
+                var sphere = this.Model.GetVertices().Select(vec => vec * 0.14f).ToList().GetHull();
                 this.Bound = sphere;
             }
         }
@@ -80,12 +80,16 @@ namespace Finline.Code.Game.Entities.LivingEntity
             this.DeathAnimation = new Animation(4, false);
 
             this.position = new Vector3(4, 4, -0.5f); // Standard
+
             // this.position = new Vector3(100, 240, -0.5f); // BossRaum
-            
+
             // Animation DeathAnimation = new Animation(4);
 
             // this.position = new Vector3(90, 240, 0);   // Hörsaal
             // this.position = new Vector3(26, 90, 0);      // 333
+            // this.position = new Vector3(5, 150 , 0);      // vor klos
+            //this.position = new Vector3(15, 64, 2);
+           // this.position = new Vector3(35.9f, 183, 0); //raum mit 2 monitoren
             var modelStand = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_stand");
             var modelLinks = contentManager.Load<Model>(GuiElement.Ausgewaehlt + "_linkesBein");
             var modelRechts = contentManager.Load<Model>(GuiElement.Ausgewaehlt.ToString());
@@ -109,10 +113,10 @@ namespace Finline.Code.Game.Entities.LivingEntity
         }
 
 #if DEBUG
-        private bool godMode = false;
+        private bool godMode;
         private bool alreadyPressed;
 
-        private bool dead = false;
+        private bool dead;
 
         public override bool Dead
         {
@@ -141,7 +145,7 @@ namespace Finline.Code.Game.Entities.LivingEntity
             }
             else if (this.alreadyPressed && Keyboard.GetState().IsKeyUp(Keys.G)) this.alreadyPressed = false;
 #endif
-            this.Update();
+            this.Update(gameTime);
             if (!this.Dead)
             {
                 this.SetViewDirection(shootDirection);

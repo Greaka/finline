@@ -25,7 +25,7 @@
 
         public enum NonEnvObjects
         {
-            poster_vader, poster_deadpool, poster_cat, poster_zombie, poster_godzilla, poster_obama, poster_dragonball, poster_totoro, poster_hotline
+            poster_vader, poster_deadpool, poster_cat, poster_zombie, poster_godzilla, poster_obama, poster_dragonball, poster_totoro, poster_hotline, poster_hotline_links
         }
     }
 }

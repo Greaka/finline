@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace Finline.Code.Constants
+﻿namespace Finline.Code.Constants
 {
+    using Microsoft.Xna.Framework;
+
     public static class GraphicConstants
     {
         public const float FieldOfView = MathHelper.PiOver4;

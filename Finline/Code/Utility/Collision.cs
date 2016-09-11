@@ -1,5 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Collision.cs" company="">
+// <copyright file="Collision.cs" company="Acagamics e.V.">
+//   APGL
 // </copyright>
 // <summary>
 //   Defines the Collision type.
@@ -11,9 +12,8 @@ namespace Finline.Code.Utility
     using System.Collections.Generic;
     using System.Linq;
 
+    using Finline.Code.Game.Entities;
     using Finline.Code.Game.Entities.LivingEntity;
-
-    using Game.Entities;
 
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -24,33 +24,30 @@ namespace Finline.Code.Utility
     public static class Collision
     {
         /// <summary>
-        /// The collision result.
-        /// </summary>
-        public class CollisionResult
-        {
-            /// <summary>
-            /// The hit entities.
-            /// </summary>
-            public readonly List<Entity> HitEntities = new List<Entity>();
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="CollisionResult" /> class.
-            /// </summary>
-            public CollisionResult()
-            {
-                this.Translation = null;
-            }
-
-            /// <summary>
-            /// Gets or sets the translation.
-            /// </summary>
-            public Vector2? Translation { get; set; }
-        }
-
-        /// <summary>
         /// The tolerance.
         /// </summary>
         private const double Tolerance = 1e-10;
+
+        /// <summary>
+        /// The removal flag.
+        /// </summary>
+        private enum RemovalFlag
+        {
+            /// <summary>
+            /// The none.
+            /// </summary>
+            None, 
+
+            /// <summary>
+            /// The mid point.
+            /// </summary>
+            MidPoint, 
+
+            /// <summary>
+            /// The end point.
+            /// </summary>
+            EndPoint
+        }
 
         /// <summary>
         /// The is colliding.
@@ -144,6 +141,9 @@ namespace Finline.Code.Utility
         /// <param name="objectsThatHide">
         /// The objects that hide.
         /// </param>
+        /// <param name="range">
+        /// The range.
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
@@ -155,9 +155,9 @@ namespace Finline.Code.Utility
                 return false;
             }
             
-            var bound = new VertexPositionColor[2]
+            var bound = new[]
                             {
-                                new VertexPositionColor(ownPosition, Color.White),
+                                new VertexPositionColor(ownPosition, Color.White), 
                                 new VertexPositionColor(ownPosition + direction, Color.White)
                             };
             direction.Normalize();
@@ -168,53 +168,15 @@ namespace Finline.Code.Utility
         }
 
         /// <summary>
-        /// Detecting collisions with <paramref name="environmentObjects"/>.
-        /// </summary>
-        /// <param name="entity">
-        /// The entity which is checked for intersections.
-        /// </param>
-        /// <param name="environmentObjects">
-        /// The environment objects that can collide with the <paramref name="entity"/>.
-        /// </param>
-        /// <param name="direction">
-        /// The direction.
-        /// </param>
-        /// <returns>
-        /// true or false for colliding.
-        /// </returns>
-        private static CollisionResult IsColliding(this Entity entity, IEnumerable<Entity> environmentObjects, Vector2 direction)
-        {
-            var colliding = new CollisionResult();
-            foreach (var obj in environmentObjects)
-            {
-                if (!((entity.Position - obj.Position).LengthSquared() < 64))
-                {
-                    continue;
-                }
-
-                var collision = entity.GetBound.PolygonCollision(obj.GetBound, direction);
-                if (!collision.WillIntersect)
-                {
-                    continue;
-                }
-
-                colliding.HitEntities.Add(obj);
-                colliding.Translation = colliding.Translation != null ? colliding.Translation + collision.MinimumTranslationVector : collision.MinimumTranslationVector;
-            }
-
-            return colliding;
-        }
-
-        /// <summary>
-        /// The get verticies.
+        /// The get vertices.
         /// </summary>
         /// <param name="modModel">
         /// The mod model.
         /// </param>
         /// <returns>
-        /// The <see cref="List"/>.
+        /// The <see cref="List{T}"/>.
         /// </returns>
-        public static List<Vector3> GetVerticies(this Model modModel)
+        public static List<Vector3> GetVertices(this Model modModel)
         {
             var verticies = new List<Vector3>();
             var transforms = new Matrix[modModel.Bones.Count];
@@ -229,7 +191,7 @@ namespace Finline.Code.Utility
 
                     // Get vertex data as float
                     var vertexData = new float[vertexBufferSize / sizeof(float)];
-                    meshPart.VertexBuffer.GetData<float>(vertexData);
+                    meshPart.VertexBuffer.GetData(vertexData);
 
                     for (var i = 0; i < vertexBufferSize / sizeof(float); i += vertexStride / sizeof(float))
                     {
@@ -246,6 +208,18 @@ namespace Finline.Code.Utility
             return verticies;
         }
 
+        /// <summary>
+        /// The get hull.
+        /// </summary>
+        /// <param name="initialPoints">
+        /// The initial points.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList{T}"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// missing removal flag.
+        /// </exception>
         public static IList<Vector3> GetHull(this IList<Vector3> initialPoints)
         {
             if (initialPoints.Count < 2)
@@ -341,7 +315,60 @@ namespace Finline.Code.Utility
             return points;
         }
 
-        static void Swap<T>(IList<T> list, int i, int j)
+        /// <summary>
+        /// Detecting collisions with <paramref name="environmentObjects"/>.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity which is checked for intersections.
+        /// </param>
+        /// <param name="environmentObjects">
+        /// The environment objects that can collide with the <paramref name="entity"/>.
+        /// </param>
+        /// <param name="direction">
+        /// The direction.
+        /// </param>
+        /// <returns>
+        /// true or false for colliding.
+        /// </returns>
+        private static CollisionResult IsColliding(this Entity entity, IEnumerable<Entity> environmentObjects, Vector2 direction)
+        {
+            var colliding = new CollisionResult();
+            foreach (var obj in environmentObjects)
+            {
+                if (!((entity.Position - obj.Position).LengthSquared() < 64))
+                {
+                    continue;
+                }
+
+                var collision = entity.GetBound.PolygonCollision(obj.GetBound, direction);
+                if (!collision.WillIntersect)
+                {
+                    continue;
+                }
+
+                colliding.HitEntities.Add(obj);
+                colliding.Translation = colliding.Translation != null ? colliding.Translation + collision.MinimumTranslationVector : collision.MinimumTranslationVector;
+            }
+
+            return colliding;
+        }
+
+        /// <summary>
+        /// The swap.
+        /// </summary>
+        /// <param name="list">
+        /// The list.
+        /// </param>
+        /// <param name="i">
+        /// The i.
+        /// </param>
+        /// <param name="j">
+        /// The j.
+        /// </param>
+        /// <typeparam name="T">
+        /// The T.
+        /// </typeparam>
+        private static void Swap<T>(IList<T> list, int i, int j)
         {
             if (i == j)
             {
@@ -353,7 +380,22 @@ namespace Finline.Code.Utility
             list[j] = temp;
         }
 
-        static double Ccw(Vector3 p1, Vector3 p2, Vector3 p3)
+        /// <summary>
+        /// The cross.
+        /// </summary>
+        /// <param name="p1">
+        /// The p 1.
+        /// </param>
+        /// <param name="p2">
+        /// The p 2.
+        /// </param>
+        /// <param name="p3">
+        /// The p 3.
+        /// </param>
+        /// <returns>
+        /// The <see cref="double"/>.
+        /// </returns>
+        private static double Ccw(Vector3 p1, Vector3 p2, Vector3 p3)
         {
             // Compute (p2 - p1) X (p3 - p1)
             double cross1 = (p2.X - p1.X) * (p3.Y - p1.Y);
@@ -366,55 +408,63 @@ namespace Finline.Code.Utility
             return cross1 - cross2;
         }
 
-        enum RemovalFlag
-        {
-            None, 
-            MidPoint, 
-            EndPoint
-        }
-
-        static RemovalFlag WhichToRemoveFromBoundary(Vector3 p1, Vector3 p2, Vector3 p3)
+        /// <summary>
+        /// The which to remove from boundary.
+        /// </summary>
+        /// <param name="p1">
+        /// The p 1.
+        /// </param>
+        /// <param name="p2">
+        /// The p 2.
+        /// </param>
+        /// <param name="p3">
+        /// The p 3.
+        /// </param>
+        /// <returns>
+        /// The <see cref="RemovalFlag"/>.
+        /// </returns>
+        private static RemovalFlag WhichToRemoveFromBoundary(Vector3 p1, Vector3 p2, Vector3 p3)
         {
             var cross = Ccw(p1, p2, p3);
             if (cross < 0)
-
+            {
                 // Remove p2
                 return RemovalFlag.MidPoint;
-            if (cross > 0)
+            }
 
+            if (cross > 0)
+            {
                 // Remove none.
                 return RemovalFlag.None;
+            }
 
             // Check for being reversed using the dot product off the difference vectors.
-            var dotp = (p3.X - p2.X) * (p2.X - p1.X) + (p3.Y - p2.Y) * (p2.Y - p1.Y);
-            if (dotp == 0.0)
-
+            var dotp = ((p3.X - p2.X) * (p2.X - p1.X)) + ((p3.Y - p2.Y) * (p2.Y - p1.Y));
+            if (Math.Abs(dotp) < 1e-10)
+            {
                 // Remove p2
                 return RemovalFlag.MidPoint;
-            if (dotp < 0)
+            }
 
-                // Remove p3
-                return RemovalFlag.EndPoint;
-            else
-
-            // Remove p2
-                return RemovalFlag.MidPoint;
+            return dotp < 0 ? RemovalFlag.EndPoint : RemovalFlag.MidPoint;
         }
 
-        public struct PolygonCollisionResult
+        /// <summary>
+        /// The build edges.
+        /// </summary>
+        /// <param name="points">
+        /// The points.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList{T}"/>.
+        /// </returns>
+        private static IList<Vector3> BuildEdges(this IReadOnlyList<VertexPositionColor> points)
         {
-            public bool WillIntersect; // Are the polygons going to intersect forward in time?
-            public bool Intersect; // Are the polygons currently intersecting
-            public Vector2 MinimumTranslationVector; // The translation to apply to polygon A to push the polygons appart.
-        }
-
-        private static IList<Vector3> BuildEdges(this VertexPositionColor[] points)
-        {
-            var edges = new Vector3[points.Length];
-            for (var i = 0; i < points.Length; i++)
+            var edges = new Vector3[points.Count];
+            for (var i = 0; i < points.Count; i++)
             {
                 var p1 = points[i];
-                var p2 = i + 1 >= points.Length ? points[0] : points[i + 1];
+                var p2 = i + 1 >= points.Count ? points[0] : points[i + 1];
 
                 edges[i] = p2.Position - p1.Position;
             }
@@ -422,7 +472,16 @@ namespace Finline.Code.Utility
             return edges;
         }
 
-        public static Vector3 Center(this VertexPositionColor[] points)
+        /// <summary>
+        /// The center.
+        /// </summary>
+        /// <param name="points">
+        /// The points.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Vector3"/>.
+        /// </returns>
+        private static Vector3 Center(this VertexPositionColor[] points)
         {
             float totalX = 0;
             float totalY = 0;
@@ -432,11 +491,26 @@ namespace Finline.Code.Utility
                 totalY += points[i].Position.Y;
             }
 
-            return new Vector3(totalX / (float)points.Length, totalY / (float)points.Length, 0);
+            return new Vector3(totalX / points.Length, totalY / points.Length, 0);
         }
 
-        // Check if polygon A is going to collide with polygon B for the given velocity
-        public static PolygonCollisionResult PolygonCollision(this VertexPositionColor[] polygonA, VertexPositionColor[] polygonB, Vector2 velocity)
+        /// <summary>
+        /// The polygon collision.
+        /// Check if polygon A is going to collide with polygon B for the given velocity
+        /// </summary>
+        /// <param name="polygonA">
+        /// The polygon a.
+        /// </param>
+        /// <param name="polygonB">
+        /// The polygon b.
+        /// </param>
+        /// <param name="velocity">
+        /// The velocity.
+        /// </param>
+        /// <returns>
+        /// The <see cref="PolygonCollisionResult"/>.
+        /// </returns>
+        private static PolygonCollisionResult PolygonCollision(this VertexPositionColor[] polygonA, VertexPositionColor[] polygonB, Vector2 velocity)
         {
             var edgesA = polygonA.BuildEdges();
             var edgesB = polygonB.BuildEdges();
@@ -460,12 +534,12 @@ namespace Finline.Code.Utility
                 axis.Normalize();
 
                 // Find the projection of the polygon on the current axis
-                float minA = 0;
-                float minB = 0;
-                float maxA = 0;
-                float maxB = 0;
-                ProjectPolygon(axis, polygonA, ref minA, ref maxA);
-                ProjectPolygon(axis, polygonB, ref minB, ref maxB);
+                float minA;
+                float minB;
+                float maxA;
+                float maxB;
+                ProjectPolygon(axis, polygonA, out minA, out maxA);
+                ProjectPolygon(axis, polygonB, out minB, out maxB);
 
                 // Check if the polygon projections are currentlty intersecting
                 if (IntervalDistance(minA, maxA, minB, maxB) > 0)
@@ -533,22 +607,53 @@ namespace Finline.Code.Utility
             return result;
         }
 
-        // Calculate the distance between [minA, maxA] and [minB, maxB]
-        // The distance will be negative if the intervals overlap
-        public static float IntervalDistance(float minA, float maxA, float minB, float maxB)
+        /// <summary>
+        /// The interval distance.
+        /// Calculate the distance between [minA, maxA] and [minB, maxB]
+        /// The distance will be negative if the intervals overlap
+        /// </summary>
+        /// <param name="minA">
+        /// The min a.
+        /// </param>
+        /// <param name="maxA">
+        /// The max a.
+        /// </param>
+        /// <param name="minB">
+        /// The min b.
+        /// </param>
+        /// <param name="maxB">
+        /// The max b.
+        /// </param>
+        /// <returns>
+        /// The <see cref="float"/>.
+        /// </returns>
+        private static float IntervalDistance(float minA, float maxA, float minB, float maxB)
         {
             if (minA < minB)
             {
                 return minB - maxA;
             }
-            else
-            {
-                return minA - maxB;
-            }
+
+            return minA - maxB;
         }
 
-        // Calculate the projection of a polygon on an axis and returns it as a [min, max] interval
-        public static void ProjectPolygon(Vector2 ax, VertexPositionColor[] polygon, ref float min, ref float max)
+        /// <summary>
+        /// The project polygon.
+        /// Calculate the projection of a polygon on an axis and returns it as a [min, max] interval
+        /// </summary>
+        /// <param name="ax">
+        /// The ax.
+        /// </param>
+        /// <param name="polygon">
+        /// The polygon.
+        /// </param>
+        /// <param name="min">
+        /// The min.
+        /// </param>
+        /// <param name="max">
+        /// The max.
+        /// </param>
+        private static void ProjectPolygon(Vector2 ax, IList<VertexPositionColor> polygon, out float min, out float max)
         {
             var axis = new Vector3(ax, 0);
 
@@ -556,7 +661,7 @@ namespace Finline.Code.Utility
             var d = Vector3.Dot(axis, polygon[0].Position);
             min = d;
             max = d;
-            for (var i = 0; i < polygon.Length; i++)
+            for (var i = 0; i < polygon.Count; i++)
             {
                 d = Vector3.Dot(polygon[i].Position, axis);
                 if (d < min)
@@ -571,6 +676,51 @@ namespace Finline.Code.Utility
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// The polygon collision result.
+        /// </summary>
+        private struct PolygonCollisionResult
+        {
+            /// <summary>
+            /// The will intersect.
+            /// </summary>
+            public bool WillIntersect; // Are the polygons going to intersect forward in time?
+
+            /// <summary>
+            /// The intersect.
+            /// </summary>
+            public bool Intersect; // Are the polygons currently intersecting
+
+            /// <summary>
+            /// The minimum translation vector.
+            /// </summary>
+            public Vector2 MinimumTranslationVector; // The translation to apply to polygon A to push the polygons appart.
+        }
+
+        /// <summary>
+        /// The collision result.
+        /// </summary>
+        public class CollisionResult
+        {
+            /// <summary>
+            /// The hit entities.
+            /// </summary>
+            public readonly List<Entity> HitEntities = new List<Entity>();
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="CollisionResult" /> class.
+            /// </summary>
+            public CollisionResult()
+            {
+                this.Translation = null;
+            }
+
+            /// <summary>
+            /// Gets or sets the translation.
+            /// </summary>
+            public Vector2? Translation { get; set; }
         }
     }
 }

@@ -8,12 +8,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Finline.Code.Game.Entities.LivingEntity
 {
+    using System;
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Input;
 
     /// <summary>
     /// The living entity.
@@ -46,8 +44,12 @@ namespace Finline.Code.Game.Entities.LivingEntity
         protected Animation DeathAnimation { get; set; }
 
         protected List<EnvironmentObject> EnvironmentObjects;
+        /// <summary>
+        /// The death time.
+        /// </summary>
+        private double deathTime;
 
-        protected void Update()
+        protected void Update(GameTime gameTime)
         {
             if (!this.Dead)
             {
@@ -61,14 +63,15 @@ namespace Finline.Code.Game.Entities.LivingEntity
                 return;
             }
 
-            Task.Factory.StartNew(
-                () =>
-                    {
-                        Thread.Sleep(50);
-                        this.Death?.Invoke(this);
-                    });
+            if (Math.Abs(this.deathTime) < 1e-10)
+            {
+                this.deathTime = gameTime.TotalGameTime.TotalMilliseconds;
+            }
 
-            return;
+            if (gameTime.TotalGameTime.TotalMilliseconds - this.deathTime > 50)
+            {
+                this.Death?.Invoke(this);
+            }
         }
 
         /// <summary>
