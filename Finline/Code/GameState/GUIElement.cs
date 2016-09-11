@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace Finline.Code.GameState
+﻿namespace Finline.Code.GameState
 {
     using Finline.Code.Game.Entities.LivingEntity;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
 
     internal class GuiElement
     {

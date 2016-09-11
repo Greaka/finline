@@ -39,7 +39,7 @@
         /// <summary>
         /// The death time.
         /// </summary>
-        private double deathTime = 0;
+        private double deathTime;
 
         public void Update(GameTime gameTime)
         {

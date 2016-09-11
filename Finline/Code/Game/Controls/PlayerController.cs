@@ -1,18 +1,16 @@
-﻿using System;
-
-using Finline.Code.Constants;
-using Finline.Code.Utility;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-using Timer = System.Timers.Timer;
-
-namespace Finline.Code.Game.Controls
+﻿namespace Finline.Code.Game.Controls
 {
+    using System;
+    using System.Timers;
+
+    using Finline.Code.Constants;
     using Finline.Code.Game.Entities;
     using Finline.Code.Game.Entities.LivingEntity;
+    using Finline.Code.Utility;
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
 
     public class PlayerController
     {
@@ -21,7 +19,7 @@ namespace Finline.Code.Game.Controls
 
         private readonly Timer aTimer;
         private bool shootable = true;
-        private bool alreadyShot = false;
+        private bool alreadyShot;
 
         private readonly GameConstants.EWeaponShootMode actualShootMode = GameConstants.EWeaponShootMode.Automatic;
 

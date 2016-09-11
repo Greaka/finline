@@ -1,35 +1,31 @@
-﻿using Finline.Code.Utility;
-
-using Microsoft.Xna.Framework;
-
-namespace Finline.Code.Game.Controls
+﻿namespace Finline.Code.Game.Controls
 {
     using System.Collections.Generic;
+    using System.Timers;
 
     using Finline.Code.Game.Entities;
     using Finline.Code.Game.Entities.LivingEntity;
+    using Finline.Code.Utility;
 
-    using Timer = System.Timers.Timer;
+    using Microsoft.Xna.Framework;
 
     public class BossController
     {
         public delegate void Shot(Entity firedFrom, Vector2 direction, int index);
         public event Shot Shoot;
-
-        private readonly Timer aTimer;
-
+        
         private bool shootable;
 
         private const float ShotsPerSecond = 4;
 
         public BossController()
         {
-            this.aTimer = new Timer
+            var timer = new Timer
             {
                 Interval = 1000 / ShotsPerSecond, 
                 Enabled = true
             };
-            this.aTimer.Elapsed += (sender, args) => { this.shootable = true; };
+            timer.Elapsed += (sender, args) => { this.shootable = true; };
         }
 
         public void Update(IEnumerable<Boss> bosses, Player player)

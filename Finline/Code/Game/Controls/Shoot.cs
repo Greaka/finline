@@ -10,7 +10,6 @@ namespace Finline.Code.Game.Controls
     using System.Collections.Generic;
     using System.Diagnostics;
 
-    using Finline.Code.Game;
     using Finline.Code.Game.Entities;
     using Finline.Code.Game.Entities.LivingEntity;
 

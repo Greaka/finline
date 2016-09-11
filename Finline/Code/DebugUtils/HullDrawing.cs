@@ -1,9 +1,9 @@
 ﻿#if DEBUG
-using System;
-using System.Collections.Generic;
-
 namespace Finline.Code.DebugUtils
 {
+    using System;
+    using System.Collections.Generic;
+
     using Finline.Code.Game.Entities;
     using Finline.Code.Game.Entities.LivingEntity;
     using Finline.Code.GameState;
@@ -31,7 +31,7 @@ namespace Finline.Code.DebugUtils
 
             // create 1x1 texture for line drawing
             this.t = new Texture2D(this.GraphicsDevice, 1, 1);
-            this.t.SetData<Color>(new[] { Color.White });
+            this.t.SetData(new[] { Color.White });
         }
 
         private BasicEffect effect;
