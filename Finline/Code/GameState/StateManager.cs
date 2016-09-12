@@ -350,12 +350,13 @@ namespace Finline.Code.GameState
                 Sounds.PauseMusicVolume();
             }
 
-            if (element == "Back2MainMenu")
+            if (element != "Back2MainMenu")
             {
-                this.nextGameState = EGameState.MainMenu;
-                this.paused = false;
-                this.Main.MakeHeile();
+                return;
             }
+            this.nextGameState = EGameState.MainMenu;
+            this.paused = false;
+            this.Main.MakeHeile();
         }
 
         /// <summary>
