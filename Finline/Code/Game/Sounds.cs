@@ -118,9 +118,12 @@ namespace Finline.Code.Game
         public void PlayMainMenuMusic()
         {
             MediaPlayer.Play(this.musicMainMenu);
-            if (Math.Abs(MediaPlayer.Volume - 1.0f) > 1e-10)
+            if (this.GetSoundOn())
             {
-                MediaPlayer.Volume = 1.0f;
+                if (Math.Abs(MediaPlayer.Volume - 1.0f) > 1e-10)
+                {
+                    MediaPlayer.Volume = 1.0f;
+                }
             }
 
             MediaPlayer.IsRepeating = true;
@@ -163,7 +166,7 @@ namespace Finline.Code.Game
 
             if (this.GetSoundOn())
             {
-                MediaPlayer.Volume = 1.0f;
+                MediaPlayer.Resume();
                 if (this.soundInstance != null)
                 {
                     this.soundInstance.Volume = 1.0f;
@@ -171,7 +174,7 @@ namespace Finline.Code.Game
             }
             else
             {
-                MediaPlayer.Volume = 0.0f;
+                MediaPlayer.Pause();
                 if (this.soundInstance != null)
                 {
                     this.soundInstance.Stop();
