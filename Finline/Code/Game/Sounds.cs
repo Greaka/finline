@@ -58,9 +58,9 @@ namespace Finline.Code.Game
         private KeyboardState oldKeyState;
 
         /// <summary>
-        /// The pause music.
+        /// The pause music volume.
         /// </summary>
-        public static void PauseMusic()
+        public static void PauseMusicVolume()
         {
             MediaPlayer.Volume = Math.Abs(MediaPlayer.Volume - 1.0f) < 1e-10 ? 0.4f : 1.0f;
         }
@@ -108,8 +108,6 @@ namespace Finline.Code.Game
             {
                 this.soundInstance.Play();
             }
-
-            // else soundInstance.Stop();
         }
 
         /// <summary>
@@ -117,13 +115,13 @@ namespace Finline.Code.Game
         /// </summary>
         public void PlayMainMenuMusic()
         {
+            if (!this.GetSoundOn()) this.soundOn = !this.soundOn;
+
             MediaPlayer.Play(this.musicMainMenu);
-            if (this.GetSoundOn())
+
+            if (Math.Abs(MediaPlayer.Volume - 1.0f) > 1e-10)
             {
-                if (Math.Abs(MediaPlayer.Volume - 1.0f) > 1e-10)
-                {
-                    MediaPlayer.Volume = 1.0f;
-                }
+                MediaPlayer.Volume = 1.0f;
             }
 
             MediaPlayer.IsRepeating = true;

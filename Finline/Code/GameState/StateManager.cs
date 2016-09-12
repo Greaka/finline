@@ -251,7 +251,7 @@ namespace Finline.Code.GameState
                 this.paused = !this.paused;
                 this.isPressed = true;
 
-                Sounds.PauseMusic();
+                Sounds.PauseMusicVolume();
             }
 
             if (this.isPressed && !k.IsKeyDown(Keys.Escape))
@@ -347,7 +347,7 @@ namespace Finline.Code.GameState
             if (element == "Play")
             {
                 this.paused = !this.paused;
-                Sounds.PauseMusic();
+                Sounds.PauseMusicVolume();
             }
 
             if (element != "Back2MainMenu")
