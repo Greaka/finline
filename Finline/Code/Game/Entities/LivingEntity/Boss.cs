@@ -88,7 +88,7 @@ namespace Finline.Code.Game.Entities.LivingEntity
 
             set
             {
-                if (value)
+                if (value && this.Life > 0)
                 {
                     --this.Life;
                 }

@@ -264,7 +264,7 @@ namespace Finline.Code.GameState
                 this.gameState.Update(gameTime);
                 if (this.currentGameState == EGameState.InGame)
                 {
-                    Ingame game = (Ingame)this.gameState;
+                    var game = (Ingame)this.gameState;
                     if (game.Won)
                     {
                         this.nextGameState = EGameState.MainMenu;
