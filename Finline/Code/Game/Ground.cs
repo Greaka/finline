@@ -76,7 +76,7 @@ namespace Finline.Code.Game
         {
             this.effect = new BasicEffect(gdevice);
 
-            this.checkerboardTexture = (Texture2D)content.Load<Texture>("MapV7a");
+            this.checkerboardTexture = (Texture2D)content.Load<Texture>("MapV7b");
         }
 
         /// <summary>
