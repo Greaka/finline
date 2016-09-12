@@ -270,11 +270,11 @@ namespace Finline.Code.Game
                     }
                 }
             }
-            this.Won = !(this.enemies.Count > 0 || this.bosses.Count > 0);
+            
 
             base.Update(gameTime);
 
-            
+            this.Won = !(this.enemies.Count > 0 || this.bosses.Count > 0);
         }
 
         /// <summary>
