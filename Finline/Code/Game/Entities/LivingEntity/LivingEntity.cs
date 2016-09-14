@@ -85,7 +85,14 @@ namespace Finline.Code.Game.Entities.LivingEntity
         /// </param>
         public override void Draw(Matrix viewMatrix, Matrix projectionMatrix)
         {
-            base.Draw(viewMatrix, projectionMatrix, this.ModelAnimation.CurrentModel);
+            if (this.Dead == false)
+            {
+                base.Draw(viewMatrix, projectionMatrix, this.ModelAnimation.CurrentModel);
+            }
+            else
+            {
+                base.Draw(viewMatrix, projectionMatrix, this.DeathAnimation.CurrentModel);
+            }
         }
     }
 }
